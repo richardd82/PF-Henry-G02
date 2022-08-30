@@ -3,14 +3,22 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('supGroups', {
-    idGroups:{
+  sequelize.define('classes', {
+    id:{
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
       allowNull: false,
     },
-    nameGroup: {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lectureLink: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    codeReviewLink: {
       type: DataTypes.STRING,
       allowNull: false,
     },
