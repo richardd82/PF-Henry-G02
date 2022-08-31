@@ -1,4 +1,5 @@
 const { Users } = require("../db.js");
+const { Op } = require("sequelize");
 
 const getAllUsers = async (req, res, next) => {
 	try {
@@ -76,16 +77,29 @@ const updateUser = async (req, res, next) => {
 		console.log(error);
 	}
 };
-const userByName = async(req, res, next) => {
+const userByName = async (req, res, next) => {
 	try {
-		const {name} = req.query;
-		Classes.findAll({
-			where:{name: name},
-			where:{category: "teacher"}
-		})
+		const { name, lastname } = req.query;
+	
+			
+	
+			const searchedName = await Users.findAll({
+				where: {
+					name: { [Op.iLike]: "%" + name + "%" },
+					[Op.and]: [{ category: "teacher" }],			
+				},
+			});
+			if(searchedName.length <= 0){
+				res.status(400).json({message: 'El nombre ingresado no existe.'});
+			}
+			else{
+				res.json(searchedName);
+			}
+			
+		
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 	}
-}
+};
 
 module.exports = { getAllUsers, createUser, updateUser, userByName };

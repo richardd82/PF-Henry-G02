@@ -7,6 +7,7 @@ const createClass = async(req, res, next) => {
             name,
             lectureLink,
             codeReviewLink,
+            description,
     })
         res.json(newClass);
     } catch (error) {
