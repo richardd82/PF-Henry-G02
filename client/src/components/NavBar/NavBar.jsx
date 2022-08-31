@@ -1,39 +1,51 @@
-import "./NavBar.css"
-
+import React from 'react';
+import './NavBar.css';
 
 const user = {
-    id: 1,
-    name: "Kelly"
-}
+  id: 1,
+  name: 'Kelly',
+};
 
+const NavBar = () => {
+  function redirectToProfile() {
+    window.location.href = `/bootcamp/profile/${user.id}`;
+  }
 
+  function redirectBootcamp() {
+    window.location.href = '/bootcamp';
+  }
 
-export default function NavBar(){
+  function redirectToCatalog() {
+    window.location.href = '/bootcamp/catalog';
+  }
 
-    function redirectToProfile(){
-        window.location.href= `/profile/${user.name}`;
-        }
+  return (
+    <div>
+      <button
+        className="button-profile"
+        name="Profile"
+        onClick={redirectToProfile}
+      >
+        Profile
+      </button>
 
-    function redirectBootcamp(){
-        window.location.href="/Bootcamp";
-        }
+      <button
+        className="button-bootcamp"
+        name="Bootcamp"
+        onClick={redirectBootcamp}
+      >
+        Bootcamp
+      </button>
 
-    function redirectToCatalog(){
-        window.location.href="/Catalog";
-        }
-
-    return  <div>
-                
-                    <button className="button-profile" name="Profile" onClick={redirectToProfile}>Profile</button>
-                
-               
-                    <button className="button-bootcamp" name="Bootcamp" onClick={redirectBootcamp}>Bootcamp</button>
-               
-                
-                    <button className="button-catalog" name="Catalog" onClick={redirectToCatalog}>Catalog</button>
-                
+      <button
+        className="button-catalog"
+        name="Catalog"
+        onClick={redirectToCatalog}
+      >
+        Catalog
+      </button>
     </div>
-    
-    
+  );
+};
 
-}
+export default NavBar;

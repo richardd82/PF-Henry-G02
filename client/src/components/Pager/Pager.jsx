@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const Pager = () => {
   return (
     <div>
-      ¡Hola, mundo!
+      <h1>Pager</h1>
     </div>
   )
 }
 
-export default Pager
+export default Pager;
