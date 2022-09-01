@@ -40,18 +40,17 @@ const { Users, Classes, Cohorts, Modules, Standups } = sequelize.models;
 // Classes.hasOne(Modules);
 // // Modules
 // Modules.hasMany(Classes);
+Modules.hasMany(Users);
 // // Cohorts
-Users.belongsTo(Cohorts);
-// Cohorts.hasMany(Users);
+Cohorts.hasMany(Users);
 // Cohorts.hasMany(Standups);
 // // Standups
-// Standups.hasMany(Users);
+Standups.hasMany(Users);
 // Standups.hasOne(Cohorts);
 // // Users
-// Users.hasOne(Standups);
-// Users.hasOne(Modules);
-// Users.hasOne(Cohorts);
-Cohorts.hasMany(Users);
+Users.belongsTo(Cohorts);
+Users.belongsTo(Standups);
+Users.belongsTo(Modules);
 
 
 module.exports = {

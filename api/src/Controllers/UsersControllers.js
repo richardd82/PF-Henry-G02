@@ -12,12 +12,12 @@ const { Op } = require("sequelize");
 
 const getAllUsers = async (req, res, next) => {
 	try {
-		if(req.query.filter){
-			const usersFilter = await Users.findAll({where:{category: req.query.filter}});
+		if (req.query.filter) {
+			const usersFilter = await Users.findAll({ where: { category: req.query.filter } });
 			return res.json(usersFilter)
 		}
 		const dbUsers = await Users.findAll();
-		 return res.send(dbUsers);
+		return res.send(dbUsers);
 	} catch (error) {
 		console.log(error);
 	}
@@ -35,7 +35,7 @@ const createUser = async (req, res, next) => {
 			password,
 			active,
 			category,
-			// cohortId,
+			cohortId,
 		} = req.body;
 		const getAll = await Users.findAll();
 		const emailPost = getAll.map((e) => e.email);
@@ -50,17 +50,8 @@ const createUser = async (req, res, next) => {
 				password,
 				active,
 				category,
-			}, //{
-				// include: [{association:Cohorts}]
-			//}
-			);
-			// const mergedUsers = await Cohorts.findAll(
-			// 	{
-			// 		where: {id: cohortId}
-			// 	}
-			// )
-			// console.log(newUser.__proto__)
-			// await  newUser.setCohorts(mergedUsers)
+			});
+			await newUser.setCohort(cohortId)
 			res.json(newUser);
 		} else {
 			return res.json({ message: "Usuario ya existente" });
@@ -104,22 +95,22 @@ const updateUser = async (req, res, next) => {
 const userByTeacher = async (req, res, next) => {
 	try {
 		const { name, lastname } = req.query;
-	
-			
-	
-			const searchedName = await Users.findAll({
-				where: {
-					name: { [Op.iLike]: "%" + name + "%" },
-					[Op.and]: [{ category: "teacher" }],			
-				},
-			});
-			if(searchedName.length <= 0){
-				res.status(400).json({message: 'El profesor ingresado no existe.'});
-			}
-			else{
-				res.json(searchedName);
-			}
-			
+
+
+
+		const searchedName = await Users.findAll({
+			where: {
+				name: { [Op.iLike]: "%" + name + "%" },
+				[Op.and]: [{ category: "teacher" }],
+			},
+		});
+		if (searchedName.length <= 0) {
+			res.status(400).json({ message: 'El profesor ingresado no existe.' });
+		}
+		else {
+			res.json(searchedName);
+		}
+
 		//Pa Salvar el file
 	} catch (error) {
 		console.log(error);
@@ -129,21 +120,21 @@ const userByStudent = async (req, res, next) => {
 	try {
 		const { name, lastname } = req.query;
 		console.log(name)
-			
-	
-			const searchedTeacher = await Users.findAll({
-				where: {
-					name: { [Op.iLike]: "%" + name + "%" },
-					[Op.and]: [{ category: "student" }],			
-				},
-			}); console.log (searchedTeacher)
-			if (searchedTeacher.length <= 0){
-				res.status(400).json({message: 'El alumno ingresado no existe.'});
-			}
-			else{
-				res.json (searchedTeacher);
-			}
-			
+
+
+		const searchedTeacher = await Users.findAll({
+			where: {
+				name: { [Op.iLike]: "%" + name + "%" },
+				[Op.and]: [{ category: "student" }],
+			},
+		}); console.log(searchedTeacher)
+		if (searchedTeacher.length <= 0) {
+			res.status(400).json({ message: 'El alumno ingresado no existe.' });
+		}
+		else {
+			res.json(searchedTeacher);
+		}
+
 		//Pa Salvar el file
 	} catch (error) {
 		console.log(error);
