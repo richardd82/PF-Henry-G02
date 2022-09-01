@@ -1,3 +1,6 @@
-const initialState = {};
+import { combineReducers } from 'redux';
+import catalog from './catalogReducer.js';
 
-export default function reducer(state = initialState, action) {}
+export default combineReducers({
+  catalog,
+});
