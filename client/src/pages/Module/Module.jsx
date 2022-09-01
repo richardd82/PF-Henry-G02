@@ -1,11 +1,33 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
+import {moduleArray} from "../Bootcamp/Bootcamp";
+
 
 const Module = () => {
-  return (
-    <div>
-      <h1>Module</h1>
-    </div>
-  )
-}
+  console.log()
+  return <div>
+    {moduleArray.map((obj, index) => {
+    if (window.location.pathname === `/bootcamp/module/${obj.module}`){
+       return (<div key={obj.module}>
+        <div className="position" >
+          {obj.themes.map((themes, index) => {
+            console.log()
+            return (
+              <Link key={themes.number} to={`/bootcamp/details/${themes.id}`}>
+                <h1>{index + 1}</h1>
+                <h1>{themes.theme}</h1>
+                <h5>See lessons</h5>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+      );
+      }
+    else return <div key={obj.module}></div>
+    })}
+  </div>
+ 
+  };
 
 export default Module;
