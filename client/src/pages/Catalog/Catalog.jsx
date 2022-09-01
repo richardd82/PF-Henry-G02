@@ -1,54 +1,46 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// Components
 import SearchBar from '../../components/SearchBar/SearchBar.jsx';
 import Pager from '../../components/Pager/Pager.jsx';
-import Card from '../../components/Card/Card.jsx';
-
-const mockedVideos = [
-  {
-    thumbnail: `https://setevalapinsap.com/wp-content/plugins/wp-ulike/assets/img/no-thumbnail.png`,
-    instructor: 'Martina',
-    cohort: 'FT-20a',
-    title: 'Lecture - React',
-  },
-  {
-    thumbnail: `https://setevalapinsap.com/wp-content/plugins/wp-ulike/assets/img/no-thumbnail.png`,
-    instructor: 'Martina',
-    cohort: 'FT-20a',
-    title: 'Code Review - React',
-  },
-  {
-    thumbnail: `https://setevalapinsap.com/wp-content/plugins/wp-ulike/assets/img/no-thumbnail.png`,
-    instructor: 'Martina',
-    cohort: 'FT-20a',
-    title: 'Lecture - React-Redux',
-  },
-  {
-    thumbnail: `https://setevalapinsap.com/wp-content/plugins/wp-ulike/assets/img/no-thumbnail.png`,
-    instructor: 'Martina',
-    cohort: 'FT-20a',
-    title: 'Code Review - React-Redux',
-  },
-];
+import Videos from '../../components/Videos/Videos.jsx';
+// Actions
+import { setPageNumber } from '../../redux/actions/catalogActions.js';
 
 const Catalog = () => {
+  useEffect(() => {
+    return () => {
+      setPageNumber(1);
+    };
+  }, []);
+
+  const dispatch = useDispatch();
+  const currentPage = useSelector(state => state.catalog.currentPage);
+  const videos = useSelector(state => state.catalog.videos);
+
+  const videosPerPage = 4,
+    indexOfLastVideo = currentPage * videosPerPage,
+    indexOfFirstVideo = indexOfLastVideo - videosPerPage,
+    currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
+
   return (
     <div>
       <h1>Catalog</h1>
       <SearchBar />
-      <Pager />
-      <div>
-        {mockedVideos.map((video, idx) => {
-          return (
-            <Card
-              key={idx}
-              title={video.title}
-              instructor={video.instructor}
-              cohort={video.cohort}
-            />
-          );
-        })}
-      </div>
-      <Pager />
+      <Pager
+        currentPage={currentPage}
+        dispatchHandler={number => dispatch(setPageNumber(number))}
+        itemsPerPage={videosPerPage}
+        totalItems={videos.length}
+      />
+      <Videos videos={currentVideos} />
+      <Pager
+        currentPage={currentPage}
+        dispatchHandler={number => dispatch(setPageNumber(number))}
+        itemsPerPage={videosPerPage}
+        totalItems={videos.length}
+      />
     </div>
   );
 };
