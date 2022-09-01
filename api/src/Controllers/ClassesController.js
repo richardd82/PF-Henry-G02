@@ -1,4 +1,5 @@
 const { Classes } = require('../db');
+const {Op} = require('sequelize');
 
 const createClass = async (req, res, next) => {
     try {
@@ -30,13 +31,30 @@ const classByName = async (req, res, next) => {
         console.log(error)
     }
 }
+// const getAllVideos = async (req, res, next) => {
+//     try {
+//         const allVideos = await Classes.findAll();
+//         res.json(allVideos);
+//     } catch (error) {
+//         console.log(error)
+//     }
+
+// }
+
 const getAllVideos = async (req, res, next) => {
     try {
+        if (req.query.filter) {
+            const videoFilter = await Classes.findAll({ where: { name:{[Op.iLike]: "%" + req.query.filter + "%" }} ,
+            })
+            return res.json(videoFilter)
+        }
+        // where: {
+        //     name: { [Op.iLike]: "%" + name + "%" }
         const allVideos = await Classes.findAll();
         res.json(allVideos);
-    } catch (error) {
-        console.log(error)
-    }
+} catch (error) {
+    console.log(error)
+}
 
 }
 

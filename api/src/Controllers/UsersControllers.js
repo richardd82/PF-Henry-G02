@@ -1,10 +1,23 @@
 const { Users, Cohorts } = require("../db.js");
 const { Op } = require("sequelize");
 
+// const getAllUsers = async (req, res, next) => {
+// 	try {
+// 		const dbUsers = await Users.findAll({include: Cohorts});
+// 		res.send(dbUsers);
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// };
+
 const getAllUsers = async (req, res, next) => {
 	try {
-		const dbUsers = await Users.findAll({include: Cohorts});
-		res.send(dbUsers);
+		if(req.query.filter){
+			const usersFilter = await Users.findAll({where:{category: req.query.filter}});
+			return res.json(usersFilter)
+		}
+		const dbUsers = await Users.findAll();
+		 return res.send(dbUsers);
 	} catch (error) {
 		console.log(error);
 	}
@@ -22,7 +35,7 @@ const createUser = async (req, res, next) => {
 			password,
 			active,
 			category,
-			cohortId,
+			// cohortId,
 		} = req.body;
 		const getAll = await Users.findAll();
 		const emailPost = getAll.map((e) => e.email);
@@ -37,14 +50,17 @@ const createUser = async (req, res, next) => {
 				password,
 				active,
 				category,
-			});
-			const mergedUsers = await Cohorts.findAll(
-				{
-					where: {id: cohortId}
-				}
-			)
-			console.log(newUser.__proto__)
-			await  newUser.setCohorts(mergedUsers)
+			}, //{
+				// include: [{association:Cohorts}]
+			//}
+			);
+			// const mergedUsers = await Cohorts.findAll(
+			// 	{
+			// 		where: {id: cohortId}
+			// 	}
+			// )
+			// console.log(newUser.__proto__)
+			// await  newUser.setCohorts(mergedUsers)
 			res.json(newUser);
 		} else {
 			return res.json({ message: "Usuario ya existente" });
