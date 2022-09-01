@@ -5,8 +5,8 @@ const { createUser, getAllUsers, updateUser, userByTeacher, userByStudent } = re
 
 const router = Router();
 router.get("/", getAllUsers);
-router.post("/created", createUser);
-router.put("/updated/:id", updateUser);
+router.post("/create", createUser);
+router.put("/update/:id", updateUser);
 router.get("/byTeacher", userByTeacher);
 router.get("/byStudent", userByStudent);
 

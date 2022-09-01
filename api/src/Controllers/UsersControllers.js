@@ -36,6 +36,8 @@ const createUser = async (req, res, next) => {
 			active,
 			category,
 			cohortId,
+			standupId,
+			moduleId
 		} = req.body;
 		const getAll = await Users.findAll();
 		const emailPost = getAll.map((e) => e.email);
@@ -52,6 +54,8 @@ const createUser = async (req, res, next) => {
 				category,
 			});
 			await newUser.setCohort(cohortId)
+			await newUser.setStandup(standupId);
+			await newUser.setModule(moduleId);
 			res.json(newUser);
 		} else {
 			return res.json({ message: "Usuario ya existente" });
@@ -73,6 +77,8 @@ const updateUser = async (req, res, next) => {
 			password,
 			active,
 			category,
+			cohortId,
+			standupId,
 		} = req.body;
 		const usrObj = {
 			name,
@@ -83,6 +89,8 @@ const updateUser = async (req, res, next) => {
 			password,
 			active,
 			category,
+			cohortId,
+			standupId,
 		};
 		await Users.update(usrObj, {
 			where: { id: id },
