@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Pager = ({ currentPage, itemsPerPage, totalItems, dispatchHandler }) => {
+const Pager = ({ currentPage, itemsPerPage, totalItems, pageHandler }) => {
   const pageNumbers = [];
 
   // Pages creation
@@ -11,17 +11,17 @@ const Pager = ({ currentPage, itemsPerPage, totalItems, dispatchHandler }) => {
   // Pagination handlers
   const handlePrevious = () => {
     if (currentPage - 1 > 0) {
-      dispatchHandler(currentPage - 1);
+      pageHandler(currentPage - 1);
     }
   };
 
   const handlePagination = number => {
-    dispatchHandler(number);
+    pageHandler(number);
   };
 
   const handleNext = () => {
     if (currentPage + 1 <= pageNumbers.length) {
-      dispatchHandler(currentPage + 1);
+      pageHandler(currentPage + 1);
     }
   };
   return (
