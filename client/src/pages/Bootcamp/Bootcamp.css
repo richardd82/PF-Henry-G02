@@ -5,3 +5,9 @@
   background: steelblue;
 
 }
+
+.position{
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    column-gap: 20px;
+}
