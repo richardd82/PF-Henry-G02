@@ -1,9 +1,9 @@
-const { Users } = require("../db.js");
+const { Users, Cohorts } = require("../db.js");
 const { Op } = require("sequelize");
 
 const getAllUsers = async (req, res, next) => {
 	try {
-		const dbUsers = await Users.findAll();
+		const dbUsers = await Users.findAll({include: Cohorts});
 		res.send(dbUsers);
 	} catch (error) {
 		console.log(error);
@@ -22,10 +22,11 @@ const createUser = async (req, res, next) => {
 			password,
 			active,
 			category,
+			cohortId,
 		} = req.body;
 		const getAll = await Users.findAll();
 		const emailPost = getAll.map((e) => e.email);
-		console.log(emailPost);
+		// console.log(emailPost);
 		if (!emailPost.find((e) => e === email)) {
 			const newUser = await Users.create({
 				name,
@@ -37,6 +38,13 @@ const createUser = async (req, res, next) => {
 				active,
 				category,
 			});
+			const mergedUsers = await Cohorts.findAll(
+				{
+					where: {id: cohortId}
+				}
+			)
+			console.log(newUser.__proto__)
+			await  newUser.setCohorts(mergedUsers)
 			res.json(newUser);
 		} else {
 			return res.json({ message: "Usuario ya existente" });
@@ -77,7 +85,7 @@ const updateUser = async (req, res, next) => {
 		console.log(error);
 	}
 };
-const userByName = async (req, res, next) => {
+const userByTeacher = async (req, res, next) => {
 	try {
 		const { name, lastname } = req.query;
 	
@@ -90,7 +98,7 @@ const userByName = async (req, res, next) => {
 				},
 			});
 			if(searchedName.length <= 0){
-				res.status(400).json({message: 'El nombre ingresado no existe.'});
+				res.status(400).json({message: 'El profesor ingresado no existe.'});
 			}
 			else{
 				res.json(searchedName);
@@ -101,5 +109,29 @@ const userByName = async (req, res, next) => {
 		console.log(error);
 	}
 };
+const userByStudent = async (req, res, next) => {
+	try {
+		const { name, lastname } = req.query;
+		console.log(name)
+			
+	
+			const searchedTeacher = await Users.findAll({
+				where: {
+					name: { [Op.iLike]: "%" + name + "%" },
+					[Op.and]: [{ category: "student" }],			
+				},
+			}); console.log (searchedTeacher)
+			if (searchedTeacher.length <= 0){
+				res.status(400).json({message: 'El alumno ingresado no existe.'});
+			}
+			else{
+				res.json (searchedTeacher);
+			}
+			
+		//Pa Salvar el file
+	} catch (error) {
+		console.log(error);
+	}
+};
 
-module.exports = { getAllUsers, createUser, updateUser, userByName };
+module.exports = { getAllUsers, createUser, updateUser, userByTeacher, userByStudent };
