@@ -13,7 +13,7 @@ const Module = () => {
           {obj.themes.map((themes, index) => {
             console.log()
             return (
-              <Link key={themes.number} to={`/bootcamp/details/${themes.id}`}>
+              <Link key={themes.number} to={`/bootcamp/details/classes/${themes.id}`}>
                 <h1>{index + 1}</h1>
                 <h1>{themes.theme}</h1>
                 <h5>See lessons</h5>

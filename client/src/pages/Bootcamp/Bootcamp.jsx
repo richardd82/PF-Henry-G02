@@ -4,6 +4,7 @@ import AssistanceModale from "../../components/BootcampComponents/assistanceModa
 import ButtonModule from "../../components/BootcampComponents/buttonModule";
 import Checkpoint from "../../components/BootcampComponents/checkpoint";
 import CheckpointModal from "../../components/BootcampComponents/checkpointModal";
+import SearchBar from "../../components/SearchBar/SearchBar";
 import "./Bootcamp.css";
 
 export const moduleArray = [
@@ -88,6 +89,7 @@ const Bootcamp = () => {
           title="Bootcamp"
           data={moduleArray.slice(0, 6)}
         />
+        <SearchBar data={moduleArray}/>
       </div>
     </div>
   );

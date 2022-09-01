@@ -17,7 +17,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/bootcamp/catalog" component={Catalog} />
-        <Route exact path="/bootcamp/details/:themeId" component={Details} />
+        <Route exact path="/bootcamp/details/classes/:id" component={Details} />
         <Route exact path="/bootcamp/profile/:userId" component={Profile} />
         <Route exact path="/bootcamp/module/:moduleId" component={Module} />
         <Route exact path="/bootcamp/catalog" component={Catalog} />
