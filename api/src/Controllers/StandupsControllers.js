@@ -10,7 +10,7 @@ const allStandUp = async (req, res, next) => {
 }
 
 const createStandUp = async (req, res, next) => {
-    const { name } = req.body;
+    const { name, usersId } = req.body;
     try {
         const getAll = await Standups.findAll();
         const searchedName = getAll.find((el) => el.name === name)
@@ -18,6 +18,8 @@ const createStandUp = async (req, res, next) => {
             res.status(400).json({ message: "El grupo ingresado ya existe" })
         } else {
             const newStandUp = await Standups.create({ name })
+            await newStandUp.addUsers(usersId);
+            // console.log(newStandUp.__proto__)
             res.json(newStandUp)
         }
     } catch (error) {
