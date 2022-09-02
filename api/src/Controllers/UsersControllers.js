@@ -10,7 +10,6 @@ const getAllUsers = async (req, res, next) => {
 		}
 		const dbUsers = await Users.findAll();
 		console.log(dbUsers.__proto__)
-		// const usersFav = await Classes
 		return res.send(dbUsers);
 	} catch (error) {
 		console.log(error);
@@ -18,7 +17,6 @@ const getAllUsers = async (req, res, next) => {
 };
 
 const createUser = async (req, res, next) => {
-	// console.log(req.body.email);
 	try {
 		const {
 			name,
@@ -35,7 +33,6 @@ const createUser = async (req, res, next) => {
 		} = req.body;
 		const getAll = await Users.findAll();
 		const emailPost = getAll.map((e) => e.email);
-		// console.log(emailPost);
 		if (!emailPost.find((e) => e === email)) {
 			const newUser = await Users.create({
 				name,
@@ -99,8 +96,6 @@ const userByTeacher = async (req, res, next) => {
 	try {
 		const { name, lastname } = req.query;
 
-
-
 		const searchedName = await Users.findAll({
 			where: {
 				name: { [Op.iLike]: "%" + name + "%" },
@@ -114,7 +109,6 @@ const userByTeacher = async (req, res, next) => {
 			res.json(searchedName);
 		}
 
-		//Pa Salvar el file
 	} catch (error) {
 		console.log(error);
 	}
@@ -124,7 +118,6 @@ const userByStudent = async (req, res, next) => {
 	try {
 		const { name, lastname } = req.query;
 		console.log(name)
-
 
 		const searchedTeacher = await Users.findAll({
 			where: {
@@ -139,7 +132,6 @@ const userByStudent = async (req, res, next) => {
 			res.json(searchedTeacher);
 		}
 
-		//Pa Salvar el file
 	} catch (error) {
 		console.log(error);
 	}

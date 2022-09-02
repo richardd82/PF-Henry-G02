@@ -18,8 +18,6 @@ const createStandUp = async (req, res, next) => {
             res.status(400).json({ message: "El grupo ingresado ya existe" })
         } else {
             const newStandUp = await Standups.create({ name })
-            
-            // console.log(newStandUp.__proto__)
             await newStandUp.setCohort(cohortId);
             res.json(newStandUp)
         }
