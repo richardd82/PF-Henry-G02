@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from "react"
 
 const SearchBar = () => {
+
   const [search, setSearch] = useState('')
     function onSubmit(event) {
         event.preventDefault();
@@ -26,8 +27,6 @@ const SearchBar = () => {
                     </form>
                 </div>
             </nav>
-
-
 }
 
 export default SearchBar;
