@@ -17,7 +17,11 @@ function App() {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/bootcamp/catalog" component={Catalog} />
+<<<<<<< HEAD
         <Route exact path="/bootcamp/lecture/:id" component={Details} />
+=======
+        <Route exact path="/bootcamp/details/classes/:id" component={Details} />
+>>>>>>> 38be8d2 (SearchBar in the NavBar and routing details changes)
         <Route exact path="/bootcamp/profile/:userId" component={Profile} />
         <Route exact path="/bootcamp/module/:moduleId" component={Module} />
         <Route exact path="/bootcamp/catalog" component={Catalog} />
