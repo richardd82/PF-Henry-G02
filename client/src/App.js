@@ -13,9 +13,9 @@ function App() {
   return (
     <div className="App">
       <Route path="/bootcamp" component={NavBar} />
+      <Route path="/bootcamp" component={Bootcamp} />
       <Switch>
         <Route exact path="/" component={Landing} />
-        <Route exact path="/bootcamp" component={Bootcamp} />
         <Route exact path="/bootcamp/catalog" component={Catalog} />
         <Route exact path="/bootcamp/lecture/:id" component={Details} />
         <Route exact path="/bootcamp/profile/:userId" component={Profile} />
