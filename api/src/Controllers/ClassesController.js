@@ -3,7 +3,7 @@ const {Op} = require('sequelize');
 
 const createClass = async (req, res, next) => {
     try {
-        const { name, lectureLink, codeReviewLink, description, moduleId } = req.body;
+        const { name, lectureLink, codeReviewLink, description, moduleId, cohortId } = req.body;
         const newClass = await Classes.create({
             name,
             lectureLink,
@@ -11,11 +11,13 @@ const createClass = async (req, res, next) => {
             description,
         })
         await newClass.setModule(moduleId);
+        await newClass.setCohort(cohortId)
         res.json(newClass);
     } catch (error) {
         console.log(error)
     }
-}
+};
+
 const classByName = async (req, res, next) => {
     try {
         const { name } = req.query;
@@ -31,16 +33,7 @@ const classByName = async (req, res, next) => {
     } catch (error) {
         console.log(error)
     }
-}
-// const getAllVideos = async (req, res, next) => {
-//     try {
-//         const allVideos = await Classes.findAll();
-//         res.json(allVideos);
-//     } catch (error) {
-//         console.log(error)
-//     }
-
-// }
+};
 
 const getAllVideos = async (req, res, next) => {
     try {
@@ -57,7 +50,7 @@ const getAllVideos = async (req, res, next) => {
     console.log(error)
 }
 
-}
+};
 
 const classById = async (req, res, next) => {
     const id = req.params.id;

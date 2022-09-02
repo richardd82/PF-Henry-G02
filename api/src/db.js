@@ -38,12 +38,14 @@ Users.belongsToMany(Classes, { through: "Users_Favorites" });
 Classes.belongsToMany(Users, { through: "Users_Favorites" });
 // // Classes
 Classes.belongsTo(Modules);
+Classes.belongsTo(Cohorts);
 // // Modules
 Modules.hasMany(Classes);
 Modules.hasMany(Users);
 // // Cohorts
 Cohorts.hasMany(Users);
 Cohorts.hasMany(Standups);
+Cohorts.hasMany(Classes);
 // // Standups
 Standups.hasMany(Users);
 Users.belongsTo(Standups);

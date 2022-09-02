@@ -1,14 +1,6 @@
-const { Users, Cohorts } = require("../db.js");
+const { Users, Classes } = require("../db.js");
 const { Op } = require("sequelize");
 
-// const getAllUsers = async (req, res, next) => {
-// 	try {
-// 		const dbUsers = await Users.findAll({include: Cohorts});
-// 		res.send(dbUsers);
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// };
 
 const getAllUsers = async (req, res, next) => {
 	try {
@@ -17,6 +9,8 @@ const getAllUsers = async (req, res, next) => {
 			return res.json(usersFilter)
 		}
 		const dbUsers = await Users.findAll();
+		console.log(dbUsers.__proto__)
+		// const usersFav = await Classes
 		return res.send(dbUsers);
 	} catch (error) {
 		console.log(error);
@@ -100,6 +94,7 @@ const updateUser = async (req, res, next) => {
 		console.log(error);
 	}
 };
+
 const userByTeacher = async (req, res, next) => {
 	try {
 		const { name, lastname } = req.query;
@@ -124,6 +119,7 @@ const userByTeacher = async (req, res, next) => {
 		console.log(error);
 	}
 };
+
 const userByStudent = async (req, res, next) => {
 	try {
 		const { name, lastname } = req.query;

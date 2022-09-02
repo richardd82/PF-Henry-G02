@@ -7,7 +7,7 @@ const allStandUp = async (req, res, next) => {
     } catch (error) {
         console.log(error)
     }
-}
+};
 
 const createStandUp = async (req, res, next) => {
     const { name, cohortId } = req.body;
