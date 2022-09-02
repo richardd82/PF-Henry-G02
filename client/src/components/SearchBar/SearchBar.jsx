@@ -3,9 +3,12 @@ import React from 'react';
 const SearchBar = () => {
   return (
     <div>
-      <h1>SearchBar</h1>
+      <form>
+        <input type="text" placeholder="Search video..." />
+        <button type="submit">Search</button>
+      </form>
     </div>
-  )
-}
+  );
+};
 
 export default SearchBar;
