@@ -5,13 +5,13 @@ const Videos = ({ videos }) => {
   return (
     <div>
       {videos &&
-        videos.map((video, idx) => {
+        videos.map((video) => {
           return (
             <Card
-              key={idx}
-              title={video.title}
+              key={video.id}
+              title={video.name}
               instructor={video.instructor}
-              cohort={video.cohort}
+              cohort={video.cohortId}
             />
           );
         })}
