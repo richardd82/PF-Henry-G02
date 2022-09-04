@@ -2,6 +2,7 @@ const initialState = {
   classes: [],
   allClasses: [],
   detalle: [{}],
+  description:[],
 };
 
 export default function details(state = initialState, action) {
