@@ -15,7 +15,10 @@ export default function bootcamp(state = initialState, action) {
         ...state,
         modules: action.payload,
       };
-
+    case 'CLEAR_STATE':
+      return {
+        ...initialState,
+      }
     default:
       return state;
   }
