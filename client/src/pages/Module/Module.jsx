@@ -18,7 +18,7 @@ const Module = () => {
       {lessons &&
         lessons.map((lesson, idx) => {
           return (
-            <Link to='/bootcamp/lecture/50c750e6-7368-4bb6-be53-d4cc674c7165'>
+            <Link to={'/bootcamp/module/' + lesson.id}>
               <div key={lesson.id}>
                 <h1>{`${idx + 1} ${lesson.name}`}</h1>
               </div>

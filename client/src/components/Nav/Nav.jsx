@@ -72,24 +72,24 @@ export default function  Nav ({ user }) {
 			<nav className="nav__links">
 				<ul>
 					<li>
-						<Link className="nav__links-active" to="/">
+						<Link className="nav__links-active" to="/bootcamp/module/1">
 							M1
 						</Link>
 					</li>
 					<li>
-						<Link to="/">M2</Link>
+						<Link to="/bootcamp/module/2">M2</Link>
 					</li>
 					<li>
-						<Link to="/">M3</Link>
+						<Link to="/bootcamp/module/3">M3</Link>
 					</li>
 					<li>
-						<Link to="/">M4</Link>
+						<Link to="/bootcamp/module/4">M4</Link>
 					</li>
 					<li>
-						<Link to="/">PI</Link>
+						<Link to="/bootcamp/module/5">PI</Link>
 					</li>
 					<li>
-						<Link to="/">JP</Link>
+						<Link to="/bootcamp/module/6">JP</Link>
 					</li>
 					<img className="nav__rocket" src={rocket} alt="" />
 				</ul>
