@@ -1,27 +1,36 @@
 import React from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+// Actions
+import { getClassesByName } from '../../redux/actions/searchBarActions';
 
 const SearchBar = () => {
-  const [search, setSearch] = useState('');
-  function onSubmit(event) {
-    event.preventDefault();
-    window.location.href = '/bootcamp/catalog/' + search;
-    document.getElementById('Form').reset();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [nameSearch, setNameSearch] = useState('');
+
+  function handleChange(e) {
+    setNameSearch(e.target.value);
   }
 
-  function onInputText(event) {
-    event.preventDefault();
-    setSearch(event.target.value);
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(getClassesByName(nameSearch));
+    setNameSearch('');
+    e.target.placeholder = 'What are you looking for?';
+    history.push('/bootcamp/catalog');
   }
 
   return (
     <nav id="myInput">
       <div className="wrap">
-        <form id="Form" onSubmit={onSubmit}>
+        <form id="Form" onSubmit={e => handleSubmit(e)}>
           <div className="search">
             <input
               type="text"
-              onChange={onInputText}
+              onChange={handleChange}
+              value={nameSearch}
               className="searchTerm"
               placeholder="What are you looking for?"
             />

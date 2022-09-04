@@ -1,18 +1,21 @@
 import React from 'react';
-import Card from '../Card/Card';
+import { Link } from 'react-router-dom';
+import Card from '../Card/Card.jsx';
 
 const Videos = ({ videos }) => {
   return (
     <div>
       {videos &&
-        videos.map((video, idx) => {
+        videos.map(video => {
           return (
-            <Card
-              key={idx}
-              title={video.title}
-              instructor={video.instructor}
-              cohort={video.cohort}
-            />
+            <Link to='/bootcamp/lecture/1'>
+              <Card
+                key={video.id}
+                title={video.name}
+                instructor={video.instructor}
+                cohort={video.cohortId}
+              />
+            </Link>
           );
         })}
     </div>
