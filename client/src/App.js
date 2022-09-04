@@ -43,18 +43,17 @@ function App() {
     <div className="App">
 	  {/* <Nav user={user}/> */}
 		<Routes>
-      <Route path="/Nav" element={<Nav user={user} />}/>
-      <Route path="/bootcamp" element={<Bootcamp/>} /> 
-	  <Route
+      <Route path="/bootcamp" element={<Nav user={user} />}/>
+      {/* <Route path="/bootcamp" element={<Bootcamp/>} />  */}
+	  {/* <Route
 			path="/login"
-			element={user ? <Navigate to="/nav" /> : <Login />}
-		/>
-      	<Route path="/" element={<Login/>} />      
+			element={user ? <Navigate to="/bootcamp" /> : <Login />}
+		/> */}
+      	<Route exact path="/" element={<Login/>} />      
         <Route exact path="/bootcamp/catalog" element={<Catalog/>} />
         <Route exact path="/bootcamp/lecture/:id" element={<Details/>} />
         <Route exact path="/bootcamp/profile/:userId" element={<Profile/>} />
         <Route exact path="/bootcamp/module/:moduleId" element={<Module/>} />
-        <Route exact path="/bootcamp/catalog" element={<Catalog/>} />
         <Route path="*" element={<NotFound />} />
 		</Routes>
     </div>

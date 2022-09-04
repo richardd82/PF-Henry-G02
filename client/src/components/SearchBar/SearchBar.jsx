@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // Actions
 import { getClassesByName } from '../../redux/actions/searchBarActions';
 import './SearchBar.css';
@@ -9,7 +9,7 @@ import lupa from '../../media/lupa.png';
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [nameSearch, setNameSearch] = useState('');
 
   function handleChange(e) {
@@ -21,7 +21,7 @@ const SearchBar = () => {
     dispatch(getClassesByName(nameSearch));
     setNameSearch('');
     e.target.placeholder = 'What are you looking for?';
-    history.push('/bootcamp/catalog');
+    navigate("/bootcamp/catalog", { replace: true })
   }
 
   return (
