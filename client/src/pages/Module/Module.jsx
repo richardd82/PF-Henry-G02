@@ -1,33 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import {moduleArray} from "../Bootcamp/Bootcamp";
-
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Contact from '../../components/Contact/Contact';
+import { getAllLessons } from '../../redux/actions/bootcampActions';
 
 const Module = () => {
-  console.log()
-  return <div>
-    {moduleArray.map((obj, index) => {
-    if (window.location.pathname === `/bootcamp/module/${obj.module}`){
-       return (<div key={obj.module}>
-        <div className="position" >
-          {obj.themes.map((themes, index) => {
-            console.log()
-            return (
-              <Link key={themes.number} to={`/bootcamp/lecture/${themes.id}`}>
-                <h1>{index + 1}</h1>
-                <h1>{themes.theme}</h1>
-                <h5>See lessons</h5>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-      );
-      }
-    else return <div key={obj.module}></div>
-    })}
-  </div>
- 
-  };
+  const dispatch = useDispatch();
+  const lessons = useSelector(state => state.bootcamp.lessons);
+  // const modules = useSelector((state) => state.bootcamp.modules);
+
+  useEffect(() => {
+    // dispatch(getAllModules());
+    dispatch(getAllLessons());
+  }, [dispatch]);
+  return (
+    <div>
+      {lessons &&
+        lessons.map((lesson, idx) => {
+          return (
+            <Link to='/bootcamp/lecture/50c750e6-7368-4bb6-be53-d4cc674c7165'>
+              <div key={lesson.id}>
+                <h1>{`${idx + 1} ${lesson.name}`}</h1>
+              </div>
+            </Link>
+          );
+        })}
+        <footer>
+          <Contact />
+        </footer>
+    </div>
+  );
+};
 
 export default Module;

@@ -38,7 +38,10 @@ const LectureOn = ({ handleEvent }) => {
       <button onClick={(e) => handleEvent(true)}>Code Review</button>
       <h2> Lecture clase: {results[id].name}</h2>
       <div>
-        <div>
+
+
+        {/* ESTO PARA DESPUES DEL LUNES */}
+        {/* <div>
           <a href="#">
             <button>M1</button>
           </a>
@@ -63,13 +66,16 @@ const LectureOn = ({ handleEvent }) => {
           <option>Web-FT27b</option>
           <option>Web-FT28A</option>
           <option>Web-FT28B</option>
-        </select>
+        </select> */}
         <h1>{results[id].name}</h1>
         <p>Author: {results[id].professor}</p>
 
         <ReactPlayer url={results[id].url} controls></ReactPlayer>
       </div>
-      <div>
+
+
+      {/* ESTO VA PARA DESPUES DEL LUNES */}
+      {/* <div>
         <Link to={`/bootcamp/lecture/${idPrev - 1}`}>
           <button disabled={idPrev === 0 ? true : false}>Prev class</button>
         </Link>
@@ -78,7 +84,7 @@ const LectureOn = ({ handleEvent }) => {
             Next class
           </button>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };
