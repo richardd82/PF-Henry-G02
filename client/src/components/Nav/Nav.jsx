@@ -10,14 +10,28 @@ import lupa from "../../assets/media/lupa.png";
 import rocket from "../../assets/media/rocket.png";
 import { useSelector } from "react-redux";
 
-export default function Nav({ user }) {
-  const GOOGLE_CLIENT_ID = "AIzaSyBnFVqnIJy_hAtph6l7W5_n9c0lLzCMkKM";
-  let obj = []
-  obj.push(user);
-  console.log( obj[0].photos[0].value)
-	// console.log(obj + "********************************************");
+export default function  Nav ({ user }) {
+	const GOOGLE_CLIENT_ID = "AIzaSyBnFVqnIJy_hAtph6l7W5_n9c0lLzCMkKM";	
+	// console.log(user)
+	const userAuth = Object.values(user)
+	// let userImg = userAut
+	let imagenG = [];	
+	const userImg = userAuth.forEach(element => {
+		imagenG.push(element);
+	})
+	console.log(userImg)
+	// let imagenF = []
+	// const userImg = userAuth.forEach(element => imagen.push(element.picture));
+	// let imgGit = []
+	// let userImg = userAuth.forEach(element => {
+	// 	imgGit.push(element);
+		// console.log(element)
+	
+	//});
+	// console.log(user.photos[0]?.value)
+	
 	const logout = () => {
-		window.open("http://localhost:3001/auth/logout", "_self");
+		window.open("https://localhost:3001/auth/logout", "_self");
 	};
 
 	return (
@@ -32,12 +46,21 @@ export default function Nav({ user }) {
 
 						<img src={logo_Henry} alt="" />
 						<div className="avatar">
-							<p className="avatar__name">{user.displayName}</p>
+							<p className="avatar__name"></p>
 							{/* {user.displayName} */}
-							<img className="avatar__image" src="" alt="" onClick={logout} />
+							<img
+								className="avatar__image"
+								src={userImg}
+								// {imagenG[6]}
+								alt=""
+								onClick={logout}
+							/>
 							{/* {
 								user.photos[0].value + `?fields=image&key=${GOOGLE_CLIENT_ID}`
 							} */}
+							{/* {
+									user._json.picture + `?fields=image&key=${GOOGLE_CLIENT_ID}`
+								} */}
 						</div>
 					</>
 				) : (
