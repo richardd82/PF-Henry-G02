@@ -44,11 +44,11 @@ function App() {
 	  {/* <Nav user={user}/> */}
 		<Routes>
       <Route path="/bootcamp" element={<Nav user={user} />}/>
-      {/* <Route path="/bootcamp" element={<Bootcamp/>} />  */}
-	  {/* <Route
+      <Route path="/bootcamp" element={<Bootcamp/>} /> 
+	  <Route
 			path="/login"
 			element={user ? <Navigate to="/bootcamp" /> : <Login />}
-		/> */}
+		/>
       	<Route exact path="/" element={<Login/>} />      
         <Route exact path="/bootcamp/catalog" element={<Catalog/>} />
         <Route exact path="/bootcamp/lecture/:id" element={<Details/>} />
