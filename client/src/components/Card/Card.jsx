@@ -1,18 +1,19 @@
 import React from 'react';
-import Profile from '../../assets/blank-profile-picture.png';
-import Thumbnail from '../../assets/video-thumbnail.png';
+import resultados from '../../assets/resultados.jpeg';
+import s from './Card.module.css';
 
-const Card = ({ title, instructor, cohort, picture }) => {
+const Card = ({ title, instructor, description }) => {
   return (
-    <div>
-      <img src={Thumbnail} alt="video-thumbnail" />
-      <div>
-        <h3>{title}</h3>
-        <div>
-          <img src={Profile} alt="profile-pic" />
-          <p>{instructor}</p>
+    <div className={s.card}>
+      <div className={s.cardHeader}>
+        <img src={resultados} alt="video-thumbnail" />
+      </div>
+      <div className={s.cardBody}>
+        <span className={`s.tag s.tagTeal`}>{title}</span>
+        <p>{description}</p>
+        <div class={s.userInfo}>
+          <h5>{instructor}</h5>
         </div>
-        <p>{cohort}</p>
       </div>
     </div>
   );

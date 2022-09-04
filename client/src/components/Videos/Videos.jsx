@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../Card/Card.jsx';
+import s from './Videos.module.css';
 
 const Videos = ({ videos }) => {
   return (
-    <div>
+    <div className={s.card}>
       {videos &&
         videos.map(video => {
           return (
@@ -13,6 +14,7 @@ const Videos = ({ videos }) => {
                 key={video.id}
                 title={video.name}
                 instructor="Martina"
+                description={video.description}
               />
             </Link>
           );
