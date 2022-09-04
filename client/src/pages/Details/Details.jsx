@@ -9,34 +9,6 @@ import github from "../../media/github.png";
 import sheet from "../../media/sheet.png";
 import "./Clases.css";
 
-// const Details = () => {
-//   const [lectureOn, setLectureOn] = useState(false);
-
-//   return (
-//     <div>
-//       {myLesson.length > 0 ? (
-//         <div>
-//           <h1>ESTO ES DETAILS</h1>
-//           <h1>{myLesson[0].name}</h1>
-
-//           <div>
-//             <ReactPlayer url={myLesson[0].lectureLink} controls></ReactPlayer>
-//           </div>
-//         </div>
-//       ) : (
-//         <div>
-//           <span>L</span>
-//           <span>O</span>
-//           <span>A</span>
-//           <span>D</span>
-//           <span>I</span>
-//           <span>N</span>
-//           <span>G</span>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
 const Details = () => {
   const dispatch = useDispatch();
   const myLesson = useSelector((state) => state.details.detalle);
@@ -80,11 +52,17 @@ const Details = () => {
             <p className="avatar__name-profesor">Prof.: Belen Manterola</p>
           </div>
           <div className="code_review">
-            <ReactPlayer url={myLesson[0].codeReviewLink}></ReactPlayer>
+            <ReactPlayer
+              url={myLesson[0].codeReviewLink}
+              className="videoReactThumb"
+            ></ReactPlayer>
             <p>Code Review</p>
           </div>
           <div className="code_review">
-            <ReactPlayer url={myLesson[0].codeReviewLink}></ReactPlayer>
+            <ReactPlayer
+              url={myLesson[0].codeReviewLink}
+              className="videoReactThumb"
+            ></ReactPlayer>
             <p>Material complementario</p>
           </div>
         </article>
