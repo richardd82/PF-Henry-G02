@@ -1,5 +1,7 @@
-const { Classes } = require('../db');
+const { Classes, Cohorts, Users } = require('../db');
 const {Op} = require('sequelize');
+
+
 
 const createClass = async (req, res, next) => {
     try {
@@ -44,7 +46,15 @@ const getAllVideos = async (req, res, next) => {
         }
         // where: {
         //     name: { [Op.iLike]: "%" + name + "%" }
-        const allVideos = await Classes.findAll();
+        const allVideos = await Classes.findAll({
+            include:[{
+                model: Cohorts, 
+            }],
+            include:[{
+                model: Users, 
+                where: {category: "teacher"}
+            }]
+        });
         res.json(allVideos);
 } catch (error) {
     console.log(error)
