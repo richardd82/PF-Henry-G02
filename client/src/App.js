@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router';
-import NavBar from './components/NavBar/NavBar.jsx';
+import NavBar from './components/NavBar/Nav.js';
 import Bootcamp from './pages/Bootcamp/Bootcamp.jsx';
 import Catalog from './pages/Catalog/Catalog.jsx';
 import Details from './pages/Details/Details.jsx';
@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <Route path="/bootcamp" component={NavBar} />
-      <Route path="/bootcamp" component={Bootcamp} />
+      
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/bootcamp/catalog" component={Catalog} />
