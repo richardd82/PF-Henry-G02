@@ -23,7 +23,7 @@ const Catalog = () => {
     setCurrentPage(number);
   };
 
-  const videosPerPage = 2,
+  const videosPerPage = 3,
     indexOfLastVideo = currentPage * videosPerPage,
     indexOfFirstVideo = indexOfLastVideo - videosPerPage,
     currentVideos = videos.classes.slice(indexOfFirstVideo, indexOfLastVideo);
@@ -34,7 +34,6 @@ const Catalog = () => {
         <h1>Loading</h1>
       ) : (
         <div>
-          <h1>Catalog</h1>
           <Pager
             currentPage={currentPage}
             pageHandler={handlePage}
