@@ -3,11 +3,13 @@ const {Op} = require('sequelize');
 
 const createClass = async (req, res, next) => {
     try {
-        const { name, lectureLink, codeReviewLink, description, moduleId, cohortId } = req.body;
+        const { name, lectureLink, lectureLink2, codeReviewLink, codeReviewLink2, description, moduleId, cohortId } = req.body;
         const newClass = await Classes.create({
             name,
             lectureLink,
+            lectureLink2,
             codeReviewLink,
+            codeReviewLink2,
             description,
         })
         await newClass.setModule(moduleId);
