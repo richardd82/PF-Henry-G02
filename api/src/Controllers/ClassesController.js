@@ -22,7 +22,9 @@ const classByName = async (req, res, next) => {
     try {
         const { name } = req.query;
         const nameSearched = await Classes.findAll({
-            where: { name: name }
+            where: { name: {
+              [Op.iLike]: '%' + name + '%',
+            }, }
         });
         if (nameSearched.length > 0) {
             res.json(nameSearched)
