@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // Actions
 import { getClassesByName } from '../../redux/actions/searchBarActions';
+import './SearchBar.css';
+import lupa from '../../media/lupa.png';
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -24,17 +26,17 @@ const SearchBar = () => {
 
   return (
     <nav id="myInput">
-      <div className="wrap">
+      <div className="search">
         <form id="Form" onSubmit={e => handleSubmit(e)}>
           <div className="search">
             <input
               type="text"
               onChange={handleChange}
               value={nameSearch}
-              className="searchTerm"
+              className="search-input"
               placeholder="What are you looking for?"
             />
-            <button type="submit" className="searchButton">
+            <button type="submit" className="icon-Search" src={lupa}>
               <i>&#128640;</i>
             </button>
           </div>

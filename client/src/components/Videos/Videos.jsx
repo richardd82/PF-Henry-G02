@@ -8,12 +8,11 @@ const Videos = ({ videos }) => {
       {videos &&
         videos.map(video => {
           return (
-            <Link to='/bootcamp/lecture/1'>
+            <Link to='/bootcamp/lecture/50c750e6-7368-4bb6-be53-d4cc674c7165'>
               <Card
                 key={video.id}
                 title={video.name}
-                instructor={video.instructor}
-                cohort={video.cohortId}
+                instructor="Martina"
               />
             </Link>
           );
