@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./buttonModule.css"
+import "./ClaseDetails.css"
 
 const ButtonModule = ({data, title, modules}) => {
   return (<div>
@@ -12,7 +12,9 @@ const ButtonModule = ({data, title, modules}) => {
       }).map((obj, index) => {
         return (
           <Link key={index} to={`/${title.toLowerCase()}/module/${obj.id}`}>
+          <section className="sectiom__title-modulo">
             <h1>{obj.name}</h1>
+            </section>
           </Link>
         );
       })}
