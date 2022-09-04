@@ -16,7 +16,7 @@ const Details = () => {
   const { id } = useParams();
   useEffect(() => {
     dispatch(getLessonsById(id));
-    return dispatch(clearState());
+    return () => dispatch(clearState());
   }, []);
 
   const divStyle = {

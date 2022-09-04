@@ -30,7 +30,7 @@ function App() {
 					throw new Error("Authentication has been failed!");
 				})
 				.then((resObject) => {
-					console.log(resObject.user)
+					// console.log(resObject.user)
 					setUser(resObject.user);
 				})
 				.catch((err) => {
@@ -41,10 +41,10 @@ function App() {
 	}, []);
   return (
     <div className="App">
-	  {/* <Nav user={user}/> */}
+	  <Nav user={user}/>
 		<Routes>
-      <Route path="/bootcamp" element={<Nav user={user} />}/>
-      <Route path="/bootcamp" element={<Bootcamp/>} /> 
+      {/* <Route path="/bootcamp" element={<Nav user={user} />}/> */}
+      {/* <Route path="/bootcamp" element={<Bootcamp/>} />  */}
 	  <Route
 			path="/login"
 			element={user ? <Navigate to="/bootcamp" /> : <Login />}

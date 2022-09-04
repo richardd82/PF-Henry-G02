@@ -16,7 +16,7 @@ export const getClassesByName = name => {
     // Si no, llenamos el estado `errorMsg` con el error
     // Más adelante se definen las otras acciones llamadas acá
     axios
-      .get(`http://localhost:3001/classes/byName?name=${name}`)
+      .get(`http://localhost:3002/classes/byName?name=${name}`)
       .then(response => dispatch(getByNameSuccess(response.data)))
       .catch(error => dispatch(requestFailure(error.response.data)));
   };
@@ -46,7 +46,7 @@ export const getAllClasses = () => {
   return dispatch => {
     dispatch(request());
     axios
-      .get(`http://localhost:3001/classes`)
+      .get(`http://localhost:3002/classes`)
       .then(response => dispatch(getAllClassesSuccess(response.data)))
       .catch(error => dispatch(requestFailure(error.response.data)));
   };

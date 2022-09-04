@@ -4,7 +4,7 @@ import "./ClaseDetails.css"
 
 const ButtonModule = ({data, title, modules}) => {
   return (<div>
-    <div className="position" >
+    <div>
       {modules.sort((a, b) =>{
        const aDate = new Date(a.createdAt)
        const bDate = new Date(b.createdAt) 
@@ -12,7 +12,7 @@ const ButtonModule = ({data, title, modules}) => {
       }).map((obj, index) => {
         return (
           <Link key={index} to={`/${title.toLowerCase()}/module/${obj.id}`}>
-          <section className="sectiom__title-modulo">
+          <section className="">
             <h1>{obj.name}</h1>
             </section>
           </Link>

@@ -6,7 +6,7 @@ export const GET_ALL_MODULES = "GET_ALL_MODULES"
 export function getAllLessons(){
     return async function(dispatch){
         try {
-            var json = await axios.get("http://localhost:3001/classes")
+            var json = await axios.get("http://localhost:3002/classes")
                  return dispatch({
                      type: GET_ALL_LESSONS,
                      payload: json.data
@@ -21,7 +21,7 @@ export function getAllLessons(){
 export function getAllModules(){
     return async function(dispatch){
         try {
-            var json = await axios.get("http://localhost:3001/modules")
+            var json = await axios.get("http://localhost:3002/modules")
                  return dispatch({
                     type: GET_ALL_MODULES,
                     payload: json.data
