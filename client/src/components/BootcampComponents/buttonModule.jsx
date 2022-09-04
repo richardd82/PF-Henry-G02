@@ -2,17 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./buttonModule.css"
 
-const ButtonModule = ({data, title, programs}) => {
+const ButtonModule = ({data, title, modules}) => {
   return (<div>
     <div className="position" >
-      {data.map((obj, index) => {
+      {modules.sort((a, b) =>{
+       const aDate = new Date(a.createdAt)
+       const bDate = new Date(b.createdAt) 
+       return aDate - bDate
+      }).map((obj, index) => {
         return (
-          <Link key={obj.module} to={`/${title.toLowerCase()}/module/${obj.module}`}>
-            <h1>{programs[index].program}</h1>
-            <h1
-            >
-              M{`${obj.module}`}
-            </h1>
+          <Link key={index} to={`/${title.toLowerCase()}/module/${obj.id}`}>
+            <h1>{obj.name}</h1>
           </Link>
         );
       })}

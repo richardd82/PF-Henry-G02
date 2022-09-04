@@ -1,10 +1,9 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 // import { useHistory } from 'react-router-dom';
 import Nav from './components/Nav/Nav.jsx';
 import Bootcamp from './pages/Bootcamp/Bootcamp.jsx';
 import Catalog from './pages/Catalog/Catalog.jsx';
 import Details from './pages/Details/Details.jsx';
-import Landing from './pages/Landing/Landing.jsx';
 import Module from './pages/Module/Module.jsx';
 import NotFound from './pages/NotFound/NotFound.jsx';
 import Profile from './pages/Profile/Profile.jsx';
@@ -14,7 +13,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [user, setUser] = useState({});
-//   const history = useHistory();
+  // const history = useHistory();
 	useEffect(() => {
 		const getUser = () => {
 			fetch("https://localhost:3001/auth/login/success", {
@@ -45,8 +44,7 @@ function App() {
 	  {/* <Nav user={user}/> */}
 		<Routes>
       <Route path="/Nav" element={<Nav user={user} />}/>
-      <Route path="/bootcamp" element={<Bootcamp/>} />
-      {/* <Switch> */}
+      <Route path="/bootcamp" element={<Bootcamp/>} /> 
 	  <Route
 			path="/login"
 			element={user ? <Navigate to="/nav" /> : <Login />}
@@ -59,7 +57,6 @@ function App() {
         <Route exact path="/bootcamp/catalog" element={<Catalog/>} />
         <Route path="*" element={<NotFound />} />
 		</Routes>
-      {/* </Switch> */}
     </div>
   );
 }

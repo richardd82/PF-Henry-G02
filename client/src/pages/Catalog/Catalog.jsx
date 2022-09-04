@@ -1,46 +1,54 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // Components
 import Pager from '../../components/Pager/Pager.jsx';
 import Videos from '../../components/Videos/Videos.jsx';
+// Actions
+import { getAllClasses } from '../../redux/actions/searchBarActions.js';
 
 const Catalog = () => {
-  useEffect(() => {
-    return () => {
-      setCurrentPage(1);
-    };
-  }, []);
+  const dispatch = useDispatch();
+  const videos = useSelector(state => state.searchBar);
 
-  const videos = useSelector(state => state.catalog.videos);
-  
+  useEffect(() => {
+    if (!videos.classes.length && videos.loading === false) {
+      dispatch(getAllClasses());
+    }
+  }, [videos, dispatch]);
+
   // Pagination handler
   const [currentPage, setCurrentPage] = useState(1);
-  const handlePage = (number) => {
-    setCurrentPage(number)
-  }
+  const handlePage = number => {
+    setCurrentPage(number);
+  };
 
-  const videosPerPage = 8,
+  const videosPerPage = 3,
     indexOfLastVideo = currentPage * videosPerPage,
     indexOfFirstVideo = indexOfLastVideo - videosPerPage,
-    currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
+    currentVideos = videos.classes.slice(indexOfFirstVideo, indexOfLastVideo);
 
   return (
     <div>
-      <h1>Catalog</h1>
-      <Pager
-        currentPage={currentPage}
-        pageHandler={handlePage}
-        itemsPerPage={videosPerPage}
-        totalItems={videos.length}
-      />
-      <Videos videos={currentVideos} />
-      <Pager
-        currentPage={currentPage}
-        pageHandler={handlePage}
-        itemsPerPage={videosPerPage}
-        totalItems={videos.length}
-      />
+      {videos.loading === true ? (
+        <h1>Loading</h1>
+      ) : (
+        <div>
+          <Pager
+            currentPage={currentPage}
+            pageHandler={handlePage}
+            itemsPerPage={videosPerPage}
+            totalItems={videos.classes.length}
+          />
+          <Videos videos={currentVideos} />
+          <Pager
+            currentPage={currentPage}
+            pageHandler={handlePage}
+            itemsPerPage={videosPerPage}
+            totalItems={videos.classes.length}
+          />
+        </div>
+      )}
     </div>
   );
 };
