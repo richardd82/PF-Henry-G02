@@ -5,7 +5,7 @@ import {moduleArray} from "../Bootcamp/Bootcamp";
 
 const Module = () => {
   console.log()
-  return <div>
+  return (<div>
     {moduleArray.map((obj, index) => {
     if (window.location.pathname === `/bootcamp/module/${obj.module}`){
        return (<div key={obj.module}>
@@ -26,7 +26,7 @@ const Module = () => {
       }
     else return <div key={obj.module}></div>
     })}
-  </div>
+  </div>)
  
   };
 
