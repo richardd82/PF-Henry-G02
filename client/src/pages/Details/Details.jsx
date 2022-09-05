@@ -1,23 +1,26 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLessonsById, clearState } from '../../redux/actions/detailActions';
+// import { getLessonsById, clearState } from '../../redux/actions/detailActions';
 import { useParams } from 'react-router-dom';
 import avatar from '../../media/avatar.png';
 import github from '../../media/github.png';
 import sheet from '../../media/sheet.png';
 import './Clases.css';
 import Nav from '../../components/NavBar/Nav';
+// Actions
+import { getClassesById, clearStateClasses } from '../../redux/actions/classesActions';
 
 const Details = ({ user }) => {
   const dispatch = useDispatch();
-  const myLesson = useSelector(state => state.details.detalle);
+  const myLesson = useSelector(state => state.classes.detalle);
   console.log('ESTO ME LLEGA DE DETAILS:', myLesson);
   const { id } = useParams();
+
   useEffect(() => {
-    dispatch(getLessonsById(id));
-    return () => dispatch(clearState());
+    dispatch(getClassesById(id));
+    return () => dispatch(clearStateClasses());
   }, []);
 
   const divStyle = {

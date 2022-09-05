@@ -6,17 +6,18 @@ import Nav from '../../components/NavBar/Nav.js';
 import Pager from '../../components/Pager/Pager.jsx';
 import Videos from '../../components/Videos/Videos.jsx';
 // Actions
-import { getAllClasses } from '../../redux/actions/searchBarActions.js';
+// import { getAllClasses } from '../../redux/actions/searchBarActions.js';
+import { getClasses } from '../../redux/actions/classesActions.js';
 
 const Catalog = ({ user }) => {
   const dispatch = useDispatch();
-  const videos = useSelector(state => state.searchBar);
+  const videos = useSelector(state => state.classes);
 
-  useEffect(() => {
-    if (!videos.classes.length && videos.loading === false) {
-      dispatch(getAllClasses());
-    }
-  }, [videos, dispatch]);
+  // useEffect(() => {
+  //   if (!videos.classes.length && videos.loading === false) {
+  //     dispatch(getClasses());
+  //   }
+  // }, [videos, dispatch]);
 
   // Pagination handler
   const [currentPage, setCurrentPage] = useState(1);

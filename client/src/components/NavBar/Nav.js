@@ -9,27 +9,29 @@ import alumno from '../../assets/media/avatar.png';
 import rocket from '../../assets/media/rocket.png';
 // Actions
 import {
-  getAllModules,
-  getAllLessons,
-  clearState,
+  getAllLessons
 } from '../../redux/actions/bootcampActions.js';
 import SearchBar from '../SearchBar/SearchBar';
+// New actions
+import { getClasses, clearStateClasses } from '../../redux/actions/classesActions';
+import { getAllModules, clearStateModules } from '../../redux/actions/modulesActions.js'
 
 export default function Nav({ user }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllModules());
-    dispatch(getAllLessons());
+    dispatch(getClasses());
   }, [dispatch]);
 
   const handleClick = () => {
-    dispatch(clearState());
-    dispatch(getAllLessons());
+    dispatch(clearStateClasses());
+    dispatch(clearStateModules())
+    dispatch(getClasses());
     dispatch(getAllModules());
   };
 
-  const lessons = useSelector(state => state.bootcamp.lessons);
-  const modules = useSelector(state => state.bootcamp.modules);
+  const lessons = useSelector(state => state.classes.classes);
+  const modules = useSelector(state => state.modules.modules);
 
   const GOOGLE_CLIENT_ID = 'AIzaSyBnFVqnIJy_hAtph6l7W5_n9c0lLzCMkKM';
   let obj = [];

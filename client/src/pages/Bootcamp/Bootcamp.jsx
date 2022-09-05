@@ -8,17 +8,19 @@ import Checkpoint from "../../components/BootcampComponents/checkpoint";
 import CheckpointModal from "../../components/BootcampComponents/checkpointModal";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import "./Bootcamp.css";
+// Actions
+import { getClasses } from "../../redux/actions/classesActions.js";
 
 
 const Bootcamp = () => {
   
   const dispatch = useDispatch()
-  const lessons = useSelector((state) => state.bootcamp.lessons)
+  const classes = useSelector((state) => state.classes.classes)
   const modules = useSelector((state) => state.bootcamp.modules)
 
 useEffect(() =>{
   dispatch(getAllModules())
-  dispatch(getAllLessons())
+  dispatch(getClasses())
 }, [])
 
   if(modules){
@@ -34,9 +36,9 @@ useEffect(() =>{
           <ButtonModule
             modules={modules}
             title="Bootcamp"
-            data={lessons}
+            data={classes}
           />
-          <SearchBar data={lessons}/>
+          <SearchBar data={classes}/>
         </div>
       </div>
     );

@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   getAllLessons,
-  getAllModules,
-  clearState,
 } from '../../redux/actions/bootcampActions';
 import Contact from '../../components/Contact/Contact';
 // Assets
@@ -12,17 +10,21 @@ import github from '../../media/github.png';
 import sheet from '../../media/sheet.png';
 import './ClaseDetails.css';
 import Nav from '../../components/NavBar/Nav';
+// Actions
+import { getClasses, clearStateClasses } from '../../redux/actions/classesActions';
+import { getAllModules, clearStateModules } from '../../redux/actions/modulesActions';
 
 const Module = ({ user }) => {
   const dispatch = useDispatch();
-  const lessons = useSelector(state => state.bootcamp.lessons);
-  const modules = useSelector(state => state.bootcamp.modules);
+  const lessons = useSelector(state => state.classes.classes);
+  const modules = useSelector(state => state.modules.modules);
 
   useEffect(() => {
     dispatch(getAllModules());
-    dispatch(getAllLessons());
+    dispatch(getClasses());
     return () => {
-      dispatch(clearState());
+      dispatch(clearStateClasses());
+      dispatch(clearStateModules());
     };
   }, [dispatch]);
 
