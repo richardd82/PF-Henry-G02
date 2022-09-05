@@ -8,6 +8,9 @@ import {
   clearState
 } from '../../redux/actions/bootcampActions';
 import Contact from '../../components/Contact/Contact';
+// Assets
+import github from '../../media/github.png';
+import sheet from '../../media/sheet.png';
 
 const Module = () => {
   const dispatch = useDispatch();
@@ -21,23 +24,27 @@ const Module = () => {
       dispatch(clearState())
     }
   }, [dispatch]);
- 
+
   return (
     <div>
       {modules && modules.map((module, index) => {
         if (window.location.pathname === `/bootcamp/module/${module.id}`) {
-          return lessons.map((obj, index) => {
+          return lessons.sort((a, b) => {
+            const aDate = new Date(a.createdAt);
+            const bDate = new Date(b.createdAt);
+            return aDate - bDate;
+          }).map((obj, index) => {
             if (obj.moduleId === module.id) {
               return (
                 <div key={index}>
-                  <section className="section__modulo-clases">
+                  <section key={index} className="section__modulo-clases">
                     <article>
-                      <div className="position">
+                      <div className="">
                         <Link key={obj.id} to={`/bootcamp/lecture/${obj.id}`}>
-                          <p>{`${index + 1} ${obj.name}`}</p>
+                          <p>{`${obj.name}`}</p>
                           <div>
-                            <img src="./assest/github.png" alt="" />
-                            <img src="./assest/sheet.png" alt="" />
+                            <img src={github} alt="github" />
+                            <img src={sheet} alt="sheet" />
                           </div>
                           <h5>See lessons</h5>
                         </Link>
@@ -47,7 +54,7 @@ const Module = () => {
                 </div>
               );
             } else {
-              return <div>Loading</div>;
+              return null
             }
           });
         }
