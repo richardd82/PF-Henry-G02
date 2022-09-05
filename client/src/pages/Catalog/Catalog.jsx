@@ -23,7 +23,7 @@ const Catalog = () => {
     setCurrentPage(number);
   };
 
-  const videosPerPage = 3,
+  const videosPerPage = 10,
     indexOfLastVideo = currentPage * videosPerPage,
     indexOfFirstVideo = indexOfLastVideo - videosPerPage,
     currentVideos = videos.classes.slice(indexOfFirstVideo, indexOfLastVideo);
