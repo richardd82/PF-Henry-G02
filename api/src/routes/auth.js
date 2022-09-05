@@ -2,6 +2,7 @@ const router = require("express").Router();
 const passport = require("passport");
 //http://localhost:3001/auth/google/callback
 const CLIENT_URL = "https://localhost:3000/bootcamp/catalog";
+const CLIENT_URL_LOGOUT = "https://localhost:3000";
 
 router.get("/login/success", (req, res) => {
 	if (req.user) {
@@ -21,12 +22,9 @@ router.get("/login/failed", (req, res) => {
 });
 
 router.get("/logout", (req, res, next) => {
-	req.logout(function (err) {
-		if (err) {
-			return next(err);
-		}
-		res.redirect(CLIENT_URL);
-	});
+	req.logout()
+	res.redirect(CLIENT_URL_LOGOUT);
+	
 });
 
 router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
