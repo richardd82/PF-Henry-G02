@@ -1,13 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Nav from '../../components/NavBar/Nav.js';
 // Components
 import Pager from '../../components/Pager/Pager.jsx';
 import Videos from '../../components/Videos/Videos.jsx';
 // Actions
 import { getAllClasses } from '../../redux/actions/searchBarActions.js';
 
-const Catalog = () => {
+const Catalog = ({ user }) => {
   const dispatch = useDispatch();
   const videos = useSelector(state => state.searchBar);
 
@@ -34,6 +35,7 @@ const Catalog = () => {
         <h1>Loading</h1>
       ) : (
         <div>
+        <Nav user={user}/>
           <Pager
             currentPage={currentPage}
             pageHandler={handlePage}

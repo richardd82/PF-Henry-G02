@@ -1,18 +1,19 @@
-import React from "react";
-import ReactPlayer from "react-player";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getLessonsById, clearState } from "../../redux/actions/detailActions";
-import { useParams } from "react-router-dom";
-import avatar from "../../media/avatar.png";
-import github from "../../media/github.png";
-import sheet from "../../media/sheet.png";
-import "./Clases.css";
+import React from 'react';
+import ReactPlayer from 'react-player';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getLessonsById, clearState } from '../../redux/actions/detailActions';
+import { useParams } from 'react-router-dom';
+import avatar from '../../media/avatar.png';
+import github from '../../media/github.png';
+import sheet from '../../media/sheet.png';
+import './Clases.css';
+import Nav from '../../components/NavBar/Nav';
 
-const Details = () => {
+const Details = ({ user }) => {
   const dispatch = useDispatch();
-  const myLesson = useSelector((state) => state.details.detalle);
-  console.log("ESTO ME LLEGA DE DETAILS:", myLesson);
+  const myLesson = useSelector(state => state.details.detalle);
+  console.log('ESTO ME LLEGA DE DETAILS:', myLesson);
   const { id } = useParams();
   useEffect(() => {
     dispatch(getLessonsById(id));
@@ -20,10 +21,11 @@ const Details = () => {
   }, []);
 
   const divStyle = {
-    borderRadius: "20px",
+    borderRadius: '20px',
   };
   return (
     <>
+      <Nav user={user} />
       <section className="sectiom__title-modulo">
         <h1>FOUNDATION</h1>
       </section>

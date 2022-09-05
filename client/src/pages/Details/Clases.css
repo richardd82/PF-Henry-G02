@@ -35,9 +35,10 @@ body::-webkit-scrollbar-track {
   gap: 10px;
 }
 .section__modulo-clases div {
-  width: 100%;
+  width: 70%;
 }
 .video__clase-full {
+  height: 70vh;
   border-radius: 10px;
   max-height: 70vh;
   position: relative;
@@ -50,7 +51,7 @@ body::-webkit-scrollbar-track {
   display: flex;
   flex-direction: column;
   background-color: #b6d7db;
-  padding: 10px;
+  /* padding: 10px; */
   margin: 10px 3px;
   border-radius: 20px;
   min-width: 285px;

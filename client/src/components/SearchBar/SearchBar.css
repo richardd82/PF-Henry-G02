@@ -177,6 +177,8 @@ height: 64px;
   min-width: 1024px;
   width: 95%;
   justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 25px;
 }
 .nav__links-active{
   background: linear-gradient(145deg, #f0f0f0, #fde615);
@@ -232,7 +234,7 @@ animation-name: slidein;
 /************* search bar **********************/
 .search-Input{
   transition: width 0.4s ease-in-out;
-  width: 120px;
+  width: 145px;
   height: 3rem;
   border-radius: 30px;
   padding-left: 20px;
@@ -260,6 +262,7 @@ animation-name: slidein;
   height: 40px;
   width: 40px;
   padding: 5px;
+  margin-top: -20px;
   margin-left: -2.6rem;
   background-color: #fde615;
   border-radius: 30px;

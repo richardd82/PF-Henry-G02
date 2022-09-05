@@ -1,65 +1,63 @@
-.moduleContainer {
+.container{
   display: flex;
-  flex-direction: row;
-  /* justify-content: stretch; */
+  flex-direction: column;
+  justify-content:stretch;
   align-items: center;
   height: 100vh;
-  flex-wrap: wrap;
 }
-a {
+a{
   text-decoration: none;
 }
 /****************************************/
 /***********************************************/
-.sectiom__title-modulo {
+.sectiom__title-modulo{
   font-size: 2rem;
   margin-top: 20px;
-  border-bottom: 1px solid gray;
-  background-color: transparent;
-  padding: 5px;
+border-bottom: 1px solid gray;
+background-color: transparent;
+padding: 5px;
 }
 /************************************************/
-.sectionModuloClases {
+.section__modulo-clases{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   min-width: fit-content;
-  min-height: fit-content;
 }
-.sectionModuloClases article {
+.section__modulo-clases article{
   display: flex;
   flex-direction: column;
-  background-color: #b6d7db;
-  padding: 10px;
-  margin: 20px;
+  background-color:#b6d7db;
+  padding-top: 10px;
+  margin: 10px;
   border-radius: 10px;
   min-width: fit-content;
   cursor: pointer;
 }
-.sectionModuloClases article p {
+.section__modulo-clases article p{
   font-size: 1.4rem;
-
+ 
   margin: 10px;
-  color: white;
+  color:white;
 }
 
-.sectionModuloClases article div {
+.section__modulo-clases article div{
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.sectionModuloClases article div img {
+.section__modulo-clases article div img{
   width: 40px;
   margin: 10px;
-  filter: opacity(0.5);
+  filter: opacity(.5);
 }
 
 /*************************************************/
-.sectiom__title-modulo {
+.sectiom__title-modulo{
   font-size: 2rem;
   margin-top: 20px;
   border-bottom: 1px solid gray;
-  background-color: #fff2d4;
+  background-color: transparent;
   padding: 5px;
-}
+  }
