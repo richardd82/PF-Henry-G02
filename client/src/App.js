@@ -11,6 +11,7 @@ import Login from '../src/pages/Login/Login';
 import './App.css';
 import { useEffect, useState } from 'react';
 import Contact from './components/Contact/Contact.jsx';
+import CreateClass from './components/Teacher/CreateClass.js';
 
 function App() {
   const [user, setUser] = useState({});
@@ -56,6 +57,7 @@ function App() {
         <Route exact path="/bootcamp/lecture/:id" element={<Details user={user}/>} />
         <Route exact path="/bootcamp/profile/:userId" element={<Profile />} />
         <Route exact path="/bootcamp/module/:moduleId" element={<Module user={user}/>} />
+        <Route exact path='/teacher/create' element={<CreateClass/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

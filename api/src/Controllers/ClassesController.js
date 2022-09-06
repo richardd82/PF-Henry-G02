@@ -80,10 +80,24 @@ const classById = async (req, res, next) => {
     }
 };
 
+const updateClasses = async(req, res, next) => {
+    const {id, name, lectureLink, lectureLink2, codeReviewLink, codeReviewLink2, description} = req.body 
+    //const {id} = req.params
+    try {
+        const obj = {id, name, lectureLink, lectureLink2, codeReviewLink, codeReviewLink2, description}
+        const update = await Classes.update(obj, {
+            where: {
+                id: id
+            }
+        })
+        res.json({modificado: true})
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 
 
 
-
-module.exports = { createClass, classByName, getAllVideos, classById }
+module.exports = { createClass, classByName, getAllVideos, classById, updateClasses }
