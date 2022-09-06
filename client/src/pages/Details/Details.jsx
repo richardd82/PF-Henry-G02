@@ -19,9 +19,6 @@ const Details = () => {
     return dispatch(clearState());
   }, []);
 
-  const divStyle = {
-    borderRadius: "20px",
-  };
   return (
     <>
       <section className="sectiom__title-modulo">
