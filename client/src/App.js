@@ -8,9 +8,11 @@ import Module from './pages/Module/Module.jsx';
 import NotFound from './pages/NotFound/NotFound.jsx';
 import Profile from './pages/Profile/Profile.jsx';
 import Login from '../src/pages/Login/Login';
+import UserAdmin from './pages/AdminProfile/UserAdmin.jsx';
 import './App.css';
 import { useEffect, useState } from 'react';
 import Contact from './components/Contact/Contact.jsx';
+import FormNewUser from '../src/components/FormNewUser/FormNewUser.jsx'
 
 function App() {
   const [user, setUser] = useState({});
@@ -44,6 +46,8 @@ function App() {
     <div className="App">
       {/* <Nav user={user} /> */}
       <Routes>
+        <Route exact path='/bootcamp/users/create' element={<FormNewUser/>}/>
+        <Route exact path="/bootcamp/users" element={<UserAdmin/>}/>
         <Route exact path="/bootcamp/catalog" element={<Catalog user={user && user} />}/>
         <Route path='/bootcamp/contacto' element={<Contact user={user} />}/>
         {/* <Route path="/bootcamp" element={<Bootcamp/>} />  */}
