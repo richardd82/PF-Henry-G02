@@ -63,6 +63,9 @@ export default function Nav({ user }) {
 
             <img src={logo_Henry} alt="" />
             <div className="avatar">
+              <Link to="/bootcamp/assistance">
+                <p className="avatar__name">Assistance</p>
+              </Link>
               <Link to="/bootcamp/contacto">
                 <p className="avatar__name">Contacto</p>
               </Link>
