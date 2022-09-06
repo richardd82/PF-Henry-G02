@@ -56,11 +56,12 @@ export default function Nav({ user }) {
       <header>
         {user ? (
           <>
-            <div>
-              <img className="logo__thumb" src={logo_thumb} alt="" />
-              <h2>Students</h2>
-            </div>
-
+            <Link to="/bootcamp">
+              <div>
+                <img className="logo__thumb" src={logo_thumb} alt="" />
+                <h2>Students</h2>
+              </div>
+            </Link>
             <img src={logo_Henry} alt="" />
             <div className="avatar">
               <Link to="/bootcamp/contacto">

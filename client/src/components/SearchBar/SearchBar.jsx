@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 // Actions
 import { getClassesByName } from '../../redux/actions/searchBarActions';
 import './SearchBar.css';
@@ -26,6 +26,11 @@ const SearchBar = () => {
 
   return (
     <div className="search">
+      <div>
+        <Link to="/bootcamp/catalog">
+          <p>Catalogo</p>
+        </Link>
+      </div>
       <form id="Form" onSubmit={e => handleSubmit(e)}>
         <div className="search">
           <input

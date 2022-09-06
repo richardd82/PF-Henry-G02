@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 // import { useHistory } from 'react-router-dom';
-import Nav from './components/NavBar/Nav.js';
+// import Nav from './components/NavBar/Nav.js';
 import Bootcamp from './pages/Bootcamp/Bootcamp.jsx';
 import Catalog from './pages/Catalog/Catalog.jsx';
 import Details from './pages/Details/Details.jsx';
@@ -14,6 +14,7 @@ import Contact from './components/Contact/Contact.jsx';
 
 function App() {
   const [user, setUser] = useState({});
+  console.log(user);
   // const history = useHistory();
   useEffect(() => {
     const getUser = () => {
@@ -44,19 +45,34 @@ function App() {
     <div className="App">
       {/* <Nav user={user} /> */}
       <Routes>
-        <Route exact path="/bootcamp/catalog" element={<Catalog user={user && user} />}/>
-        <Route path='/bootcamp/contacto' element={<Contact user={user} />}/>
-        {/* <Route path="/bootcamp" element={<Bootcamp/>} />  */}
-        {/* <Route
+        <Route path="/bootcamp/contacto" element={<Contact user={user} />} />
+        <Route exact path="/bootcamp" element={<Bootcamp user={user} />} />
+        <Route
+          path="/bootcamp/catalog"
+          element={<Catalog user={user && user} />}
+        />
+        <Route
           path="/"
-          element={user ? <Navigate to="/bootcamp/catalog" /> : <Login />}
+          element={user.id ? <Navigate to="/bootcamp" /> : <Login />}
+        />
+        {/* <Route
+          path="/bootcamp"
+          element={!user.id ? <Navigate to="/" /> : <Navigate to='/bootcamp' />}
         /> */}
         <Route exact path="/" element={<Login />} />
         {/* <Route exact path="/bootcamp/catalog" element={<Catalog user={user}/>} /> */}
-        <Route exact path="/bootcamp/lecture/:id" element={<Details user={user}/>} />
+        <Route
+          exact
+          path="/bootcamp/lecture/:id"
+          element={<Details user={user} />}
+        />
         <Route exact path="/bootcamp/profile/:userId" element={<Profile />} />
-        <Route exact path="/bootcamp/module/:moduleId" element={<Module user={user}/>} />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          exact
+          path="/bootcamp/module/:moduleId"
+          element={<Module user={user} />}
+        />
+        <Route path="*" element={<NotFound user={user}/>} />
       </Routes>
     </div>
   );

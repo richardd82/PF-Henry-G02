@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport");
 //http://localhost:3001/auth/google/callback
-const CLIENT_URL = "https://localhost:3000/bootcamp/catalog";
+const CLIENT_URL = "https://localhost:3000/bootcamp";
 const CLIENT_URL_LOGOUT = "https://localhost:3000";
 
 router.get("/login/success", (req, res) => {

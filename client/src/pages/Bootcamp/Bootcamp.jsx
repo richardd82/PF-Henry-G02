@@ -8,9 +8,10 @@ import Checkpoint from "../../components/BootcampComponents/checkpoint";
 import CheckpointModal from "../../components/BootcampComponents/checkpointModal";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import "./Bootcamp.css";
+import Nav from "../../components/NavBar/Nav";
 
 
-const Bootcamp = () => {
+const Bootcamp = ({user}) => {
   
   const dispatch = useDispatch()
   const lessons = useSelector((state) => state.bootcamp.lessons)
@@ -24,20 +25,21 @@ useEffect(() =>{
   if(modules){
     return (
       <div>
+      <Nav user={user}/>
         <AssistanceModale />
         <CheckpointModal />
-        <div className="container">
+        <div className="">
           <AssistanceBox />
           <Checkpoint />
         </div>
-        <div>
-          <ButtonModule
-            modules={modules}
-            title="Bootcamp"
-            data={lessons}
-          />
-          <SearchBar data={lessons}/>
-        </div>
+        {/* <div> */}
+          {/* <ButtonModule */}
+            {/* modules={modules} */}
+            {/* title="Bootcamp" */}
+            {/* data={lessons} */}
+          {/* /> */}
+          {/* <SearchBar data={lessons}/> */}
+        {/* </div> */}
       </div>
     );
   }
