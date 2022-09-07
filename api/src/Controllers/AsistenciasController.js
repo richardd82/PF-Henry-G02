@@ -1,4 +1,4 @@
-const {Asistencias, Users} = require("../db.js")
+/* const {Asistencias, Users} = require("../db.js")
 
 const createAsistencia = async (req, res, next)=>{
     try {
@@ -19,4 +19,4 @@ const createAsistencia = async (req, res, next)=>{
 
 module.exports = {
     createAsistencia
-}
+} */
