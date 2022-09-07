@@ -47,7 +47,7 @@ function Classnames({user}) {
                   modules.map((module, index)=> {
                     if (
                       window.location.pathname ===
-                      `/bootcamp/assistance/${module.id}` && (obj.moduleId === module.id)
+                      `/bootcamp/attendant/${module.id}` && (obj.moduleId === module.id)
                     ) {
                       return (
                           <div key={index}>

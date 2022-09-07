@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import Modulebutton from '../../components/AssistanceComponents/moduleButton'
+import Modulebutton from '../../components/AttendantComponents/moduleButton'
 import Nav from '../../components/NavBar/Nav'
 
-function Assistance({ user }) {
+function Attendant({ user }) {
 
     // const dispatch = useDispatch()
 
@@ -18,4 +18,4 @@ function Assistance({ user }) {
   )
 }
 
-export default Assistance
+export default Attendant;

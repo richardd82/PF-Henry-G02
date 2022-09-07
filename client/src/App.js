@@ -11,8 +11,8 @@ import Login from '../src/pages/Login/Login';
 import './App.css';
 import { useEffect, useState } from 'react';
 import Contact from './components/Contact/Contact.jsx';
-import Assistance from './pages/Assistance/Assistance.jsx';
-import Classnames from './components/AssistanceComponents/classNames.jsx';
+import Classnames from './components/AttendantComponents/classNames.jsx';
+import Attendant from './pages/Attendant/Attendant.jsx';
 
 function App() {
   const [user, setUser] = useState({});
@@ -54,8 +54,8 @@ function App() {
           element={user ? <Navigate to="/bootcamp/catalog" /> : <Login />}
         /> */}
         <Route exact path="/" element={<Login />} />
-        <Route exact path="/bootcamp/assistance" element={<Assistance user={user}/>}/>
-        <Route exact path="/bootcamp/assistance/:moduleId" element={<Classnames user={user}/>}/>
+        <Route exact path="/bootcamp/attendant" element={<Attendant user={user}/>}/>
+        <Route exact path="/bootcamp/attendant/:moduleId" element={<Classnames user={user}/>}/>
 
         {/* <Route exact path="/bootcamp/catalog" element={<Catalog user={user}/>} /> */}
         <Route exact path="/bootcamp/lecture/:id" element={<Details user={user}/>} />

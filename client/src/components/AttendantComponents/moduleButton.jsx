@@ -41,7 +41,7 @@ useEffect(() => {
               <Link
                 onClick={() => handleClick()}
                 key={index}
-                to={`/bootcamp/assistance/${obj.id}`}
+                to={`/bootcamp/attendance/${obj.id}`}
               >
                 <section>
                   <h1>{obj.name}</h1>
