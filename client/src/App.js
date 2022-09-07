@@ -12,6 +12,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import Contact from './components/Contact/Contact.jsx';
 import CreateClass from './components/Teacher/CreateClass.js';
+import TeacherDashboard from './components/Teacher/TeacherDashboard.js';
 
 function App() {
   const [user, setUser] = useState({});
@@ -58,6 +59,7 @@ function App() {
         <Route exact path="/bootcamp/profile/:userId" element={<Profile />} />
         <Route exact path="/bootcamp/module/:moduleId" element={<Module user={user}/>} />
         <Route exact path='/teacher/create' element={<CreateClass/>}/>
+        <Route exact path='/teacher' element={<TeacherDashboard/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

@@ -44,3 +44,18 @@ export function getCohorts() {
     }
   };
 }
+
+export function getTeacher() {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get('http://localhost:3002/users');
+        console.log(response.data);
+        return dispatch({
+          type: 'GET_TEACHER',
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }

@@ -4,18 +4,23 @@ import {
   createClass,
   getCohorts,
   getModules,
+  getTeacher
 } from '../../redux/actions/teacherActions';
 // Error handler
 import { createClassErrors } from '../../helpers/setCreateClassErrors';
+
 
 export default function CreateClass() {
   const dispatch = useDispatch();
   const modules = useSelector(state => state.teacher.modules);
   const cohorts = useSelector(state => state.teacher.cohorts);
+  const teacher = useSelector(state => state.teacher.teacher);
+  //console.log(teacher);
 
   useEffect(() => {
     dispatch(getCohorts());
     dispatch(getModules());
+    dispatch(getTeacher())
   }, [dispatch]);
 
   const [input, setInput] = useState({
@@ -27,14 +32,16 @@ export default function CreateClass() {
     description: '',
     moduleId: '',
     cohortId: '',
+    nameTeacher: '',
     errorMsg: '',
   });
-
+//los videos deberian ser archivos adjuntos???
   const [warnings, setWarnings] = useState({
     name: '',
     lecture: '',
     moduleId: '',
     cohortId: '',
+    nameTeacher: '',
     errorMsg: '',
     error: false,
   });
@@ -83,13 +90,14 @@ export default function CreateClass() {
         description: '',
         moduleId: '',
         cohortId: '',
+        nameTeacher: '',
         errorMsg: '',
       });
     }
   }
 
-  console.log('INPUT', input);
-  console.log('WARNING', warnings);
+  //console.log('INPUT', input);
+  //console.log('WARNING', warnings);
 
   return (
     <div>
@@ -184,6 +192,20 @@ export default function CreateClass() {
           <select name="cohortId" onChange={e => handleSelect(e)}>
             {cohorts &&
               cohorts.map(e => {
+                return (
+                  <option key={e.id} value={e.id}>
+                    {e.name}
+                  </option>
+                );
+              })}
+          </select>
+          {warnings.cohortId ? <p>{warnings.cohortId}</p> : null}
+        </div>
+        <div>
+          <label>Teacher</label>
+          <select name="nameTeacher" onChange={e => handleSelect(e)}>
+            {teacher &&
+              teacher.map(e => {
                 return (
                   <option key={e.id} value={e.id}>
                     {e.name}

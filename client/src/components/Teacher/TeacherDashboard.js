@@ -7,6 +7,10 @@ export default function TeacherDashboard (){
             <Link to={'/teacher/create'}>
                 <botton>CREAR CLASE</botton>
             </Link>
+            <Link to={'/teacher/update'}>
+                <botton>MODIFICAR CLASE</botton>
+            </Link>
         </div>
+        
     )
 }
