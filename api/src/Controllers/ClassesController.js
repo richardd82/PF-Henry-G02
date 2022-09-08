@@ -5,17 +5,21 @@ const {Op} = require('sequelize');
 
 const createClass = async (req, res, next) => {
     try {
-        const { name, lectureLink, lectureLink2, codeReviewLink, codeReviewLink2, description, moduleId, cohortId } = req.body;
+        const { name,  description} = req.body;
         const newClass = await Classes.create({
             name,
-            lectureLink,
-            lectureLink2,
-            codeReviewLink,
-            codeReviewLink2,
             description,
         })
-        await newClass.setModule(moduleId);
-        await newClass.setCohort(cohortId)
+/*         await newClass.setModule(moduleId);
+        await newClass.setCohort(cohortId);
+
+        const user = await Users.findAll({
+            where:{
+                name: nameTeacher,
+            }
+        }) 
+        await newClass.addUsers(user) 
+        */
         res.json(newClass);
     } catch (error) {
         console.log(error)
@@ -54,10 +58,10 @@ const getAllVideos = async (req, res, next) => {
             include:[{
                 model: Cohorts, 
             }],
-            // include:[{
-            //     model: Users, 
-            //     where: {category: "teacher"}
-            // }]
+             include:[{
+                 model: Users, 
+                // where: {category: "teacher"}
+             }]
         });
         res.json(allVideos);
 } catch (error) {
@@ -80,10 +84,24 @@ const classById = async (req, res, next) => {
     }
 };
 
+const updateClasses = async(req, res, next) => {
+    const {id, name, lectureLink, lectureLink2, codeReviewLink, codeReviewLink2, description} = req.body 
+    //const {id} = req.params
+    try {
+        const obj = {id, name, lectureLink, lectureLink2, codeReviewLink, codeReviewLink2, description}
+        const update = await Classes.update(obj, {
+            where: {
+                id: id
+            }
+        })
+        res.json({modificado: true})
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 
 
 
-
-module.exports = { createClass, classByName, getAllVideos, classById }
+module.exports = { createClass, classByName, getAllVideos, classById, updateClasses }
