@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './Pager.module.css';
 
 const Pager = ({ currentPage, itemsPerPage, totalItems, pageHandler }) => {
   const pageNumbers = [];
@@ -25,18 +26,18 @@ const Pager = ({ currentPage, itemsPerPage, totalItems, pageHandler }) => {
     }
   };
   return (
-    <div>
-      <div>
+    <div className={s.pager}>
+      <div className={s.pagination}>
         {currentPage !== 1 ? (
-          <button onClick={() => handlePrevious()}>{'<'}</button>
+          <span onClick={() => handlePrevious()}>{'<'}</span>
         ) : null}
         {pageNumbers.map(number => (
-          <button key={number} onClick={() => handlePagination(number)}>
+          <span key={number} onClick={() => handlePagination(number)}>
             {number}
-          </button>
+          </span>
         ))}
         {currentPage < pageNumbers.length ? (
-          <button onClick={() => handleNext()}>{'>'}</button>
+          <span onClick={() => handleNext()}>{'>'}</span>
         ) : null}
       </div>
     </div>

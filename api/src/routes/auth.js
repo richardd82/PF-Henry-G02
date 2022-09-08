@@ -1,15 +1,16 @@
 const router = require("express").Router();
 const passport = require("passport");
-//http://localhost:5000/auth/google/callback
-const CLIENT_URL = "http://localhost:3000";
+//http://localhost:3001/auth/google/callback
+const CLIENT_URL = "https://localhost:3000/bootcamp/contacto/";
+const CLIENT_URL_LOGOUT = "https://localhost:3000";
 
 router.get("/login/success", (req, res) => {
 	if (req.user) {
 		res.status(200).json({
 			success: true,
 			message: "succefull",
-            user: req.user,
-            // coolies: req.cookies
+			user: req.user,
+			// coolies: req.cookies
 		});
 	}
 });
@@ -20,9 +21,10 @@ router.get("/login/failed", (req, res) => {
 	});
 });
 
-router.get('/logout', (req, res) =>{
-    req.logout();
-    res.redirect(CLIENT_URL)
+router.get("/logout", (req, res, next) => {
+	req.logout()
+	res.redirect(CLIENT_URL_LOGOUT);
+	
 });
 
 router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
@@ -43,7 +45,10 @@ router.get(
 		failureRedirect: "/login/failed",
 	})
 );
-router.get("/facebook", passport.authenticate("facebook", { scope: ["profile"] }));
+router.get(
+	"/facebook",
+	passport.authenticate("facebook", { scope: ["profile"] })
+);
 
 router.get(
 	"/facebook/callback",
