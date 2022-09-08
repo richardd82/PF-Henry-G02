@@ -19,7 +19,7 @@ const Bootcamp = () => {
 useEffect(() =>{
   dispatch(getAllModules())
   dispatch(getAllLessons())
-}, [])
+}, [dispatch])
 
   if(modules){
     return (

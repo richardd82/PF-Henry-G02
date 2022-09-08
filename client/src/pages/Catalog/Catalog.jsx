@@ -8,7 +8,7 @@ import Videos from '../../components/Videos/Videos.jsx';
 // Actions
 import { getAllClasses } from '../../redux/actions/searchBarActions.js';
 
-const Catalog = ({ user }) => {
+const Catalog = () => {
   const dispatch = useDispatch();
   const videos = useSelector(state => state.searchBar);
 
@@ -35,7 +35,7 @@ const Catalog = ({ user }) => {
         <h1>Loading</h1>
       ) : (
         <div>
-        <Nav user={user}/>
+        <Nav />
           <Pager
             currentPage={currentPage}
             pageHandler={handlePage}
