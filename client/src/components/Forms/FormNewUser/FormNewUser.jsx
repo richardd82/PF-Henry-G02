@@ -1,16 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import { postNewUser } from "../../redux/actions/userAdmin";
+import { postNewUser } from "../../../redux/actions/userAdmin";
 import { useDispatch, useSelector } from "react-redux";
 import { Validations } from "./validations";
-import { getTodosUsuarios } from "../../redux/actions/userAdmin";
+import { getTodosUsuarios } from "../../../redux/actions/userAdmin.js";
 import { useEffect } from "react";
 
 const FormNewUser = () => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const adminUser = useSelector((state) => state.usuarios);
-  const usersExist = adminUser.users.filter((e) => e.email);
+  const usersExist = adminUser.users.map((e) => e.email);
   const [input, setInput] = useState({
     name: "",
     lastname: "",
@@ -38,38 +38,25 @@ const FormNewUser = () => {
     dispatch(getTodosUsuarios());
   }, [dispatch]);
 
-  
-
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    const exist =  usersExist.find(
-        (r) => r.email !== input.email
-      );
-    if (input.image === "") {
-      input.image =
-        "https://imgs.search.brave.com/_KPvrLWa9wT9dTKgNV9dQwk7IWkdnjWzC-Cv7cyJRo0/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9jZG4u/aGVhbHRobndlbGwu/Y29tL2hlYWx0aG53/ZWxsL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDE4LzA0LzhiZWYx/OTY1LTI0MDQtNDky/OS1hYjI5LTFmZGIx/ZWIzYjY5Zi5qcGc";
-    }
-    if (exist === input.email) {
-      return alert("EMAIL ALREADY EXIST");
-    } else if (Object.keys(errors).length) {
-      return alert(Object.values(errors));
-    } else {
-      dispatch(postNewUser(input));
-      alert("¡RECIPE CREATED!");
-      setInput({
-        name: "",
-        lastname: "",
-        email: "",
-        image: "image",
-        password: "123",
-        active: true,
-        category: "",
-      });
-    }
+    dispatch(postNewUser(input));
+    alert("User Created");
+    setInput({
+      name: "",
+      lastname: "",
+      email: "",
+      image: "image",
+      password: "123",
+      active: true,
+      category: "",
+    });
   };
 
   return (
     <div>
+      <h1>Create new user </h1>
+      <br></br>
       <form
         autoComplete="off"
         onSubmit={(e) => {
