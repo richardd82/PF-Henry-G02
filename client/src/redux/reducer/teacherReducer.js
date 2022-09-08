@@ -2,7 +2,7 @@ const initialState = {
   classes: [],
   modules: [],
   cohorts: [],
-  teacher: []
+  teachers: []
 };
 
 export default function teacher(state = initialState, action) {
@@ -22,10 +22,10 @@ export default function teacher(state = initialState, action) {
         ...state,
         cohorts: action.payload,
       };
-      case 'GET_TEACHER': 
+      case 'GET_TEACHERS': 
       return {
         ...state, 
-        teacher: action.payload
+        teachers: action.payload
       }
     default:
       return { ...state };

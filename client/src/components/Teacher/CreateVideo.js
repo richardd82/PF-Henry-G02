@@ -1,39 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  createClass,
-  getCohorts,
-  getModules,
-} from '../../redux/actions/teacherActions';
-// Error handler
-import { createClassErrors } from '../../helpers/setCreateClassErrors';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// Actions
+import { getCohorts, getTeachers } from '../../redux/actions/teacherActions';
+import { createVideo } from '../../redux/actions/videoActions';
+// Helpers
+import { setVideoErrors } from '../../helpers/setVideoErrors';
 
-
-export default function CreateClass() {
+const CreateVideo = () => {
   const dispatch = useDispatch();
-  const modules = useSelector(state => state.teacher.modules);
+  const teachers = useSelector(state => state.teacher.teachers);
   const cohorts = useSelector(state => state.teacher.cohorts);
-  
-  //console.log(teacher);
 
   useEffect(() => {
     dispatch(getCohorts());
-    dispatch(getModules());
+    dispatch(getTeachers());
   }, [dispatch]);
 
+  // Control de inputs
   const [input, setInput] = useState({
     name: '',
-    description: '',
-    moduleId: '',
+    type: '',
+    link: '',
     cohortId: '',
+    userId: '',
   });
 
-  // los videos deberian ser archivos adjuntos???
+  // Control de errores
   const [warnings, setWarnings] = useState({
     name: '',
-    moduleId: '',
+    type: '',
+    link: '',
     cohortId: '',
-    teacherId: '',
+    userId: '',
     errorMsg: '',
     error: false,
   });
@@ -46,7 +44,7 @@ export default function CreateClass() {
         [name]: value,
       };
     });
-    setWarnings(createClassErrors(input));
+    setWarnings(setVideoErrors(input));
   }
 
   function handleSelect(e) {
@@ -57,7 +55,6 @@ export default function CreateClass() {
         [name]: value,
       };
     });
-    setWarnings(createClassErrors(input));
   }
 
   function handleSubmit(e) {
@@ -70,19 +67,17 @@ export default function CreateClass() {
         };
       });
     } else {
-      dispatch(createClass(input));
+      dispatch(createVideo(input));
       setInput({
         name: '',
-        description: '',
-        moduleId: '',
+        type: '',
+        link: '',
         cohortId: '',
+        teacherId: '',
       });
     }
   }
-
-  //console.log('INPUT', input);
-  //console.log('WARNING', warnings);
-
+  console.log(input)
   return (
     <div>
       <h1>Creación de Clase</h1>
@@ -94,26 +89,35 @@ export default function CreateClass() {
             type="text"
             name="name"
             value={input.name}
-            placeholder={'Nombre...'}
+            placeholder={'Nombre del vídeo...'}
             onChange={e => handleChange(e)}
           />
           {warnings.name ? <p>{warnings.name}</p> : null}
         </div>
         <div>
-          <label>Descripción</label>
-          <textarea
+          <label>Link al vídeo</label>
+          <input
             type="text"
-            name="description"
-            value={input.description}
-            placeholder={'Descripcion...'}
+            name="link"
+            value={input.link}
+            placeholder={'Enlace al vídeo'}
             onChange={e => handleChange(e)}
-          ></textarea>
+          />
+          {warnings.link ? <p>{warnings.link}</p> : null}
         </div>
         <div>
-          <label>Módulos</label>
-          <select name="moduleId" onChange={e => handleSelect(e)}>
-            {modules &&
-              modules.map(e => {
+          <label>Tipo</label>
+          <select name="type" onChange={e => handleSelect(e)}>
+            <option value="lecture">Lecture</option>
+            <option value="code-review">Code Review</option>
+          </select>
+          {warnings.type ? <p>{warnings.type}</p> : null}
+        </div>
+        <div>
+          <label>Profesor</label>
+          <select name="userId" onChange={e => handleSelect(e)}>
+            {teachers &&
+              teachers.map(e => {
                 return (
                   <option key={e.id} value={e.id}>
                     {e.name}
@@ -121,10 +125,10 @@ export default function CreateClass() {
                 );
               })}
           </select>
-          {warnings.moduleId ? <p>{warnings.moduleId}</p> : null}
+          {warnings.userId ? <p>{warnings.userId}</p> : null}
         </div>
         <div>
-          <label>Cohortes</label>
+          <label>Cohorte</label>
           <select name="cohortId" onChange={e => handleSelect(e)}>
             {cohorts &&
               cohorts.map(e => {
@@ -137,24 +141,12 @@ export default function CreateClass() {
           </select>
           {warnings.cohortId ? <p>{warnings.cohortId}</p> : null}
         </div>
-        {/* <div>
-          <label>Teacher</label>
-          <select name="nameTeacher" onChange={e => handleSelect(e)}>
-            {teacher &&
-              teacher.map(e => {
-                return (
-                  <option key={e.id} value={e.id}>
-                    {e.name}
-                  </option>
-                );
-              })}
-          </select>
-          {warnings.teacherId ? <p>{warnings.teacherId}</p> : null}
-        </div> */}
         <div>
-          <input type="submit" value="CREAR CLASE" />
+          <input type="submit" value="SUBIR VIDEO" />
         </div>
       </form>
     </div>
   );
-}
+};
+
+export default CreateVideo;

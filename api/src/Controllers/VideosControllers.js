@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 
 
 const createVideo = async(req, res, next)=>{
-    const {name, type, link, classId, userId} = req.body
+    const {name, type, link, classId, cohortId, userId} = req.body
     try {
         const video = await Videos.create({
             name, 
@@ -12,6 +12,7 @@ const createVideo = async(req, res, next)=>{
         })
         await video.setClass(classId)
         await video.setUser(userId)
+        await video.setCohort(cohortId)
         res.json(video)
     } catch (error) {
         next(error)

@@ -15,6 +15,7 @@ import Classnames from './components/AttendantComponents/classNames.jsx';
 import Attendant from './pages/Attendant/Attendant.jsx';
 import CreateClass from './components/Teacher/CreateClass.js';
 import TeacherDashboard from './components/Teacher/TeacherDashboard.js';
+import CreateVideo from './components/Teacher/CreateVideo.js';
 
 function App() {
   const [user, setUser] = useState({});
@@ -63,7 +64,8 @@ function App() {
         <Route exact path="/bootcamp/lecture/:id" element={<Details />} />
         <Route exact path="/bootcamp/profile/:userId" element={<Profile />} />
         <Route exact path="/bootcamp/module/:moduleId" element={<Module user={user}/>} />
-        <Route exact path='/teacher/create' element={<CreateClass/>}/>
+        <Route exact path='/teacher/class' element={<CreateClass/>}/>
+        <Route exact path='/teacher/video' element={<CreateVideo/>}/>
         <Route exact path='/teacher' element={<TeacherDashboard/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
