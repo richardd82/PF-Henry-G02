@@ -92,6 +92,19 @@ const updateUser = async (req, res, next) => {
 	}
 };
 
+const getAllTeachers = async (req, res, next) => {
+  try {
+    const allTeachers = await Users.findAll({
+      where: {
+        category: "teacher"
+      }
+    });
+    res.json(allTeachers);
+  } catch (error) {
+    next(error);
+  }
+}
+
 const userByTeacher = async (req, res, next) => {
 	try {
 		const { name, lastname } = req.query;
@@ -137,4 +150,4 @@ const userByStudent = async (req, res, next) => {
 	}
 };
 
-module.exports = { getAllUsers, createUser, updateUser, userByTeacher, userByStudent };
+module.exports = { getAllUsers, createUser, updateUser, userByTeacher, userByStudent, getAllTeachers };

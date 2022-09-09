@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const passport = require("passport");
 //http://localhost:3001/auth/google/callback
-const CLIENT_URL = "https://localhost:3000/bootcamp/contacto/";
-const CLIENT_URL_LOGOUT = "https://localhost:3000";
+const CLIENT_URL = "https://localhost:3000/";
+const CLIENT_URL_LOGOUT = "https://localhost:3000/login";
 
 router.get("/login/success", (req, res) => {
 	if (req.user) {
@@ -45,17 +45,6 @@ router.get(
 		failureRedirect: "/login/failed",
 	})
 );
-router.get(
-	"/facebook",
-	passport.authenticate("facebook", { scope: ["profile"] })
-);
 
-router.get(
-	"/facebook/callback",
-	passport.authenticate("facebook", {
-		successRedirect: CLIENT_URL,
-		failureRedirect: "/login/failed",
-	})
-);
 
 module.exports = router;
