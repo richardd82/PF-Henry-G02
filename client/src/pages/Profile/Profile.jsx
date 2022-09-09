@@ -20,7 +20,7 @@ const Profile = ({ user }) => {
 	// dispatch(getTodosUsuarios());
 	const userValidate = users.find((e) => e.name === user.displayName);
 	const category = userValidate && userValidate.category;
-	console.log(category);
+	// console.log(category);
 
 	return (
 		<div>

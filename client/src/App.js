@@ -5,7 +5,6 @@ import "./App.css";
 import Catalog from "./pages/Catalog/Catalog";
 import catalog from "./redux/reducer/catalogReducer";
 import Contact from "./components/Contact/Contact";
-import Attendant from "./pages/Attendant/Attendant";
 import Profile from "./pages/Profile/Profile";
 import Details from "./pages/Details/Details";
 import Nav from "./components/Nav/Nav";
@@ -17,6 +16,7 @@ import { FormsCreate } from "./components/Admin/Forms/FormsCreate/FormsCreate";
 import CreateVideo from './components/Teacher/CreateVideo';
 import UpdateClass from './components/Teacher/UpdateClass';
 import Module from "./pages/Module/Module";
+import Classnames from "./components/AttendantComponents/classNames";
 
 function App() {
 	const [user, setUser] = useState({});
@@ -59,7 +59,8 @@ function App() {
 				<Route path="/create" element={<FormsCreate user={user} />}/>
 				{/* Rutas de Students y TA */}
 				<Route path="/students" element={<Students />} />
-				<Route path="/tas" element={<Ta />} />
+				<Route path="/tas" element={<Ta user={user}/>} />
+				<Route path="/attendance/:id" element={<Classnames user={user}/>} /> 
 				<Route path="/module/:id" element={<Module user={user}/>} />
 				<Route path="/lecture/:id" element={<Details user={user}/>} />
 
