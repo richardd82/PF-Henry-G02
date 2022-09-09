@@ -6,7 +6,7 @@ const CLEAR_STATE = "CLEAR_STATE";
 
 export function getLessonsById(id) {
   return async function (dispatch) {
-    var json = await axios.get(`http://localhost:3002/classes/byId/${id}`);
+    var json = await axios.get(`https://localhost:3001/classes/byId/${id}`);
     return dispatch({
       type: GET_LESSONS_BY_ID,
       payload: json.data,
@@ -15,7 +15,7 @@ export function getLessonsById(id) {
 }
 export function getLessons() {
   return async function (dispatch) {
-    var json = await axios.get(`http://localhost:3002/classes`);
+    var json = await axios.get(`https://localhost:3001/classes`);
     return dispatch({
       type: GET_LESSONS,
       payload: json.data,

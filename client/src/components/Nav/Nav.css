@@ -2,13 +2,13 @@
 /*************************************************/
 @font-face {
   font-family: 'Avenir';
-  src: url('../../assets/media/fonts/AvenirLTStd-Book.otf');
+  src: url('../../media/fonts/AvenirLTStd-Book.otf');
   font-weight: normal; 
   font-style: normal;
 }
 @font-face {
   font-family: 'Avenir-bold';
-  src: url('../../assets/media/fonts/AvenirLTStd-Black.otf');
+  src: url('../../media/fonts/AvenirLTStd-Black.otf');
   font-weight: bold; 
   font-style: normal;
 }
@@ -162,6 +162,7 @@ height: 64px;
   /* Take full size */
   /* height: 100%;
   width: 100%; */
+  cursor: pointer;
 }
 
 /***********************************************/

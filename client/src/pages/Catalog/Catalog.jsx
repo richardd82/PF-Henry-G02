@@ -1,12 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Nav from '../../components/NavBar/Nav.js';
+
 // Components
 import Pager from '../../components/Pager/Pager.jsx';
-import Videos from '../../components/Videos/Videos.jsx';
+import Card from '../../components/Card/Card.jsx';
 // Actions
 import { getAllClasses } from '../../redux/actions/searchBarActions.js';
+import { Link } from 'react-router-dom';
 
 const Catalog = () => {
   const dispatch = useDispatch();
@@ -31,18 +32,32 @@ const Catalog = () => {
 
   return (
     <div>
-      {videos.loading === true ? (
+      {/* {videos.loading === true ? (
         <h1>Loading</h1>
-      ) : (
+      ) : ( */}
         <div>
-        <Nav />
+            <h1>ESTA ES LA PAGINA QUE MUESTRA LOS VIDEOS</h1>
           <Pager
             currentPage={currentPage}
             pageHandler={handlePage}
             itemsPerPage={videosPerPage}
             totalItems={videos.classes.length}
           />
-          <Videos videos={currentVideos} />
+          <div>
+            {currentVideos &&
+              currentVideos.map(video => {
+                return (
+                  <Link key={video.id} to={`/bootcamp/lecture/${video.id}`}>
+                    <Card
+                      id={video.id}
+                      title={video.name}
+                      instructor="Martina"
+                      description={video.description}
+                    />
+                  </Link>
+                );
+              })}
+          </div>
           <Pager
             currentPage={currentPage}
             pageHandler={handlePage}
@@ -50,7 +65,7 @@ const Catalog = () => {
             totalItems={videos.classes.length}
           />
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 };

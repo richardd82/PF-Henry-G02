@@ -4,6 +4,8 @@ import searchBar from './searchBarReducer.js';
 import details from './detailReducer.js';
 import bootcamp from './bootcampReducer.js';
 import teacher from './teacherReducer.js';
+import videos from './videoReducer.js';
+import users from './userAdmin';
 
 export default combineReducers({
   catalog,
@@ -11,4 +13,6 @@ export default combineReducers({
   details,
   searchBar,
   teacher,
+  users,
+  videos,
 });

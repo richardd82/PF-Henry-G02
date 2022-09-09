@@ -6,7 +6,7 @@ import {
   getAllModules,
 } from "../../redux/actions/bootcampActions";
 import Nav from "../NavBar/Nav";
-import Modulebutton from "./moduleButton";
+import Modulebutton from "./ModuleButton";
 
 function Classnames({user}) {
   const estudiante = [
@@ -30,7 +30,7 @@ function Classnames({user}) {
   }, [dispatch]);
   return (
     <>
-    <Nav user={user}/>
+    {/* <Nav user={user}/> */}
       <div className="moduleContainer">
         <Modulebutton />
         <form>

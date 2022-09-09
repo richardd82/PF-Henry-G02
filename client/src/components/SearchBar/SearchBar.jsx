@@ -21,7 +21,7 @@ const SearchBar = () => {
     dispatch(getClassesByName(nameSearch));
     setNameSearch('');
     e.target.placeholder = 'Search...';
-    navigate('/bootcamp/catalog', { replace: true });
+    navigate('/catalog', { replace: true });
   }
 
   return (

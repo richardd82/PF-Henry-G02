@@ -61,11 +61,21 @@ const videoByTeacher = async(req, res, next) =>{
         next(error)
     }
 }
+const videoById = async(req, res, next) =>{
+    const {id} = req.params
+    try {
+        const allVideo = await Videos.findByPk(id)
+        res.json(allVideo)
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 module.exports = {
     createVideo,
     allVideos,
     videoByName,
-    videoByTeacher
+    videoByTeacher,
+    videoById
 }

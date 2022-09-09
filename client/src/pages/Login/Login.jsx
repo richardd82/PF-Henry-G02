@@ -1,6 +1,5 @@
 import React from 'react'
 import Google from '../../assets/google.png';
-import Facebook from '../../assets/facebook.png';
 import GitHub from '../../assets/github.png';
 import './login.css'
 
@@ -12,9 +11,7 @@ const google = () => {
 const github = () => {
     window.open("https://localhost:3001/auth/github", "_self");
 }
-const facebook = () => {
-    window.open("https://localhost:3001/auth/facebook", "_self");
-}
+
 
     return (
         <div className='login'>
@@ -24,11 +21,7 @@ const facebook = () => {
                     <div className="loginButton google" onClick={google}>
                         <img src={Google} alt="" className='icon' />
                         Google
-                    </div>
-                    <div className="loginButton facebook" onClick={facebook}>
-                        <img src={Facebook} alt="" className='icon' />
-                        Facebook
-                    </div>
+                    </div>                   
                     <div className="loginButton github" onClick={github}>
                         <img src={GitHub} alt="" className='icon' />
                         GitHub

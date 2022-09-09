@@ -11,7 +11,8 @@ import Contact from '../../components/Contact/Contact';
 import github from '../../media/github.png';
 import sheet from '../../media/sheet.png';
 import './ClaseDetails.css';
-import Nav from '../../components/NavBar/Nav';
+import Nav from '../../components/Nav/Nav';
+
 
 const Module = ({ user }) => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const Module = ({ user }) => {
       <div className="moduleContainer">
         {modules &&
           modules.map((module, index) => {
-            if (window.location.pathname === `/bootcamp/module/${module.id}`) {
+            if (window.location.pathname === `/module/${module.id}`) {
               return lessons
                 .sort((a, b) => {
                   const aDate = new Date(a.createdAt);
@@ -44,7 +45,7 @@ const Module = ({ user }) => {
                     return (
                       <div key={index} className="sectionModuloClases">
                         <article>
-                          <Link key={obj.id} to={`/bootcamp/lecture/${obj.id}`}>
+                          <Link key={obj.id} to={`/lecture/${obj.id}`}>
                             <p>{`${obj.name}`}</p>
                             <div>
                               <img src={github} alt="github" />

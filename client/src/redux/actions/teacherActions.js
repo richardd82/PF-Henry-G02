@@ -45,13 +45,13 @@ export function getCohorts() {
   };
 }
 
-export function getTeacher() {
+export function getTeachers() {
     return async function (dispatch) {
       try {
-        const response = await axios.get('http://localhost:3002/users');
+        const response = await axios.get('http://localhost:3002/users/teachers');
         console.log(response.data);
         return dispatch({
-          type: 'GET_TEACHER',
+          type: 'GET_TEACHERS',
           payload: response.data,
         });
       } catch (error) {
