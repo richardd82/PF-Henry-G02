@@ -10,7 +10,8 @@ const FormNewUser = () => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const adminUser = useSelector((state) => state.usuarios);
-  const usersExist = adminUser.users.map((e) => e.email);
+  const emails = adminUser.users.map((e) => e.email);
+
   const [input, setInput] = useState({
     name: "",
     lastname: "",
@@ -20,6 +21,8 @@ const FormNewUser = () => {
     active: true,
     category: "",
   });
+
+  const usersExistente = emails.find((e) => e === input.email);
 
   const handleChange = (e) => {
     setInput({
@@ -40,17 +43,21 @@ const FormNewUser = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    dispatch(postNewUser(input));
-    alert("User Created");
-    setInput({
-      name: "",
-      lastname: "",
-      email: "",
-      image: "image",
-      password: "123",
-      active: true,
-      category: "",
-    });
+    if (usersExistente) {
+      return alert("email existente");
+    } else {
+      dispatch(postNewUser(input));
+      alert("User Created");
+      setInput({
+        name: "",
+        lastname: "",
+        email: "",
+        image: "image",
+        password: "123",
+        active: true,
+        category: "",
+      });
+    }
   };
 
   return (

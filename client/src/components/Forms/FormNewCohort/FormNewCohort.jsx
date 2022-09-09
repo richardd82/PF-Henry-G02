@@ -2,17 +2,17 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Validations } from "./validations";
-import { getAllCohorts, postNewCohort } from "../../../redux/actions/userAdmin.js";
+import {
+  getAllCohorts,
+  postNewCohort,
+} from "../../../redux/actions/userAdmin.js";
 import { useEffect } from "react";
-
 
 const FormNewCohort = () => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const adminUser = useSelector((state) => state.usuarios.allCohorts);
-  console.log(adminUser);
-  const usersExist = adminUser.map((e) => e.name);
-  console.log(usersExist);
+  const adminUser = useSelector((state) => state.usuarios);
+  const cohortsName = adminUser.cohorts.map((e) => e.name);
   const [input, setInput] = useState({
     name: "",
   });
@@ -29,19 +29,17 @@ const FormNewCohort = () => {
       })
     );
   };
-
+  const cohortExist = cohortsName.find((e) => e === input.name);
   useEffect(() => {
     dispatch(getAllCohorts());
   }, [dispatch]);
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    if (usersExist.every((r) => r.name == input.name)) {
-      return alert("NAME ALREADY EXIST");
-    } else if (Object.keys(errors).length) {
-      return alert(Object.values(errors));
+    if (cohortExist) {
+      return alert("That cohort already exist");
     } else {
       dispatch(postNewCohort(input));
-      alert("Cohort Created");
+      alert("Cohort created");
       setInput({
         name: "",
       });

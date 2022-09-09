@@ -11,7 +11,7 @@ const FormNewStandUp = () => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const adminUser = useSelector((state) => state.usuarios);
-  const usersExist = adminUser.users.map((e) => e.name);
+  const supName = adminUser.standUp.map((e) => e.name);
   const [input, setInput] = useState({
     name: "",
   });
@@ -32,18 +32,15 @@ const FormNewStandUp = () => {
   useEffect(() => {
     dispatch(getAllStandUps());
   }, [dispatch]);
-
+  const supExistente = supName.find((e) => e === input.name);
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    const exist = usersExist.every((r) => r.name === input.name);
 
-    if (!exist) {
-      return alert("NAME ALREADY EXIST");
-    } else if (Object.keys(errors).length) {
-      return alert(Object.values(errors));
-    } else {
+    if (supExistente) {
+      return alert("StandUp already exist");
+    }else {
       dispatch(postNewStandUp(input));
-      alert("Stand Up Created");
+      alert("StandUp created");
       setInput({
         name: "",
       });

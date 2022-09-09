@@ -12,11 +12,10 @@ import UserAdmin from "./pages/AdminProfile/UserAdmin.jsx";
 import "./App.css";
 import { useEffect, useState } from "react";
 import Contact from "./components/Contact/Contact.jsx";
-import FormNewUser from "../src/components/Forms/FormNewUser/FormNewUser.jsx";
 import FormNewClass from "./components/Forms/FormNewClass/FormNewClass.jsx";
-import FormNewCohort from "./components/Forms/FormNewCohort/FormNewCohort.jsx";
 import { FormCreate } from "./components/Forms/FormsCreate/FormsCreate.jsx";
 import FormUpdateUser from "./components/Forms/FormUpdateUser/FormUpdateUser";
+import UpdateOptions from "./components/Forms/FormUpdateUser/UpdateOptions.jsx";
 
 function App() {
   const [user, setUser] = useState({});
@@ -52,7 +51,7 @@ function App() {
       <Routes>
         <Route exact path="/adashboard/create" element={<FormCreate />} />
         <Route exact path="/updateuser" element={<FormUpdateUser />} />
-        <Route exact path="/updateuser/" element={<FormUpdateUser />} />
+        <Route exact path="/updateuser/:id" element={<UpdateOptions />} />
 
         <Route
           exact

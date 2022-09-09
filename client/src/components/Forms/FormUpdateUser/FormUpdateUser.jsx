@@ -6,12 +6,7 @@ import { Link } from "react-router-dom";
 const UpdateUser = () => {
   const dispatch = useDispatch();
   const updateUser = useSelector((state) => state.usuarios);
-  const userMapped = updateUser.users.map((e) => e);
-  const userId = userMapped.map((e) => e.name + " " + e.id);
-  const userName = userMapped.map((e) => e.name);
-  const idName = { id: ` ${userId}` };
-  //   console.log("User name: ", userName);
-  console.log(idName);
+
   useEffect(() => {
     dispatch(getTodosUsuarios());
   }, [dispatch]);
