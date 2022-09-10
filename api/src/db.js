@@ -49,11 +49,11 @@ Cohorts.hasMany(Standups);
 Cohorts.hasMany(Classes);
 // // Standups
 Standups.hasMany(Users);
-Users.belongsTo(Standups);
 Standups.belongsTo(Cohorts);
 // // Users
 Users.belongsTo(Cohorts);
 Users.belongsTo(Modules);
+Users.belongsTo(Standups);
 Users.hasMany(Videos)
 // // Videos
 Videos.belongsTo(Classes)

@@ -10,5 +10,5 @@ export default combineReducers({
   bootcamp,
   details,
   searchBar,
-  teacher,
+  teacher
 });
