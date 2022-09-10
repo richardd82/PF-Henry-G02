@@ -8,10 +8,6 @@ import alumno from "../../assets/media/avatar.png";
 
 export default function Nav({ user }) {
 
-
-	// const lessons = useSelector(state => state.bootcamp.lessons);
-	
-
 	const GOOGLE_CLIENT_ID = "AIzaSyBnFVqnIJy_hAtph6l7W5_n9c0lLzCMkKM";
 	let obj = [];
 	obj.push(user);
