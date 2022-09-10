@@ -18,6 +18,7 @@ import CreateVideo from './components/Teacher/CreateVideo';
 import UpdateClass from './components/Teacher/UpdateClass';
 import Module from "./pages/Module/Module";
 import Classnames from "./components/AttendantComponents/classNames";
+import StudentList from "./components/AttendantComponents/StudentList";
 
 function App() {
 	const [user, setUser] = useState({});
@@ -61,6 +62,7 @@ function App() {
 				{/* Rutas de Students y TA */}
 				<Route path="/students" element={<Students />} />
 				<Route path="/tas" element={<Ta user={user}/>} />
+        <Route path="/attendance/" element={<StudentList user={user}/>} /> 
 				<Route path="/attendance/:id" element={<Classnames user={user}/>} /> 
 				<Route path="/module/:id" element={<Module user={user}/>} />
 				<Route path="/lecture/:id" element={<Details user={user}/>} />
