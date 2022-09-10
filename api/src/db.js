@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,DB_DATABASE
+  DB_USER, DB_PASSWORD, DB_HOST, DB_DATABASE
 } = process.env;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}`, {
@@ -47,6 +47,7 @@ Modules.hasMany(Users);
 Cohorts.hasMany(Users);
 Cohorts.hasMany(Standups);
 Cohorts.hasMany(Classes);
+Cohorts.hasMany(Videos);
 // // Standups
 Standups.hasMany(Users);
 Users.belongsTo(Standups);
@@ -56,8 +57,9 @@ Users.belongsTo(Cohorts);
 Users.belongsTo(Modules);
 Users.hasMany(Videos)
 // // Videos
-Videos.belongsTo(Classes)
-Videos.belongsTo(Users)
+Videos.belongsTo(Classes);
+Videos.belongsTo(Users);
+Videos.belongsTo(Cohorts);
 
 
 module.exports = {

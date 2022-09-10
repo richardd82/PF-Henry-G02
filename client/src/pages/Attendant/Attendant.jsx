@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import Modulebutton from '../../components/AttendantComponents/moduleButton'
-import Nav from '../../components/NavBar/Nav'
+import Modulebutton from '../../components/AttendantComponents/ModuleButton'
+// import Nav from '../../components/NavBar/Nav'
 
 function Attendant({ user }) {
 
@@ -10,7 +10,7 @@ function Attendant({ user }) {
 
   return (
     <div>
-      <Nav user={user}/>
+      {/* <Nav user={user}/> */}
       <div>
        <Modulebutton />
       </div>
