@@ -5,7 +5,7 @@ import Nav from "../../components/Nav/Nav";
 import Students from "../../components/Students/Students";
 import Ta from "../../components/Ta/Ta";
 import Teachers from "../../components/Teachers/Teachers";
-import { getTodosUsuarios } from "../../redux/actions/userAdmin";
+import { getTodosUsuarios } from "../../redux/actions/index";
 
 const Profile = ({ user }) => {
 	const users = useSelector((state) => state.users.allUsers);

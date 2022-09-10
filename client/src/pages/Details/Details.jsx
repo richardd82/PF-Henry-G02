@@ -9,19 +9,20 @@ import github from "../../media/github.png";
 import sheet from "../../media/sheet.png";
 import "./Clases.css";
 import Nav from "../../components/Nav/Nav";
-import { clearState, getVideosById } from "../../redux/actions/videoActions";
+import { clearStateVideos } from "../../redux/actions/index";
+import { getVideosById } from "../../redux/actions/index";
 
 const Details = ({ user }) => {
 	const dispatch = useDispatch();
-	const cualquierCosa = useSelector((state) => state.videos);
-  console.log(cualquierCosa)
+	const myLesson = useSelector((state) => state.videos.detailVideos);
+  console.log(myLesson)
   // const myLesson = cualquierCosa.map(e => e.videos);
   
 	// console.log("ESTO ME LLEGA DE DETAILS:", myLesson);
 	const { id } = useParams();
 	useEffect(() => {
 		dispatch(getVideosById(id));
-		return () => dispatch(clearState());
+		return () => dispatch(clearStateVideos());
 	}, []);
 
 	const divStyle = {
@@ -30,14 +31,14 @@ const Details = ({ user }) => {
 	return (
 		<>
       <Nav user={user} />
-			{/* <section className="sectiom__title-modulo">
+			<section className="sectiom__title-modulo">
 				<h1>FOUNDATION</h1>
 			</section>
 			<section className="section__modulo-clases">
-				{myLesson.length > 0 && (
+				{myLesson &&  (
 					<div className="video__clase-full">
 						<ReactPlayer
-							url={myLesson[0].link}
+							url={myLesson.link}
 							controls
 						
 							className="videoReact"
@@ -57,20 +58,20 @@ const Details = ({ user }) => {
 					</div>
 					<div className="code_review">
 						<ReactPlayer
-							url={myLesson[0].link}
+							url={myLesson.link}
 							className="videoReactThumb"
 						></ReactPlayer>
 						<p>Code Review</p>
 					</div>
 					<div className="code_review">
 						<ReactPlayer
-							url={myLesson[0].link}
+							url={myLesson.link}
 							className="videoReactThumb"
 						></ReactPlayer>
 						<p>Material complementario</p>
 					</div>
 				</article>
-			</section> */}
+			</section>
 		</>
 	);
 };

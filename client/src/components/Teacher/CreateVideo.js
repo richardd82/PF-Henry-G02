@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Actions
-import { getCohorts, getTeachers } from '../../redux/actions/teacherActions';
-import { createVideo } from '../../redux/actions/videoActions';
+import { getCohorts, getTeachers } from '../../redux/actions/index';
+import { createVideo } from '../../redux/actions/index';
 // Helpers
 import { setVideoErrors } from '../../helpers/setVideoErrors';
 
 const CreateVideo = () => {
   const dispatch = useDispatch();
-  const teachers = useSelector(state => state.teacher.teachers);
-  const cohorts = useSelector(state => state.teacher.cohorts);
+  const teachers = useSelector(state => state.users.teachers);
+  const cohorts = useSelector(state => state.cohorts.allCohorts);
 
   useEffect(() => {
     dispatch(getCohorts());

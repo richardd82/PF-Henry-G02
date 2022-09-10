@@ -1,4 +1,4 @@
-import { getTodosUsuarios } from "../../redux/actions/userAdmin";
+import { getTodosUsuarios } from "../../redux/actions/index";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";

@@ -6,17 +6,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import Pager from '../../components/Pager/Pager.jsx';
 import Card from '../../components/Card/Card.jsx';
 // Actions
-import { getAllClasses } from '../../redux/actions/searchBarActions.js';
+import { getAllVideos } from '../../redux/actions/index';
 import { Link } from 'react-router-dom';
 
 const Catalog = () => {
   const dispatch = useDispatch();
-  const videos = useSelector(state => state.searchBar);
+  const videos = useSelector(state => state.videos.allVideos);
+console.log(videos)
 
   useEffect(() => {
-    if (!videos.classes.length && videos.loading === false) {
-      dispatch(getAllClasses());
-    }
+    // if (!videos.classes.length && videos.loading === false) {
+      dispatch(getAllVideos());
+    // }
   }, [videos, dispatch]);
 
   // Pagination handler
@@ -28,7 +29,7 @@ const Catalog = () => {
   const videosPerPage = 10,
     indexOfLastVideo = currentPage * videosPerPage,
     indexOfFirstVideo = indexOfLastVideo - videosPerPage,
-    currentVideos = videos.classes.slice(indexOfFirstVideo, indexOfLastVideo);
+    currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
 
   return (
     <div>
@@ -47,7 +48,7 @@ const Catalog = () => {
             {currentVideos &&
               currentVideos.map(video => {
                 return (
-                  <Link key={video.id} to={`/bootcamp/lecture/${video.id}`}>
+                  <Link key={video.id} to={`/lecture/${video.id}`}>
                     <Card
                       id={video.id}
                       title={video.name}

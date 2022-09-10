@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import Login from "../src/pages/Login/Login";
 import "./App.css";
 import Catalog from "./pages/Catalog/Catalog";
-import catalog from "./redux/reducer/catalogReducer";
-import Contact from "./components/Contact/Contact";
-import Attendant from "./pages/Attendant/Attendant";
+// import catalog from "./redux/reducer/index";
+// import Contact from "./components/Contact/Contact";
+// import Attendant from "./pages/Attendant/Attendant";
+// import Nav from "./components/Nav/Nav";
 import Profile from "./pages/Profile/Profile";
 import Details from "./pages/Details/Details";
-import Nav from "./components/Nav/Nav";
 import Admin from "./components/Admin/Admin";
 import Students from "./components/Students/Students";
 import Ta from "./components/Ta/Ta";
@@ -62,6 +62,8 @@ function App() {
 				<Route path="/tas" element={<Ta />} />
 				<Route path="/module/:id" element={<Module user={user}/>} />
 				<Route path="/lecture/:id" element={<Details user={user}/>} />
+				<Route path="/catalog" element={<Catalog user={user}/>} />
+				
 
 				{/* Rutas de Teachers */}
 				<Route path="/teachers" element={<Teachers />} />
