@@ -57,15 +57,10 @@ Users.belongsTo(Modules);
 Users.belongsTo(Standups);
 Users.hasMany(Videos)
 // // Videos
-<<<<<<< HEAD
-Videos.belongsTo(Classes)
-Videos.belongsTo(Users)
-// // Attendance
-=======
 Videos.belongsTo(Classes);
 Videos.belongsTo(Users);
 Videos.belongsTo(Cohorts);
->>>>>>> f223ada12783e69a11badbb47e0fe7f579c59246
+
 
 
 module.exports = {
