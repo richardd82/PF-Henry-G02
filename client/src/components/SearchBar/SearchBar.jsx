@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // Actions
-import { getClassesByName } from '../../redux/actions/searchBarActions';
+import { getClassesByName } from '../../redux/actions/index';
 import './SearchBar.css';
 import lupa from '../../media/lupa.png';
 
@@ -21,7 +21,7 @@ const SearchBar = () => {
     dispatch(getClassesByName(nameSearch));
     setNameSearch('');
     e.target.placeholder = 'Search...';
-    navigate('/bootcamp/catalog', { replace: true });
+    navigate('/catalog', { replace: true });
   }
 
   return (

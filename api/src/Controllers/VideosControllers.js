@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 
 
 const createVideo = async(req, res, next)=>{
-    const {name, type, link, classId, userId} = req.body
+    const {name, type, link, classId, cohortId, userId} = req.body
     try {
         const video = await Videos.create({
             name, 
@@ -12,6 +12,7 @@ const createVideo = async(req, res, next)=>{
         })
         await video.setClass(classId)
         await video.setUser(userId)
+        await video.setCohort(cohortId)
         res.json(video)
     } catch (error) {
         next(error)
@@ -60,11 +61,21 @@ const videoByTeacher = async(req, res, next) =>{
         next(error)
     }
 }
+const videoById = async(req, res, next) =>{
+    const {id} = req.params
+    try {
+        const allVideo = await Videos.findByPk(id)
+        res.json(allVideo)
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 module.exports = {
     createVideo,
     allVideos,
     videoByName,
-    videoByTeacher
+    videoByTeacher,
+    videoById
 }

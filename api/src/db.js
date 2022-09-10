@@ -3,10 +3,10 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DB_USER, DB_PASSWORD, DB_HOST, DB_DATABASE
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/students`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -47,6 +47,7 @@ Modules.hasMany(Users);
 Cohorts.hasMany(Users);
 Cohorts.hasMany(Standups);
 Cohorts.hasMany(Classes);
+Cohorts.hasMany(Videos);
 // // Standups
 Standups.hasMany(Users);
 Standups.belongsTo(Cohorts);
@@ -56,9 +57,15 @@ Users.belongsTo(Modules);
 Users.belongsTo(Standups);
 Users.hasMany(Videos)
 // // Videos
+<<<<<<< HEAD
 Videos.belongsTo(Classes)
 Videos.belongsTo(Users)
 // // Attendance
+=======
+Videos.belongsTo(Classes);
+Videos.belongsTo(Users);
+Videos.belongsTo(Cohorts);
+>>>>>>> f223ada12783e69a11badbb47e0fe7f579c59246
 
 
 module.exports = {
