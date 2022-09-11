@@ -26,7 +26,7 @@ const UpdateOptions = ({ user }) => {
   const [input, setInput] = useState({
     name: updateUser.users.name,
     lastname: updateUser.users.lastname,
-    active: updateUser.users.map((e) => e.active),
+    active: updateUser.users.active,
     category: updateUser.users.category,
     cohortId: supExistente.id,
     moduleId: moduleExistente.id,
@@ -56,23 +56,15 @@ const UpdateOptions = ({ user }) => {
     });
   };
   const handleChange = (e) => {
-    if (e.active === true) {
-      setInput({
-        ...input,
-        [input.active]: false,
-      });
-    } else {
-      setInput({
-        ...input,
-        [input.active]: true,
-      });
-    }
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
   };
   // console.log(updateUser.users.map((e) => e.active));
-  console.log(input.active)
   const { id } = useParams();
   const handleSubmit = (e) => {
-    e.preventDefault(e);
+   
     dispatch(putUser(id, input));
     alert("User Updated");
 
@@ -109,7 +101,7 @@ const UpdateOptions = ({ user }) => {
                         required
                         defaultValue={e.name}
                         value={input.name}
-                        onLoad={(e) => {
+                        onChange={(e) => {
                           handleChange(e);
                         }}
                       />
@@ -148,29 +140,16 @@ const UpdateOptions = ({ user }) => {
                         }}
                       />
                       <label>is active?</label>
-                      <div>
-                        <label>ACTIVE</label>
-                        <input
-                          type="radio"
-                          name="active"
-                          value={input.active}
-                          defaultValue={e.active}
-                          defaultChecked
-                          onChange={(e) => {
-                            handleChange(e);
-                          }}
-                        />
-                        <label>INACTIVE</label>
-                        <input
-                          type="radio"
-                          name="active"
-                          value={input.active}
-                          defaultValue={!e.active}
-                          onChange={(e) => {
-                            handleChange(e);
-                          }}
-                        />
-                      </div>
+                      <input
+                        placeholder={e.active}
+                        name="active"
+                        value={input.active}
+                        defaultValue={e.active}
+                        required
+                        onChange={(e) => {
+                          handleChange(e);
+                        }}
+                      />
                       <select onChange={handleSelectCohorte}>
                         <option> Select cohort</option>
                         {cohortsExistentes?.map((e) => {
