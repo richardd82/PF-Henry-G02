@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Nav from '../Nav/Nav.js';
-import StudentList from '../StudentList.jsx';
+import StudentList from './StudentList.jsx';
 // Actions
 import {
   getUsers,
@@ -14,14 +13,14 @@ import {
 const Attendance = ({ user }) => {
   const dispatch = useDispatch();
   const state = useSelector(state => state.attendance);
-  const ta = state.users.filter(e => e.name === user.displayName);
-  const students = state.users.filter(e => {
-    return (
+  const ta = state.users.filter(e => e.name === user.displayName)[0];
+
+  const students = state.users.filter(
+    e =>
       e.category === 'student' &&
       e.standupId === ta.standupId &&
       e.cohortId === ta.cohortId
-    );
-  });
+  );
 
   useEffect(() => {
     dispatch(getUsers());
@@ -30,11 +29,8 @@ const Attendance = ({ user }) => {
     dispatch(getStandups());
     dispatch(getClasses());
   }, [dispatch, state.users.length]);
-
   const [options, setOptions] = useState({
     module: '',
-    cohort: '',
-    standup: '',
     lecture: '',
   });
 
@@ -49,7 +45,6 @@ const Attendance = ({ user }) => {
 
   return (
     <div>
-      <Nav user={user} />
       <form>
         <select name="module" onChange={e => handleChange(e)}>
           <option value="none">Select a Module</option>
@@ -62,30 +57,6 @@ const Attendance = ({ user }) => {
               );
             })}
         </select>
-        {/* <select name="cohort" onChange={e => handleChange(e)}>
-          <option value="none">Select a Cohort</option>
-          {state.cohorts &&
-            state.cohorts.map(cohort => {
-              return (
-                <option key={cohort.name} value={cohort.id}>
-                  {cohort.name}
-                </option>
-              );
-            })}
-        </select>
-        <select name="standup" onChange={e => handleChange(e)}>
-          <option value="none">Select a Standup</option>
-          {state.standups &&
-            state.standups
-              .filter(standup => standup.cohortId.toString() === options.cohort)
-              .map(standup => {
-                return (
-                  <option key={standup.name} value={standup.id}>
-                    {standup.name}
-                  </option>
-                );
-              })}
-        </select> */}
         <select name="lecture" onChange={e => handleChange(e)}>
           <option value="none">Select a Lecture</option>
           {state.lectures &&
@@ -93,7 +64,7 @@ const Attendance = ({ user }) => {
               .filter(lecture => lecture.moduleId.toString() === options.module)
               .map(lecture => {
                 return (
-                  <option key={lecture.name} value={lecture.id}>
+                  <option key={lecture.id} value={lecture.id}>
                     {lecture.name}
                   </option>
                 );
@@ -105,9 +76,10 @@ const Attendance = ({ user }) => {
           lecture={
             state.lectures.filter(
               lecture => lecture.id.toString() === options.lecture
-            )[0]
+            )[0].id
           }
-          users={students}
+          currentStudents={students}
+          standup={ta.standupId}
           cohort={ta.cohortId}
         />
       )}

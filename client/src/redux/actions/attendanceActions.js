@@ -107,9 +107,9 @@ export const getLecturesSuccess = lectures => {
 };
 
 export const postAttendance = attendance => {
-  return dispatch => {
+  return () => {
     axios
-      .post('https://localhost:3001/asistencias/create', attendance)
+      .post('https://localhost:3001/attendance/create', attendance)
       .then(response => console.log(response.data))
       .catch(error => console.log(error));
   };

@@ -1,15 +1,15 @@
-import React from 'react'
-import Nav from '../Nav/Nav'
-import Classnames from '../AttendantComponents/classNames';
+import React from 'react';
+import Attendance from '../AttendantComponents/Attendance.jsx';
+import Nav from '../Nav/Nav';
+// import Classnames from '../AttendantComponents/classNames';
 
-
-const Ta = ({user}) => {
+const Ta = ({ user }) => {
   return (
     <div>
       <Nav user={user} />
-      <Classnames/>
-      </div>
-  )
-}
+      <Attendance user={user} />
+    </div>
+  );
+};
 
-export default Ta
+export default Ta;

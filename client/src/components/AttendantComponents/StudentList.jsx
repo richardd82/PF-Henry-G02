@@ -3,29 +3,33 @@ import { useDispatch } from 'react-redux';
 // Actions
 import { postAttendance } from '../../redux/actions/attendanceActions.js';
 
-const StudentList = ({ students, lecture, cohort }) => {
+const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
   const dispatch = useDispatch();
   const [attendance, setAttendance] = useState({
+    standupId: standup,
     cohortId: cohort,
-    classId: lecture.id,
+    classId: lecture,
     students: [],
   });
-
+  console.log(attendance)
   useEffect(() => {
     return () => {
       setAttendance({
+        standupId: standup,
         cohortId: cohort,
         classId: lecture,
         students: [],
       });
     };
-  }, [students, cohort, lecture]);
+  }, [currentStudents, standup, cohort, lecture]);
 
   const handleSelect = e => {
     const { name, id, checked } = e.target;
     setAttendance(prev => {
       if (checked === false) {
-        const filteredStudents = prev.students.filter(student => student.id !== id);
+        const filteredStudents = prev.students.filter(
+          student => student.id !== id
+        );
         return {
           ...prev,
           students: filteredStudents,
@@ -33,7 +37,7 @@ const StudentList = ({ students, lecture, cohort }) => {
       } else {
         return {
           ...prev,
-          students: prev.students.concat({ id, name }),
+          students: [...prev.students, { id, name }],
         };
       }
     });
@@ -43,6 +47,7 @@ const StudentList = ({ students, lecture, cohort }) => {
     e.preventDefault();
     dispatch(postAttendance(attendance));
     setAttendance({
+      standupId: standup,
       cohortId: cohort,
       classId: lecture,
       students: [],
@@ -53,13 +58,12 @@ const StudentList = ({ students, lecture, cohort }) => {
     <div>
       <h1>Estudiantes</h1>
       <form onSubmit={e => handleSubmit(e)}>
-        {students &&
-          students.map(student => {
+        {currentStudents &&
+          currentStudents.map(student => {
             return (
-              <div>
+              <div key={student.id}>
                 <label>{student.name}</label>
                 <input
-                  key={student.id}
                   id={student.id}
                   name={student.name}
                   type="checkbox"
