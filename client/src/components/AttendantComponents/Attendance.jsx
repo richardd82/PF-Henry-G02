@@ -18,8 +18,7 @@ const Attendance = ({ user }) => {
   const students = state.users.filter(
     e =>
       e.category === 'student' &&
-      e.standupId === ta.standupId &&
-      e.cohortId === ta.cohortId
+      e.standupId === ta.standupId
   );
 
   useEffect(() => {
