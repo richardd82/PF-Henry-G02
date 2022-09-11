@@ -57,6 +57,10 @@ export default function usuarios(state = initialState, action) {
       return {
         ...state,
       };
+    case "PUT_USER":
+      return {
+        ...state,
+      };
     default:
       return state;
   }

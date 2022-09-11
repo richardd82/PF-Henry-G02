@@ -100,3 +100,12 @@ export function postNewClass(payload) {
     return json;
   };
 }
+
+//ACTIONS PUT USER
+
+export function putUser(id,payload) {
+  return async function () {
+    var json = await axios.put(`http://localhost:3002/users/update/${id}`, payload);
+    return json;
+  };
+}

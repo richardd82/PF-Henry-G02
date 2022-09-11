@@ -17,19 +17,19 @@ const UserAdmin = () => {
   
   return (
     <div>
-      {userRole[0] == "admin" ? (
+      {/* {userRole[0] == "admin" ? ( */}
         <div>
           <h1>RENDERIZAR EL DASHBOARD</h1>
           <Link to="create">
             <button> Create User, SUP, Cohort </button>
           </Link>
-          <Link to="update">
+          <Link to="updateuser">
             <button> Update USER info </button>
           </Link>
         </div>
-      ) : (
-        <h1>No eres admin</h1>
-      )}
+      {/* // ) : (
+      //   <h1>No eres admin</h1>
+      // )} */}
     </div>
   );
 };

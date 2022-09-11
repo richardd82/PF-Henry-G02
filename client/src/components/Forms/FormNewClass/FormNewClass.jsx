@@ -47,7 +47,7 @@ const FormNewClass = () => {
 
   return (
     <div>
-      <h1>Hola</h1>
+      <h1>Create new Lesson</h1>
       <form
         autoComplete="off"
         onSubmit={(e) => {

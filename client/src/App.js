@@ -50,8 +50,9 @@ function App() {
       {/* <Nav user={user} /> */}
       <Routes>
         <Route exact path="/adashboard/create" element={<FormCreate />} />
-        <Route exact path="/updateuser" element={<FormUpdateUser />} />
-        <Route exact path="/updateuser/:id" element={<UpdateOptions />} />
+        <Route exact path="adashboard/updateuser" element={<FormUpdateUser />} />
+        <Route exact path="adashboard/updateuser/:id" element={<UpdateOptions />} />
+        <Route exact path="/crearclase" element={<FormNewClass />} />
 
         <Route
           exact
@@ -59,6 +60,8 @@ function App() {
           element={<FormNewClass />}
         />
         <Route exact path={`/adashboard`} element={<UserAdmin />} />
+        <Route exact path={`/adashboard`} element={<UserAdmin />} />
+
         <Route
           exact
           path="/bootcamp/catalog"

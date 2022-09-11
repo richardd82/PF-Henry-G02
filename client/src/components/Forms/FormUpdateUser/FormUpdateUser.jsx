@@ -15,14 +15,17 @@ const UpdateUser = () => {
     <>
       <div>
         <div>
+          <h1>Update user</h1>
           <div>
             ID:
             {updateUser.users.map((e) => (
               <>
-                <div>{e.id}</div>
-                <Link to={e.id}>
-                  <button>Update</button>
-                </Link>
+                <div>
+                  {e.id}
+                  <Link to={e.id}>
+                    <button>Update</button>
+                  </Link>
+                </div>
               </>
             ))}
             EMAIL:
