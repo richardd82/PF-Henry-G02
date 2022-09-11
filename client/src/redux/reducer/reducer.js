@@ -173,9 +173,9 @@ export function videos(state = initialState, action) {
 			return {
 				...state,
 				videos: [...state.videos, action.payload],
+				allVideos: [...state.videos, action.payload]
 			};
 		case GET_VIDEOS:
-			console.log(state + " ********************");
 			return {
 				...state,
 				videos: action.payload,

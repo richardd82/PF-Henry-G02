@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Admin from "../../components/Admin/Admin";
-import Nav from "../../components/Nav/Nav";
+//import Nav from "../../components/Nav/Nav";
 import Students from "../../components/Students/Students";
 import Ta from "../../components/Ta/Ta";
 import Teachers from "../../components/Teachers/Teachers";
 import { getTodosUsuarios } from "../../redux/actions/index";
+import Login from '../Login/Login'
 
 const Profile = ({ user }) => {
 	const users = useSelector((state) => state.users.allUsers);
@@ -20,21 +21,23 @@ const Profile = ({ user }) => {
 	// dispatch(getTodosUsuarios());
 	const userValidate = users.find((e) => e.name === user.displayName);
 	const category = userValidate && userValidate.category;
-	console.log(category);
+	const active = userValidate && userValidate.active;
+console.log(active);
 
 	return (
 		<div>
-			{category === "admin" ? (
+			{category === "admin" && active === true ? (
 				<Admin user={user} />
-			) : category === "student" ? (
+			) : category === "student" && active === true ? (
 				<Students user={user} />
-			) : category === "ta" ? (
+			) : category === "ta" && active === true ? (
 				<Ta user={user} />
-			) : category === "teacher" ? (
+			) : category === "teacher" && active === true ? (
 				<Teachers user={user} />
-			) : (
-				null
-			)}            
+			) : active === false ? (
+				<Login/>
+			) : null 
+			}            
 		</div>
 	);
 

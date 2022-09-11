@@ -173,9 +173,10 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.get('https://localhost:3001/videos');
+        console.log(response.data);
         return dispatch({
           type: GET_VIDEOS,
-          payload: response.payload,
+          payload: response.data,
         });
       } catch (error) {
         console.log(error);

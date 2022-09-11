@@ -13,14 +13,15 @@ import { Link } from 'react-router-dom';
 
 const Catalog = ({user}) => {
   const dispatch = useDispatch();
-  const videos = useSelector(state => state.videos.allVideos);
-console.log(videos)
-
+  const videos = useSelector(state => state.videos.videos);
+  
+  
   useEffect(() => {
     // if (!videos.classes.length && videos.loading === false) {
       dispatch(getAllVideos());
-    // }
-  }, [videos, dispatch]);
+      // }
+    }, [dispatch]);
+    console.log(videos)
 
   // Pagination handler
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,10 +29,10 @@ console.log(videos)
     setCurrentPage(number);
   };
 
-  const videosPerPage = 10,
+   const videosPerPage = 10,
     indexOfLastVideo = currentPage * videosPerPage,
     indexOfFirstVideo = indexOfLastVideo - videosPerPage,
-    currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
+    currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo); 
 
   return (
     <div>
@@ -46,7 +47,7 @@ console.log(videos)
             currentPage={currentPage}
             pageHandler={handlePage}
             itemsPerPage={videosPerPage}
-            totalItems={videos.classes.length}
+            totalItems={videos.length}
           />
           <div>
             {currentVideos &&
@@ -67,8 +68,8 @@ console.log(videos)
             currentPage={currentPage}
             pageHandler={handlePage}
             itemsPerPage={videosPerPage}
-            totalItems={videos.classes.length}
-          />
+            totalItems={videos.length}
+          /> 
         </div>
       {/* )} */}
     </div>

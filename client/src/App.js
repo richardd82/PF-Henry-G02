@@ -17,6 +17,7 @@ import { FormsCreate } from "./components/Admin/Forms/FormsCreate/FormsCreate";
 import CreateVideo from './components/Teacher/CreateVideo';
 import UpdateClass from './components/Teacher/UpdateClass';
 import Module from "./pages/Module/Module";
+import Contact from "./components/Contact/Contact";
 
 function App() {
 	const [user, setUser] = useState({});
@@ -63,6 +64,7 @@ function App() {
 				<Route path="/module/:id" element={<Module user={user}/>} />
 				<Route path="/lecture/:id" element={<Details user={user}/>} />
 				<Route path="/catalog" element={<Catalog user={user}/>} />
+				<Route path="/contacto" element={<Contact user={user}/>} />
 				
 
 				{/* Rutas de Teachers */}
