@@ -14,8 +14,13 @@ import {
 const Attendance = ({ user }) => {
   const dispatch = useDispatch();
   const state = useSelector(state => state.attendance);
-  const students = state.users.filter(user => {
-    return user.category === 'student';
+  const ta = state.users.filter(e => e.name === user.displayName);
+  const students = state.users.filter(e => {
+    return (
+      e.category === 'student' &&
+      e.standupId === ta.standupId &&
+      e.cohortId === ta.cohortId
+    );
   });
 
   useEffect(() => {
@@ -41,7 +46,7 @@ const Attendance = ({ user }) => {
       };
     });
   };
-  
+
   return (
     <div>
       <Nav user={user} />
@@ -57,7 +62,7 @@ const Attendance = ({ user }) => {
               );
             })}
         </select>
-        <select name="cohort" onChange={e => handleChange(e)}>
+        {/* <select name="cohort" onChange={e => handleChange(e)}>
           <option value="none">Select a Cohort</option>
           {state.cohorts &&
             state.cohorts.map(cohort => {
@@ -80,7 +85,7 @@ const Attendance = ({ user }) => {
                   </option>
                 );
               })}
-        </select>
+        </select> */}
         <select name="lecture" onChange={e => handleChange(e)}>
           <option value="none">Select a Lecture</option>
           {state.lectures &&
@@ -95,28 +100,17 @@ const Attendance = ({ user }) => {
               })}
         </select>
       </form>
-      {options.module &&
-        options.cohort &&
-        options.standup &&
-        options.lecture && (
-          <StudentList
-            lecture={
-              state.lectures.filter(
-                lecture => lecture.id.toString() === options.lecture
-              )[0]
-            }
-            users={students.filter(
-              student =>
-                student.stantupId.toString() === options.standup &&
-                student.moduleId.toString() === options.module
-            )}
-            cohort={
-              state.cohorts.filter(
-                cohort => cohort.id.toString() === options.cohort
-              )[0]
-            }
-          />
-        )}
+      {options.module && options.lecture && (
+        <StudentList
+          lecture={
+            state.lectures.filter(
+              lecture => lecture.id.toString() === options.lecture
+            )[0]
+          }
+          users={students}
+          cohort={ta.cohortId}
+        />
+      )}
     </div>
   );
 };

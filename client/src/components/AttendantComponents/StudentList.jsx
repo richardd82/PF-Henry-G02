@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 // Actions
-import { postAttendance } from '../../redux/actions/attendanceActions.js'
+import { postAttendance } from '../../redux/actions/attendanceActions.js';
 
 const StudentList = ({ students, lecture, cohort }) => {
   const dispatch = useDispatch();
   const [attendance, setAttendance] = useState({
-    cohortId: cohort.id,
+    cohortId: cohort,
     classId: lecture.id,
     students: [],
   });
@@ -14,27 +14,26 @@ const StudentList = ({ students, lecture, cohort }) => {
   useEffect(() => {
     return () => {
       setAttendance({
-        cohortId: cohort.id,
-        classId: lecture.id,
+        cohortId: cohort,
+        classId: lecture,
         students: [],
       });
     };
   }, [students, cohort, lecture]);
 
   const handleSelect = e => {
+    const { name, id, checked } = e.target;
     setAttendance(prev => {
-      if (e.target.checked === false) {
-        const filteredUsers = prev.students.filter(
-          userId => userId !== e.target.id
-        );
+      if (checked === false) {
+        const filteredStudents = prev.students.filter(student => student.id !== id);
         return {
           ...prev,
-          students: filteredUsers,
+          students: filteredStudents,
         };
       } else {
         return {
           ...prev,
-          students: prev.students.concat(e.target.id),
+          students: prev.students.concat({ id, name }),
         };
       }
     });
@@ -42,11 +41,10 @@ const StudentList = ({ students, lecture, cohort }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // Dispatch al back
-    dispatch(postAttendance(attendance))
+    dispatch(postAttendance(attendance));
     setAttendance({
-      cohortId: cohort.id,
-      classId: lecture.id,
+      cohortId: cohort,
+      classId: lecture,
       students: [],
     });
   };
