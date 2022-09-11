@@ -1,35 +1,34 @@
-import { getTodosUsuarios } from "../../redux/actions/userAdmin";
+import { getTodosUsuarios } from "../../redux/actions/index";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import React from "react";
+import Nav from "../../components/Nav/Nav";
 
-const UserAdmin = () => {
+const UserAdmin = ({user}) => {
   const dispatch = useDispatch();
-  const adminUser = useSelector((state) => state.usuarios.allUsers);
-  const adminMapeado = adminUser.map((e) => e.name);
-  const userRole = adminUser.map((e) => e.category);
-  console.log("ESTO ME LLEGA DE USERS:", adminUser);
-  // console.log(typeof userRole);
   useEffect(() => {
     dispatch(getTodosUsuarios());
   }, []);
   
   return (
-    <div>
-      {/* {userRole[0] == "admin" ? ( */}
+    <div>        
         <div>
           <h1>RENDERIZAR EL DASHBOARD</h1>
-          <Link to="create">
-            <button> Create User, SUP, Cohort </button>
+          <Link to="createUSER">
+            <button> Create User</button>
           </Link>
-          <Link to="updateuser">
+          <Link to="createSUP">
+            <button> Create SUP</button>
+          </Link>
+          <Link to="createCOHORT">
+            <button> Create Cohort </button>
+          </Link>
+          <Link to="/update">
             <button> Update USER info </button>
           </Link>
         </div>
-      {/* // ) : (
-      //   <h1>No eres admin</h1>
-      // )} */}
+    
     </div>
   );
 };

@@ -1,30 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
+import { useForm, ValidationError } from "@formspree/react";
 // Helper
-import { setErrors } from '../../helpers/setErrors.js';
-import Nav from '../NavBar/Nav.js';
+import { setErrors } from "../../helpers/setErrors.js";
+// import Nav from '../NavBar/Nav.js';
 // Styles
-import s from './Contact.module.css';
+import s from "./Contact.module.css";
+import Nav from "../Nav/Nav.jsx";
 
 const Contact = ({ user }) => {
   // Local states
+  const form = useRef();
   const [submitted, setSubmitted] = useState(false);
   const [input, setInput] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
+
 
   // Error handling
   const [error, setError] = useState({
-    name: '',
-    email: '',
-    message: '',
-    submit: '',
+    name: "",
+    email: "",
+    message: "",
+    submit: "",
   });
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setInput(prev => {
+
+    setInput((prev) => {
       return {
         ...prev,
         [name]: value,
@@ -38,13 +44,29 @@ const Contact = ({ user }) => {
     );
   };
 
-  const handleSubmit = e => {
+  var handleSubmit = (e) => {
     e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_s0ez0b7",
+        "template_bgjldma",
+        form.current,
+        "nsR4tZhBowRxFC-w5"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
     if (!input.name || !input.email || !input.message) {
-      setError(prev => {
+      setError((prev) => {
         return {
           ...prev,
-          submit: 'Fill out the fields',
+          submit: "Fill out the fields",
         };
       });
     }
@@ -57,9 +79,9 @@ const Contact = ({ user }) => {
       input.message
     ) {
       setInput({
-        name: '',
-        email: '',
-        message: '',
+        name: "",
+        email: "",
+        message: "",
       });
       setSubmitted(true);
     }
@@ -72,7 +94,7 @@ const Contact = ({ user }) => {
   if (submitted) {
     return (
       <>
-        <Nav user={user} />
+        {/* <Nav user={user} /> */}
         <div className={s.parent}>
           <div className={s.container}>
             <div className={s.form}>
@@ -96,9 +118,10 @@ const Contact = ({ user }) => {
           <h1 className={s.title}>Contact Us</h1>
           {error.submit && <p className={s.titleErrors}>{error.submit}</p>}
           <form
+            ref={form}
             autoComplete="off"
             className={s.form}
-            onSubmit={e => handleSubmit(e)}
+            onSubmit={(e) => handleSubmit(e)}
           >
             <div>
               <label className={s.subtitle}>Name</label>
@@ -108,7 +131,7 @@ const Contact = ({ user }) => {
                 placeholder="Your name"
                 name="name"
                 value={input.name}
-                onChange={e => handleChange(e)}
+                onChange={(e) => handleChange(e)}
               />
               {error.name && <p className={s.titleErrors}>{error.name}</p>}
             </div>
@@ -120,7 +143,7 @@ const Contact = ({ user }) => {
                 placeholder="Your email"
                 name="email"
                 value={input.email}
-                onChange={e => handleChange(e)}
+                onChange={(e) => handleChange(e)}
               />
               {error.email && <p className={s.titleErrors}>{error.email}</p>}
             </div>
@@ -131,7 +154,7 @@ const Contact = ({ user }) => {
                 placeholder="Your message"
                 name="message"
                 value={input.message}
-                onChange={e => handleChange(e)}
+                onChange={(e) => handleChange(e)}
               />
               {error.message && (
                 <p className={s.titleErrors}>{error.message}</p>

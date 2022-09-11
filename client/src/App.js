@@ -1,25 +1,31 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 // import { useHistory } from 'react-router-dom';
-import Nav from "./components/NavBar/Nav.js";
-import Bootcamp from "./pages/Bootcamp/Bootcamp.jsx";
+
 import Catalog from "./pages/Catalog/Catalog.jsx";
 import Details from "./pages/Details/Details.jsx";
 import Module from "./pages/Module/Module.jsx";
-import NotFound from "./pages/NotFound/NotFound.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
 import Login from "../src/pages/Login/Login";
-import UserAdmin from "./pages/AdminProfile/UserAdmin.jsx";
 import "./App.css";
 import { useEffect, useState } from "react";
+import Admin from "./components/Admin/Admin.jsx";
+import { FormsCreate } from "./components/Admin/Forms/FormsCreate/FormsCreate.jsx";
+import FormUpdateUser from "./components/Admin/Forms/FormUpdateUser/FormUpdateUser.jsx";
+import Students from "./components/Students/Students.jsx";
+import Ta from "./components/Ta/Ta.jsx";
+import Teachers from "./components/Teachers/Teachers.jsx";
+import CreateVideo from "./components/Teacher/CreateVideo.js";
+import UpdateClass from "./components/Teacher/UpdateClass.js";
+import UpdateOptions from "./components/Admin/Forms/FormUpdateUser/UpdateOptions.jsx";
 import Contact from "./components/Contact/Contact.jsx";
-import FormNewClass from "./components/Forms/FormNewClass/FormNewClass.jsx";
-import { FormCreate } from "./components/Forms/FormsCreate/FormsCreate.jsx";
-import FormUpdateUser from "./components/Forms/FormUpdateUser/FormUpdateUser";
-import UpdateOptions from "./components/Forms/FormUpdateUser/UpdateOptions.jsx";
+import Attendant from "./pages/Attendant/Attendant";
+import FormNewCohort from "./components/Admin/Forms/FormNewCohort/FormNewCohort.jsx";
+import FormNewStandUp from "./components/Admin/Forms/FormNewSup/FormNewSup.jsx";
+import FormNewUser from "./components/Admin/Forms/FormNewUser/FormNewUser.jsx";
 
 function App() {
   const [user, setUser] = useState({});
-  // const history = useHistory();
+
   useEffect(() => {
     const getUser = () => {
       fetch("https://localhost:3001/auth/login/success", {
@@ -36,7 +42,7 @@ function App() {
           throw new Error("Authentication has been failed!");
         })
         .then((resObject) => {
-          // console.log(resObject.user)
+          console.log(resObject);
           setUser(resObject.user);
         })
         .catch((err) => {
@@ -45,42 +51,46 @@ function App() {
     };
     getUser();
   }, []);
+  //console.log(user);
+
   return (
     <div className="App">
-      {/* <Nav user={user} /> */}
       <Routes>
-        <Route exact path="/adashboard/create" element={<FormCreate />} />
-        <Route exact path="adashboard/updateuser" element={<FormUpdateUser />} />
-        <Route exact path="adashboard/updateuser/:id" element={<UpdateOptions />} />
-        <Route exact path="/crearclase" element={<FormNewClass />} />
-
+        {/* Rutas del Login y Home */}
+        <Route
+          path="/login"
+          element={user.displayName ? <Navigate to="/" /> : <Login />}
+        />
         <Route
           exact
-          path="/bootcamp/classes/create"
-          element={<FormNewClass />}
+          path="/"
+          element={
+            user.displayName ? (
+              <Profile user={user} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
-        <Route exact path={`/adashboard`} element={<UserAdmin />} />
-        <Route exact path={`/adashboard`} element={<UserAdmin />} />
-
-        <Route
-          exact
-          path="/bootcamp/catalog"
-          element={<Catalog user={user && user} />}
-        />
-        <Route path="/bootcamp/contacto" element={<Contact user={user} />} />
-        <Route exact path="/" element={<Login />} />
-        <Route
-          exact
-          path="/bootcamp/lecture/:id"
-          element={<Details user={user} />}
-        />
-        <Route exact path="/bootcamp/profile/:userId" element={<Profile />} />
-        <Route
-          exact
-          path="/bootcamp/module/:moduleId"
-          element={<Module user={user} />}
-        />
-        <Route path="*" element={<NotFound />} />
+        {/* Rutas del Admin */}
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/createCOHORT" element={<FormNewCohort user={user} />} />
+        <Route path="/createSUP" element={<FormNewStandUp user={user} />} />
+        <Route path="/createUSER" element={<FormNewUser user={user} />} />
+        <Route path="/update" element={<FormUpdateUser user={user} />} />
+        <Route path="/update/:id" element={<UpdateOptions user={user} />} />
+        {/* Rutas de Students y TA */}
+        <Route path="/students" element={<Students />} />
+        <Route path="/tas" element={<Ta />} />
+        <Route path="/module/:id" element={<Module user={user} />} />
+        <Route path="/lecture/:id" element={<Details user={user} />} />
+        <Route path="/catalog" element={<Catalog user={user} />} />
+        <Route path="/contacto" element={<Contact user={user} />} />
+        <Route path="/assistance" element={<Attendant user={user} />} />
+        {/* Rutas de Teachers */}
+        <Route path="/teachers" element={<Teachers />} />
+        <Route path="/createVideo" element={<CreateVideo user={user} />} />
+        <Route path="/update" element={<UpdateClass user={user} />} />
       </Routes>
     </div>
   );
