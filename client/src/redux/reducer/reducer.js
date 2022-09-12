@@ -234,7 +234,6 @@ export function extras(state = initialState, action) {
 			return { ...state };
 	}
 }
-
 export function favorites(state = initialState, action) {
 	switch (action.type) {
 		case GET_FAVORITE_BY_ID:
@@ -254,7 +253,6 @@ export function favorites(state = initialState, action) {
 			return { ...state };
 	}
 }
-
 // export default {
 // 	modules,
 // 	cohorts,

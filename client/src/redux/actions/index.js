@@ -28,7 +28,6 @@ export const ADD_FAVORITE = "ADD_FAVORITE"
 
 
 
-
 //*************Modulos************
 export function getAllModules() {
     return async function (dispatch) {
@@ -189,7 +188,7 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `http://localhost:3002/videos/byName?name=${name}`
+          `https://localhost:3001/videos/byName?name=${name}`
         );
         if (!response.data.length){
           alert("Error: La clase ingresada no existe...");
@@ -291,7 +290,7 @@ export function getAllStandUps() {
       return json;
     };
   }
-//*********************Favoritos**************************
+  //*********************Favoritos**************************
 export function getFavoritesById(id) {
   return async function (dispatch) {
     var json = await axios.get(`http://localhost:3002/favorites/${id}`);

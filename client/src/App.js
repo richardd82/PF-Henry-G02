@@ -18,11 +18,8 @@ import CreateVideo from './components/Teacher/CreateVideo';
 import UpdateClass from './components/Teacher/UpdateClass';
 import Module from "./pages/Module/Module";
 import Contact from "./components/Contact/Contact";
-import AllFavourite from "./pages/Favourite/allFavourite";
 import SearchBar from "./components/SearchBar/SearchBar";
-
-import SearchBar from "./components/SearchBar/SearchBar";
-import AllFavourite from "./pages/Favourite/allFavourite";
+import AllFavourite from "./pages/FavouriteComponents/favouriteButton";
 
 function App() {
 	const [user, setUser] = useState({});
@@ -70,9 +67,8 @@ function App() {
 				<Route path="/lecture/:id" element={<Details user={user}/>} />
 				<Route path="/catalog" element={<Catalog user={user}/>} />
 				<Route path="/contacto" element={<Contact user={user}/>} />
-				<Route path="/favourite" element={<AllFavourite user={user}/>} />
 				<Route path="/search" element={<SearchBar user={user}/>} />
-				
+				<Route path="/favourite" element={<AllFavourite user={user}/>} />
 
 				{/* Rutas de Teachers */}
 				<Route path="/teachers" element={<Teachers />} />

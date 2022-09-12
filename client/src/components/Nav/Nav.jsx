@@ -34,24 +34,23 @@ export default function Nav({ user }) {
 	const category = userValidate && userValidate.category;
 	const active = userValidate && userValidate.active;
 
+
+
 	return (
 		<div className="nav">
 			<header>
 				{user ? (
 					<>
 						<div>
-							
 							<Link to="/">
 								<img className="logo__thumb" src={logo_thumb} alt="" />
 							</Link>
 							<h2>Students</h2>
 						</div>
-						
 						{/* <Link to="/"> */}
 							<img src={logo_Henry} alt="" />
 						{/* </Link> */}
 						<div className="avatar">
-							
 						{category === "student" && active === true ? (
 						<div>
 							<Link to="/favourite">
@@ -71,7 +70,6 @@ export default function Nav({ user }) {
 								<p className="avatar__name">Contacto</p>
 							</Link>
 							</div>): null}
-							
 							<p className="avatar__name">{user.displayName}</p>
 							{/* {user.displayName} */}
 							<img
