@@ -267,6 +267,23 @@ export function getTeachers() {
       return json;
     };
   }
+
+  export function putUser(id,payload) {
+      return async function () {
+        var json = await axios.put(`http://localhost:3002/users/update/${id}`, payload);
+        return json;
+      };
+    }
+
+  export function searchByEmail(email){
+    return async function(dispatch){
+      var json = await axios.get(`http://localhost:3002/users/byEmail?email=${email}`);
+      return dispatch({
+        type: GET_BY_EMAIL,
+        payload: json.data,
+      });
+    }
+  }
 //*********************Stand Ups**************************
 export function getAllStandUps() {
     return async function (dispatch) {

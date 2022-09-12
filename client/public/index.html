@@ -24,6 +24,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
     <title>React App</title>
   </head>
   <body>
@@ -39,5 +40,59 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      const mp = new MercadoPago('TEST-3b6f38d4-6fe4-4c3b-b256-31592cbb15d4');
+      
+      const bricksBuilder = mp.bricks();
+      const renderCardPaymentBrick = async bricksBuilder => {
+        const settings = {
+          initialization: {
+            amount: 100, //valor do processamento a ser realizado
+            payer: {
+              email: 'test@mail.com',
+            },
+          },
+          style: {
+            theme: 'default', // | 'dark' | 'bootstrap' | 'flat'
+          },
+          callbacks: {
+            onReady: () => {
+              // callback chamado quando o Brick estiver pronto
+            },
+            onSubmit: cardFormData => {
+              // callback chamado o usuário clicar no botão de submissão dos dados
+              // ejemplo de envío de los datos recolectados por el Brick a su servidor
+              return new Promise((resolve, reject) => {
+                fetch('https://localhost:3001/process_payment', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(cardFormData),
+                })
+                  .then(response => {
+                    // receber o resultado do pagamento
+                    alert('Su pago fue realizado')
+                    resolve();
+                  })
+                  .catch(error => {
+                    // lidar com a resposta de erro ao tentar criar o pagamento
+                    reject();
+                  });
+              });
+            },
+            onError: error => {
+              // callback chamado para todos os casos de erro do Brick
+            },
+          },
+        };
+        window.cardPaymentBrickController = await bricksBuilder.create(
+          'cardPayment',
+          'cardPaymentBrick_container',
+          settings
+        );
+      };
+      renderCardPaymentBrick(bricksBuilder);
+    </script>
   </body>
 </html>

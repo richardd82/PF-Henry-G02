@@ -60,7 +60,7 @@ export default function Nav({ user }) {
 								<p className="avatar__name">Contacto</p>
 							</Link>
 							</div>) : category === "ta" && active === true ? (<div>
-								<Link to="/assistance">
+								<Link to="/attendance">
 								<p className="avatar__name">Assistance</p>
 							</Link>
 							<Link to="/favourite">

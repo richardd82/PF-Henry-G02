@@ -2,13 +2,13 @@
 /*************************************************/
 @font-face {
   font-family: 'Avenir';
-  src: url('../../media/fonts/AvenirLTStd-Book.otf');
+  src: url('../../../../media/fonts/AvenirLTStd-Book.otf');
   font-weight: normal; 
   font-style: normal;
 }
 @font-face {
   font-family: 'Avenir-bold';
-  src: url('../../media/fonts/AvenirLTStd-Black.otf');
+  src: url('../../../../media/fonts/AvenirLTStd-Black.otf');
   font-weight: bold; 
   font-style: normal;
 }
@@ -162,7 +162,6 @@ height: 64px;
   /* Take full size */
   /* height: 100%;
   width: 100%; */
-  cursor: pointer;
 }
 
 /***********************************************/
@@ -178,6 +177,8 @@ height: 64px;
   min-width: 1024px;
   width: 95%;
   justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 25px;
 }
 .nav__links-active{
   background: linear-gradient(145deg, #f0f0f0, #fde615);
@@ -214,7 +215,7 @@ animation-name: slidein;
   background-color: #565656;
   color: transparent;
   text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
-  -webkit-background-clip: text;
+  /* -webkit-background-clip: text; */
 }
 .nav__links ul li a:hover{
   text-decoration: none;
@@ -233,7 +234,7 @@ animation-name: slidein;
 /************* search bar **********************/
 .search-Input{
   transition: width 0.4s ease-in-out;
-  width: 120px;
+  width: 145px;
   height: 3rem;
   border-radius: 30px;
   padding-left: 20px;
@@ -261,6 +262,7 @@ animation-name: slidein;
   height: 40px;
   width: 40px;
   padding: 5px;
+  margin-top: -20px;
   margin-left: -2.6rem;
   background-color: #fde615;
   border-radius: 30px;

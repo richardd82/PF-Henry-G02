@@ -1,16 +1,26 @@
 import React from "react";
 import { useState } from "react";
-import { postNewUser } from "../../../../redux/actions/index";
+import { getAllModules, postNewUser } from "../../../../redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import { Validations } from "./validations";
-import { getTodosUsuarios } from "../../../../redux/actions/index";
+import {
+  getTodosUsuarios,
+  getAllStandUps,
+  getCohorts,
+} from "../../../../redux/actions/index";
 import { useEffect } from "react";
+import Nav from "../../../Nav/Nav";
+import "../Formularios.css";
 
-const FormNewUser = () => {
+const FormNewUser = ({ user }) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const adminUser = useSelector((state) => state.users.users);
-  const usersExist = adminUser.users.map((e) => e.email);
+  const adminUser = useSelector((state) => state.users);
+  const cohortsExistentes = useSelector((state) => state.cohorts.allCohorts);
+  const supExistente = useSelector((state) => state.standUps.allStandUp);
+  const moduleExistente = useSelector((state) => state.modules.modules);
+  const userEmail = adminUser.users.map((e) => e.email);
+
   const [input, setInput] = useState({
     name: "",
     lastname: "",
@@ -19,6 +29,9 @@ const FormNewUser = () => {
     password: "123",
     active: true,
     category: "",
+    cohortId: "",
+    moduleId: "",
+    standupId: "",
   });
 
   const handleChange = (e) => {
@@ -33,90 +46,172 @@ const FormNewUser = () => {
       })
     );
   };
-
-  useEffect(() => {
-    dispatch(getTodosUsuarios());
-  }, [dispatch]);
-
-  const handleSubmit = (e) => {
+  const handleSelectCohorte = (e) => {
     e.preventDefault(e);
-    dispatch(postNewUser(input));
-    alert("User Created");
     setInput({
-      name: "",
-      lastname: "",
-      email: "",
-      image: "image",
-      password: "123",
-      active: true,
-      category: "",
+      ...input,
+      cohortId: e.target.value,
     });
   };
 
+  const handleSelectModule = (e) => {
+    e.preventDefault(e);
+    setInput({
+      ...input,
+      moduleId: e.target.value,
+    });
+  };
+  const handleSelectSup = (e) => {
+    e.preventDefault(e);
+    setInput({
+      ...input,
+      standupId: e.target.value,
+    });
+  };
+  useEffect(() => {
+    dispatch(getTodosUsuarios());
+    dispatch(getAllStandUps());
+    dispatch(getCohorts());
+    dispatch(getAllModules());
+  }, [dispatch]);
+  const emailExistente = userEmail.find((e) => e === input.email);
+  console.log(emailExistente);
+
+  const handleSubmit = (e) => {
+    e.preventDefault(e);
+    if (emailExistente) {
+      return alert("This user email already exist");
+    } else {
+      dispatch(postNewUser(input));
+      alert("User created");
+      setInput({
+        name: "",
+        lastname: "",
+        email: "",
+        image: "image",
+        password: "123",
+        active: true,
+        category: "",
+        cohortId: "",
+        moduleId: "",
+        standupId: "",
+      });
+    }
+  };
+
   return (
-    <div>
-      <h1>Create new user </h1>
-      <br></br>
-      <form
-        autoComplete="off"
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <label>Name:</label>
-        <input
-          placeholder="Insert a name"
-          type="text"
-          value={input.name}
-          name="name"
-          onChange={(e) => {
-            handleChange(e);
+    <>
+      <Nav user={user} />
+      <div className="parent">
+        <div className="container">
+        <h1 className="title">Create new user </h1>
+        <br></br>
+        <form
+        className="form"
+          autoComplete="off"
+          onSubmit={(e) => {
+            handleSubmit(e);
           }}
-          required
-        ></input>
-        {/* {errors.name && <h1>{errors.name}</h1>} */}
+        >
+          <label>Name:</label>
+          <input
+          className="inputCreate"
+            placeholder="Insert a name"
+            type="text"
+            value={input.name}
+            name="name"
+            onChange={(e) => {
+              handleChange(e);
+            }}
+            required
+          ></input>
+          {/* {errors.name && <h1>{errors.name}</h1>} */}
 
-        <label>Last Name:</label>
-        <input
-          placeholder="Insert a lastname"
-          type="text"
-          value={input.lastname}
-          name="lastname"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-          required
-        ></input>
-        {/* {errors.lastname && <h1>{errors.lastname}</h1>} */}
+          <label>Last Name:</label>
+          <input
+          className="inputCreate"
 
-        <label>Email:</label>
-        <input
-          placeholder="Insert a email"
-          type="email"
-          value={input.email}
-          name="email"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-          required
-        ></input>
-        {/* {errors.email && <h1>{errors.email}</h1>} */}
+            placeholder="Insert a lastname"
+            type="text"
+            value={input.lastname}
+            name="lastname"
+            onChange={(e) => {
+              handleChange(e);
+            }}
+            required
+          ></input>
+          {/* {errors.lastname && <h1>{errors.lastname}</h1>} */}
 
-        <label>Category:</label>
-        <input
-          placeholder="Insert a user role"
-          type="text"
-          value={input.category}
-          name="category"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-          required
-        ></input>
-        {/* {errors.category && <h1>{errors.category}</h1>} */}
-        <button type="submit"> Create User</button>
-      </form>
-    </div>
+          <label>Email:</label>
+          <input
+          className="inputCreate"
+
+            placeholder="Insert a email"
+            type="email"
+            value={input.email}
+            name="email"
+            onChange={(e) => {
+              handleChange(e);
+            }}
+            required
+          ></input>
+          {/* {errors.email && <h1>{errors.email}</h1>} */}
+
+          <label>Category:</label>
+          <input
+          className="inputCreate"
+
+            placeholder="Insert a user role"
+            type="text"
+            value={input.category}
+            name="category"
+            onChange={(e) => {
+              handleChange(e);
+            }}
+            required
+          ></input>
+          <select 
+          className="select"
+          onChange={handleSelectCohorte}>
+            <option> Select cohort</option>
+            {cohortsExistentes?.map((e) => {
+              return (
+                <option key={e.id} value={e.id}>
+                  {e.name}
+                </option>
+              );
+            })}
+          </select>
+          <select 
+          className="select"
+          onChange={handleSelectModule}>
+            <option> Select module</option>
+            {moduleExistente?.map((e) => {
+              return (
+                <option key={e.id} value={e.id}>
+                  {e.name}
+                </option>
+              );
+            })}
+          </select>
+          <select
+          className="select"
+           onChange={handleSelectSup}>
+            <option> Select Standup</option>
+            {supExistente?.map((e) => {
+              return (
+                <option key={e.id} value={e.id}>
+                  {e.name}
+                </option>
+              );
+            })}
+          </select>
+          {/* {errors.category && <h1>{errors.category}</h1>} */}
+          <button className="submitButton" type="submit"> Create User</button>
+        </form>
+        </div>
+      </div>
+    </>
   );
 };
 

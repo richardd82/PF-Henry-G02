@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { createUser, getAllUsers, updateUser, userByTeacher, userByStudent, getAllTeachers } = require('../Controllers/UsersControllers');
+const { createUser, getAllUsers, updateUser, userByTeacher, userByStudent, getAllTeachers, userByEmail } = require('../Controllers/UsersControllers');
 
 //crear usuario, borrar usuario, modificar usuario, get usuario 
 
@@ -10,5 +10,7 @@ router.put("/update/:id", updateUser);
 router.get("/byTeacher", userByTeacher);
 router.get("/byStudent", userByStudent);
 router.get("/teachers", getAllTeachers)
+router.get("/byEmail", userByEmail);
+
 
 module.exports = router;
