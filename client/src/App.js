@@ -23,6 +23,7 @@ import FormNewCohort from "./components/Admin/Forms/FormNewCohort/FormNewCohort.
 import FormNewStandUp from "./components/Admin/Forms/FormNewSup/FormNewSup.jsx";
 import FormNewUser from "./components/Admin/Forms/FormNewUser/FormNewUser.jsx";
 import Attendance from "./components/AttendantComponents/Attendance.jsx";
+import Payment from "./components/Payment/Payment.jsx";
 
 function App() {
   const [user, setUser] = useState({});
@@ -87,7 +88,8 @@ function App() {
         <Route path="/module/:id" element={<Module user={user} />} />
         <Route path="/lecture/:id" element={<Details user={user} />} />
         <Route path="/codeReview/:id" element={<Details user={user} />} />
-
+        {/* Ruta de pasarela de pagos */}
+        <Route path="/pagos" element={<Payment user={user}/>} />  
         <Route path="/catalog" element={<Catalog user={user} />} />
         <Route path="/contacto" element={<Contact user={user} />} />
         <Route path="/assistance" element={<Attendant user={user} />} />

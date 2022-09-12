@@ -8,6 +8,7 @@ const FavoritesRoute = require("./FavoritesRoute.js");
 const passport = require('passport');
 const VideosRoute = require('./VideosRoute.js')
 const AttendanceRoute = require('./AttendanceRoute.js')
+const MercadopagoRoutes = require('./MercadopagoRoutes.js')
  
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -25,6 +26,7 @@ router.use("/users", UsersRoute);
 router.use("/favorites", FavoritesRoute);
 router.use('/videos', VideosRoute)
 router.use('/attendance', AttendanceRoute)
+router.use("/", MercadopagoRoutes);
 
 
 
