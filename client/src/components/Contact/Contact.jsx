@@ -1,37 +1,33 @@
-import React, { useState, useRef } from "react";
-import { useForm, ValidationError } from "@formspree/react";
+import React, { useState, useRef } from 'react';
 // Helper
-import { setErrors } from "../../helpers/setErrors.js";
+import { setErrors } from '../../helpers/setErrors.js';
 // import Nav from '../NavBar/Nav.js';
 //import { helpHttp } from '../../helpers/helpHttp.js';
-import emailjs from "@emailjs/browser";
+import emailjs from '@emailjs/browser';
 // codigo para reemplazar el email a283c9b9690c7603de76bc317ef60969
 // Styles
-import s from "./Contact.module.css";
-import Nav from "../Nav/Nav.jsx";
+import s from './Contact.module.css';
 
 const Contact = ({ user }) => {
   // Local states
-  const form = useRef();
   const [submitted, setSubmitted] = useState(false);
   const [input, setInput] = useState({
-    name: "",
-    email: "",
-    message: "",
+    name: '',
+    email: '',
+    message: '',
   });
 
   // Error handling
   const [error, setError] = useState({
-    name: "",
-    email: "",
-    message: "",
-    submit: "",
+    name: '',
+    email: '',
+    message: '',
+    submit: '',
   });
-
-  const handleChange = (e) => {
+const form = useRef()
+  const handleChange = e => {
     const { name, value } = e.target;
-
-    setInput((prev) => {
+    setInput(prev => {
       return {
         ...prev,
         [name]: value,
@@ -45,29 +41,16 @@ const Contact = ({ user }) => {
     );
   };
 
-  var handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "service_s0ez0b7",
-        "template_bgjldma",
-        form.current,
-        "nsR4tZhBowRxFC-w5"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+
+
     if (!input.name || !input.email || !input.message) {
-      setError((prev) => {
+      setError(prev => {
         return {
           ...prev,
-          submit: "Fill out the fields",
+          submit: 'Fill out the fields',
         };
       });
     }
@@ -79,22 +62,14 @@ const Contact = ({ user }) => {
       !error.message &&
       input.message
     ) {
-      emailjs
-        .sendForm(
-          "service_s0ez0b7",
-          "template_9801hdb",
-          form.current,
-          "nsR4tZhBowRxFC-w5"
-        )
-        .then(
-          (result) => {
-            console.log(result.text);
-          },
-          (error) => {
-            console.log(error.text);
-          }
-        );
-      /*       helpHttp()
+
+      emailjs.sendForm('service_loeaupt', 'template_jdmw2f6', form.current, '1mx1KpuB5wsywFkli')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+/*       helpHttp()
       .post("https://formsubmit.co/38ad089733f4917f3fb35745511e2678", {
         body: input,
         headers: {
@@ -106,12 +81,13 @@ const Contact = ({ user }) => {
         return res 
       }) */
       setInput({
-        name: "",
-        email: "",
-        message: "",
+        name: '',
+        email: '',
+        message: '',
       });
       setSubmitted(true);
     }
+
   };
 
   const handleReset = () => {
@@ -121,7 +97,7 @@ const Contact = ({ user }) => {
   if (submitted) {
     return (
       <>
-        <Nav user={user} />
+        {/* <Nav user={user} /> */}
         <div className={s.parent}>
           <div className={s.container}>
             <div className={s.form}>
@@ -139,16 +115,16 @@ const Contact = ({ user }) => {
 
   return (
     <>
-      <Nav user={user} />
+      {/* <Nav user={user} /> */}
       <div className={s.parent}>
         <div className={s.container}>
           <h1 className={s.title}>Contact Us</h1>
           {error.submit && <p className={s.titleErrors}>{error.submit}</p>}
           <form
-            ref={form}
             autoComplete="off"
             className={s.form}
-            onSubmit={(e) => handleSubmit(e)}
+            onSubmit={e => handleSubmit(e)}
+            ref={form}
           >
             <div>
               <label className={s.subtitle}>Name</label>
@@ -158,7 +134,7 @@ const Contact = ({ user }) => {
                 placeholder="Your name"
                 name="name"
                 value={input.name}
-                onChange={(e) => handleChange(e)}
+                onChange={e => handleChange(e)}
               />
               {error.name && <p className={s.titleErrors}>{error.name}</p>}
             </div>
@@ -170,7 +146,7 @@ const Contact = ({ user }) => {
                 placeholder="Your email"
                 name="email"
                 value={input.email}
-                onChange={(e) => handleChange(e)}
+                onChange={e => handleChange(e)}
               />
               {error.email && <p className={s.titleErrors}>{error.email}</p>}
             </div>
@@ -181,7 +157,7 @@ const Contact = ({ user }) => {
                 placeholder="Your message"
                 name="message"
                 value={input.message}
-                onChange={(e) => handleChange(e)}
+                onChange={e => handleChange(e)}
               />
               {error.message && (
                 <p className={s.titleErrors}>{error.message}</p>

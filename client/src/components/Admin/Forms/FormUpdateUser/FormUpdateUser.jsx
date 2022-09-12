@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
-import { getTodosUsuarios } from "../../../../redux/actions/index";
+import { getTodosUsuarios } from "../../../redux/actions/userAdmin";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import SearchBarEmail from "./SearchBarEmail";
 
-const FormUpdateUser = () => {
+const UpdateUser = () => {
   const dispatch = useDispatch();
-  const updateUser = useSelector((state) => state.users.users);
-  const userMapped = updateUser.map((e) => e);
+  const updateUser = useSelector((state) => state.usuarios);
+  const userMapped = updateUser.users.map((e) => e);
   const userId = userMapped.map((e) => e.name + " " + e.id);
   const userName = userMapped.map((e) => e.name);
   const idName = { id: ` ${userId}` };
@@ -16,24 +15,28 @@ const FormUpdateUser = () => {
   useEffect(() => {
     dispatch(getTodosUsuarios());
   }, [dispatch]);
-  console.log(updateUser.map((e) => e));
 
   return (
     <>
-      <SearchBarEmail />
       <div>
         <div>
           <div>
-            {/* ID: */}
-            {updateUser.map((e) => (
+            ID:
+            {updateUser.users.map((e) => (
               <>
-                <div>
-                  {`NAME: ${e.name} ${e.lastname} EMAIL:  ${e.email} CATEGORY: ${e.category} ACTIVE? ${e.active} ID: ${e.id} `}
-                  <Link to={e.id}>
-                    <button>Update</button>
-                  </Link>
-                </div>
+                <div>{e.id}</div>
+                <Link to={e.id}>
+                  <button>Update</button>
+                </Link>
               </>
+            ))}
+            EMAIL:
+            {updateUser.users.map((e) => (
+              <div>{e.email}</div>
+            ))}
+            NAME:
+            {updateUser.users.map((e) => (
+              <div>{`${e.name} ${e.lastname}`}</div>
             ))}
           </div>
         </div>
@@ -42,4 +45,4 @@ const FormUpdateUser = () => {
   );
 };
 
-export default FormUpdateUser;
+export default UpdateUser;

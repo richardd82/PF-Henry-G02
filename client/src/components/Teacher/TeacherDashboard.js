@@ -5,11 +5,11 @@ export default function TeacherDashboard (){
     return (
         <div>
             <Link to={'/createVideo'}>
-                <button>Subir Video</button>
+                <botton>Subir Video</botton>
             </Link>
-            {/* <Link to={'/updateclass'}>
-                <button>Modificar Clase</button>
-            </Link> */}
+            <Link to={'/update'}>
+                <botton>Modificar Clase</botton>
+            </Link>
         </div>
         
     )

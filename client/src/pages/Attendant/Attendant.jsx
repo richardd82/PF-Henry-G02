@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import Modulebutton from '../../components/AttendantComponents/moduleButton'
+import Modulebutton from '../../components/AttendantComponents/ModuleButton'
 // import Nav from '../../components/NavBar/Nav'
 
 function Attendant({ user }) {

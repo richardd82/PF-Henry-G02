@@ -1,33 +1,20 @@
 import React from "react";
 import { useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Validations } from "./validations";
-import { getAllStandUps, getCohorts } from "../../../../redux/actions/index";
+import { getAllStandUps } from "../../../../redux/actions/index";
 import { useEffect } from "react";
 import { postNewStandUp } from "../../../../redux/actions/index";
-import Nav from "../../../Nav/Nav";
-import "../Formularios.css";
 
-const FormNewStandUp = ({ user }) => {
+const FormNewStandUp = () => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const adminUser = useSelector((state) => state.standUps);
-  const cohortsExistentes = useSelector((state) => state.cohorts.allCohorts);
-  const supName = adminUser.standUp.map((e) => e.name);
-  console.log(adminUser);
-
+  const adminUser = useSelector((state) => state.users.users);
+  const usersExist = adminUser.users.map((e) => e.name);
   const [input, setInput] = useState({
     name: "",
-    cohortId: "",
   });
-
-  const handleSelect = (e) => {
-    e.preventDefault(e);
-    setInput({
-      ...input,
-      cohortId: e.target.value,
-    });
-  };
 
   const handleChange = (e) => {
     setInput({
@@ -44,55 +31,51 @@ const FormNewStandUp = ({ user }) => {
 
   useEffect(() => {
     dispatch(getAllStandUps());
-    dispatch(getCohorts());
   }, [dispatch]);
-  const supExistente = supName.find((e) => e === input.name);
+
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    if (supExistente) {
-      return alert("StandUp already exist");
+    const exist = usersExist.every((r) => r.name === input.name);
+
+    if (!exist) {
+      return alert("NAME ALREADY EXIST");
+    } else if (Object.keys(errors).length) {
+      return alert(Object.values(errors));
     } else {
       dispatch(postNewStandUp(input));
-      alert("StandUp created");
-      e.target.reset();
+      alert("Stand Up Created");
+      setInput({
+        name: "",
+      });
     }
   };
 
   return (
-    <>
-      <Nav user={user} />
-      <div className="parent">
-        <div className="container">
-          <h1 className="title">Create new Stand Up </h1>
-          <br></br>
-          <form  className="form" autoComplete="off" onSubmit={handleSubmit}>
-            <label>Name:</label>
-            <input
-            className="inputCreate"
-              placeholder="Insert a name"
-              type="text"
-              value={input.name}
-              name="name"
-              onChange={handleChange}
-              required
-            ></input>
-            <select className="select" onChange={handleSelect}>
-              <option> Select cohort</option>
-              {cohortsExistentes?.map((e) => {
-                return (
-                  <option key={e.id} value={e.id}>
-                    {e.name}
-                  </option>
-                );
-              })}
-            </select>
-            {/* {errors.name && <h1>{errors.name}</h1>} */}
+    <div>
+      <h1>Create new Stand Up </h1>
+      <br></br>
+      <form
+        autoComplete="off"
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >
+        <label>Name:</label>
+        <input
+          placeholder="Insert a name"
+          type="text"
+          value={input.name}
+          name="name"
+          onChange={(e) => {
+            handleChange(e);
+          }}
+          required
+        ></input>
+        {/* {errors.name && <h1>{errors.name}</h1>} */}
 
-            <button className="submitButton" type="submit"> Create Stand Up </button>
-          </form>
-        </div>
-      </div>
-    </>
+        <button type="submit"> Create Stand Up </button>
+      </form>
+    </div>
   );
 };
 

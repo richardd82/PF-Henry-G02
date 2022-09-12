@@ -50,7 +50,7 @@ server.use(cookieSession(//se cambió de cookieSession a Session
   {
     name: 'session',
     keys: ['lama'],
-    maxAge: 48 * 60 * 60 *10
+    maxAge: 24 * 60 * 60 *10
   }
   ));
 server.use(passport.initialize());
