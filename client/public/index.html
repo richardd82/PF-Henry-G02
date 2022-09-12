@@ -41,7 +41,8 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <script>
-      const mp = new MercadoPago('%REACT_APP_KEY%');
+      const mp = new MercadoPago('TEST-3b6f38d4-6fe4-4c3b-b256-31592cbb15d4');
+      
       const bricksBuilder = mp.bricks();
       const renderCardPaymentBrick = async bricksBuilder => {
         const settings = {

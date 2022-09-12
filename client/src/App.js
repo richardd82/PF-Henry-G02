@@ -25,6 +25,7 @@ import FormNewUser from "./components/Admin/Forms/FormNewUser/FormNewUser.jsx";
 import Attendance from "./components/AttendantComponents/Attendance.jsx";
 import Payment from "./components/Payment/Payment.jsx";
 
+
 function App() {
   const [user, setUser] = useState({});
 
