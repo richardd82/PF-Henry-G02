@@ -32,7 +32,7 @@ export default function Nav({ user }) {
 							<img src={logo_Henry} alt="" />
 						{/* </Link> */}
 						<div className="avatar">
-							<Link to="/assistance">
+							<Link to="/attendance">
 								<p className="avatar__name">Assistance</p>
 							</Link>
 							<Link to="/contacto">

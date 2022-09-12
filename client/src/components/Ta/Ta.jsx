@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import Attendance from '../AttendantComponents/Attendance.jsx';
+import Nav from '../Nav/Nav';
+// import Classnames from '../AttendantComponents/classNames';
 
-const Ta = () => {
+const Ta = ({ user }) => {
   return (
-    <div>Im a Teacher Assistance</div>
-  )
-}
+    <div>
+      <Nav user={user} />
+      <Attendance user={user} />
+    </div>
+  );
+};
 
-export default Ta
+export default Ta;

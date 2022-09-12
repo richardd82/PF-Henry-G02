@@ -22,6 +22,7 @@ import Attendant from "./pages/Attendant/Attendant";
 import FormNewCohort from "./components/Admin/Forms/FormNewCohort/FormNewCohort.jsx";
 import FormNewStandUp from "./components/Admin/Forms/FormNewSup/FormNewSup.jsx";
 import FormNewUser from "./components/Admin/Forms/FormNewUser/FormNewUser.jsx";
+import Attendance from "./components/AttendantComponents/Attendance.jsx";
 
 function App() {
   const [user, setUser] = useState({});
@@ -82,6 +83,7 @@ function App() {
         {/* Rutas de Students y TA */}
         <Route path="/students" element={<Students />} />
         <Route path="/tas" element={<Ta />} />
+        <Route path="/attendance" element={<Attendance user={user}/>} />
         <Route path="/module/:id" element={<Module user={user} />} />
         <Route path="/lecture/:id" element={<Details user={user} />} />
         <Route path="/codeReview/:id" element={<Details user={user} />} />
