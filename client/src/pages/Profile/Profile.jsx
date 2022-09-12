@@ -22,7 +22,6 @@ const Profile = ({ user }) => {
 	const userValidate = users.find((e) => e.name === user.displayName);
 	const category = userValidate && userValidate.category;
 	const active = userValidate && userValidate.active;
-console.log(active);
 
 	return (
 		<div>

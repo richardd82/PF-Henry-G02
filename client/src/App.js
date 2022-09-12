@@ -18,6 +18,7 @@ import CreateVideo from './components/Teacher/CreateVideo';
 import UpdateClass from './components/Teacher/UpdateClass';
 import Module from "./pages/Module/Module";
 import Contact from "./components/Contact/Contact";
+import AllFavourite from "./pages/Favourite/allFavourite";
 
 function App() {
 	const [user, setUser] = useState({});
@@ -65,6 +66,7 @@ function App() {
 				<Route path="/lecture/:id" element={<Details user={user}/>} />
 				<Route path="/catalog" element={<Catalog user={user}/>} />
 				<Route path="/contacto" element={<Contact user={user}/>} />
+				<Route path="/favourite" element={<AllFavourite user={user}/>} />
 				
 
 				{/* Rutas de Teachers */}

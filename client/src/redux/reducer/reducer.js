@@ -23,6 +23,8 @@ import {
 	CLEAR_STATE_VIDEOS,
 	CLEAR_STATE_LESSONS,
 	CLEAR_STATE_MODULES,
+	ADD_FAVORITE,
+	GET_FAVORITE_BY_ID,
 } from "../actions/index";
 
 const initialState = {
@@ -53,6 +55,9 @@ const initialState = {
 	videos: [],
 	allVideos: [],
 	detailVideos: {},
+
+	//Favorites
+	favorites: [],
 
 	//Extras
 	loading: false,
@@ -223,6 +228,26 @@ export function extras(state = initialState, action) {
 				loading: false,
 				errorMsg: action.payload,
 			};
+		default:
+			return { ...state };
+	}
+}
+
+export function favorites(state = initialState, action) {
+	switch (action.type) {
+		case GET_FAVORITE_BY_ID:
+			console.log(action.payload)
+			return {
+				...state,
+				favorite: action.payload,
+			};
+
+
+		case ADD_FAVORITE:
+			return {
+				...state,
+			};
+
 		default:
 			return { ...state };
 	}

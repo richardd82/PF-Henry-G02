@@ -20,7 +20,7 @@ https.createServer({
   cert: fs.readFileSync('./Certificate.crt'),
   key: fs.readFileSync('./Private.key')
 },server).listen(PUERTO, function(){
-	console.log('Servidor https correindo en el puerto 3001');
+	console.log('Servidor https corriendo en el puerto 3001');
 });
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
