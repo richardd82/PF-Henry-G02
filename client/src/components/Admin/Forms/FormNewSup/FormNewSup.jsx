@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { Validations } from "./validations";
 import { getAllStandUps, getCohorts } from "../../../../redux/actions/index";
@@ -11,11 +10,11 @@ import Nav from "../../../Nav/Nav";
 const FormNewStandUp = ({ user }) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const adminUser = useSelector((state) => state.users);
+  const adminUser = useSelector((state) => state.standUps);
   const cohortsExistentes = useSelector((state) => state.cohorts.allCohorts);
-
   const supName = adminUser.standUp.map((e) => e.name);
-  // // const cohortsExistentes = adminCohort.cohorts;
+  console.log(adminUser)
+
   const [input, setInput] = useState({
     name: "",
     cohortId: "",
@@ -49,7 +48,6 @@ const FormNewStandUp = ({ user }) => {
   const supExistente = supName.find((e) => e === input.name);
   const handleSubmit = (e) => {
     e.preventDefault(e);
-
     if (supExistente) {
       return alert("StandUp already exist");
     } else {
@@ -58,11 +56,6 @@ const FormNewStandUp = ({ user }) => {
       e.target.reset();
     }
   };
-  // console.log("ESTO ES COHORTES EXISTENTES", cohortsExistentes, adminUser);
-  console.log(
-    "ESTO ES COHORTES EXISTENTES",
-    cohortsExistentes.map((e) => e.id)
-  );
 
   return (
     <div>

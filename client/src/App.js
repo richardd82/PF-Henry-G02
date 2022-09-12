@@ -84,6 +84,8 @@ function App() {
         <Route path="/tas" element={<Ta />} />
         <Route path="/module/:id" element={<Module user={user} />} />
         <Route path="/lecture/:id" element={<Details user={user} />} />
+        <Route path="/codeReview/:id" element={<Details user={user} />} />
+
         <Route path="/catalog" element={<Catalog user={user} />} />
         <Route path="/contacto" element={<Contact user={user} />} />
         <Route path="/assistance" element={<Attendant user={user} />} />

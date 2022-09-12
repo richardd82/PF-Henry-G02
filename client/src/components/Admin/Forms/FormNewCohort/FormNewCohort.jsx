@@ -9,10 +9,9 @@ import Nav from "../../../Nav/Nav";
 const FormNewCohort = ({ user }) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const adminUser = useSelector((state) => state.cohorts.allCohorts);
-  console.log(adminUser);
-  const usersExist = adminUser.map((e) => e.name);
-  console.log(usersExist);
+  const adminUser = useSelector((state) => state.cohorts);
+  const cohortName = adminUser.cohorts.map((e) => e.name);
+  console.log(cohortName);
   const [input, setInput] = useState({
     name: "",
   });
@@ -33,12 +32,11 @@ const FormNewCohort = ({ user }) => {
   useEffect(() => {
     dispatch(getCohorts());
   }, [dispatch]);
+  const cohortExistente = cohortName.find((e) => e === input.name);
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    if (usersExist.every((r) => r.name == input.name)) {
-      return alert("NAME ALREADY EXIST");
-    } else if (Object.keys(errors).length) {
-      return alert(Object.values(errors));
+    if (cohortExistente) {
+      return alert("Cohort already exist");
     } else {
       dispatch(postNewCohort(input));
       alert("Cohort Created");
@@ -47,7 +45,6 @@ const FormNewCohort = ({ user }) => {
       });
     }
   };
-
   return (
     <>
       <Nav user={user} />

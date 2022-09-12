@@ -14,11 +14,11 @@ import Nav from "../../../Nav/Nav";
 const FormNewUser = ({ user }) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const adminUser = useSelector((state) => state.users.users);
+  const adminUser = useSelector((state) => state.users);
   const cohortsExistentes = useSelector((state) => state.cohorts.allCohorts);
   const supExistente = useSelector((state) => state.standUps.allStandUp);
   const moduleExistente = useSelector((state) => state.modules.modules);
-  const usersExist = adminUser.map((e) => e.email);
+  const userEmail = adminUser.map((e) => e.email);
   const [input, setInput] = useState({
     name: "",
     lastname: "",
