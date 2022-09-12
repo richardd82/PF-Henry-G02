@@ -6,6 +6,7 @@ import { getAllStandUps, getCohorts } from "../../../../redux/actions/index";
 import { useEffect } from "react";
 import { postNewStandUp } from "../../../../redux/actions/index";
 import Nav from "../../../Nav/Nav";
+import "../Formularios.css";
 
 const FormNewStandUp = ({ user }) => {
   const [errors, setErrors] = useState({});
@@ -13,7 +14,7 @@ const FormNewStandUp = ({ user }) => {
   const adminUser = useSelector((state) => state.standUps);
   const cohortsExistentes = useSelector((state) => state.cohorts.allCohorts);
   const supName = adminUser.standUp.map((e) => e.name);
-  console.log(adminUser)
+  console.log(adminUser);
 
   const [input, setInput] = useState({
     name: "",
@@ -58,35 +59,40 @@ const FormNewStandUp = ({ user }) => {
   };
 
   return (
-    <div>
+    <>
       <Nav user={user} />
-      <h1>Create new Stand Up </h1>
-      <br></br>
-      <form autoComplete="off" onSubmit={handleSubmit}>
-        <label>Name:</label>
-        <input
-          placeholder="Insert a name"
-          type="text"
-          value={input.name}
-          name="name"
-          onChange={handleChange}
-          required
-        ></input>
-        <select onChange={handleSelect}>
-          <option> Select cohort</option>
-          {cohortsExistentes?.map((e) => {
-            return (
-              <option key={e.id} value={e.id}>
-                {e.name}
-              </option>
-            );
-          })}
-        </select>
-        {/* {errors.name && <h1>{errors.name}</h1>} */}
+      <div className="parent">
+        <div className="container">
+          <h1 className="title">Create new Stand Up </h1>
+          <br></br>
+          <form  className="form" autoComplete="off" onSubmit={handleSubmit}>
+            <label>Name:</label>
+            <input
+            className="inputCreate"
+              placeholder="Insert a name"
+              type="text"
+              value={input.name}
+              name="name"
+              onChange={handleChange}
+              required
+            ></input>
+            <select className="select" onChange={handleSelect}>
+              <option> Select cohort</option>
+              {cohortsExistentes?.map((e) => {
+                return (
+                  <option key={e.id} value={e.id}>
+                    {e.name}
+                  </option>
+                );
+              })}
+            </select>
+            {/* {errors.name && <h1>{errors.name}</h1>} */}
 
-        <button type="submit"> Create Stand Up </button>
-      </form>
-    </div>
+            <button className="submitButton" type="submit"> Create Stand Up </button>
+          </form>
+        </div>
+      </div>
+    </>
   );
 };
 

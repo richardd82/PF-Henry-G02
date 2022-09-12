@@ -5,6 +5,7 @@ import { Validations } from "./validations";
 import { getCohorts, postNewCohort } from "../../../../redux/actions/index";
 import { useEffect } from "react";
 import Nav from "../../../Nav/Nav";
+import "../Formularios.css";
 
 const FormNewCohort = ({ user }) => {
   const [errors, setErrors] = useState({});
@@ -48,32 +49,36 @@ const FormNewCohort = ({ user }) => {
   return (
     <>
       <Nav user={user} />
-      <div>
-        <h1>Create new cohort </h1>
-        <br></br>
-        <form
-          autoComplete="off"
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
-          <label>
-            <b>*</b>Cohort name:
-          </label>
-          <input
-            placeholder="Title"
-            type="text"
-            value={input.name}
-            name="name"
-            required
-            onChange={(e) => {
-              handleChange(e);
+      <div className="parent">
+        <div className="container">
+          <h1 className="title">Create new cohort </h1>
+          <br></br>
+          <form
+          className="form"
+            autoComplete="off"
+            onSubmit={(e) => {
+              handleSubmit(e);
             }}
-          ></input>
+          >
+            <label>
+              <b>*</b>Cohort name:
+            </label>
+            <input
+            className="inputCreate"
+              placeholder="Title"
+              type="text"
+              value={input.name}
+              name="name"
+              required
+              onChange={(e) => {
+                handleChange(e);
+              }}
+            ></input>
 
-          {/* {errors.name && <h1>{errors.name}</h1>} */}
-          <button type="submit"> Create</button>
-        </form>
+            {/* {errors.name && <h1>{errors.name}</h1>} */}
+            <button className="submitButton" type="submit"> Create</button>
+          </form>
+        </div>
       </div>
     </>
   );

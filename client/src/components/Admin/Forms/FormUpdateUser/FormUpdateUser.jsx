@@ -16,7 +16,7 @@ const FormUpdateUser = () => {
   useEffect(() => {
     dispatch(getTodosUsuarios());
   }, [dispatch]);
-  console.log(updateUser.map((e) => e))
+  console.log(updateUser.map((e) => e));
 
   return (
     <>
