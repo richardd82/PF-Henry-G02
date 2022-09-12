@@ -173,7 +173,7 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.get('https://localhost:3001/videos');
-        console.log(response.data);
+ 
         return dispatch({
           type: GET_VIDEOS,
           payload: response.data,
@@ -189,10 +189,15 @@ export function createVideo(payload) {
         const response = await axios.get(
           `https://localhost:3001/videos/byName?name=${name}`
         );
+        if (!response.data.length){
+          alert("Error: La clase ingresada no existe...");
+      }
+      else{
         return dispatch({
           type: GET_VIDEOS_BY_NAME,
-          payload: response.payload,
+          payload: response.data,
         });
+      }
       } catch (error) {
         console.log(error);
       }
@@ -202,6 +207,7 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.get(`https://localhost:3001/byTeacher/${id}`);
+        console.log(response.data);
         return dispatch({
           type: GET_VIDEOS_BY_TEACHER,
           payload: response.payload,

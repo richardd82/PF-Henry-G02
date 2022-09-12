@@ -53,6 +53,7 @@ const initialState = {
 	videos: [],
 	allVideos: [],
 	detailVideos: {},
+	teacher: {},
 
 	//Extras
 	loading: false,
@@ -185,11 +186,12 @@ export function videos(state = initialState, action) {
 			return {
 				...state,
 				videos: action.payload,
+				allVideos: action.payload
 			};
 		case GET_VIDEOS_BY_TEACHER:
 			return {
 				...state,
-				videos: action.payload,
+				teacher: action.payload,
 			};
 		case GET_VIDEOS_BY_ID:			
 			return {

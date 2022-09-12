@@ -8,12 +8,12 @@ import Videos from '../../components/Videos/Videos.jsx';
 import Card from '../../components/Card/Card.jsx';
 import Nav from '../../components/Nav/Nav'
 // Actions
-import { getAllVideos } from '../../redux/actions/index';
+import { getAllVideos, getVideosByTeacher,  } from '../../redux/actions/index';
 import { Link } from 'react-router-dom';
 
 const Catalog = ({user}) => {
   const dispatch = useDispatch();
-  const videos = useSelector(state => state.videos.videos);
+  const allVideos = useSelector(state => state.videos.allVideos);
   
   
   useEffect(() => {
@@ -21,7 +21,8 @@ const Catalog = ({user}) => {
       dispatch(getAllVideos());
       // }
     }, [dispatch]);
-    console.log(videos)
+
+
 
   // Pagination handler
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,7 +33,7 @@ const Catalog = ({user}) => {
    const videosPerPage = 10,
     indexOfLastVideo = currentPage * videosPerPage,
     indexOfFirstVideo = indexOfLastVideo - videosPerPage,
-    currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo); 
+    currentVideos = allVideos.slice(indexOfFirstVideo, indexOfLastVideo); 
 
   return (
     <div>
@@ -41,13 +42,12 @@ const Catalog = ({user}) => {
       ) : ( */}
         <div>
 
-        <Nav user={user}/>
-            <h1>ESTA ES LA PAGINA QUE MUESTRA LOS VIDEOS</h1>
+{/*       <Nav user={user}/> */}
           <Pager
             currentPage={currentPage}
             pageHandler={handlePage}
             itemsPerPage={videosPerPage}
-            totalItems={videos.length}
+            totalItems={allVideos.length}
           />
           <div>
             {currentVideos &&
@@ -68,7 +68,7 @@ const Catalog = ({user}) => {
             currentPage={currentPage}
             pageHandler={handlePage}
             itemsPerPage={videosPerPage}
-            totalItems={videos.length}
+            totalItems={allVideos.length}
           /> 
         </div>
       {/* )} */}

@@ -4,7 +4,6 @@ const getFavorites = async(req, res, next)=>{
     const {id} = req.params;
     try {
         const user = await Users.findByPk(id,{  include: [{model:Classes}] });
-        
         res.json(user);
     } catch (error) {
         console.log(error)
