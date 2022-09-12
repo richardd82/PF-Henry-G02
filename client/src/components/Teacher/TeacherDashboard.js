@@ -7,9 +7,9 @@ export default function TeacherDashboard (){
             <Link to={'/createVideo'}>
                 <button>Subir Video</button>
             </Link>
-            <Link to={'/update'}>
+            {/* <Link to={'/updateclass'}>
                 <button>Modificar Clase</button>
-            </Link>
+            </Link> */}
         </div>
         
     )

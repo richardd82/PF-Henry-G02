@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 // Actions
-import { postAttendance } from '../../redux/actions/attendanceActions.js';
+import { postAttendance } from "../../redux/actions/attendanceActions.js";
 
 const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
     classId: lecture,
     students: [],
   });
-  console.log(attendance)
+  console.log(attendance);
   useEffect(() => {
     return () => {
       setAttendance({
@@ -23,12 +23,12 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
     };
   }, [currentStudents, standup, cohort, lecture]);
 
-  const handleSelect = e => {
+  const handleSelect = (e) => {
     const { name, id, checked } = e.target;
-    setAttendance(prev => {
+    setAttendance((prev) => {
       if (checked === false) {
         const filteredStudents = prev.students.filter(
-          student => student.id !== id
+          (student) => student.id !== id
         );
         return {
           ...prev,
@@ -43,7 +43,7 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postAttendance(attendance));
     setAttendance({
@@ -57,22 +57,25 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
   return (
     <div>
       <h1>Estudiantes</h1>
-      <form onSubmit={e => handleSubmit(e)}>
+      <form className="form" onSubmit={(e) => handleSubmit(e)}>
         {currentStudents &&
-          currentStudents.map(student => {
+          currentStudents.map((student) => {
             return (
               <div key={student.id}>
                 <label>{student.name}</label>
                 <input
+                  className="inputCreate"
                   id={student.id}
                   name={student.name}
                   type="checkbox"
-                  onChange={e => handleSelect(e)}
+                  onChange={(e) => handleSelect(e)}
                 />
               </div>
             );
           })}
-        <button type="subtmit">Enviar Asistencias</button>
+        <button className="submitButton" type="subtmit">
+          Enviar Asistencias
+        </button>
       </form>
     </div>
   );

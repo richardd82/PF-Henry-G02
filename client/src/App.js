@@ -97,7 +97,7 @@ function App() {
         {/* Rutas de Teachers */}
         <Route path="/teachers" element={<Teachers />} />
         <Route path="/createVideo" element={<CreateVideo user={user} />} />
-        <Route path="/update" element={<UpdateClass user={user} />} />
+        <Route path="/updateclass" element={<UpdateClass user={user} />} />
       </Routes>
     </div>
   );

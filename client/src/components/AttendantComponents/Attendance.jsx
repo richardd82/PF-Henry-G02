@@ -10,6 +10,7 @@ import {
   getStandups,
 } from "../../redux/actions/attendanceActions.js";
 import Nav from "../Nav/Nav.jsx";
+import "./Formularios.css";
 
 const Attendance = ({ user }) => {
   const dispatch = useDispatch();
@@ -42,48 +43,46 @@ const Attendance = ({ user }) => {
   };
 
   return (
-    <div>
-      <h1>CONTROL ASISTENCIAS StandUp</h1>
-      <form>
-        <select name="module" onChange={(e) => handleChange(e)}>
-          <option value="none">Select a Module</option>
-          {state.modules &&
-            state.modules.map((module) => {
-              return (
-                <option key={module.name} value={module.id}>
-                  {module.name}
-                </option>
-              );
-            })}
-        </select>
-        <select name="lecture" onChange={(e) => handleChange(e)}>
-          <option value="none">Select a Lecture</option>
-          {state.lectures &&
-            state.lectures
-              .filter(
-                (lecture) => lecture.moduleId.toString() === options.module
-              )
-              .map((lecture) => {
+    <div className="parent">
+      <div className="container">
+        <h1 className="title">CONTROL ASISTENCIAS STANDUP</h1>
+        <form className="form">
+          <select className="select" name="module" onChange={(e) => handleChange(e)}>
+            <option value="none">Select a Module</option>
+            {state.modules &&
+              state.modules.map((module) => {
                 return (
-                  <option key={lecture.id} value={lecture.id}>
-                    {lecture.name}
+                  <option key={module.name} value={module.id}>
+                    {module.name}
                   </option>
                 );
               })}
-        </select>
-      </form>
-      {options.module && options.lecture && (
-        <StudentList
-          lecture={
-            state.lectures.filter(
-              (lecture) => lecture.id.toString() === options.lecture
-            )[0].id
-          }
-          currentStudents={students}
-          standup={ta.standupId}
-          cohort={ta.cohortId}
-        />
-      )}
+          </select>
+          <select className="select"  name="lecture" onChange={(e) => handleChange(e)}>
+            <option value="none">Select a Lecture</option>
+            {state.lectures &&
+              state.lectures
+                .filter(
+                  (lecture) => lecture.moduleId.toString() === options.module
+                )
+                .map((lecture) => {
+                  return (
+                    <option key={lecture.id} value={lecture.id}>
+                      {lecture.name}
+                    </option>
+                  );
+                })}
+          </select>
+        </form>
+        {options.module && options.lecture && (
+          <StudentList
+            lecture={options.lecture}
+            currentStudents={students}
+            standup={ta.standupId}
+            cohort={ta.cohortId}
+          />
+        )}
+      </div>
     </div>
   );
 };

@@ -81,10 +81,10 @@ const Contact = ({ user }) => {
     ) {
       emailjs
         .sendForm(
-          "service_loeaupt",
-          "template_jdmw2f6",
+          "service_s0ez0b7",
+          "template_9801hdb",
           form.current,
-          "1mx1KpuB5wsywFkli"
+          "nsR4tZhBowRxFC-w5"
         )
         .then(
           (result) => {
@@ -121,7 +121,7 @@ const Contact = ({ user }) => {
   if (submitted) {
     return (
       <>
-        {/* <Nav user={user} /> */}
+        <Nav user={user} />
         <div className={s.parent}>
           <div className={s.container}>
             <div className={s.form}>
