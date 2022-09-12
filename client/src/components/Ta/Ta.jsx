@@ -1,8 +1,14 @@
 import React from 'react'
+import Nav from '../Nav/Nav'
+import DashboardStudent from '../Students/DashboardStudents/DasboardStudent.jsx'
 
-const Ta = () => {
+
+const Ta = ({user}) => {
   return (
-    <div>Im a Teacher Assistance</div>
+    <div>
+      <Nav user={user}/>
+      <DashboardStudent />
+    </div>
   )
 }
 

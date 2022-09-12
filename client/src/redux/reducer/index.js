@@ -7,6 +7,7 @@ import {
 	users,
 	videos,
 	extras,
+	favorites,
 } from "./reducer";
 
 export default combineReducers({
@@ -18,5 +19,6 @@ export default combineReducers({
 	users,
 	videos,
 	extras,
+	favorites,
 
 });

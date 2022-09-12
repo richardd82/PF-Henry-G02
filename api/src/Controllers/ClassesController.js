@@ -58,10 +58,10 @@ const getAllVideos = async (req, res, next) => {
             include:[{
                 model: Cohorts, 
             }],
-             include:[{
-                 model: Users, 
-                // where: {category: "teacher"}
-             }]
+            //  include:[{
+            //      model: Users, 
+            //     // where: {category: "teacher"}
+            //  }]
         });
         res.json(allVideos);
 } catch (error) {

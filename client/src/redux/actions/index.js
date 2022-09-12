@@ -23,6 +23,8 @@ export const GET_VIDEOS_BY_ID = "GET_VIDEOS_BY_ID";
 export const CLEAR_STATE_VIDEOS = "CLEAR_STATE_VIDEOS";
 export const CLEAR_STATE_LESSONS = "CLEAR_STATE_LESSONS";
 export const CLEAR_STATE_MODULES = "CLEAR_STATE_MODULES";
+export const GET_FAVORITE_BY_ID = "GET_FAVORITE_BY_ID"
+export const ADD_FAVORITE = "ADD_FAVORITE"
 
 
 
@@ -187,7 +189,7 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `https://localhost:3001/videos/byName?name=${name}`
+          `http://localhost:3002/videos/byName?name=${name}`
         );
         if (!response.data.length){
           alert("Error: La clase ingresada no existe...");
@@ -289,4 +291,25 @@ export function getAllStandUps() {
       return json;
     };
   }
-  
+//*********************Favoritos**************************
+export function getFavoritesById(id) {
+  return async function (dispatch) {
+    var json = await axios.get(`http://localhost:3002/favorites/${id}`);
+    console.log(json)
+    return dispatch({
+      type: GET_FAVORITE_BY_ID,
+      payload: json.data.videos,
+    });
+  };
+}
+
+export function addFavoritesById(userId, videoId) {
+  return async function (dispatch) {
+    var json = await axios.post( `http://localhost:3002/favorites/create/${userId}/${videoId}`);
+    console.log(json)
+    return dispatch({
+      type: ADD_FAVORITE,
+      payload: json.data,
+    });
+  };
+}
