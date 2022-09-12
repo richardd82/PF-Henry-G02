@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,DB_DATABASE
+  DB_USER, DB_PASSWORD, DB_HOST, DB_DATABASE
 } = process.env;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}`, {
@@ -30,7 +30,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Users, Classes, Cohorts, Modules, Standups, Videos} = sequelize.models;
+const { Users, Classes, Cohorts, Modules, Standups, Videos, Attendance} = sequelize.models;
 // Standups, Cohorts, Modules, Classes
 
 // Aca vendrian las relaciones
@@ -47,17 +47,20 @@ Modules.hasMany(Users);
 Cohorts.hasMany(Users);
 Cohorts.hasMany(Standups);
 Cohorts.hasMany(Classes);
+Cohorts.hasMany(Videos);
 // // Standups
 Standups.hasMany(Users);
-Users.belongsTo(Standups);
 Standups.belongsTo(Cohorts);
 // // Users
 Users.belongsTo(Cohorts);
 Users.belongsTo(Modules);
+Users.belongsTo(Standups);
 Users.hasMany(Videos)
 // // Videos
-Videos.belongsTo(Classes)
-Videos.belongsTo(Users)
+Videos.belongsTo(Classes);
+Videos.belongsTo(Users);
+Videos.belongsTo(Cohorts);
+
 
 
 module.exports = {

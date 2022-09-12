@@ -4,7 +4,6 @@ import {
   createClass,
   getCohorts,
   getModules,
-  getTeacher
 } from '../../redux/actions/teacherActions';
 // Error handler
 import { createClassErrors } from '../../helpers/setCreateClassErrors';
@@ -14,34 +13,27 @@ export default function CreateClass() {
   const dispatch = useDispatch();
   const modules = useSelector(state => state.teacher.modules);
   const cohorts = useSelector(state => state.teacher.cohorts);
-  const teacher = useSelector(state => state.teacher.teacher);
+  
   //console.log(teacher);
 
   useEffect(() => {
     dispatch(getCohorts());
     dispatch(getModules());
-    dispatch(getTeacher())
   }, [dispatch]);
 
   const [input, setInput] = useState({
     name: '',
-    lectureLink: '',
-    lectureLink2: '',
-    codeReviewLink: '',
-    codeReviewLink2: '',
     description: '',
     moduleId: '',
     cohortId: '',
-    nameTeacher: '',
-    errorMsg: '',
   });
-//los videos deberian ser archivos adjuntos???
+
+  // los videos deberian ser archivos adjuntos???
   const [warnings, setWarnings] = useState({
     name: '',
-    lecture: '',
     moduleId: '',
     cohortId: '',
-    nameTeacher: '',
+    teacherId: '',
     errorMsg: '',
     error: false,
   });
@@ -51,7 +43,6 @@ export default function CreateClass() {
     setInput(prev => {
       return {
         ...prev,
-        errorMsg: '',
         [name]: value,
       };
     });
@@ -63,7 +54,6 @@ export default function CreateClass() {
     setInput(prev => {
       return {
         ...prev,
-        errorMsg: '',
         [name]: value,
       };
     });
@@ -83,15 +73,9 @@ export default function CreateClass() {
       dispatch(createClass(input));
       setInput({
         name: '',
-        lectureLink: '',
-        lectureLink2: '',
-        codeReviewLink: '',
-        codeReviewLink2: '',
         description: '',
         moduleId: '',
         cohortId: '',
-        nameTeacher: '',
-        errorMsg: '',
       });
     }
   }
@@ -101,7 +85,7 @@ export default function CreateClass() {
 
   return (
     <div>
-      <h1>Subir Clase</h1>
+      <h1>Creación de Clase</h1>
       {warnings.errorMsg ? <p>{warnings.errorMsg}</p> : null}
       <form onSubmit={e => handleSubmit(e)}>
         <div>
@@ -115,52 +99,6 @@ export default function CreateClass() {
           />
           {warnings.name ? <p>{warnings.name}</p> : null}
         </div>
-
-        <div>
-          <label>Lecture Parte 1</label>
-          <input
-            type="text"
-            name="lectureLink"
-            value={input.lectureLink}
-            placeholder={'Lecture...'}
-            onChange={e => handleChange(e)}
-          />
-          {warnings.lecture ? <p>{warnings.lecture}</p> : null}
-        </div>
-
-        <div>
-          <label>Lecture Parte 2</label>
-          <input
-            type="text"
-            name="lectureLink2"
-            value={input.lectureLink2}
-            placeholder={'Lecture 2...'}
-            onChange={e => handleChange(e)}
-          />
-        </div>
-
-        <div>
-          <label>Code Review Parte 1</label>
-          <input
-            type="text"
-            name="codeReviewLink"
-            value={input.codeReviewLink}
-            placeholder={'Code Review...'}
-            onChange={e => handleChange(e)}
-          />
-        </div>
-
-        <div>
-          <label>Code Review Parte 2</label>
-          <input
-            type="text"
-            name="codeReviewLink2"
-            value={input.codeReviewLink2}
-            placeholder={'Code Review...'}
-            onChange={e => handleChange(e)}
-          />
-        </div>
-
         <div>
           <label>Descripción</label>
           <textarea
@@ -171,7 +109,6 @@ export default function CreateClass() {
             onChange={e => handleChange(e)}
           ></textarea>
         </div>
-
         <div>
           <label>Módulos</label>
           <select name="moduleId" onChange={e => handleSelect(e)}>
@@ -186,7 +123,6 @@ export default function CreateClass() {
           </select>
           {warnings.moduleId ? <p>{warnings.moduleId}</p> : null}
         </div>
-
         <div>
           <label>Cohortes</label>
           <select name="cohortId" onChange={e => handleSelect(e)}>
@@ -201,7 +137,7 @@ export default function CreateClass() {
           </select>
           {warnings.cohortId ? <p>{warnings.cohortId}</p> : null}
         </div>
-        <div>
+        {/* <div>
           <label>Teacher</label>
           <select name="nameTeacher" onChange={e => handleSelect(e)}>
             {teacher &&
@@ -213,10 +149,10 @@ export default function CreateClass() {
                 );
               })}
           </select>
-          {warnings.cohortId ? <p>{warnings.cohortId}</p> : null}
-        </div>
+          {warnings.teacherId ? <p>{warnings.teacherId}</p> : null}
+        </div> */}
         <div>
-          <input type="submit" value="CREATE" />
+          <input type="submit" value="CREAR CLASE" />
         </div>
       </form>
     </div>

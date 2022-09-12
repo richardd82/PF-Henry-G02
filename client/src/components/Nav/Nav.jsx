@@ -1,95 +1,81 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import './Nav.css';
+import React, { useEffect } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import "./Nav.css";
 // Assets
-import logo_thumb from '../../assets/media/images.png';
-import logo_Henry from '../../assets/media/logoHenryWhite.png';
-import alumno from '../../assets/media/avatar.png';
-import rocket from '../../assets/media/rocket.png';
-import SearchBar from '../SearchBar/SearchBar';
-// Actions
-import {
-  getAllModules,
-  getAllLessons,
-} from '../../redux/actions/bootcampActions.js';
-import { useEffect } from 'react';
-import ButtonModule from '../BootcampComponents/buttonModule';
+import logo_thumb from "../../assets/media/images.png";
+import logo_Henry from "../../assets/media/logoHenryWhite.png";
+import alumno from "../../assets/media/avatar.png";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, usersValidate } from "../../redux/actions";
+import jwt from 'jwt-decode';
+
 
 export default function Nav({ user }) {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllModules());
-    dispatch(getAllLessons());
-  }, [dispatch]);
+const navigate = useNavigate();
+	const token = localStorage.getItem('token');
+	console.log(token)
+	const users = jwt(token);
+	console.log(users.category)
+	
 
-  const lessons = useSelector(state => state.bootcamp.lessons);
-  const modules = useSelector(state => state.bootcamp.modules);
-  const GOOGLE_CLIENT_ID = 'AIzaSyBnFVqnIJy_hAtph6l7W5_n9c0lLzCMkKM';
-  let obj = [];
-  obj.push(user);
-  // console.log(obj[0].photos[0].value);
-  // console.log(obj + "********************************************");
-  const logout = () => {
-    window.open('http://localhost:3001/auth/logout', '_self');
-  };
-
-  return (
-    <div className="nav">
-      <header>
-        {user ? (
-          <>
-            <div>
-              <img className="logo__thumb" src={logo_thumb} alt="" />
-              <h2>Students</h2>
-            </div>
-
-            <img src={logo_Henry} alt="" />
-            <div className="avatar">
-              <p className="avatar__name">{user.displayName}</p>
-              {/* {user.displayName} */}
-              <img
-                className="avatar__image"
-                src={alumno}
-                alt=""
-                onClick={logout}
-              />
-              {/* {
+	const GOOGLE_CLIENT_ID = "AIzaSyBnFVqnIJy_hAtph6l7W5_n9c0lLzCMkKM";
+	let obj = [];
+	obj.push(user);
+	const dispatch = useDispatch();
+	// console.log(obj[0].photos[0].value);
+	// console.log(obj + "********************************************");
+	const handleLogout = async() => {
+		// window.open("https://localhost:3001/auth/logout", "_self");
+		await dispatch(logout());
+		// localStorage.clear();
+		navigate('/login')
+		// setTimeout(() => {
+				
+			// window.open('https://localhost:3000/login', "_self")		
+		// }, 2000);
+	};
+	const redirect = () =>{
+		navigate('/login' )
+	}
+console.log(users.name +  'Esto es users')
+	return (
+		<div className="nav">
+			<header>
+				{users ? (
+					<>
+						<div>
+							<Link to="/">
+								<img className="logo__thumb" src={logo_thumb} alt="" />
+							</Link>
+							<h2>Students</h2>
+						</div>
+						{/* <Link to="/"> */}
+							<img src={logo_Henry} alt="" />
+						{/* </Link> */}
+						<div className="avatar">
+							<Link to="/assistance">
+								<p className="avatar__name">Assistance</p>
+							</Link>
+							<Link to="/contacto">
+								<p className="avatar__name">Contacto</p>
+							</Link>
+							<p className="avatar__name">{users.name}</p>
+							{/* {user.displayName} */}
+							<img
+								className="avatar__image"
+								src={alumno}
+								alt=""
+								onClick={handleLogout}
+							/>
+							{/* {
 								user.photos[0].value + `?fields=image&key=${GOOGLE_CLIENT_ID}`
 							} */}
-            </div>
-          </>
-        ) : (
-          <Link className="link" to="/login">
-            Login
-          </Link>
-        )}
-      </header>
-      <nav className="nav__links">
-        <ButtonModule modules={modules} title="Bootcamp" data={lessons} />
-        {/* {modules &&
-            modules.map(module => {
-              return (
-                <li key={module.name}>
-                  <Link
-                    className="nav__links-active"
-                    to={`/bootcamp/module/${module.id}`}
-                  >
-                    {module.name}
-                  </Link>
-                </li>
-              );
-            })} */}
-
-        <img className="nav__rocket" src={rocket} alt="" />
-        <div>
-          <SearchBar />
-        </div>
-        {/* <div className="search">
-            <input className="search-Input" type="text"  placeholder="Buscar..."/>
-            <Link to="/" className="link-Search"><img className="icon-Search" src={lupa} alt=""/></Link>
-          </div> */}
-      </nav>
-    </div>
-  );
+						</div>
+					</>
+				) : (
+					<div onLoad={redirect}></div>
+				)}
+			</header>			
+		</div>
+	);
 }
