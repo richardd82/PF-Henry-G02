@@ -7,39 +7,47 @@ import Ta from "../../components/Ta/Ta";
 import Teachers from "../../components/Teachers/Teachers";
 import { getTodosUsuarios } from "../../redux/actions/index";
 import Login from '../Login/Login'
+import jwt from "jwt-decode";
 
 const Profile = ({ user }) => {
+	// console.log(tokenDecode.category)
 	const users = useSelector((state) => state.users.allUsers);
 	const dispatch = useDispatch();
-
+	// console.log(user)
 	useEffect(() => {
 		if (!users.length) {
 			dispatch(getTodosUsuarios());
 		}
 	}, [dispatch]);
 	///FALTA INVESTIGAR COMO OBTENER EL EMAIL DEL USER DE GOOGLE
+
+	const token = localStorage.getItem("token");
+	// console.log(token)
+	let tokenDecode;
+	if (token) {
+		tokenDecode = jwt(token);
+	} else {
+		window.open("https://localhost:3000/login", "_self");
+	}
+
 	// dispatch(getTodosUsuarios());
-	const userValidate = users.find((e) => e.name === user.displayName);
-	const category = userValidate && userValidate.category;
-	const active = userValidate && userValidate.active;
-console.log(active);
+	// const userValidate = users.find((e) => e.name === user.displayName);
+	// const category = userValidate && userValidate.category;
+	// console.log(category);
+	const category = tokenDecode.category;
 
 	return (
 		<div>
-			{category === "admin" && active === true ? (
-				<Admin user={user} />
-			) : category === "student" && active === true ? (
+			{category === "admin" ? (
+				<Admin />
+			) : category === "student" ? (
 				<Students user={user} />
-			) : category === "ta" && active === true ? (
+			) : category === "ta" ? (
 				<Ta user={user} />
-			) : category === "teacher" && active === true ? (
-				<Teachers user={user} />
-			) : active === false ? (
-				<Login/>
-			) : null 
-			}            
+			) : category === "teacher" ? (
+				<Teachers />
+			) : null}
 		</div>
 	);
-
 };
 export default Profile;

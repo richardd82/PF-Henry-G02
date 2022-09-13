@@ -8,7 +8,7 @@ import Videos from '../../components/Videos/Videos.jsx';
 import Card from '../../components/Card/Card.jsx';
 import Nav from '../../components/Nav/Nav'
 // Actions
-import { getAllVideos, getVideosByTeacher,  } from '../../redux/actions/index';
+import { getAllVideos } from '../../redux/actions/index';
 import { Link } from 'react-router-dom';
 
 const Catalog = ({user}) => {

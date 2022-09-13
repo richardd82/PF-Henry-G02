@@ -1,12 +1,13 @@
-import axios from 'axios';
-export const GET_ALL_LESSONS = 'GET_ALL_LESSONS';
-export const GET_ALL_MODULES = 'GET_ALL_MODULES';
+import axios from "axios";
+import jwtDecode from "jwt-decode";
+export const GET_ALL_LESSONS = "GET_ALL_LESSONS";
+export const GET_ALL_MODULES = "GET_ALL_MODULES";
 export const GET_LESSONS_BY_ID = "GET_LESSONS_BY_ID";
-export const SET_PAGE_NUMBER = 'SET_PAGE_NUMBER';
-export const REQUEST = 'GET_REQUEST'
-export const REQUEST_FAILURE = 'REQUEST_FAILURE';
-export const GET_BY_NAME_SUCCESS = 'GET_BY_NAME_SUCCESS';
-export const GET_ALL_CLASSES_SUCCESS = 'GET_ALL_CLASSES_SUCCESS';
+export const SET_PAGE_NUMBER = "SET_PAGE_NUMBER";
+export const REQUEST = "GET_REQUEST";
+export const REQUEST_FAILURE = "REQUEST_FAILURE";
+export const GET_BY_NAME_SUCCESS = "GET_BY_NAME_SUCCESS";
+export const GET_ALL_CLASSES_SUCCESS = "GET_ALL_CLASSES_SUCCESS";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_ALL_STANDUPS = "GET_ALL_STANDUPS";
 export const GET_ALL_COHORTS = "GET_ALL_COHORTS";
@@ -25,6 +26,8 @@ export const CLEAR_STATE_LESSONS = "CLEAR_STATE_LESSONS";
 export const CLEAR_STATE_MODULES = "CLEAR_STATE_MODULES";
 export const GET_FAVORITE_BY_ID = "GET_FAVORITE_BY_ID"
 export const ADD_FAVORITE = "ADD_FAVORITE"
+export const USER_VALIDATE = "USER_VALIDATE";
+export const LOGOUT = "LOGOUT";
 
 
 
@@ -190,15 +193,10 @@ export function createVideo(payload) {
         const response = await axios.get(
           `https://localhost:3001/videos/byName?name=${name}`
         );
-        if (!response.data.length){
-          alert("Error: La clase ingresada no existe...");
-      }
-      else{
         return dispatch({
           type: GET_VIDEOS_BY_NAME,
           payload: response.data,
         });
-      }
       } catch (error) {
         console.log(error);
       }
@@ -207,11 +205,12 @@ export function createVideo(payload) {
   export function getVideosByTeacher(id) {
     return async function (dispatch) {
       try {
-        const response = await axios.get(`https://localhost:3001/byTeacher/${id}`);
-        console.log(response.data);
+        const response = await axios.get(
+          `https://localhost:3001/byTeacher/${id}`
+        );
         return dispatch({
           type: GET_VIDEOS_BY_TEACHER,
-          payload: response.payload,
+          payload: response.data,
         });
       } catch (error) {
         console.log(error);
@@ -266,6 +265,30 @@ export function getTeachers() {
       var json = await axios.post(`https://localhost:3001/users/create`, payload);
       return json;
     };
+  }
+  export function usersValidate(payload) {
+    return async function (dispatch) {
+      console.log(payload.email + " <-------------->Entre a la Action");
+      var json = await axios.post(`https://localhost:3001/validate`, payload);
+      localStorage.setItem("token", JSON.stringify(json.data));
+      const data = await jwtDecode(json.data);
+      // console.log(data)
+      return dispatch({
+        type: USER_VALIDATE,
+        payload: data,
+      });
+    };
+  }
+  export function logout(payload) {
+    return async function (dispatch) {     
+        // console.log();
+        const token = await localStorage.clear();
+        return dispatch({
+          type: LOGOUT,
+          payload: token,
+        });
+     
+    }
   }
 //*********************Stand Ups**************************
 export function getAllStandUps() {
