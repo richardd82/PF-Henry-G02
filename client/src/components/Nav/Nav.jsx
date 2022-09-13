@@ -1,106 +1,81 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
+import React, { useEffect } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./Nav.css";
-
+// Assets
 import logo_thumb from "../../assets/media/images.png";
 import logo_Henry from "../../assets/media/logoHenryWhite.png";
 import alumno from "../../assets/media/avatar.png";
-import lupa from "../../assets/media/lupa.png";
-import rocket from "../../assets/media/rocket.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, usersValidate } from "../../redux/actions";
+import jwt from 'jwt-decode';
 
-export default function  Nav ({ user }) {
-	const GOOGLE_CLIENT_ID = "AIzaSyBnFVqnIJy_hAtph6l7W5_n9c0lLzCMkKM";	
-	// console.log(user)
-	const userAuth = Object.values(user)
-	// let userImg = userAut
-	let imagenG = [];	
-	const userImg = userAuth.forEach(element => {
-		imagenG.push(element);
-	})
-	console.log(userImg)
-	// let imagenF = []
-	// const userImg = userAuth.forEach(element => imagen.push(element.picture));
-	// let imgGit = []
-	// let userImg = userAuth.forEach(element => {
-	// 	imgGit.push(element);
-		// console.log(element)
+
+export default function Nav({ user }) {
+const navigate = useNavigate();
+	const token = localStorage.getItem('token');
+	console.log(token)
+	const users = jwt(token);
+	console.log(users.category)
 	
-	//});
-	// console.log(user.photos[0]?.value)
-	
-	const logout = () => {
-		window.open("https://localhost:3001/auth/logout", "_self");
+
+	const GOOGLE_CLIENT_ID = "AIzaSyBnFVqnIJy_hAtph6l7W5_n9c0lLzCMkKM";
+	let obj = [];
+	obj.push(user);
+	const dispatch = useDispatch();
+	// console.log(obj[0].photos[0].value);
+	// console.log(obj + "********************************************");
+	const handleLogout = async() => {
+		// window.open("https://localhost:3001/auth/logout", "_self");
+		await dispatch(logout());
+		// localStorage.clear();
+		navigate('/login')
+		// setTimeout(() => {
+				
+			// window.open('https://localhost:3000/login', "_self")		
+		// }, 2000);
 	};
-
+	const redirect = () =>{
+		navigate('/login' )
+	}
+console.log(users.name +  'Esto es users')
 	return (
 		<div className="nav">
 			<header>
-				{user ? (
+				{users ? (
 					<>
 						<div>
-							<img className="logo__thumb" src={logo_thumb} alt="" />
+							<Link to="/">
+								<img className="logo__thumb" src={logo_thumb} alt="" />
+							</Link>
 							<h2>Students</h2>
 						</div>
-
-						<img src={logo_Henry} alt="" />
+						{/* <Link to="/"> */}
+							<img src={logo_Henry} alt="" />
+						{/* </Link> */}
 						<div className="avatar">
-							<p className="avatar__name"></p>
+							<Link to="/assistance">
+								<p className="avatar__name">Assistance</p>
+							</Link>
+							<Link to="/contacto">
+								<p className="avatar__name">Contacto</p>
+							</Link>
+							<p className="avatar__name">{users.name}</p>
 							{/* {user.displayName} */}
 							<img
 								className="avatar__image"
-								src={userImg}
-								// {imagenG[6]}
+								src={alumno}
 								alt=""
-								onClick={logout}
+								onClick={handleLogout}
 							/>
 							{/* {
 								user.photos[0].value + `?fields=image&key=${GOOGLE_CLIENT_ID}`
 							} */}
-							{/* {
-									user._json.picture + `?fields=image&key=${GOOGLE_CLIENT_ID}`
-								} */}
 						</div>
 					</>
 				) : (
-					<Link className="link" to="/login">
-						Login
-					</Link>
+					<div onLoad={redirect}></div>
 				)}
-			</header>
-			<nav className="nav__links">
-				<ul>
-					<li>
-						<Link className="nav__links-active" to="/bootcamp/module/1">
-							M1
-						</Link>
-					</li>
-					<li>
-						<Link to="/bootcamp/module/2">M2</Link>
-					</li>
-					<li>
-						<Link to="/bootcamp/module/3">M3</Link>
-					</li>
-					<li>
-						<Link to="/bootcamp/module/4">M4</Link>
-					</li>
-					<li>
-						<Link to="/bootcamp/module/5">PI</Link>
-					</li>
-					<li>
-						<Link to="/bootcamp/module/6">JP</Link>
-					</li>
-					<img className="nav__rocket" src={rocket} alt="" />
-				</ul>
-
-				<div className="search">
-					<input className="search-Input" type="text" placeholder="Buscar..." />
-					<Link to="/" className="link-Search">
-						<img className="icon-Search" src={lupa} alt="" />
-					</Link>
-				</div>
-			</nav>
+			</header>			
 		</div>
 	);
 }

@@ -50,7 +50,7 @@
     z-index: -1;
 }
 .loginButton{
-    width: 150px;
+    width: 185px;
     padding: 15px 25px;
     border-radius: 5px;
     color: white;
@@ -73,10 +73,13 @@
 .icon{
     margin-right: 10px;
 }
-input{
-    width: 200px;
-    padding: 15px 20px;
-    margin-bottom: 20px;
+input {
+  border: 1px solid black;
+  color: black;
+  width: 200px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 6px;
 }
 .submit{
     width: 200px;
@@ -91,4 +94,7 @@ input{
     position: absolute;
     top: 150px;
     color: lightgrey;
+}
+::placeholder {
+  color: gray;
 }

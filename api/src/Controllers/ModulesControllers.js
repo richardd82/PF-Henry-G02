@@ -2,12 +2,12 @@ const {Modules} = require('../db');
 
 
 const modules =  [
-    "Módulo 1",
-    "Módulo 2",
-    "Módulo 3",
-    "Módulo 4",
-    "Proyecto Individual",
-    "Job Preparation"                   
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "PI",
+    "JP"                   
 ];
 
 const createModules = async(req, res) => {
