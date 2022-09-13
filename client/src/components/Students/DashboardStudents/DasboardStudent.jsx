@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import rocket from "../../../assets/media/rocket.png";
 import { useDispatch, useSelector } from 'react-redux';
-import { clearState, getAllLessons, getAllModules } from '../../../redux/actions/bootcampActions';
+import { clearStateModules, getAllLessons, getAllModules } from '../../../redux/actions/index';
 import SearchBar from '../../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
 
 const DasboardStudent = () => {
-	const modules = useSelector((state) => state.bootcamp.modules);
+	const modules = useSelector((state) => state.modules.modules);
 
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getAllModules());
 		dispatch(getAllLessons());
-		return () => dispatch(clearState());
+		return () => dispatch(clearStateModules());
 	}, [dispatch]);
 
 	const handleClick = () => {

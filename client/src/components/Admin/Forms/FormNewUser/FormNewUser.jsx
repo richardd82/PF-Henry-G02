@@ -1,15 +1,15 @@
 import React from "react";
 import { useState } from "react";
-import { postNewUser } from "../../../../redux/actions/userAdmin";
+import { postNewUser } from "../../../../redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import { Validations } from "./validations";
-import { getTodosUsuarios } from "../../../../redux/actions/userAdmin.js";
+import { getTodosUsuarios } from "../../../../redux/actions/index";
 import { useEffect } from "react";
 
 const FormNewUser = () => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const adminUser = useSelector((state) => state.users);
+  const adminUser = useSelector((state) => state.users.users);
   const usersExist = adminUser.users.map((e) => e.email);
   const [input, setInput] = useState({
     name: "",

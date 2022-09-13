@@ -7,5 +7,5 @@ router.get('/', getAllVideos);
 router.post('/create', createClass);
 router.get('/byName', classByName);
 router.get ('/byId/:id', classById);
-router.put('/update/', updateClasses)
+router.put('/update/:id', updateClasses)
 module.exports= router;
