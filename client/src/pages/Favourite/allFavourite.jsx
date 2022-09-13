@@ -26,6 +26,7 @@ const AllFavourite = ({user}) => {
     }, [dispatch]);
 
     const videos = useSelector(state => state.favorites.favorite);
+    
     const users = useSelector((state) => state.users.allUsers);
 
 	///FALTA INVESTIGAR COMO OBTENER EL EMAIL DEL USER DE GOOGLE
