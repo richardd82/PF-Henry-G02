@@ -6,8 +6,6 @@ const passportSetup = require('passport');
 const passport = require('passport'); 
 require('../passport.js');//AQUI ESTABA EL ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const authRoute = require('./routes/auth');
-const loginRoute = require('./routes/Login');
-const bcrypt = require("bcrypt");
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
@@ -22,7 +20,7 @@ https.createServer({
   cert: fs.readFileSync('./Certificate.crt'),
   key: fs.readFileSync('./Private.key')
 },server).listen(PUERTO, function(){
-	console.log('Servidor https corriendo en el puerto 3001');
+	console.log('Servidor https correindo en el puerto 3001');
 });
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
@@ -44,7 +42,7 @@ server.use((req, res, next) => {
 server.use(cors(
   {
     origin: 'https://localhost:3000',
-    methods:'GET, POST, PUT, DELETE, OPTIONS',
+    methods:'GET, POST, PUT, DELETE',
     credentials: true,
   }
   ));
@@ -52,7 +50,7 @@ server.use(cookieSession(//se cambió de cookieSession a Session
   {
     name: 'session',
     keys: ['lama'],
-    maxAge: 24 * 60 * 60 *10
+    maxAge: 48 * 60 * 60 *10
   }
   ));
 server.use(passport.initialize());
@@ -61,7 +59,6 @@ require('passport');
 // Error catching endware.
   server.use("/auth", authRoute);
   server.use('/', routes);
-  // server.use('/', authRoute)
 
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;

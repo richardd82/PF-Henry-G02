@@ -15,8 +15,14 @@ const UserAdmin = ({user}) => {
     <div>        
         <div>
           <h1>RENDERIZAR EL DASHBOARD</h1>
-          <Link to="create">
-            <button> Create User, SUP, Cohort </button>
+          <Link to="createUSER">
+            <button> Create User</button>
+          </Link>
+          <Link to="createSUP">
+            <button> Create SUP</button>
+          </Link>
+          <Link to="createCOHORT">
+            <button> Create Cohort </button>
           </Link>
           <Link to="/update">
             <button> Update USER info </button>

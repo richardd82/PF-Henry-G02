@@ -2,21 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './ClaseDetails.css';
 import {
+  clearState,
   getAllLessons,
+  getAllModules,
 } from '../../redux/actions/bootcampActions.js';
-import { useDispatch, useSelector } from 'react-redux';
-// Actions
-import { getClasses, clearStateClasses } from '../../redux/actions/classesActions';
-import { getAllModules, clearStateModules } from '../../redux/actions/modulesActions.js';
+import { useDispatch } from 'react-redux';
 
-const ButtonModule = ({ data, title }) => {
+const ButtonModule = ({ data, title, modules }) => {
   const dispatch = useDispatch();
-  const modules = useSelector(state => state.modules.modules);
-  
   const handleClick = () => {
-    dispatch(clearStateClasses());
-    dispatch(clearStateModules());
-    dispatch(getClasses())
+    dispatch(clearState());
+    dispatch(getAllLessons())
     dispatch(getAllModules())
   };
   return (

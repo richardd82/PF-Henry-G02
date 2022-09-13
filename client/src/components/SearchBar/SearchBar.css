@@ -50,7 +50,7 @@ h1,h2,h3,h4,h5,h6,p,span.strong,i,b,u,em{
   background-color: var(--color-primario);
   color:var(--color-secundario);
 }
-form,input,textarea,select,button,label{
+form,textarea,select,button,label{
   font-family: inherit;
   font-size: inherit;
   hyphens: auto;

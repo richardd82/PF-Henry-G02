@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import Catalog from '../../pages/Catalog/Catalog'
 import Nav from '../Nav/Nav'
 import DashboardStudent from './DashboardStudents/DasboardStudent'
 
@@ -11,7 +10,7 @@ const Students = ({user}) => {
 
     <Nav user={user} />
     <DashboardStudent />
-    <Catalog/>
+   
     
 
     </div>
