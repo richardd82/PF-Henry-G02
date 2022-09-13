@@ -11,7 +11,6 @@ import {
 } from "./reducer";
 
 export default combineReducers({
-
 	modules,
 	cohorts,
 	classes,

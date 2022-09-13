@@ -8,6 +8,7 @@ import alumno from "../../assets/media/avatar.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getTodosUsuarios } from "../../redux/actions";
 
+
 export default function Nav({ user }) {
 
 	const GOOGLE_CLIENT_ID = "AIzaSyBnFVqnIJy_hAtph6l7W5_n9c0lLzCMkKM";
@@ -18,6 +19,7 @@ export default function Nav({ user }) {
 	const logout = () => {
 		window.open("https://localhost:3001/auth/logout", "_self");
 	};
+
 
 
 	const users = useSelector((state) => state.users.allUsers);
@@ -33,8 +35,6 @@ export default function Nav({ user }) {
 	const userValidate = users.find((e) => e.name === user.displayName);
 	const category = userValidate && userValidate.category;
 	const active = userValidate && userValidate.active;
-
-
 
 	return (
 		<div className="nav">
@@ -70,6 +70,7 @@ export default function Nav({ user }) {
 								<p className="avatar__name">Contacto</p>
 							</Link>
 							</div>): null}
+
 							<p className="avatar__name">{user.displayName}</p>
 							{/* {user.displayName} */}
 							<img
