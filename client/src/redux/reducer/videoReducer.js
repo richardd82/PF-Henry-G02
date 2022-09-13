@@ -1,5 +1,9 @@
 const initialState = {
   videos: [],
+
+  allVideos: [],
+  detailVideos:[{}]
+
 };
 
 export default function videos(state = initialState, action) {
@@ -13,6 +17,8 @@ export default function videos(state = initialState, action) {
       return {
         ...state,
         videos: action.payload,
+        allVideos: action.payload
+
       };
     case 'GET_VIDEOS_BY_NAME':
       return {
@@ -24,6 +30,18 @@ export default function videos(state = initialState, action) {
         ...state,
         videos: action.payload,
       };
+
+    case 'GET_VIDEOS_BY_ID':
+      console.log(state.detailVideos + '=====================>')
+      return {
+        ...state,
+        detailVideos: [{...action.payload}],
+      };
+    case 'CLEAR_STATE':
+      return {
+        ...state,
+      };
+
     default:
       return { ...state };
   }

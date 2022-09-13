@@ -1,8 +1,14 @@
 import React from 'react'
+import Nav from '../Nav/Nav'
+import Classnames from '../AttendantComponents/classNames';
 
-const Ta = () => {
+
+const Ta = ({user}) => {
   return (
-    <div>Im a Teacher Assistance</div>
+    <div>
+      <Nav user={user} />
+      <Classnames/>
+      </div>
   )
 }
 
