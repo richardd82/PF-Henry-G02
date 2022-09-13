@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // Helper
 import { setErrors } from '../../helpers/setErrors.js';
-import Nav from '../NavBar/Nav.js';
+// import Nav from '../NavBar/Nav.js';
 // Styles
 import s from './Contact.module.css';
 
@@ -72,7 +72,7 @@ const Contact = ({ user }) => {
   if (submitted) {
     return (
       <>
-        <Nav user={user} />
+        {/* <Nav user={user} /> */}
         <div className={s.parent}>
           <div className={s.container}>
             <div className={s.form}>
@@ -90,7 +90,7 @@ const Contact = ({ user }) => {
 
   return (
     <>
-      <Nav user={user} />
+      {/* <Nav user={user} /> */}
       <div className={s.parent}>
         <div className={s.container}>
           <h1 className={s.title}>Contact Us</h1>

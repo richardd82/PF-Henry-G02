@@ -3,28 +3,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   getAllLessons,
-} from '../../redux/actions/bootcampActions';
+  getAllModules,
+  clearState,
+  clearStateLessons,
+} from '../../redux/actions/index';
 import Contact from '../../components/Contact/Contact';
 // Assets
 import github from '../../media/github.png';
 import sheet from '../../media/sheet.png';
 import './ClaseDetails.css';
-import Nav from '../../components/NavBar/Nav';
-// Actions
-import { getClasses, clearStateClasses } from '../../redux/actions/classesActions';
-import { getAllModules, clearStateModules } from '../../redux/actions/modulesActions';
+import Nav from '../../components/Nav/Nav';
+
 
 const Module = ({ user }) => {
   const dispatch = useDispatch();
-  const lessons = useSelector(state => state.classes.classes);
+  const lessons = useSelector(state => state.classes.lessons);
   const modules = useSelector(state => state.modules.modules);
 
   useEffect(() => {
     dispatch(getAllModules());
-    dispatch(getClasses());
+    dispatch(getAllLessons());
     return () => {
-      dispatch(clearStateClasses());
-      dispatch(clearStateModules());
+      dispatch(clearStateLessons());
     };
   }, [dispatch]);
 
@@ -34,7 +34,7 @@ const Module = ({ user }) => {
       <div className="moduleContainer">
         {modules &&
           modules.map((module, index) => {
-            if (window.location.pathname === `/bootcamp/module/${module.id}`) {
+            if (window.location.pathname === `/module/${module.id}`) {
               return lessons
                 .sort((a, b) => {
                   const aDate = new Date(a.createdAt);
@@ -46,7 +46,7 @@ const Module = ({ user }) => {
                     return (
                       <div key={index} className="sectionModuloClases">
                         <article>
-                          <Link key={obj.id} to={`/bootcamp/lecture/${obj.id}`}>
+                          <Link key={obj.id} to={`/lecture/${obj.id}`}>
                             <p>{`${obj.name}`}</p>
                             <div>
                               <img src={github} alt="github" />

@@ -1,12 +1,22 @@
-import { combineReducers } from 'redux';
-// import catalog from './catalogReducer.js';
-// import searchBar from './searchBarReducer.js';
-// import details from './detailReducer.js';
-// import bootcamp from './bootcampReducer.js';
-import classes from './classesReducer.js';
-import modules from './modulesReducer.js';
+import { combineReducers } from "redux";
+import {
+	modules,
+	cohorts,
+	classes,
+	standUps,
+	users,
+	videos,
+	extras,
+} from "./reducer";
 
 export default combineReducers({
-  classes,
-  modules,
+
+	modules,
+	cohorts,
+	classes,
+	standUps,
+	users,
+	videos,
+	extras,
+
 });
