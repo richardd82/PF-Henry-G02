@@ -12,7 +12,7 @@ const addFavourite = (e) =>{
     console.log("CLICKEASTE")
     dispatch(addFavoritesById(userId, videoId));
 }
-
+    //AGREGAR IMAGEN 13/09/22
   return (
       <button onClick={addFavourite}>
         <img src={img} alt="" />

@@ -1,79 +1,84 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // Components
-import Pager from '../../components/Pager/Pager.jsx';
-import Videos from '../../components/Videos/Videos.jsx';
-import Card from '../../components/Card/Card.jsx';
-import Nav from '../../components/Nav/Nav'
+import Pager from "../../components/Pager/Pager.jsx";
+import Videos from "../../components/Videos/Videos.jsx";
+import Card from "../../components/Card/Card.jsx";
+import Nav from "../../components/Nav/Nav";
 // Actions
-import { getAllVideos } from '../../redux/actions/index';
-import { Link } from 'react-router-dom';
+import { getAllVideos, getTodosUsuarios } from "../../redux/actions/index";
+import { Link } from "react-router-dom";
 
-const Catalog = ({user}) => {
-  const dispatch = useDispatch();
-  const allVideos = useSelector(state => state.videos.allVideos);
-  
-  
-  useEffect(() => {
-    // if (!videos.classes.length && videos.loading === false) {
-      dispatch(getAllVideos());
-      // }
-    }, [dispatch]);
+const Catalog = ({ user }) => {
+	const dispatch = useDispatch();
+	const allVideos = useSelector((state) => state.videos.allVideos);
+	const users = useSelector((state) => state.users.allUsers);
 
+	useEffect(() => {
+		// if (!videos.classes.length && videos.loading === false) {
+		dispatch(getAllVideos());
+		if (!users.length) {
+			dispatch(getTodosUsuarios());
+		}
+		// }
+	}, [dispatch]);
 
+	// Pagination handler
+	const [currentPage, setCurrentPage] = useState(1);
+	const handlePage = (number) => {
+		setCurrentPage(number);
+	};
+	const userValidate = users.find((e) => e.name === user.displayName);
+	const loginUserId = userValidate && userValidate.id;
 
-  // Pagination handler
-  const [currentPage, setCurrentPage] = useState(1);
-  const handlePage = number => {
-    setCurrentPage(number);
-  };
+	const videosPerPage = 10,
+		indexOfLastVideo = currentPage * videosPerPage,
+		indexOfFirstVideo = indexOfLastVideo - videosPerPage,
+		currentVideos = allVideos.slice(indexOfFirstVideo, indexOfLastVideo);
 
-   const videosPerPage = 10,
-    indexOfLastVideo = currentPage * videosPerPage,
-    indexOfFirstVideo = indexOfLastVideo - videosPerPage,
-    currentVideos = allVideos.slice(indexOfFirstVideo, indexOfLastVideo); 
-
-  return (
-    <div>
-      {/* {videos.loading === true ? (
+	return (
+		<div>
+			{/* {videos.loading === true ? (
         <h1>Loading</h1>
       ) : ( */}
-        <div>
-
-{/*       <Nav user={user}/> */}
-          <Pager
-            currentPage={currentPage}
-            pageHandler={handlePage}
-            itemsPerPage={videosPerPage}
-            totalItems={allVideos.length}
-          />
-          <div>
-            {currentVideos &&
-              currentVideos.map(video => {
-                return (
-                  <Link key={video.id} to={`/lecture/${video.id}`}>
-                    <Card
-                      id={video.id}
-                      title={video.name}
-                      instructor="Martina"
-                      description={video.description}
-                    />
-                  </Link>
-                );
-              })}
-          </div>
-          <Pager
-            currentPage={currentPage}
-            pageHandler={handlePage}
-            itemsPerPage={videosPerPage}
-            totalItems={allVideos.length}
-          /> 
-        </div>
-      {/* )} */}
-    </div>
-  );
+			<div>
+				{/*       <Nav user={user}/> */}
+				<Pager
+					currentPage={currentPage}
+					pageHandler={handlePage}
+					itemsPerPage={videosPerPage}
+					totalItems={allVideos.length}
+				/>
+				<div>
+					{currentVideos &&
+						currentVideos.map((video) => {
+							return (
+								<div>
+									<Link key={video.id} to={`/lecture/${video.id}`}>
+										<Card
+											id={video.id}
+											title={video.name}
+											instructor="Martina"
+											description={video.description}
+										/>
+									</Link>
+									<FavouriteButton userId={loginUserId} videoId={video.id} />
+								</div>
+							);
+						})}
+				</div>
+				<Pager
+					currentPage={currentPage}
+					pageHandler={handlePage}
+					itemsPerPage={videosPerPage}
+					totalItems={allVideos.length}
+				/>
+			</div>
+			{/* )} */}
+		</div>
+	);
 };
 
 export default Catalog;

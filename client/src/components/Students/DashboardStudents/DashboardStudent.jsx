@@ -5,7 +5,7 @@ import { clearStateModules, getAllLessons, getAllModules } from '../../../redux/
 import SearchBar from '../../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
 
-const DasboardStudent = () => {
+const DashboardStudent = () => {
 	const modules = useSelector((state) => state.modules.modules);
 
 	const dispatch = useDispatch();
@@ -61,4 +61,4 @@ const DasboardStudent = () => {
 	);
 };
 
-export default DasboardStudent;
+export default DashboardStudent;

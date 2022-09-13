@@ -19,7 +19,7 @@ import UpdateClass from './components/Teacher/UpdateClass';
 import Module from "./pages/Module/Module";
 import Contact from "./components/Contact/Contact";
 import SearchBar from "./components/SearchBar/SearchBar";
-import AllFavourite from "./pages/FavouriteComponents/favouriteButton";
+import AllFavourite from "./pages/Favourite/allFavourite";
 
 function App() {
 	const [user, setUser] = useState({});

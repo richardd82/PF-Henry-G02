@@ -20,6 +20,10 @@ module.exports = (sequelize) => {
     link: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    userId:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   });
 };

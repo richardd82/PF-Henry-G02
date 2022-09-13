@@ -15,7 +15,7 @@ const addFavorites = async (req,res) =>{
     const {idUser, idVideo} = req.params;
     try {
         const favorites = await Users.findByPk(idUser);
-        await favorites.addClasses(idVideo)
+        await favorites.addVideos(idVideo)
         const user = await Users.findByPk(idUser);
         res.json(user)
     } catch (error) {
