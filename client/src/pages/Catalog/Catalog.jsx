@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Components
 import Pager from '../../components/Pager/Pager.jsx';
+import Videos from '../../components/Videos/Videos.jsx';
 import Card from '../../components/Card/Card.jsx';
+import Nav from '../../components/Nav/Nav'
 // Actions
 import { getAllVideos } from '../../redux/actions/index';
 import { Link } from 'react-router-dom';
 
-const Catalog = () => {
+const Catalog = ({user}) => {
   const dispatch = useDispatch();
   const videos = useSelector(state => state.videos.allVideos);
 console.log(videos)
@@ -37,6 +39,8 @@ console.log(videos)
         <h1>Loading</h1>
       ) : ( */}
         <div>
+
+        <Nav user={user}/>
             <h1>ESTA ES LA PAGINA QUE MUESTRA LOS VIDEOS</h1>
           <Pager
             currentPage={currentPage}

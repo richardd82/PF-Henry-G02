@@ -17,6 +17,8 @@ import { FormsCreate } from "./components/Admin/Forms/FormsCreate/FormsCreate";
 import CreateVideo from './components/Teacher/CreateVideo';
 import UpdateClass from './components/Teacher/UpdateClass';
 import Module from "./pages/Module/Module";
+import Classnames from "./components/AttendantComponents/classNames";
+
 
 function App() {
 	const [user, setUser] = useState({});
@@ -48,18 +50,24 @@ function App() {
 	}, []);
 	//console.log(user);
 
+//{user.displayName ? <Navigate to="/" /> : <Login />}
+//{user.displayName ? <Profile user={user} /> : <Navigate to='/login'/> } 
 	return (
 		<div className="App">			
 			<Routes>
 				{/* Rutas del Login y Home */}
+
 				<Route path="/login" element={user.displayName ? <Navigate to="/" /> : <Login />} />
 				<Route exact path="/" element={user.displayName ? <Profile user={user} /> : <Navigate to='/login'/> } />
+
 				{/* Rutas del Admin */}
 				<Route path="/admin" element={<Admin />} />
 				<Route path="/create" element={<FormsCreate user={user} />}/>
 				{/* Rutas de Students y TA */}
 				<Route path="/students" element={<Students />} />
-				<Route path="/tas" element={<Ta />} />
+
+				<Route path="/tas" element={<Ta user={user}/>} />
+				<Route path="/attendance/:id" element={<Classnames user={user}/>} /> 
 				<Route path="/module/:id" element={<Module user={user}/>} />
 				<Route path="/lecture/:id" element={<Details user={user}/>} />
 				<Route path="/catalog" element={<Catalog user={user}/>} />

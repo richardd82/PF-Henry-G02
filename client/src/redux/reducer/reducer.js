@@ -23,6 +23,8 @@ import {
 	CLEAR_STATE_VIDEOS,
 	CLEAR_STATE_LESSONS,
 	CLEAR_STATE_MODULES,
+	USER_VALIDATE,
+	LOGOUT,
 } from "../actions/index";
 
 const initialState = {
@@ -48,11 +50,12 @@ const initialState = {
 	users: [],
 	teachers: [],
 	allUsers: [],
+	userValidate: {},
 
 	//Videos
 	videos: [],
 	allVideos: [],
-	detailVideos: {},
+	detailVideos: {},	
 
 	//Extras
 	loading: false,
@@ -161,6 +164,17 @@ export function users(state = initialState, action) {
 			return {
 				...state,
 			};
+		case USER_VALIDATE:
+			// console.log(state + ' _________________ SOY REDUCER ')
+			return {
+				...state,
+				userValidate: action.payload,
+			};
+		case LOGOUT:
+			return{
+				...state,
+				userValidate: action.payload,
+			}
 
 		default:
 			return { ...state };
