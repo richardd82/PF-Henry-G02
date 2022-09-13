@@ -6,6 +6,8 @@ const passportSetup = require('passport');
 const passport = require('passport'); 
 require('../passport.js');//AQUI ESTABA EL ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const authRoute = require('./routes/auth');
+const loginRoute = require('./routes/Login');
+const bcrypt = require("bcrypt");
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
@@ -42,7 +44,7 @@ server.use((req, res, next) => {
 server.use(cors(
   {
     origin: 'https://localhost:3000',
-    methods:'GET, POST, PUT, DELETE',
+    methods:'GET, POST, PUT, DELETE, OPTIONS',
     credentials: true,
   }
   ));
@@ -59,6 +61,7 @@ require('passport');
 // Error catching endware.
   server.use("/auth", authRoute);
   server.use('/', routes);
+  // server.use('/', authRoute)
 
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;

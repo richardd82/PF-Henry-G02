@@ -1,6 +1,7 @@
 const { Users} = require("../db.js");
 const { Op } = require("sequelize");
-
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = "qwertyuiopñlkjhgfdsa";
 
 const getAllUsers = async (req, res, next) => {
 	try {
@@ -92,6 +93,19 @@ const updateUser = async (req, res, next) => {
 	}
 };
 
+const getAllTeachers = async (req, res, next) => {
+  try {
+    const allTeachers = await Users.findAll({
+      where: {
+        category: "teacher"
+      }
+    });
+    res.json(allTeachers);
+  } catch (error) {
+    next(error);
+  }
+}
+
 const userByTeacher = async (req, res, next) => {
 	try {
 		const { name, lastname } = req.query;
@@ -137,4 +151,33 @@ const userByStudent = async (req, res, next) => {
 	}
 };
 
-module.exports = { getAllUsers, createUser, updateUser, userByTeacher, userByStudent };
+const usersValidate = async (req, res) => {
+	try {
+		const {email, password} = req.body;
+
+		const user = await Users.findOne({
+			where: { email: email},
+			[Op.and]: [{password: password}]
+		});
+		console.log(user)
+		return res.send(
+			await jwt.sign(
+				{
+					id: user.id,
+					name: user.name,
+					image: user.image,
+					email: user.email,
+					active: user.active,
+					category: user.category,
+				},
+				SECRET_KEY,
+				{ expiresIn: "8h" }
+			)
+		);
+		
+	} catch (error) {
+		console.log(error)
+	}
+};
+
+module.exports = { getAllUsers, createUser, updateUser, userByTeacher, userByStudent, getAllTeachers, usersValidate };
