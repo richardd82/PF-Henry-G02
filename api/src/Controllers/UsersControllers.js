@@ -1,4 +1,4 @@
-const { Users, Classes } = require("../db.js");
+const { Users} = require("../db.js");
 const { Op } = require("sequelize");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = "qwertyuiopñlkjhgfdsa";
