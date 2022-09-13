@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const passport = require("passport");
 //http://localhost:3001/auth/google/callback
-const CLIENT_URL = "https://localhost:3000/bootcamp/contacto/";
-const CLIENT_URL_LOGOUT = "https://localhost:3000";
+const CLIENT_URL = "https://localhost:3000/";
+const CLIENT_URL_LOGOUT = "https://localhost:3000/login";
 
 router.get("/login/success", (req, res) => {
 	if (req.user) {
@@ -45,17 +45,35 @@ router.get(
 		failureRedirect: "/login/failed",
 	})
 );
-router.get(
-	"/facebook",
-	passport.authenticate("facebook", { scope: ["profile"] })
-);
-
-router.get(
-	"/facebook/callback",
-	passport.authenticate("facebook", {
-		successRedirect: CLIENT_URL,
-		failureRedirect: "/login/failed",
-	})
-);
+router.post("/local", async (req,res,next) => {
+	try {		
+		passport.authenticate("local", { session: false }, async (error, user) => {			
+			console.log(user + "USER DEL BACK");
+			if (error) return res.status(400).json("invalid");
+			else if (!user) return res.json("invalid");
+			else if (user.active !== true) {
+				return res
+					.status(401)
+					.send({
+						message: "La cuenta se encuentra momentaneamente desactivada.",
+					});
+			} else {
+				console.log("esto esta en log", user);
+				return res.send(
+					await jwt.sign(
+						{
+							id: user.id,
+							email: user.email,
+							active: user.active,
+							category: user.category,
+						},
+						SECRET_KEY,
+						{ expiresIn: "8h" }
+					)
+				);
+			}
+		});
+	} catch (error) {console.log(error)}
+});
 
 module.exports = router;

@@ -5,14 +5,14 @@ const {Op} = require('sequelize');
 
 const createClass = async (req, res, next) => {
     try {
-        const { name,  description} = req.body;
+        const { name,  description, moduleId, cohortId} = req.body;
         const newClass = await Classes.create({
             name,
             description,
         })
-/*         await newClass.setModule(moduleId);
+         await newClass.setModule(moduleId);
         await newClass.setCohort(cohortId);
-
+/*
         const user = await Users.findAll({
             where:{
                 name: nameTeacher,
@@ -85,8 +85,8 @@ const classById = async (req, res, next) => {
 };
 
 const updateClasses = async(req, res, next) => {
-    const {id, name, lectureLink, lectureLink2, codeReviewLink, codeReviewLink2, description} = req.body 
-    //const {id} = req.params
+    const {name, lectureLink, lectureLink2, codeReviewLink, codeReviewLink2, description} = req.body 
+    const {id} = req.params
     try {
         const obj = {id, name, lectureLink, lectureLink2, codeReviewLink, codeReviewLink2, description}
         const update = await Classes.update(obj, {
