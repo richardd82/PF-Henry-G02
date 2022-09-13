@@ -14,14 +14,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lectureLink: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    codeReviewLink: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
     description: {
       type: DataTypes.STRING,
       allowNull: false,

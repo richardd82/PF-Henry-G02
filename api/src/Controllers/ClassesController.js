@@ -1,17 +1,25 @@
-const { Classes } = require('../db');
+const { Classes, Cohorts, Users } = require('../db');
 const {Op} = require('sequelize');
+
+
 
 const createClass = async (req, res, next) => {
     try {
-        const { name, lectureLink, codeReviewLink, description, moduleId, cohortId } = req.body;
+        const { name,  description, moduleId, cohortId} = req.body;
         const newClass = await Classes.create({
             name,
-            lectureLink,
-            codeReviewLink,
             description,
         })
-        await newClass.setModule(moduleId);
-        await newClass.setCohort(cohortId)
+         await newClass.setModule(moduleId);
+        await newClass.setCohort(cohortId);
+/*
+        const user = await Users.findAll({
+            where:{
+                name: nameTeacher,
+            }
+        }) 
+        await newClass.addUsers(user) 
+        */
         res.json(newClass);
     } catch (error) {
         console.log(error)
@@ -22,7 +30,9 @@ const classByName = async (req, res, next) => {
     try {
         const { name } = req.query;
         const nameSearched = await Classes.findAll({
-            where: { name: name }
+            where: { name: {
+              [Op.iLike]: '%' + name + '%',
+            }, }
         });
         if (nameSearched.length > 0) {
             res.json(nameSearched)
@@ -44,7 +54,15 @@ const getAllVideos = async (req, res, next) => {
         }
         // where: {
         //     name: { [Op.iLike]: "%" + name + "%" }
-        const allVideos = await Classes.findAll();
+        const allVideos = await Classes.findAll({
+            include:[{
+                model: Cohorts, 
+            }],
+             include:[{
+                 model: Users, 
+                // where: {category: "teacher"}
+             }]
+        });
         res.json(allVideos);
 } catch (error) {
     console.log(error)
@@ -66,10 +84,24 @@ const classById = async (req, res, next) => {
     }
 };
 
+const updateClasses = async(req, res, next) => {
+    const {name, lectureLink, lectureLink2, codeReviewLink, codeReviewLink2, description} = req.body 
+    const {id} = req.params
+    try {
+        const obj = {id, name, lectureLink, lectureLink2, codeReviewLink, codeReviewLink2, description}
+        const update = await Classes.update(obj, {
+            where: {
+                id: id
+            }
+        })
+        res.json({modificado: true})
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 
 
 
-
-module.exports = { createClass, classByName, getAllVideos, classById }
+module.exports = { createClass, classByName, getAllVideos, classById, updateClasses }
