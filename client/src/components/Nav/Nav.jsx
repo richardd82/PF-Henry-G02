@@ -1,24 +1,12 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import "./Nav.css";
 // Assets
 import logo_thumb from "../../assets/media/images.png";
 import logo_Henry from "../../assets/media/logoHenryWhite.png";
 import alumno from "../../assets/media/avatar.png";
-// Actions
-import {
-	getAllModules,
-	getAllLessons,
-	clearState,
-} from "../../redux/actions/bootcampActions.js";
-import SearchBar from "../SearchBar/SearchBar";
 
 export default function Nav({ user }) {
-
-
-	// const lessons = useSelector(state => state.bootcamp.lessons);
-	
 
 	const GOOGLE_CLIENT_ID = "AIzaSyBnFVqnIJy_hAtph6l7W5_n9c0lLzCMkKM";
 	let obj = [];

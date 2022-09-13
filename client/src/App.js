@@ -70,6 +70,8 @@ function App() {
 				<Route path="/attendance/:id" element={<Classnames user={user}/>} /> 
 				<Route path="/module/:id" element={<Module user={user}/>} />
 				<Route path="/lecture/:id" element={<Details user={user}/>} />
+				<Route path="/catalog" element={<Catalog user={user}/>} />
+				
 
 				{/* Rutas de Teachers */}
 				<Route path="/teachers" element={<Teachers />} />
