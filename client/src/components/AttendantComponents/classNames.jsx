@@ -6,9 +6,8 @@ import {
   getAllLessons,
   getAllModules,
 } from "../../redux/actions/bootcampActions";
-import { getTodosUsuarios } from "../../redux/actions/userAdmin";
-import Nav from "../Nav/Nav";
-import Modulebutton from "./moduleButton";
+import Nav from "../NavBar/Nav";
+import Modulebutton from "./ModuleButton";
 
 function Classnames({user}) {
 
@@ -57,7 +56,7 @@ console.log(data = [asist])
   }, [dispatch]);
   return (
     <>
-    <Nav user={user}/>
+    {/* <Nav user={user}/> */}
       <div className="moduleContainer">
         <Modulebutton />
         <form onSubmit={e => handleSubmit(e)}>

@@ -3,14 +3,14 @@ import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Validations } from "./validations";
-import { getAllStandUps } from "../../../../redux/actions/userAdmin";
+import { getAllStandUps } from "../../../../redux/actions/index";
 import { useEffect } from "react";
-import { postNewStandUp } from "../../../../redux/actions/userAdmin";
+import { postNewStandUp } from "../../../../redux/actions/index";
 
 const FormNewStandUp = () => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const adminUser = useSelector((state) => state.users);
+  const adminUser = useSelector((state) => state.users.users);
   const usersExist = adminUser.users.map((e) => e.name);
   const [input, setInput] = useState({
     name: "",

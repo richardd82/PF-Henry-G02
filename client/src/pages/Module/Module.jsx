@@ -5,7 +5,8 @@ import {
   getAllLessons,
   getAllModules,
   clearState,
-} from '../../redux/actions/bootcampActions';
+  clearStateLessons,
+} from '../../redux/actions/index';
 import Contact from '../../components/Contact/Contact';
 // Assets
 import github from '../../media/github.png';
@@ -16,14 +17,14 @@ import Nav from '../../components/Nav/Nav';
 
 const Module = ({ user }) => {
   const dispatch = useDispatch();
-  const lessons = useSelector(state => state.bootcamp.lessons);
-  const modules = useSelector(state => state.bootcamp.modules);
+  const lessons = useSelector(state => state.classes.lessons);
+  const modules = useSelector(state => state.modules.modules);
 
   useEffect(() => {
     dispatch(getAllModules());
     dispatch(getAllLessons());
     return () => {
-      dispatch(clearState());
+      dispatch(clearStateLessons());
     };
   }, [dispatch]);
 

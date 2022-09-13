@@ -2,14 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Validations } from "./validations";
-import { getAllCohorts, postNewCohort } from "../../../../redux/actions/userAdmin.js";
+import { getCohorts, postNewCohort } from "../../../../redux/actions/index";
 import { useEffect } from "react";
 
 
 const FormNewCohort = () => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const adminUser = useSelector((state) => state.users.allCohorts);
+  const adminUser = useSelector((state) => state.cohorts.allCohorts);
   console.log(adminUser);
   const usersExist = adminUser.map((e) => e.name);
   console.log(usersExist);
@@ -31,7 +31,7 @@ const FormNewCohort = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllCohorts());
+    dispatch(getCohorts());
   }, [dispatch]);
   const handleSubmit = (e) => {
     e.preventDefault(e);
