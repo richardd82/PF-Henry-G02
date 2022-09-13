@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 // Helper
 import { setErrors } from '../../helpers/setErrors.js';
 // import Nav from '../NavBar/Nav.js';
+//import { helpHttp } from '../../helpers/helpHttp.js';
+import emailjs from '@emailjs/browser';
+// codigo para reemplazar el email a283c9b9690c7603de76bc317ef60969
 // Styles
 import s from './Contact.module.css';
 
@@ -21,7 +24,7 @@ const Contact = ({ user }) => {
     message: '',
     submit: '',
   });
-
+const form = useRef()
   const handleChange = e => {
     const { name, value } = e.target;
     setInput(prev => {
@@ -40,6 +43,9 @@ const Contact = ({ user }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+
+
     if (!input.name || !input.email || !input.message) {
       setError(prev => {
         return {
@@ -56,6 +62,24 @@ const Contact = ({ user }) => {
       !error.message &&
       input.message
     ) {
+
+      emailjs.sendForm('service_loeaupt', 'template_jdmw2f6', form.current, '1mx1KpuB5wsywFkli')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+/*       helpHttp()
+      .post("https://formsubmit.co/38ad089733f4917f3fb35745511e2678", {
+        body: input,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+      })
+      .then((res)=> {
+        return res 
+      }) */
       setInput({
         name: '',
         email: '',
@@ -63,6 +87,7 @@ const Contact = ({ user }) => {
       });
       setSubmitted(true);
     }
+
   };
 
   const handleReset = () => {
@@ -99,6 +124,7 @@ const Contact = ({ user }) => {
             autoComplete="off"
             className={s.form}
             onSubmit={e => handleSubmit(e)}
+            ref={form}
           >
             <div>
               <label className={s.subtitle}>Name</label>

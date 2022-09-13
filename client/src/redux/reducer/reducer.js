@@ -23,6 +23,8 @@ import {
 	CLEAR_STATE_VIDEOS,
 	CLEAR_STATE_LESSONS,
 	CLEAR_STATE_MODULES,
+	ADD_FAVORITE,
+	GET_FAVORITE_BY_ID,
 	USER_VALIDATE,
 	LOGOUT,
 } from "../actions/index";
@@ -55,7 +57,11 @@ const initialState = {
 	//Videos
 	videos: [],
 	allVideos: [],
-	detailVideos: {},	
+	detailVideos: {},
+	teacher: {},
+
+	//Favorites
+	favorites: [],
 
 	//Extras
 	loading: false,
@@ -187,9 +193,9 @@ export function videos(state = initialState, action) {
 			return {
 				...state,
 				videos: [...state.videos, action.payload],
+				allVideos: [...state.videos, action.payload]
 			};
 		case GET_VIDEOS:
-			console.log(state + " ********************");
 			return {
 				...state,
 				videos: action.payload,
@@ -199,10 +205,12 @@ export function videos(state = initialState, action) {
 			return {
 				...state,
 				videos: action.payload,
+				allVideos: action.payload
 			};
 		case GET_VIDEOS_BY_TEACHER:
 			return {
 				...state,
+				teacher: action.payload,
 				videos: action.payload,
 			};
 		case GET_VIDEOS_BY_ID:			
@@ -241,7 +249,25 @@ export function extras(state = initialState, action) {
 			return { ...state };
 	}
 }
+export function favorites(state = initialState, action) {
+	switch (action.type) {
+		case GET_FAVORITE_BY_ID:
+			console.log(action.payload)
+			return {
+				...state,
+				favorite: action.payload,
+			};
 
+
+		case ADD_FAVORITE:
+			return {
+				...state,
+			};
+
+		default:
+			return { ...state };
+	}
+}
 // export default {
 // 	modules,
 // 	cohorts,

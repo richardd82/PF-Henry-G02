@@ -13,14 +13,16 @@ import { Link } from 'react-router-dom';
 
 const Catalog = ({user}) => {
   const dispatch = useDispatch();
-  const videos = useSelector(state => state.videos.allVideos);
-console.log(videos)
-
+  const allVideos = useSelector(state => state.videos.allVideos);
+  
+  
   useEffect(() => {
     // if (!videos.classes.length && videos.loading === false) {
       dispatch(getAllVideos());
-    // }
-  }, [videos, dispatch]);
+      // }
+    }, [dispatch]);
+
+
 
   // Pagination handler
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,10 +30,10 @@ console.log(videos)
     setCurrentPage(number);
   };
 
-  const videosPerPage = 10,
+   const videosPerPage = 10,
     indexOfLastVideo = currentPage * videosPerPage,
     indexOfFirstVideo = indexOfLastVideo - videosPerPage,
-    currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
+    currentVideos = allVideos.slice(indexOfFirstVideo, indexOfLastVideo); 
 
   return (
     <div>
@@ -40,13 +42,12 @@ console.log(videos)
       ) : ( */}
         <div>
 
-        <Nav user={user}/>
-            <h1>ESTA ES LA PAGINA QUE MUESTRA LOS VIDEOS</h1>
+{/*       <Nav user={user}/> */}
           <Pager
             currentPage={currentPage}
             pageHandler={handlePage}
             itemsPerPage={videosPerPage}
-            totalItems={videos.classes.length}
+            totalItems={allVideos.length}
           />
           <div>
             {currentVideos &&
@@ -67,8 +68,8 @@ console.log(videos)
             currentPage={currentPage}
             pageHandler={handlePage}
             itemsPerPage={videosPerPage}
-            totalItems={videos.classes.length}
-          />
+            totalItems={allVideos.length}
+          /> 
         </div>
       {/* )} */}
     </div>

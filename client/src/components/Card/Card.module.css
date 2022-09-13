@@ -15,14 +15,6 @@
   object-fit:fill;
 }
 
-.cardBody {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px;
-  min-height: 175px;
-}
 
 .tag {
   background: #cccccc;
@@ -41,4 +33,12 @@
 
 .userInfo h5 {
   margin: 0;
+}
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  min-height: 175px;
 }

@@ -34,8 +34,8 @@ const { Users, Classes, Cohorts, Modules, Standups, Videos, Attendance} = sequel
 // Standups, Cohorts, Modules, Classes
 
 // Aca vendrian las relaciones
-Users.belongsToMany(Classes, { through: "Users_Favorites" });
-Classes.belongsToMany(Users, { through: "Users_Favorites" });
+Users.belongsToMany(Videos, { through: "Users_Favorites" });
+Videos.belongsToMany(Users, { through: "Users_Favorites" });
 // // Classes
 Classes.belongsTo(Modules);
 Classes.belongsTo(Cohorts);

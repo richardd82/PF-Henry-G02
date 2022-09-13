@@ -52,7 +52,6 @@ const Module = ({ user }) => {
                               <img src={github} alt="github" />
                               <img src={sheet} alt="sheet" />
                             </div>
-                            <h5>See lessons</h5>
                           </Link>
                         </article>
                       </div>
