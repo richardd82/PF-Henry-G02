@@ -1,0 +1,41 @@
+.pager{
+  position: fixed;
+  bottom: 0;
+  padding:10px;
+  background-color: black;
+  color:yellow;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap:10px
+}
+
+.pagination span{ 
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: yellow;
+  color: black;
+  padding: 5px;
+  transition: transform .25s;
+  cursor: pointer;;
+}
+
+.pagination span:first-child,
+.pagination span:last-child{ 
+  width: fit-content;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.pagination span:hover{
+transform: scale(120%) ;
+}

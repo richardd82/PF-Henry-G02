@@ -3,10 +3,10 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DB_USER, DB_PASSWORD, DB_HOST, DB_DATABASE
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/students`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -30,26 +30,38 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Users, Classes } = sequelize.models;
+const { Users, Classes, Cohorts, Modules, Standups, Videos, Attendance} = sequelize.models;
 // Standups, Cohorts, Modules, Classes
 
 // Aca vendrian las relaciones
-// Users.belongsToMany(Classes, { through: "Users_Favorites" });
-// Classes.belongsToMany(Users, { through: "Users_Favorites" });
+Users.belongsToMany(Classes, { through: "Users_Favorites" });
+Classes.belongsToMany(Users, { through: "Users_Favorites" });
 // // Classes
-// Classes.hasOne(Modules);
+Classes.belongsTo(Modules);
+Classes.belongsTo(Cohorts);
+Classes.hasMany(Videos)
 // // Modules
-// Modules.hasMany(Classes);
+Modules.hasMany(Classes);
+Modules.hasMany(Users);
 // // Cohorts
-// Cohorts.hasMany(Users);
-// Cohorts.hasMany(Standups);
+Cohorts.hasMany(Users);
+Cohorts.hasMany(Standups);
+Cohorts.hasMany(Classes);
+Cohorts.hasMany(Videos);
 // // Standups
-// Standups.hasMany(Users);
-// Standups.hasOne(Cohorts);
+Standups.hasMany(Users);
+Standups.belongsTo(Cohorts);
 // // Users
-// Users.hasOne(Standups);
-// Users.hasOne(Modules);
-// Users.hasOne(Cohorts);
+Users.belongsTo(Cohorts);
+Users.belongsTo(Modules);
+Users.belongsTo(Standups);
+Users.hasMany(Videos)
+// // Videos
+Videos.belongsTo(Classes);
+Videos.belongsTo(Users);
+Videos.belongsTo(Cohorts);
+
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

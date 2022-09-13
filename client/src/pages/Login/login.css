@@ -1,0 +1,100 @@
+.login {
+	height: calc(100vh - 50px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.wrapper {
+	width: 60%;
+	height: 75%;
+	box-shadow: 11px 11px 8px -3px rgba(0, 0, 0, 0.41);
+	-webkit-box-shadow: 11px 11px 8px -3px rgba(0, 0, 0, 0.41);
+	-moz-box-shadow: 11px 11px 8px -3px rgba(0, 0, 0, 0.41);
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+}
+.left, .right{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.center{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.or{
+    border: 2px solid lightgray;
+    border-radius: 50%;
+    padding: 10px;
+    color: gray;
+    background: white;
+    font-weight: bold;
+}
+.line{
+    width: 0.5px;
+    height: 70%;
+    background-color: lightgray;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    box-shadow: 5px 0px 11px 1px rgb(30, 28, 0, 0.35);
+	-webkit-box-shadow: 5px 0px 11px 1px rgb(30, 28, 0, 0.35);
+	-moz-box-shadow: 5px 0px 11px 1px rgb(30, 28, 0,  0.35);
+    z-index: -1;
+}
+.loginButton{
+    width: 185px;
+    padding: 15px 25px;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    gap: 2em;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.google{
+    background-color: #df4930;
+}
+.facebook{
+    background-color: #507cc0;
+}
+.github{
+    background-color: #262738;
+}
+.icon{
+    margin-right: 10px;
+}
+input {
+  border: 1px solid black;
+  color: black;
+  width: 200px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+.submit{
+    width: 200px;
+    background-color: rgb(70, 43, 222);
+    color: aliceblue;
+    font-weight: bold;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 5px;
+}
+.loginTitle{
+    position: absolute;
+    top: 150px;
+    color: lightgrey;
+}
+::placeholder {
+  color: gray;
+}

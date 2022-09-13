@@ -1,0 +1,44 @@
+.card {
+  margin: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: 230px;
+  cursor: pointer;
+  transition: transform .4s;
+}
+
+.cardHeader img {
+  width: 100%;
+  height: fit-content;
+  object-fit:fill;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  min-height: 175px;
+}
+
+.tag {
+  background: #cccccc;
+  border-radius: 50px;
+  font-size: 12px;
+  margin: 0;
+  color: #fff;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.tagTeal {
+  background-color: #47bcd4;
+}
+
+.userInfo h5 {
+  margin: 0;
+}

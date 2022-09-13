@@ -1,0 +1,84 @@
+.parent {  
+  margin-top: -100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.339);
+  background-size: cover;
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid black;
+  margin: 50px;
+  padding: 30px;
+}
+
+.select {
+  background-color: rgba(0, 0, 0, 0.762);
+  text-align: center;
+  color: white;
+  width: 200px;
+  border: 2px solid black;
+  height: 23px;
+  
+}
+
+.title {
+  color: aliceblue;
+}
+
+.subtitle {
+  color: aliceblue;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20.5px;
+}
+
+.submit {
+  border-radius: 5px;
+  padding: 5px 20px;
+  border: 2px solid black;
+  color: rgba(0, 0, 0, 0.762);
+  background-color: #ffff00; 
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+.inputCreate {
+  background-color: rgba(0, 0, 0, 0.762);
+  text-align: center;
+  color: white;
+  width: 200px;
+  border: 2px solid black;
+  height: 17px;
+  
+}
+
+.titleErrors {
+  color: black;
+  background-color: rgba(165, 42, 42, 0.488);
+  border: 3px solid brown;
+  padding: 3px;
+  font-size: 13px;
+}
+
+::placeholder {
+  color: white;
+}
