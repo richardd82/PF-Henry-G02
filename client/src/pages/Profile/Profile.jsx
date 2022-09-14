@@ -21,20 +21,20 @@ const Profile = ({ user }) => {
 	}, [dispatch]);
 	///FALTA INVESTIGAR COMO OBTENER EL EMAIL DEL USER DE GOOGLE
 
-	const token = localStorage.getItem("token");
-	// console.log(token)
-	let tokenDecode;
-	if (token) {
-		tokenDecode = jwt(token);
-	} else {
-		window.open("https://localhost:3000/login", "_self");
-	}
+	// const token = localStorage.getItem("token");
+	// // console.log(token)
+	// let tokenDecode;
+	// if (token) {
+	// 	tokenDecode = jwt(token);
+	// } else {
+		window.open("http://localhost:3000/login", "_self");
+	// }
 
-	// dispatch(getTodosUsuarios());
-	// const userValidate = users.find((e) => e.name === user.displayName);
-	// const category = userValidate && userValidate.category;
-	// console.log(category);
-	const category = tokenDecode.category;
+	dispatch(getTodosUsuarios());
+	const userValidate = users.find((e) => e.name === user.displayName);
+	const category = userValidate && userValidate.category;
+	console.log(category);
+	// const category = tokenDecode.category;
 
 	return (
 		<div>

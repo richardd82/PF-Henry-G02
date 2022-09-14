@@ -7,23 +7,23 @@ const LectureOn = ({ handleEvent }) => {
   const results = [
     {
       name: "CSS Avanzado",
-      url: "https://vimeo.com/743497945",
-      codeReview: "https://vimeo.com/ecoledesnouvellesimages/kayak",
+      url: "http://vimeo.com/743497945",
+      codeReview: "http://vimeo.com/ecoledesnouvellesimages/kayak",
       description: " CSS Avanzado para nuestros proyectos.",
       professor: "Federico Panella",
     },
 
     {
       name: "React Redux",
-      url: "https://vimeo.com/744368057",
-      codeReview: "https://vimeo.com/743497945",
+      url: "http://vimeo.com/744368057",
+      codeReview: "http://vimeo.com/743497945",
       description: " Clase React Redux y su descripción",
       professor: "Martina Scomazzon",
     },
     {
       name: "Kick off PI",
-      url: "https://vimeo.com/ecoledesnouvellesimages/kayak",
-      codeReview: "https://vimeo.com/744368057",
+      url: "http://vimeo.com/ecoledesnouvellesimages/kayak",
+      codeReview: "http://vimeo.com/744368057",
       description: " Descripción clase Kick off PI",
       professor: "Matias Calvar",
     },

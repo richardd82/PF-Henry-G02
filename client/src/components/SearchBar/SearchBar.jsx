@@ -15,7 +15,7 @@ const SearchBar = () => {
   function handleChange(e) {
     setNameSearch(e.target.value);
   }
-console.log(nameSearch);
+// console.log(nameSearch);
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(getVideosByName(nameSearch));

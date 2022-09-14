@@ -25,6 +25,7 @@
     "express-session": "^1.17.3",
     "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
+    "mercadopago": "^1.5.14",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.19",
     "passport": "^0.5.3",

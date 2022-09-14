@@ -1,4 +1,4 @@
-const { Users} = require("../db.js");
+const { Users } = require("../db");
 const { Op } = require("sequelize");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = "qwertyuiopñlkjhgfdsa";
@@ -150,6 +150,26 @@ const userByStudent = async (req, res, next) => {
 		console.log(error);
 	}
 };
+const userByEmail = async (req, res, next) => {
+	try {
+	  const email  = req.query.email;
+	  console.log(email);
+  
+	  const searchedEmail = await Users.findAll({
+		where: {
+		  email,
+		},
+	  });
+	  console.log(searchedEmail);
+	  if (searchedEmail.length <= 0) {
+		res.status(400).json({ message: "El email ingresado no corresponde a ningún usuario." });
+	  } else {
+		res.json(searchedEmail);
+	  }
+	} catch (error) {
+	  console.log(error);
+	}
+  };
 
 const usersValidate = async (req, res) => {
 	try {
@@ -161,7 +181,7 @@ const usersValidate = async (req, res) => {
 		});
 		console.log(user)
 		return res.send(
-			await jwt.sign(
+			jwt.sign(
 				{
 					id: user.id,
 					name: user.name,
@@ -180,4 +200,4 @@ const usersValidate = async (req, res) => {
 	}
 };
 
-module.exports = { getAllUsers, createUser, updateUser, userByTeacher, userByStudent, getAllTeachers, usersValidate };
+module.exports = { getAllUsers, createUser, updateUser, userByTeacher, userByStudent, getAllTeachers, usersValidate, userByEmail };

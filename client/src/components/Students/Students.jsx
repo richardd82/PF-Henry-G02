@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Catalog from '../../pages/Catalog/Catalog'
 import Nav from '../Nav/Nav'
-import DashboardStudent from './DashboardStudents/DasboardStudent'
+import DashboardStudent from './DashboardStudents/DashboardStudent'
 
 const Students = ({user}) => {
  

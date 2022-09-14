@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import {
   getAllLessons,
   getAllModules,
-  clearState,
   clearStateLessons,
 } from '../../redux/actions/index';
 import Contact from '../../components/Contact/Contact';

@@ -26,7 +26,7 @@ function App() {
 
 	useEffect(() => {
 		const getUser = () => {
-			fetch("https://localhost:3001/auth/login/success", {
+			fetch("http://localhost:3001/auth/login/success", {
 				method: "GET",
 				credentials: "include",
 				headers: {
@@ -55,8 +55,8 @@ function App() {
 		<div className="App">			
 			<Routes>
 				{/* Rutas del Login y Home */}
-				<Route path="/login" element={user.displayName ? <Navigate to="/" /> : <Login />} />
-				<Route exact path="/" element={user.displayName ? <Profile user={user} /> : <Navigate to='/login'/> } />
+				<Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+				<Route exact path="/" element={user ? <Profile user={user} /> : <Navigate to='/login'/> } />
 				{/* Rutas del Admin */}
 				<Route path="/admin" element={<Admin />} />
 				<Route path="/create" element={<FormsCreate user={user} />}/>

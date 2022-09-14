@@ -10,6 +10,7 @@ import Nav from "../../components/Nav/Nav";
 // Actions
 import { getAllVideos, getTodosUsuarios } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
+import FavouriteButton from "../../components/FavouriteComponents/favouriteButton.jsx";
 
 const Catalog = ({ user }) => {
 	const dispatch = useDispatch();

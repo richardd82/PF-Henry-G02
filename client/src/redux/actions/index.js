@@ -26,6 +26,7 @@ export const CLEAR_STATE_LESSONS = "CLEAR_STATE_LESSONS";
 export const CLEAR_STATE_MODULES = "CLEAR_STATE_MODULES";
 export const GET_FAVORITE_BY_ID = "GET_FAVORITE_BY_ID"
 export const ADD_FAVORITE = "ADD_FAVORITE"
+export const  GET_BY_EMAIL = " GET_BY_EMAIL"
 export const USER_VALIDATE = "USER_VALIDATE";
 export const LOGOUT = "LOGOUT";
 
@@ -35,7 +36,7 @@ export const LOGOUT = "LOGOUT";
 export function getAllModules() {
     return async function (dispatch) {
       try {
-        var json = await axios.get('https://localhost:3001/modules');
+        var json = await axios.get('http://localhost:3001/modules');
         return dispatch({
           type: GET_ALL_MODULES,
           payload: json.data,
@@ -54,7 +55,7 @@ export function getAllModules() {
 export function getCohorts() {
     return async function (dispatch) {
       try {
-        const response = await axios.get('https://localhost:3001/cohorts');
+        const response = await axios.get('http://localhost:3001/cohorts');
         return dispatch({
           type: GET_ALL_COHORTS,
           payload: response.data,
@@ -67,7 +68,7 @@ export function getCohorts() {
   export function postNewCohort(payload) {
     return async function () {
       var json = await axios.post(
-        `https://localhost:3001/cohorts/create`,
+        `http://localhost:3001/cohorts/create`,
         payload
       );
       return json;
@@ -77,7 +78,7 @@ export function getCohorts() {
 export function getAllLessons() {
     return async function (dispatch) {
       try {
-        var json = await axios.get('https://localhost:3001/classes');
+        var json = await axios.get('http://localhost:3001/classes');
         return dispatch({
           type: GET_ALL_LESSONS,
           payload: json.data,
@@ -89,7 +90,7 @@ export function getAllLessons() {
   }
   export function getLessonsById(id) {
     return async function (dispatch) {
-      var json = await axios.get(`https://localhost:3001/classes/byId/${id}`);
+      var json = await axios.get(`http://localhost:3001/classes/byId/${id}`);
       return dispatch({
         type: GET_LESSONS_BY_ID,
         payload: json.data,
@@ -113,7 +114,7 @@ export const getClassesByName = name => {
       // Si no, llenamos el estado `errorMsg` con el error
       // Más adelante se definen las otras acciones llamadas acá
       axios
-        .get(`https://localhost:3001/classes/byName?name=${name}`)
+        .get(`http://localhost:3001/classes/byName?name=${name}`)
         .then(response => dispatch(getByNameSuccess(response.data)))
         .catch(error => dispatch(requestFailure(error.response.data)));
     };
@@ -145,12 +146,20 @@ export const getClassesByName = name => {
   export function postNewClass(payload) {
     return async function () {
       var json = await axios.post(
-        `https://localhost:3001/classes/create`,
+        `http://localhost:3001/classes/create`,
         payload
       );
       return json;
     };
   }
+  export const postAttendance = attendance => {
+    return () => {
+      axios
+        .post('http://localhost:3001/attendance/create', attendance)
+        .then(response => console.log(response.data))
+        .catch(error => console.log(error));
+    };
+  };
   export function clearStateLessons() {
     return {
       type: CLEAR_STATE_LESSONS,
@@ -161,7 +170,7 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.post(
-          'https://localhost:3001/videos/create',
+          'http://localhost:3001/videos/create',
           payload
         );
         return dispatch({
@@ -176,7 +185,7 @@ export function createVideo(payload) {
   export function getAllVideos() {
     return async function (dispatch) {
       try {
-        const response = await axios.get('https://localhost:3001/videos');
+        const response = await axios.get('http://localhost:3001/videos');
  
         return dispatch({
           type: GET_VIDEOS,
@@ -191,7 +200,7 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `https://localhost:3001/videos/byName?name=${name}`
+          `http://localhost:3001/videos/byName?name=${name}`
         );
         return dispatch({
           type: GET_VIDEOS_BY_NAME,
@@ -206,7 +215,7 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `https://localhost:3001/byTeacher/${id}`
+          `http://localhost:3001/byTeacher/${id}`
         );
         return dispatch({
           type: GET_VIDEOS_BY_TEACHER,
@@ -219,7 +228,7 @@ export function createVideo(payload) {
   }
   export function getVideosById(id) {
     return async function (dispatch) {
-      var json = await axios.get(`https://localhost:3001/videos/byId/${id}`);
+      var json = await axios.get(`http://localhost:3001/videos/byId/${id}`);
       console.log(json)
       return dispatch({
         type: GET_VIDEOS_BY_ID,
@@ -236,7 +245,7 @@ export function createVideo(payload) {
 export function getTeachers() {
     return async function (dispatch) {
       try {
-        const response = await axios.get('https://localhost:3001/users/teachers');
+        const response = await axios.get('http://localhost:3001/users/teachers');
         console.log(response.data);
         return dispatch({
           type: GET_TEACHERS,
@@ -250,7 +259,7 @@ export function getTeachers() {
   export function getTodosUsuarios() {
     return async function (dispatch) {
       try {
-        var json = await axios.get("https://localhost:3001/users");
+        var json = await axios.get("http://localhost:3001/users");
         return dispatch({
           type: GET_ALL_USERS,
           payload: json.data,
@@ -262,14 +271,30 @@ export function getTeachers() {
   }
   export function postNewUser(payload) {
     return async function () {
-      var json = await axios.post(`https://localhost:3001/users/create`, payload);
+      var json = await axios.post(`http://localhost:3001/users/create`, payload);
       return json;
     };
   }
+  export function putUser(id,payload) {
+    return async function () {
+      var json = await axios.put(`http://localhost:3001/users/update/${id}`, payload);
+      return json;
+    };
+  }
+
+export function searchByEmail(email){
+  return async function(dispatch){
+    var json = await axios.get(`http://localhost:3001/users/byEmail?email=${email}`);
+    return dispatch({
+      type: GET_BY_EMAIL,
+      payload: json.data,
+    });
+  }
+}
   export function usersValidate(payload) {
     return async function (dispatch) {
       console.log(payload.email + " <-------------->Entre a la Action");
-      var json = await axios.post(`https://localhost:3001/validate`, payload);
+      var json = await axios.post(`http://localhost:3001/validate`, payload);
       localStorage.setItem("token", JSON.stringify(json.data));
       const data = await jwtDecode(json.data);
       // console.log(data)
@@ -294,7 +319,7 @@ export function getTeachers() {
 export function getAllStandUps() {
     return async function (dispatch) {
       try {
-        var json = await axios.get("https://localhost:3001/standups");
+        var json = await axios.get("http://localhost:3001/standups");
         return dispatch({
           type: GET_ALL_STANDUPS,
           payload: json.data,
@@ -307,7 +332,7 @@ export function getAllStandUps() {
   export function postNewStandUp(payload) {
     return async function () {
       var json = await axios.post(
-        `https://localhost:3001/standups/create`,
+        `http://localhost:3001/standups/create`,
         payload
       );
       return json;
@@ -316,7 +341,7 @@ export function getAllStandUps() {
   //*********************Favoritos**************************
 export function getFavoritesById(id) {
   return async function (dispatch) {
-    var json = await axios.get(`http://localhost:3002/favorites/${id}`);
+    var json = await axios.get(`http://localhost:3001/favorites/${id}`);
     console.log(json)
     return dispatch({
       type: GET_FAVORITE_BY_ID,
@@ -327,7 +352,7 @@ export function getFavoritesById(id) {
 
 export function addFavoritesById(userId, videoId) {
   return async function (dispatch) {
-    var json = await axios.post( `http://localhost:3002/favorites/create/${userId}/${videoId}`);
+    var json = await axios.post( `http://localhost:3001/favorites/create/${userId}/${videoId}`);
     console.log(json)
     return dispatch({
       type: ADD_FAVORITE,

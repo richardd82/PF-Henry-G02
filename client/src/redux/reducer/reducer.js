@@ -25,6 +25,7 @@ import {
 	CLEAR_STATE_MODULES,
 	ADD_FAVORITE,
 	GET_FAVORITE_BY_ID,
+	GET_BY_EMAIL,
 	USER_VALIDATE,
 	LOGOUT,
 } from "../actions/index";
@@ -170,6 +171,11 @@ export function users(state = initialState, action) {
 			return {
 				...state,
 			};
+		case GET_BY_EMAIL:
+			return {
+				...state,
+				users: action.payload,
+			};
 		case USER_VALIDATE:
 			// console.log(state + ' _________________ SOY REDUCER ')
 			return {
@@ -177,10 +183,10 @@ export function users(state = initialState, action) {
 				userValidate: action.payload,
 			};
 		case LOGOUT:
-			return{
+			return {
 				...state,
 				userValidate: action.payload,
-			}
+			};
 
 		default:
 			return { ...state };
@@ -193,7 +199,7 @@ export function videos(state = initialState, action) {
 			return {
 				...state,
 				videos: [...state.videos, action.payload],
-				allVideos: [...state.videos, action.payload]
+				allVideos: [...state.videos, action.payload],
 			};
 		case GET_VIDEOS:
 			return {
@@ -205,7 +211,7 @@ export function videos(state = initialState, action) {
 			return {
 				...state,
 				videos: action.payload,
-				allVideos: action.payload
+				allVideos: action.payload,
 			};
 		case GET_VIDEOS_BY_TEACHER:
 			return {
@@ -213,11 +219,11 @@ export function videos(state = initialState, action) {
 				teacher: action.payload,
 				videos: action.payload,
 			};
-		case GET_VIDEOS_BY_ID:			
+		case GET_VIDEOS_BY_ID:
 			return {
 				...state,
 				detailVideos: action.payload,
-			};			
+			};
 		case CLEAR_STATE_VIDEOS:
 			return {
 				...state,
@@ -252,12 +258,11 @@ export function extras(state = initialState, action) {
 export function favorites(state = initialState, action) {
 	switch (action.type) {
 		case GET_FAVORITE_BY_ID:
-			console.log(action.payload)
+			console.log(action.payload);
 			return {
 				...state,
 				favorite: action.payload,
 			};
-
 
 		case ADD_FAVORITE:
 			return {
