@@ -8,10 +8,11 @@ const createVideo = async(req, res, next)=>{
         const video = await Videos.create({
             name, 
             link,
-            type
+            type,
+            userId
         })
         await video.setClass(classId)
-        await video.setUser(userId)
+        //await video.setUser(userId)
         await video.setCohort(cohortId)
         res.json(video)
     } catch (error) {

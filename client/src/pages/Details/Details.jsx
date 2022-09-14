@@ -11,7 +11,7 @@ import "./Clases.css";
 import Nav from "../../components/Nav/Nav";
 import { clearStateVideos, getAllVideos } from "../../redux/actions/index";
 import { getVideosById } from "../../redux/actions/index";
-import CodeReviewOn from "./ConditionalRender/CodeReviewOn";
+//import CodeReviewOn from "./ConditionalRender/CodeReviewOn";
 
 const Details = ({ user }) => {
   const dispatch = useDispatch();
