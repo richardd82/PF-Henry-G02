@@ -8,7 +8,7 @@ import Videos from '../../components/Videos/Videos.jsx';
 import Card from '../../components/Card/Card.jsx';
 import Nav from '../../components/Nav/Nav'
 // Actions
-import { getAllVideos } from '../../redux/actions/index';
+import { getAllVideos, getTodosUsuarios } from '../../redux/actions/index';
 import { Link } from 'react-router-dom';
 import FavouriteButton from '../../components/FavouriteComponents/favouriteButton.jsx';
 
@@ -67,7 +67,7 @@ const Catalog = ({user}) => {
                       description={video.description}
                     />
                   </Link>
-                  <FavouriteButton userId={loginUserId} videoId={video.id} /> 
+                  <FavouriteButton userId={user} videoId={video.id} /> 
                   </div>
                 );
               })}
