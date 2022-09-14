@@ -6,11 +6,9 @@ import logo_thumb from "../../assets/media/images.png";
 import logo_Henry from "../../assets/media/logoHenryWhite.png";
 import alumno from "../../assets/media/avatar.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getTodosUsuarios } from "../../redux/actions";
-
+import { getTodosUsuarios } from "../../redux/actions/index";
 
 export default function Nav({ user }) {
-
 	const GOOGLE_CLIENT_ID = "AIzaSyBnFVqnIJy_hAtph6l7W5_n9c0lLzCMkKM";
 	let obj = [];
 	obj.push(user);
@@ -20,15 +18,13 @@ export default function Nav({ user }) {
 		window.open("https://localhost:3001/auth/logout", "_self");
 	};
 
-
-
 	const users = useSelector((state) => state.users.allUsers);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (!users.length) {
+		// if (!users.length) {
 			dispatch(getTodosUsuarios());
-		}
+		// }
 	}, [dispatch]);
 	///FALTA INVESTIGAR COMO OBTENER EL EMAIL DEL USER DE GOOGLE
 	// dispatch(getTodosUsuarios());
@@ -47,29 +43,34 @@ export default function Nav({ user }) {
 							</Link>
 							<h2>Students</h2>
 						</div>
+
 						{/* <Link to="/"> */}
-							<img src={logo_Henry} alt="" />
+						<img src={logo_Henry} alt="" />
 						{/* </Link> */}
-						<div className="avatar">
-						{category === "student" && active === true ? (
-						<div>
-							<Link to="/favourite">
-								<p className="avatar__name">Favourite</p>
-							</Link>
-							<Link to="/contacto">
-								<p className="avatar__name">Contacto</p>
-							</Link>
-							</div>) : category === "ta" && active === true ? (<div>
-								<Link to="/assistance">
-								<p className="avatar__name">Assistance</p>
-							</Link>
-							<Link to="/favourite">
-								<p className="avatar__name">Favourite</p>
-							</Link>
-							<Link to="/contacto">
-								<p className="avatar__name">Contacto</p>
-							</Link>
-							</div>): null}
+						<div className="avatar">						
+
+							{category === "student" && active === true ? (
+								<div>
+									<Link to="/favourite">
+										<p className="avatar__name">Favourite</p>
+									</Link>
+									<Link to="/contacto">
+										<p className="avatar__name">Contacto</p>
+									</Link>
+								</div>
+							) : category === "ta" && active === true ? (
+								<div>
+									<Link to="/assistance">
+										<p className="avatar__name">Assistance</p>
+									</Link>
+									<Link to="/favourite">
+										<p className="avatar__name">Favourite</p>
+									</Link>
+									<Link to="/contacto">
+										<p className="avatar__name">Contacto</p>
+									</Link>
+								</div>
+							) : null}
 
 							<p className="avatar__name">{user.displayName}</p>
 							{/* {user.displayName} */}
@@ -89,7 +90,7 @@ export default function Nav({ user }) {
 						Login
 					</Link>
 				)}
-			</header>			
+			</header>
 		</div>
 	);
 }

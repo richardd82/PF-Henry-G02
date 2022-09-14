@@ -9,7 +9,7 @@ import {
 	extras,
 	favorites,
 } from "./reducer";
-
+import attendance from './attendanceReducer.js';
 export default combineReducers({
 	modules,
 	cohorts,
@@ -19,4 +19,5 @@ export default combineReducers({
 	videos,
 	extras,
 	favorites,
+	attendance,
 });

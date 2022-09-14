@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 // Actions
-import { postAttendance } from "../../../redux/actions/index";
+import { postAttendance } from "../../redux/actions/attendanceActions.js";
 
 const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
   const dispatch = useDispatch();

@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import StudentList from "./StudentList.jsx";
 // Actions
 import {
-  getAllModules,
+  getUsers,
+  getClasses,
+  getModules,
   getCohorts,
-  getAllStandUps,
-  getTodosUsuarios,
-  getAllLessons,
-} from "../../../redux/actions/index";
+  getStandups,
+} from "../../redux/actions/attendanceActions.js";
+import Nav from "../Nav/Nav.jsx";
 import "./Formularios.css";
 
 const Attendance = ({ user }) => {
@@ -21,11 +22,11 @@ const Attendance = ({ user }) => {
   );
 
   useEffect(() => {
-    dispatch(getTodosUsuarios());
+    dispatch(getUsers());
     dispatch(getCohorts());
-    dispatch(getAllModules());
-    dispatch(getAllStandUps());
-    dispatch(getAllLessons());
+    dispatch(getModules());
+    dispatch(getStandups());
+    dispatch(getClasses());
   }, [dispatch, state.users.length]);
   const [options, setOptions] = useState({
     module: "",
