@@ -20,4 +20,5 @@ export default combineReducers({
   videos,
   extras,
   favorites,
+  attendance
 });

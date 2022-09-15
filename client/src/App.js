@@ -24,6 +24,8 @@ import FormNewStandUp from "./components/Admin/Forms/FormNewSup/FormNewSup.jsx";
 import FormNewUser from "./components/Admin/Forms/FormNewUser/FormNewUser.jsx";
 import Attendance from "./components/AttendantComponents/Attendance.jsx";
 import Payment from "./components/Payment/Payment.jsx";
+import AllFavourite from "./pages/Favourite/allFavourite.jsx";
+import NotFound from "./pages/NotFound/NotFound.jsx";
 
 
 function App() {
@@ -89,6 +91,7 @@ function App() {
         <Route path="/module/:id" element={<Module user={user} />} />
         <Route path="/lecture/:id" element={<Details user={user} />} />
         <Route path="/codeReview/:id" element={<Details user={user} />} />
+        <Route path="/favourite" element={<AllFavourite user={user} />} />
         {/* Ruta de pasarela de pagos */}
         <Route path="/pagos" element={<Payment user={user}/>} />  
         <Route path="/catalog" element={<Catalog user={user} />} />
@@ -98,6 +101,8 @@ function App() {
         <Route path="/teachers" element={<Teachers />} />
         <Route path="/createVideo" element={<CreateVideo user={user} />} />
         <Route path="/updateclass" element={<UpdateClass user={user} />} />
+        {/* Not found */}
+        <Route path="*" element={<NotFound user={user} />} />
       </Routes>
     </div>
   );
