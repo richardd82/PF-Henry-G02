@@ -7,6 +7,7 @@ export const GET_ALL_COHORTS = 'GET_ALL_COHORTS';
 export const GET_ALL_MODULES = 'GET_ALL_MODULES';
 export const GET_ALL_STANDUPS = 'GET_ALL_STANDUPS';
 export const GET_ALL_LECTURES = 'GET_ALL_LECTURES';
+export const GET_ATTENDANCES = 'GET_ATTENDANCES';
 
 export const getUsers = () => {
   return dispatch => {
@@ -90,7 +91,7 @@ export const getStandupsSuccess = standups => {
   };
 };
 
-export const getClasses = () => {
+export const getAllClasses = () => {
   return dispatch => {
     dispatch(fetching());
     axios.get('https://localhost:3001/classes').then(response => {
@@ -112,5 +113,20 @@ export const postAttendance = attendance => {
       .post('https://localhost:3001/attendance/create', attendance)
       .then(response => console.log(response.data))
       .catch(error => console.log(error));
+  };
+};
+
+export const getAttendances = attendance => {
+  return dispatch => {
+    axios
+      .get('https://localhost:3001/attendance', attendance)
+      .then(response => {
+        dispatch(() => {
+          return {
+            type: GET_ATTENDANCES,
+            payload: response.data,
+          };
+        });
+      });
   };
 };

@@ -327,7 +327,7 @@ export function getFavoritesById(id) {
 export function addFavoritesById(userId, videoId) {
   return async function (dispatch) {
     var json = await axios.post( `http://localhost:3002/favorites/create/${userId}/${videoId}`);
-    console.log(json)
+    console.log(json.data)
     return dispatch({
       type: ADD_FAVORITE,
       payload: json.data,

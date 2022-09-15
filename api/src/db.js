@@ -55,7 +55,7 @@ Standups.belongsTo(Cohorts);
 Users.belongsTo(Cohorts);
 Users.belongsTo(Modules);
 Users.belongsTo(Standups);
-//Users.hasMany(Videos)
+// Users.hasMany(Videos)
 // // Videos
 Videos.belongsTo(Classes);
 //Videos.belongsTo(Users);
