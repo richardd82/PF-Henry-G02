@@ -11,31 +11,41 @@ import Login from "../Login/Login";
 const Profile = ({ user }) => {
   const users = useSelector((state) => state.users.allUsers);
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     if (!users.length) {
       dispatch(getTodosUsuarios());
     }
-  }, [dispatch]);
+  }, [dispatch, users.length]);
+  let category = '';
+  let active = false;
   ///FALTA INVESTIGAR COMO OBTENER EL EMAIL DEL USER DE GOOGLE
   // dispatch(getTodosUsuarios());
   const userValidate = users.find((e) => e.name === user.displayName);
-  const category = userValidate && userValidate.category;
-  const active = userValidate && userValidate.active;
+  
   console.log(active);
-
+  if (!user.category) {
+    // dispatch(getTodosUsuarios());
+		
+		const userValidate = users.find((e) => e.name === user.displayName);
+     active = userValidate && userValidate.active;
+		 category = userValidate && userValidate.category;
+		}else{
+			category = user.category;
+      // active = user.active;
+			// console.log(category);
+	}
+// && active === true
   return (
     <div>
-      {category === "admin" && active === true ? (
+      {category === "admin"  ? (
         <Admin user={user} />
-      ) : category === "student" && active === true ? (
+      ) : category === "student" ? (
         <Students user={user} />
-      ) : category === "ta" && active === true ? (
+      ) : category === "ta" ? (
         <Ta user={user} />
-      ) : category === "teacher" && active === true ? (
+      ) : category === "teacher" ? (
         <Teachers user={user} />
-      ) : active === false ? (
-        <Login />
       ) : null}
     </div>
   );

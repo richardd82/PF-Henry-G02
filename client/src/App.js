@@ -26,36 +26,48 @@ import Attendance from "./components/AttendantComponents/Attendance.jsx";
 import Payment from "./components/Payment/Payment.jsx";
 import AllFavourite from "./pages/Favourite/allFavourite.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
+import jwt from "jwt-decode";
 
 
 function App() {
   const [user, setUser] = useState({});
+  const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    const getUser = () => {
-      fetch("https://localhost:3001/auth/login/success", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error("Authentication has been failed!");
-        })
-        .then((resObject) => {
-          console.log(resObject);
-          setUser(resObject.user);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getUser();
-  }, []);
+	console.log(user , '============> Esto es user')
+	useEffect(() => {
+		if (!user.name) {
+			const getUser = () => {
+        
+				if (token) {          
+					const tokenDecode = jwt(token);
+					setUser(tokenDecode);
+				} else {
+					fetch("http://localhost:3001/auth/login/success", {
+						method: "GET",
+						credentials: "include",
+						headers: {
+							Accept: "application/json",
+							"Content-Type": "application/json",
+							"Access-Control-Allow-Credentials": true,
+						},
+					})
+						.then((response) => {
+							if (response.status === 200) return response.json();
+							throw new Error("Authentication has been failed!");
+						})
+						.then((resObject) => {
+							console.log(resObject);
+							setUser(resObject.user);
+						})
+						.catch((err) => {
+							console.log(err);
+						});
+				}
+			};
+			getUser();
+		}
+		
+	}, [token, user]);
   //console.log(user);
 
   return (
@@ -63,20 +75,15 @@ function App() {
       <Routes>
         {/* Rutas del Login y Home */}
         <Route
-          path="/login"
-          element={user.displayName ? <Navigate to="/" /> : <Login />}
-        />
-        <Route
-          exact
-          path="/"
-          element={
-            user.displayName ? (
-              <Profile user={user} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
+					path="/login"
+					element={user.name ? <Navigate to="/" /> : <Login />}
+				/>
+				<Route
+					path="/"
+					element={
+						user.name ? <Profile user={user} /> : <Navigate to="/login" />
+					}
+				/>
         {/* Rutas del Admin */}
         <Route path="/admin" element={<Admin />} />
         <Route path="/createCOHORT" element={<FormNewCohort user={user} />} />
