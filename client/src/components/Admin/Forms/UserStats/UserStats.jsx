@@ -9,7 +9,7 @@ const UsersStats = () => {
   let usersActive = 0;
   let usersInactive = 0;
   const dispatch = useDispatch();
-useEffect(() => {
+  useEffect(() => {
     dispatch(getTodosUsuarios());
   }, [dispatch]);
 

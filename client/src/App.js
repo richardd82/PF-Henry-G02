@@ -86,6 +86,7 @@ function App() {
         <Route path="/createUSER" element={<FormNewUser user={user} />} />
         <Route path="/update" element={<FormUpdateUser user={user} />} />
         <Route path="/update/:id" element={<UpdateOptions user={user} />} />
+
         {/* Rutas de Students y TA */}
         <Route path="/students" element={<Students />} />
         <Route path="/tas" element={<Ta />} />
