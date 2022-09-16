@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import React from "react";
 import Nav from "../../components/Nav/Nav";
+import UsersStats from "../../components/Admin/Forms/UserStats/UserStats";
 
 const UserAdmin = ({user}) => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const UserAdmin = ({user}) => {
     <div>        
         <div>
           <h1>RENDERIZAR EL DASHBOARD</h1>
+          <UsersStats/>
           <Link to="createUSER">
             <button> Create User</button>
           </Link>

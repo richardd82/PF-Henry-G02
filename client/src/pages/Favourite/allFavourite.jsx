@@ -23,7 +23,7 @@ const AllFavourite = ({ user }) => {
     if (!users.length) {
       dispatch(getTodosUsuarios());
     }
-    console.log('HOLA');
+
   }, [dispatch, loginUserId, users.length]);
 
   const videos = useSelector(state => state.favorites.favorite);

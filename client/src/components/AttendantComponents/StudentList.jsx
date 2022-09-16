@@ -14,26 +14,22 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
     classId: lecture,
     students: [],
   });
-  console.log(attendance);
-  useEffect(() => {
-    dispatch(
-      getAttendances({
-        standupId: standup,
-        cohortId: cohort,
-        classId: lecture,
-        students: currentStudents,
-      })
-    );
 
-    return () => {
+   useEffect(() => {
+    if(attendance.standupId &&  attendance.cohortId && attendance.classId){
+    dispatch(
+      getAttendances(standup, cohort, lecture)
+    );
+    }
+/*     return () => {
       setAttendance({
         standupId: standup,
         cohortId: cohort,
         classId: lecture,
         students: [],
       });
-    };
-  }, [dispatch, currentStudents, standup, cohort, lecture]);
+    };  */
+  }, [dispatch, standup, cohort, lecture]); 
 
   const attendances = useSelector(state => state.attendance.attendances);
 
@@ -73,18 +69,20 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
     <div>
       <h1>Estudiantes</h1>
       <form className="form" onSubmit={e => handleSubmit(e)}>
-        {currentStudents &&
-          currentStudents.map(student => {
-            return (
-              attendances &&
+          {currentStudents &&
+          currentStudents.map(student => { 
+            if(attendances.map(el => el.cohortId === student.cohortId)){
+             return (
+    
               attendances.map(dbAttendance => {
                 if (
-                  student.id === dbAttendance.usersId &&
+                  dbAttendance 
+                 /*  student.id === dbAttendance.usersId &&
                   dbAttendance.cohortId === attendance.cohortId &&
-                  dbAttendance.classId === attendance.classId
+                  dbAttendance.classId === attendance.classId */
                 ) {
                   return (
-                    <div key={student.id}>
+                       <div key={student.id}>
                       <label>{student.name}</label>
                       <input
                         className="inputCreate"
@@ -94,9 +92,9 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
                         type="checkbox"
                         onChange={e => handleSelect(e)}
                       />
-                    </div>
+                    </div> 
                   );
-                } else {
+                } else { 
                   return (
                     <div key={student.id}>
                       <label>{student.name}</label>
@@ -110,9 +108,28 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
                     </div>
                   );
                 }
-              })
+               })
+              );
+            } 
+           return (
+            <div>no renderizo nada</div>
+           )
+          })}   
+{/*             {currentStudents &&
+          currentStudents.map(student => {
+            return (
+              <div key={student.id}>
+                <label>{student.name}</label>
+                <input
+                  className="inputCreate"
+                  id={student.id}
+                  name={student.name}
+                  type="checkbox"
+                  onChange={e => handleSelect(e)}
+                />
+              </div>
             );
-          })}
+          })}   */}
         <button className="submitButton" type="subtmit">
           Enviar Asistencias
         </button>

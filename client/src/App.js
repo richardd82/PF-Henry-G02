@@ -26,6 +26,8 @@ import Attendance from "./components/AttendantComponents/Attendance.jsx";
 import Payment from "./components/Payment/Payment.jsx";
 import AllFavourite from "./pages/Favourite/allFavourite.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
+import Reviews from "./components/Reviews/Reviews.jsx";
+import AddReviews from "./components/Reviews/AddReviews.jsx";
 
 
 function App() {
@@ -92,6 +94,8 @@ function App() {
         <Route path="/lecture/:id" element={<Details user={user} />} />
         <Route path="/codeReview/:id" element={<Details user={user} />} />
         <Route path="/favourite" element={<AllFavourite user={user} />} />
+        <Route path="/reviews" element={<Reviews user={user} />} />
+        <Route path="/reviews/create" element={<AddReviews user={user} />} />
         {/* Ruta de pasarela de pagos */}
         <Route path="/pagos" element={<Payment user={user}/>} />  
         <Route path="/catalog" element={<Catalog user={user} />} />
