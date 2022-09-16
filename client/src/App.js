@@ -24,6 +24,7 @@ import FormNewStandUp from "./components/Admin/Forms/FormNewSup/FormNewSup.jsx";
 import FormNewUser from "./components/Admin/Forms/FormNewUser/FormNewUser.jsx";
 import Attendance from "./components/AttendantComponents/Attendance.jsx";
 import Payment from "./components/Payment/Payment.jsx";
+import UsersStats from "./components/Admin/Forms/Users Stats/activeUsers.jsx";
 
 
 function App() {
@@ -82,6 +83,8 @@ function App() {
         <Route path="/createUSER" element={<FormNewUser user={user} />} />
         <Route path="/update" element={<FormUpdateUser user={user} />} />
         <Route path="/update/:id" element={<UpdateOptions user={user} />} />
+        <Route path="/userstats" element={<UsersStats />} />
+
         {/* Rutas de Students y TA */}
         <Route path="/students" element={<Students />} />
         <Route path="/tas" element={<Ta />} />
