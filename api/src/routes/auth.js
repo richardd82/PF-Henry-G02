@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const passport = require("passport");
 //http://localhost:3001/auth/google/callback
-const CLIENT_URL = "https://localhost:3000/";
-const CLIENT_URL_LOGOUT = "https://localhost:3000/login";
+const CLIENT_URL = "http://localhost:3000/";
+const CLIENT_URL_LOGOUT = "http://localhost:3000/login";
 
 router.get("/login/success", (req, res) => {
 	if (req.user) {

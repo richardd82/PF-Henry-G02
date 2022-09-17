@@ -6,8 +6,7 @@ const GOOGLE_CLIENT_ID = "945644650061-0ts08c3vksmljvnnivlbjjko15mgqp0f.apps.goo
 const GOOGLE_CLIENT_SECRET = "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";
 const GITHUB_CLIENT_ID = "3e73f61eba155354d3b9";
 const GITHUB_CLIENT_SECRET = "2d1e660993492dd4c54200a794325f70148d5782";
-const FACEBOOK_CLIENT_ID = "ee7de60d067619fbde4c638894504de1";
-const FACEBOOK_CLIENT_SECRET = "f6867dbebc5db0f44650257033b08265";
+
 //ee7de60d067619fbde4c638894504de1 Facebook ClientID
 //f6867dbebc5db0f44650257033b08265 Facebook Secret
 //3e73f61eba155354d3b9 Github clientID
@@ -34,18 +33,6 @@ passport.use(
 			clientID: GITHUB_CLIENT_ID,
 			clientSecret: GITHUB_CLIENT_SECRET,
 			callbackURL: "/auth/github/callback",
-		},
-		function (accessToken, refreshToken, profile, done) {
-			done(null, profile)
-		}
-	)
-);
-passport.use(
-	new FacebookStrategy(
-		{
-			clientID: FACEBOOK_CLIENT_ID,
-			clientSecret: FACEBOOK_CLIENT_SECRET,
-			callbackURL: "/auth/facebook/callback",
 		},
 		function (accessToken, refreshToken, profile, done) {
 			done(null, profile)

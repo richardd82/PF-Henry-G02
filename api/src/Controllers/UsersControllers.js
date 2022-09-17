@@ -1,5 +1,7 @@
 const { Users, Classes } = require("../db.js");
 const { Op } = require("sequelize");
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = "qwertyuiopñlkjhgfdsa";
 
 const getAllUsers = async (req, res, next) => {
   try {
@@ -167,6 +169,34 @@ const userByEmail = async (req, res, next) => {
     console.log(error);
   }
 };
+const usersValidate = async (req, res) => {
+	try {
+		const {email, password} = req.body;
+
+		const user = await Users.findOne({
+			where: { email: email},
+			[Op.and]: [{password: password}]
+		});
+		console.log(user)
+		return res.send(
+			await jwt.sign(
+				{
+					id: user.id,
+					name: user.name,
+					image: user.image,
+					email: user.email,
+					active: user.active,
+					category: user.category,
+				},
+				SECRET_KEY,
+				{ expiresIn: "8h" }
+			)
+		);
+		
+	} catch (error) {
+		console.log(error)
+	}
+};
 
 module.exports = {
   getAllUsers,
@@ -175,5 +205,6 @@ module.exports = {
   userByTeacher,
   userByStudent,
   getAllTeachers,
-  userByEmail
+  userByEmail,
+  usersValidate,
 };
