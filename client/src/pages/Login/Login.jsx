@@ -40,15 +40,16 @@ const github = () => {
                     <div className ='l__text-auth'> OR </div> 
                     <hr className ='l__or-left'></hr>
                     <hr className ='l__or-right'></hr>
-                        <div className ='l__links__google'>
+                        <div className ='l__links__google' onClick={google}>
                             <img src= {Google} /> <p>Login with Google</p>
                         </div>
-                        <div className ='l__links__github'>
+                        <div className ='l__links__github' onClick={github}>
                             <img src= {GitHub} /> <p>Login with GitHub</p>
                         </div>
                     </div>
                 </form>
             </div>
+
             {/* <h1 className="loginTitle">Choose a Login Method</h1>
             <div className="wrapper">
                 <div className="left">
