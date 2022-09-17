@@ -29,7 +29,7 @@ export const ADD_FAVORITE = "ADD_FAVORITE";
 export const ADD_REVIEW = "ADD_REVIEW";
 export const GET_REVIEWS = "GET_REVIEWS";
 export const REVIEWS_BY_STUDENT = "REVIEWS_BY_STUDENT";
-
+export const CLEAR_STATE_REVIEWS = "CLEAR_STATE_REVIEWS";
 
 
 //*************Modulos************
@@ -349,10 +349,10 @@ try {
 }
 }
 //*********************Reviews**************************
-export function addReview (taId, payload){
+export function addReview (user, payload){
 try {
   return async (dispatch) => {
-    var response = await axios.post(`https://localhost:3001/reviews/create/${taId}`, payload)
+    var response = await axios.post(`https://localhost:3001/reviews/create/${user}`, payload)
     return dispatch({
       type: ADD_REVIEW, 
       payload: response.data
@@ -389,4 +389,10 @@ export function getReviews (taId){
     } catch (error) {
       console.log(error);
     }
+    }
+
+    export function clearStateReviews() {
+      return {
+        type: CLEAR_STATE_REVIEWS,
+      };
     }

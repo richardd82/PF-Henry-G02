@@ -270,3 +270,6 @@ animation-name: slidein;
 .link-Search{
   display: contents;
 }
+::placeholder{
+  color: black;
+}

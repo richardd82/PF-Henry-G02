@@ -52,8 +52,8 @@ const getReviewByStudent = async (req, res, next)=>{
         next(error)
     } */
 const createReview = async(req, res, next) => {
-    const {taId }= req.params
-    const {rating, comments, user} = req.body
+    const {user }= req.params
+    const {rating, comments, taId} = req.body
     try {
 
          let ta = await Users.findOne({

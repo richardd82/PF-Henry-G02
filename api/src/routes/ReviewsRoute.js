@@ -6,7 +6,7 @@ const router = Router()
 
 router.get('/', getReview)
 router.get('/reviewByStudent', getReviewByStudent)
-router.post('/create/:taId', createReview)
+router.post('/create/:user', createReview)
 //router.put('/:userId', updateReview)
 /* 
 router.get('/:idUser', getAllReviews) */

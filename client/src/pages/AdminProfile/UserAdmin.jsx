@@ -15,7 +15,6 @@ const UserAdmin = ({user}) => {
   return (
     <div>        
         <div>
-          <h1>RENDERIZAR EL DASHBOARD</h1>
           <UsersStats/>
           <Link to="createUSER">
             <button> Create User</button>

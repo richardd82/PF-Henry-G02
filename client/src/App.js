@@ -28,6 +28,7 @@ import AllFavourite from "./pages/Favourite/allFavourite.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import Reviews from "./components/Reviews/Reviews.jsx";
 import AddReviews from "./components/Reviews/AddReviews.jsx";
+import UserReview from "./components/Reviews/UserReview.jsx";
 
 
 function App() {
@@ -86,6 +87,7 @@ function App() {
         <Route path="/createUSER" element={<FormNewUser user={user} />} />
         <Route path="/update" element={<FormUpdateUser user={user} />} />
         <Route path="/update/:id" element={<UpdateOptions user={user} />} />
+        <Route path="/reviews" element={<Reviews user={user} />} />
 
         {/* Rutas de Students y TA */}
         <Route path="/students" element={<Students />} />
@@ -95,8 +97,8 @@ function App() {
         <Route path="/lecture/:id" element={<Details user={user} />} />
         <Route path="/codeReview/:id" element={<Details user={user} />} />
         <Route path="/favourite" element={<AllFavourite user={user} />} />
-        <Route path="/reviews" element={<Reviews user={user} />} />
         <Route path="/reviews/create" element={<AddReviews user={user} />} />
+        <Route path="/reviews/create/:id" element={<UserReview user={user} />} />
         {/* Ruta de pasarela de pagos */}
         <Route path="/pagos" element={<Payment user={user}/>} />  
         <Route path="/catalog" element={<Catalog user={user} />} />

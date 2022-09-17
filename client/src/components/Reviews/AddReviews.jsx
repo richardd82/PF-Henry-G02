@@ -10,29 +10,77 @@ import "./AddReview.css";
 import { FaCheck } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
 import { useState } from "react";
-import { Rating } from "react-simple-star-rating";
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
+import StarIcon from '@mui/icons-material/Star';
+import { Link } from "react-router-dom";
 
-export default function AddReview() {
-  const user = {
-    name: "Romi Jimenez",
-    id: "105104a9-9e18-4934-b950-18de117aa014",
-    standupId: "6c5dc9cc-460c-408c-8cb8-cfa94af873ec",
-    lastname: "Jimenez",
-    email: "romijimenez06@gmail.comimage",
-    category: "ta",
-    active: true,
-  };
-  const [rating, setRating] = useState(0)
-  const [valor, setValue] = useState({
+export default function AddReview(){
+    const user = {
+        name: "Romi Jimenez",
+        id: "105104a9-9e18-4934-b950-18de117aa014",
+        standupId: "6c5dc9cc-460c-408c-8cb8-cfa94af873ec",
+        lastname: "Jimenez",
+        email: "romijimenez06@gmail.comimage",
+        category: "ta",
+        active: true,
+      };
+    const dispatch = useDispatch()
+    const users = useSelector(state=> state.users.users)
+
+    useEffect(()=>{
+        dispatch(getTodosUsuarios())
+    },[dispatch])
+
+
+
+    return (
+        <div>
+            {
+                users && users.map(e => {
+                    if(e.standupId === user.standupId && e.category === "student")
+                    return (
+                    <Link to={`/reviews/create/${e.id}`}>
+                    <p>
+                        {e.name}
+                    </p>
+                    </Link>)
+                } )
+            }
+        </div>
+    )
+}
+
+/* export default function AddReview() {
+
+    const labels = {
+       // 0.5: 'Useless',
+        1: 'Useless+',
+       // 1.5: 'Poor',
+        2: 'Poor+',
+       // 2.5: 'Ok',
+        3: 'Ok+',
+       // 3.5: 'Good',
+        4: 'Good+',
+       // 4.5: 'Excellent',
+        5: 'Excellent+',
+      };
+      
+      function getLabelText(value) {
+        return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
+      }
+
+
+
+  
+
+  const [valor, setValor] = useState({
     valor: "0",
     id: "",
-    className: "",
+
   });
-  let rate = 1;
-  const handleRating = (rate) => {
-    setRating(rate)
-    // other logic
-  }
+  const [value, setValue] = useState(2);
+  const [hover, setHover] = useState(-1);
 
 
   const dispatch = useDispatch();
@@ -58,34 +106,53 @@ export default function AddReview() {
     setValue({
       ...valor,
       valor: e.currentTarget.value,
-      id: e.currentTarget.name,
+      id: e.target.name,
     });
-
-    let currentValor = e.currentTarget.value;
-    while (currentValor > 0 && currentValor < 5) {
-      setValue({
-        className: className,
-      });
-      if (valor.valor === currentValor) {
-      }
-      currentValor = currentValor - 1;
-      console.log(currentValor);
-    }
   };
 
   return (
     <>
+    
       <div>
-      <div >
-      <Rating onClick={handleRating} ratingValue={rating} /* Available Props */ />
-    </div>
         <h1>REVIEWS USERS STANDUP de: {user.name}</h1>
         {users &&
           users.map((e) => {
-            // console.log(user.standupId)
+           
             if (e.standupId === user.standupId && e.category === "student") {
               return (
-                <div key={e.id}>
+                  <Box 
+                sx={{
+                    width: 200,
+                    display: 'flex',
+                    alignItems: 'center',
+                }}
+                >
+                <Rating
+                    
+                    name={"hover-feedback"}
+                    value={value}
+                    precision={1}
+                    getLabelText={getLabelText}
+                    onChange={(event, newValue) => {
+                    setValue(newValue);
+                    }} 
+                    onChangeActive={(event, newHover) => {
+                    setHover(newHover);
+                    }}
+                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                />
+                {value !== null && (
+                    <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+                )}
+                </Box>
+              );
+            }
+          })}
+      </div>
+    </>
+  ); */
+//}
+ {/* <div key={e.id}>
                   <form>
                     <div key={e.id} style={{ display: "flex" }}>
                       <p>{e.name}</p>
@@ -156,11 +223,61 @@ export default function AddReview() {
                       <TiDelete />
                     </button>
                   </form>
-                </div>
-              );
-            }
-          })}
-      </div>
-    </>
+                </div> */}
+
+
+
+/* import * as React from 'react';
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
+import StarIcon from '@mui/icons-material/Star';
+
+const labels = {
+  0.5: 'Useless',
+  1: 'Useless+',
+  1.5: 'Poor',
+  2: 'Poor+',
+  2.5: 'Ok',
+  3: 'Ok+',
+  3.5: 'Good',
+  4: 'Good+',
+  4.5: 'Excellent',
+  5: 'Excellent+',
+};
+
+function getLabelText(value) {
+  return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
+}
+
+export default function HoverRating() {
+  const [value, setValue] = React.useState(2);
+  const [hover, setHover] = React.useState(-1);
+
+  return (
+    <Box
+      sx={{
+        width: 200,
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      <Rating
+        name="hover-feedback"
+        value={value}
+        precision={0.5}
+        getLabelText={getLabelText}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+        onChangeActive={(event, newHover) => {
+          setHover(newHover);
+        }}
+        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+      />
+      {value !== null && (
+        <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+      )}
+    </Box>
   );
 }
+ */

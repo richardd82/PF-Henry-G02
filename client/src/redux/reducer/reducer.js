@@ -27,7 +27,8 @@ import {
 	GET_FAVORITE_BY_ID,
   ADD_REVIEW,
   GET_REVIEWS,
-  REVIEWS_BY_STUDENT
+  REVIEWS_BY_STUDENT,
+  CLEAR_STATE_REVIEWS
 } from "../actions/index";
 
 const initialState = {
@@ -273,6 +274,10 @@ export function reviews(state = initialState, action) {
     return {
       ...state,
       reviews: action.payload
+    }
+    case CLEAR_STATE_REVIEWS: 
+    return {
+      ...initialState
     }
 		default:
 			return { ...state };

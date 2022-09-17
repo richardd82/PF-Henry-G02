@@ -32,11 +32,12 @@ const SearchBarEmail = () => {
       <form id="Form" onSubmit={(e) => handleSubmit(e)}>
         <div className="search">
           <input
+          style={{marginLeft: '150px'}}
             type="text"
             onChange={handleChange}
             value={emailSearch.toLowerCase()}
             className="search-Input"
-            placeholder="Search..."
+            placeholder="Email..."
           />
           <button type="submit" className="icon-Search" src={lupa}>
             <i>&#128640;</i>
