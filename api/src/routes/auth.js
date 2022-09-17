@@ -27,16 +27,16 @@ router.get("/logout", (req, res, next) => {
 	
 });
 
-router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
 router.get(
 	"/google/callback",
 	passport.authenticate("google", {
-		successRedirect: CLIENT_URL,
+		successRedirect: CLIENT_URL,		
 		failureRedirect: "/login/failed",
-	})
+	})		
 );
-router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
+router.get("/github", passport.authenticate("github", { scope: ["user:email"] }));
 
 router.get(
 	"/github/callback",

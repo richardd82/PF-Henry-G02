@@ -286,7 +286,7 @@ export function getTeachers() {
   export function usersValidate(payload) {
     return async function (dispatch) {
       console.log(payload.email + " <-------------->Entre a la Action");
-      var json = await axios.post(`http://localhost:3001/validate`, payload);
+      var json = await axios.post(`http://localhost:3001/users/`, payload);
       localStorage.setItem("token", JSON.stringify(json.data));
       const data = await jwtDecode(json.data);
       // console.log(data)

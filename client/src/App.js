@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 // import { useHistory } from 'react-router-dom';
 
 import Catalog from "./pages/Catalog/Catalog.jsx";
@@ -30,89 +30,97 @@ import jwt from "jwt-decode";
 
 
 function App() {
-  const [user, setUser] = useState({});
-  const token = localStorage.getItem("token");
+	const [user, setUser] = useState({});
+	const navigate = useNavigate();
+	const token = localStorage.getItem("token");
+	console.log(token + "Soy el token decodificado");
 
-	console.log(user , '============> Esto es user')
+	console.log(user, "============> Esto es user");
 	useEffect(() => {
-		if (!user.name) {
-			const getUser = () => {
-        
-				if (token) {          
-					const tokenDecode = jwt(token);
-					setUser(tokenDecode);
-				} else {
-					fetch("http://localhost:3001/auth/login/success", {
-						method: "GET",
-						credentials: "include",
-						headers: {
-							Accept: "application/json",
-							"Content-Type": "application/json",
-							"Access-Control-Allow-Credentials": true,
-						},
+		// if (!user.id) {
+		const getUser = () => {
+			if (token) {
+				const tokenDecode = jwt(token);
+				setUser(tokenDecode);
+			} else {
+				fetch("http://localhost:3001/auth/login/success", {
+					method: "GET",
+					credentials: "include",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json",
+						"Access-Control-Allow-Credentials": true,
+					},
+				})
+					.then((response) => {
+						if (response.status === 200) return response.json();
+						throw new Error("Authentication has been failed!");
 					})
-						.then((response) => {
-							if (response.status === 200) return response.json();
-							throw new Error("Authentication has been failed!");
-						})
-						.then((resObject) => {
-							console.log(resObject);
-							setUser(resObject.user);
-						})
-						.catch((err) => {
-							console.log(err);
-						});
-				}
-			};
-			getUser();
-		}
-		
+					.then((resObject) => {
+						console.log(resObject);
+						setUser(resObject.user);
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			}
+		};
+		getUser();
+		// }
 	}, [token, user]);
-  //console.log(user);
+	//console.log(user);
 
-  return (
-    <div className="App">
-      <Routes>
-        {/* Rutas del Login y Home */}
-        <Route
-					path="/login"
-					element={user.name ? <Navigate to="/" /> : <Login />}
-				/>
-				<Route
-					path="/"
-					element={
-						user.name ? <Profile user={user} /> : <Navigate to="/login" />
-					}
-				/>
-        {/* Rutas del Admin */}
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/createCOHORT" element={<FormNewCohort user={user} />} />
-        <Route path="/createSUP" element={<FormNewStandUp user={user} />} />
-        <Route path="/createUSER" element={<FormNewUser user={user} />} />
-        <Route path="/update" element={<FormUpdateUser user={user} />} />
-        <Route path="/update/:id" element={<UpdateOptions user={user} />} />
-        {/* Rutas de Students y TA */}
-        <Route path="/students" element={<Students />} />
-        <Route path="/tas" element={<Ta />} />
-        <Route path="/attendance" element={<Attendance user={user}/>} />
-        <Route path="/module/:id" element={<Module user={user} />} />
-        <Route path="/lecture/:id" element={<Details user={user} />} />
-        <Route path="/codeReview/:id" element={<Details user={user} />} />
-        <Route path="/favourite" element={<AllFavourite user={user} />} />
-        {/* Ruta de pasarela de pagos */}
-        <Route path="/pagos" element={<Payment user={user}/>} />  
-        <Route path="/catalog" element={<Catalog user={user} />} />
-        <Route path="/contacto" element={<Contact user={user} />} />
-        <Route path="/assistance" element={<Attendant user={user} />} />
-        {/* Rutas de Teachers */}
-        <Route path="/teachers" element={<Teachers />} />
-        <Route path="/createVideo" element={<CreateVideo user={user} />} />
-        <Route path="/updateclass" element={<UpdateClass user={user} />} />
-        {/* Not found */}
-        <Route path="*" element={<NotFound user={user} />} />
-      </Routes>
-    </div>
-  );
+	return (
+		<div className="App">
+			{/* {user.name || user.emails ? ( */}
+				<Routes>
+					{/* Rutas del Login y Home */}
+					<Route
+						path="/login"
+						element={user.name || user.emails ? <Navigate to="/" /> : <Login />}
+					/>
+					<Route
+						path="/"
+						element={
+							user.name || user.emails ? (
+								<Profile user={user} />
+							) : (
+								<Navigate to="/login" />
+							)
+						}
+					/>
+					{/* Rutas del Admin */}
+					<Route path="/admin" element={user.name || user.emails ? <Admin />:<Navigate to="/login" />} />
+					<Route path="/createCOHORT" element={user.name || user.emails ? <FormNewCohort user={user} />:<Navigate to="/login" />} />
+					<Route path="/createSUP" element={user.name || user.emails ? <FormNewStandUp user={user} />:<Navigate to="/login" />} />
+					<Route path="/createUSER" element={user.name || user.emails ? <FormNewUser user={user} />:<Navigate to="/login" />} />
+					<Route path="/update" element={user.name || user.emails ? <FormUpdateUser user={user} />:<Navigate to="/login" />} />
+					<Route path="/update/:id" element={user.name || user.emails ? <UpdateOptions user={user} />:<Navigate to="/login" />} />
+					{/* Rutas de Students y TA */}
+					<Route path="/students" element={user.name || user.emails ? <Students />:<Navigate to="/login" />} />
+					<Route path="/tas" element={user.name || user.emails ? <Ta />:<Navigate to="/login" />} />
+					<Route path="/attendance" element={user.name || user.emails ? <Attendance user={user} />:<Navigate to="/login" />} />
+					<Route path="/module/:id" element={user.name || user.emails ? <Module user={user} />:<Navigate to="/login" />} />
+					<Route path="/lecture/:id" element={user.name || user.emails ? <Details user={user} />:<Navigate to="/login" />} />
+					<Route path="/codeReview/:id" element={user.name || user.emails ? <Details user={user} />:<Navigate to="/login" />} />
+					<Route path="/favourite" element={user.name || user.emails ? <AllFavourite user={user} />:<Navigate to="/login" />} />
+					{/* Ruta de pasarela de pagos */}
+					<Route path="/pagos" element={user.name || user.emails ? <Payment user={user} />:<Navigate to="/login" />} />
+					<Route path="/catalog" element={user.name || user.emails ? <Catalog user={user} />:<Navigate to="/login" />} />
+					<Route path="/contacto" element={user.name || user.emails ? <Contact user={user} />:<Navigate to="/login" />} />
+					<Route path="/assistance" element={user.name || user.emails ? <Attendant user={user} />:<Navigate to="/login" />} />
+					{/* Rutas de Teachers */}
+					<Route path="/teachers" element={user.name || user.emails ? <Teachers />:<Navigate to="/login" />} />
+					<Route path="/createVideo" element={user.name || user.emails ? <CreateVideo user={user} />:<Navigate to="/login" />} />
+					<Route path="/updateclass" element={user.name || user.emails ? <UpdateClass user={user} />:<Navigate to="/login" />} />
+					{/* Not found */}
+					<Route path="*" element={user.name || user.emails ? <NotFound user={user} />:<Navigate to="/login" />} />
+				</Routes>
+			{/* ) : (
+				 <Login />								
+			)} */}
+		</div>
+	);
 }
 
 export default App;

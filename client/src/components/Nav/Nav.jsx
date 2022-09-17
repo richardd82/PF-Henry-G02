@@ -20,10 +20,10 @@ export default function Nav({ user }) {
 
 	const handleLogout =  () => {
 		if (user.category) {
-			 dispatch(logout());
 			localStorage.clear();
+			 dispatch(logout());
 			window.location.reload("http://localhost:3000/login");
-		} else if (user.displayName) {
+		} else if (user.emails) {
 			window.open("http://localhost:3001/auth/logout", "_self");
 		}
 	};

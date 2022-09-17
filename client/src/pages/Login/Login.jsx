@@ -28,7 +28,7 @@ const users = useSelector((state) => state.users.users);
 	
 	const user = users.find(e => e.email === input.email);
 	const validated = useSelector((state) => state.userValidate);
-	// console.log(users + ' - - - SOY users')
+	// console.log(validated + ' - - - SOY validated')
     
     const payload = {
         method: 'POST',
@@ -45,11 +45,13 @@ const users = useSelector((state) => state.users.users);
     const handleSubmit = (e) => {
         e.preventDefault()
 		if(user.email === input.email && user.password === input.password){
-			// console.log(user.category);
+			// console.log(user, '======> SOY USER ANTES DEL ACTION');
 			// navigate('/', { user: user.category });
 			dispatch(usersValidate(user))
 			// navigate('/')
-			window.location.reload('http://localhost:3000/');
+			
+				window.location.reload('http://localhost:3000/');
+			
 ;		}
 		else{
 			console.log('Usuario no registrado')
