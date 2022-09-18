@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useForm, ValidationError } from "@formspree/react";
+// import { useForm, ValidationError } from "@formspree/react";
 // Helper
 import { setErrors } from "../../helpers/setErrors.js";
 // import Nav from '../NavBar/Nav.js';
@@ -19,6 +19,10 @@ const Contact = ({ user }) => {
     email: "",
     message: "",
   });
+
+
+
+  
 
   // Error handling
   const [error, setError] = useState({

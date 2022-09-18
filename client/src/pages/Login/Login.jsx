@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Google from '../../assets/google.png';
+import Google from '../../assets/LogoGoogle.png'
 import GitHub from '../../assets/github.png';
 import './login.css'
 import { useDispatch, useSelector } from 'react-redux';

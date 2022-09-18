@@ -70,7 +70,7 @@ const Catalog = ({user}) => {
                       description={video.description}
                     />
                   </Link>
-                  <FavouriteButton userId={loginUserId} videoId={video.id} /> 
+                  <FavouriteButton userId={user} videoId={video.id} /> 
                   </div>
                 );
               })}
