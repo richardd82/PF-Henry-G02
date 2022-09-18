@@ -23,7 +23,10 @@ export const GET_VIDEOS_BY_ID = "GET_VIDEOS_BY_ID";
 export const CLEAR_STATE_VIDEOS = "CLEAR_STATE_VIDEOS";
 export const CLEAR_STATE_LESSONS = "CLEAR_STATE_LESSONS";
 export const CLEAR_STATE_MODULES = "CLEAR_STATE_MODULES";
-export const GET_BY_EMAIL = "GET_BY_EMAIL"
+export const GET_BY_EMAIL = "GET_BY_EMAIL";
+export const GET_FAVORITE_BY_ID = "GET_FAVORITE_BY_ID";
+export const ADD_FAVORITE = "ADD_FAVORITE";
+
 
 
 
@@ -191,7 +194,7 @@ export function createVideo(payload) {
         );
         return dispatch({
           type: GET_VIDEOS_BY_NAME,
-          payload: response.payload,
+          payload: response.data,
         });
       } catch (error) {
         console.log(error);
@@ -204,7 +207,7 @@ export function createVideo(payload) {
         const response = await axios.get(`https://localhost:3001/byTeacher/${id}`);
         return dispatch({
           type: GET_VIDEOS_BY_TEACHER,
-          payload: response.payload,
+          payload: response.data,
         });
       } catch (error) {
         console.log(error);
@@ -300,4 +303,35 @@ export function getAllStandUps() {
       return json;
     };
   }
+  //*********************Attendance**************************
+  export const postAttendance = attendance => {
+    return () => {
+      axios
+        .post('https://localhost:3001/attendance/create', attendance)
+        .then(response => console.log(response.data))
+        .catch(error => console.log(error));
+    };
+  };
+//*********************Favoritos**************************
+export function getFavoritesById(id) {
+  return async function (dispatch) {
+    var json = await axios.get(`http://localhost:3002/favorites/${id}`);
+    console.log(json)
+    return dispatch({
+      type: GET_FAVORITE_BY_ID,
+      payload: json.data.videos,
+    });
+  };
+}
+
+export function addFavoritesById(userId, videoId) {
+  return async function (dispatch) {
+    var json = await axios.post( `http://localhost:3002/favorites/create/${userId}/${videoId}`);
+    console.log(json.data)
+    return dispatch({
+      type: ADD_FAVORITE,
+      payload: json.data,
+    });
+  };
+}
   

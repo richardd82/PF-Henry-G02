@@ -1,9 +1,9 @@
-const {Users, Classes} = require("../db.js");
+const {Users, Videos} = require("../db.js");
 
 const getFavorites = async(req, res, next)=>{
     const {id} = req.params;
     try {
-        const user = await Users.findByPk(id,{  include: [{model:Classes}] });
+        const user = await Users.findByPk(id,{  include: [{model:Videos}] });
         
         res.json(user);
     } catch (error) {
@@ -12,10 +12,10 @@ const getFavorites = async(req, res, next)=>{
 };
 
 const addFavorites = async (req,res) =>{
-    const {idUser, idClass} = req.params;
+    const {idUser, idVideos} = req.params;
     try {
         const favorites = await Users.findByPk(idUser);
-        await favorites.addClasses(idClass)
+        await favorites.addVideos(idVideos)
         const user = await Users.findByPk(idUser);
         res.json(user)
     } catch (error) {

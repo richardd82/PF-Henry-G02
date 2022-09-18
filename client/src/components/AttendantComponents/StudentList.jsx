@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 // Actions
-import { postAttendance } from "../../redux/actions/attendanceActions.js";
+import {
+  postAttendance,
+  getAttendances,
+} from '../../redux/actions/attendanceActions.js';
 
 const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
   const dispatch = useDispatch();
@@ -13,6 +16,15 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
   });
   console.log(attendance);
   useEffect(() => {
+    dispatch(
+      getAttendances({
+        standupId: standup,
+        cohortId: cohort,
+        classId: lecture,
+        students: currentStudents,
+      })
+    );
+
     return () => {
       setAttendance({
         standupId: standup,
@@ -21,14 +33,16 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
         students: [],
       });
     };
-  }, [currentStudents, standup, cohort, lecture]);
+  }, [dispatch, currentStudents, standup, cohort, lecture]);
 
-  const handleSelect = (e) => {
+  const attendances = useSelector(state => state.attendance.attendances);
+
+  const handleSelect = e => {
     const { name, id, checked } = e.target;
-    setAttendance((prev) => {
+    setAttendance(prev => {
       if (checked === false) {
         const filteredStudents = prev.students.filter(
-          (student) => student.id !== id
+          student => student.id !== id
         );
         return {
           ...prev,
@@ -43,34 +57,60 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     dispatch(postAttendance(attendance));
-    setAttendance({
-      standupId: standup,
-      cohortId: cohort,
-      classId: lecture,
-      students: [],
-    });
+    alert('Asistencia enviada');
+    // setAttendance({
+    //   standupId: standup,
+    //   cohortId: cohort,
+    //   classId: lecture,
+    //   students: [],
+    // });
   };
 
   return (
     <div>
       <h1>Estudiantes</h1>
-      <form className="form" onSubmit={(e) => handleSubmit(e)}>
+      <form className="form" onSubmit={e => handleSubmit(e)}>
         {currentStudents &&
-          currentStudents.map((student) => {
+          currentStudents.map(student => {
             return (
-              <div key={student.id}>
-                <label>{student.name}</label>
-                <input
-                  className="inputCreate"
-                  id={student.id}
-                  name={student.name}
-                  type="checkbox"
-                  onChange={(e) => handleSelect(e)}
-                />
-              </div>
+              attendances &&
+              attendances.map(dbAttendance => {
+                if (
+                  student.id === dbAttendance.usersId &&
+                  dbAttendance.cohortId === attendance.cohortId &&
+                  dbAttendance.classId === attendance.classId
+                ) {
+                  return (
+                    <div key={student.id}>
+                      <label>{student.name}</label>
+                      <input
+                        className="inputCreate"
+                        id={student.id}
+                        value={true}
+                        name={student.name}
+                        type="checkbox"
+                        onChange={e => handleSelect(e)}
+                      />
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div key={student.id}>
+                      <label>{student.name}</label>
+                      <input
+                        className="inputCreate"
+                        id={student.id}
+                        name={student.name}
+                        type="checkbox"
+                        onChange={e => handleSelect(e)}
+                      />
+                    </div>
+                  );
+                }
+              })
             );
           })}
         <button className="submitButton" type="subtmit">

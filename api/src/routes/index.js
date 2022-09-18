@@ -9,6 +9,7 @@ const passport = require('passport');
 const VideosRoute = require('./VideosRoute.js')
 const AttendanceRoute = require('./AttendanceRoute.js')
 const MercadopagoRoutes = require('./MercadopagoRoutes.js')
+
  
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');

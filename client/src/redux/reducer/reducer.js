@@ -23,6 +23,8 @@ import {
   CLEAR_STATE_LESSONS,
   CLEAR_STATE_MODULES,
   GET_BY_EMAIL,
+  ADD_FAVORITE,
+	GET_FAVORITE_BY_ID,
 } from "../actions/index";
 
 const initialState = {
@@ -229,7 +231,25 @@ export function extras(state = initialState, action) {
       return { ...state };
   }
 }
+export function favorites(state = initialState, action) {
+	switch (action.type) {
+		case GET_FAVORITE_BY_ID:
+			console.log(action.payload)
+			return {
+				...state,
+				favorite: action.payload,
+			};
 
+
+		case ADD_FAVORITE:
+			return {
+				...state,
+			};
+
+		default:
+			return { ...state };
+	}
+}
 // export default {
 // 	modules,
 // 	cohorts,

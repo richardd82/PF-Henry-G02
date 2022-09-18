@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { createUser, getAllUsers, updateUser, userByTeacher, userByStudent, getAllTeachers, userByEmail } = require('../Controllers/UsersControllers');
+const { createUser, getAllUsers, updateUser, userByTeacher, userByStudent, getAllTeachers, userByEmail, userValidate } = require('../Controllers/UsersControllers');
 
 //crear usuario, borrar usuario, modificar usuario, get usuario 
 

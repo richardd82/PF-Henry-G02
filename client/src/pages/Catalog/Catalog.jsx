@@ -9,17 +9,25 @@ import Card from '../../components/Card/Card.jsx';
 import Nav from '../../components/Nav/Nav'
 // Actions
 import { getAllVideos } from '../../redux/actions/index';
+import { getTodosUsuarios } from '../../redux/actions/index';
 import { Link } from 'react-router-dom';
+import FavouriteButton from '../../components/FavouriteComponents/favouriteButton.jsx';
+
 
 const Catalog = ({user}) => {
   const dispatch = useDispatch();
   const videos = useSelector(state => state.videos.videos);
-  
-  
+  const users = useSelector((state) => state.users.allUsers);
+  const userValidate = users.find((e) => e.name === user.displayName);
+	const loginUserId = userValidate && userValidate.id;
+
   useEffect(() => {
     // if (!videos.classes.length && videos.loading === false) {
       dispatch(getAllVideos());
       // }
+      if(!users.length){
+        dispatch(getTodosUsuarios());
+    }
     }, [dispatch]);
     console.log(videos)
 
@@ -53,6 +61,7 @@ const Catalog = ({user}) => {
             {currentVideos &&
               currentVideos.map(video => {
                 return (
+                  <div>
                   <Link key={video.id} to={`/lecture/${video.id}`}>
                     <Card
                       id={video.id}
@@ -61,6 +70,8 @@ const Catalog = ({user}) => {
                       description={video.description}
                     />
                   </Link>
+                  <FavouriteButton userId={user} videoId={video.id} /> 
+                  </div>
                 );
               })}
           </div>

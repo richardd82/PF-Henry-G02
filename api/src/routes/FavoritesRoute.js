@@ -3,6 +3,6 @@ const {getFavorites, addFavorites} = require ('../Controllers/FavoritesControlle
 const router = Router();
 
 router.get("/:id", getFavorites);
-router.post("/create/:idUser/:idClass", addFavorites);
+router.post("/create/:idUser/:idVideos", addFavorites);
 
 module.exports =  router;
