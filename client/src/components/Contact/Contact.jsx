@@ -1,8 +1,4 @@
 import React, { useState, useRef } from "react";
-<<<<<<< HEAD
-// import { useForm, ValidationError } from "@formspree/react";
-=======
->>>>>>> miercoles-15
 // Helper
 import { setErrors } from "../../helpers/setErrors.js";
 // import Nav from '../NavBar/Nav.js';
