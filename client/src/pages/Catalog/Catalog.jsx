@@ -50,7 +50,6 @@ const Catalog = ({user}) => {
         <div>
 
         <Nav user={user}/>
-            <h1>ESTA ES LA PAGINA QUE MUESTRA LOS VIDEOS</h1>
           <Pager
             currentPage={currentPage}
             pageHandler={handlePage}

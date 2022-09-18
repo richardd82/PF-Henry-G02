@@ -61,8 +61,8 @@ Videos.belongsTo(Classes);
 //Videos.belongsTo(Users);
 Videos.belongsTo(Cohorts);
 // //Review
-Users.belongsToMany(Reviews, {through: 'users_reviews'})
-Reviews.belongsToMany(Users, {through: 'users_reviews'}) 
+Users.hasMany(Reviews)
+Reviews.belongsTo(Users) 
 
 
 module.exports = {

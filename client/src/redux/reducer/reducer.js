@@ -277,7 +277,8 @@ export function reviews(state = initialState, action) {
     }
     case CLEAR_STATE_REVIEWS: 
     return {
-      ...initialState
+      ...state,
+      reviews: []
     }
 		default:
 			return { ...state };

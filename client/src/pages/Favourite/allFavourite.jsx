@@ -51,7 +51,6 @@ const AllFavourite = ({ user }) => {
       ) : ( */}
       <div>
         <Nav user={user} />
-        <h1>Pagina de FAV</h1>
         <div>
           {currentVideos &&
             currentVideos.map(video => {

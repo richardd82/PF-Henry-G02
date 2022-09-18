@@ -16,6 +16,9 @@ import { useDispatch, useSelector } from "react-redux";
   
 
 export default function UserReview(){
+
+
+    //MODIFICAR CUANDO SE PUEDA INGRESAR CON LOGIN
     const user = {
         name: "Romi Jimenez",
         id: "105104a9-9e18-4934-b950-18de117aa014",
@@ -25,12 +28,14 @@ export default function UserReview(){
         category: "ta",
         active: true,
       };
+      //MODIFICAR CUANDO SE PUEDA INGRESAR CON LOGIN
+
 
 
     const users = useSelector(state=> state.users.users)
+
     const {id}= useParams()
     const dispatch = useDispatch()
-
 
     const labels = {
          1: 'Useless+',
@@ -43,8 +48,8 @@ export default function UserReview(){
 
        useEffect(()=>{
         dispatch(getTodosUsuarios())
-        return ()=>{
-            clearStateReviews()
+        return ()=> {
+            dispatch(clearStateReviews())
         }
        }, [])
        function getLabelText(value) {
@@ -74,7 +79,11 @@ function handleSelect(e){
 function handleSubmit(e){
     e.preventDefault()
     dispatch(addReview(id, value))
-    console.log(value);
+    setValue({
+        rating: 0,
+        comments: '', 
+        taId: ''
+    })
 }
 
     return (
@@ -83,6 +92,7 @@ function handleSubmit(e){
             <AddReview/>
             <div>
                 <form onSubmit={(e)=>handleSubmit(e)}>
+
                     <select onChange={(e)=>handleSelect(e)}>
                         <option value={''}>TA</option>
                     {
@@ -120,15 +130,15 @@ function handleSubmit(e){
                 
                 <textarea
                     name={'comments'}
+                    value={value.comments}
                     onChange={handleChange}
                       wrap="hard"
                       required
-                      placeholder="Deje un comentario sobre el estudiante."
+                      placeholder={"Deje un comentario sobre el estudiante"}
                       style={{
                         border: "1px solid black",
                         width: "400px",
                         height: "200px",
-
                         resize: "none",
                       }}
                     ></textarea>
@@ -145,6 +155,7 @@ function handleSubmit(e){
                     >  
                     <TiDelete />
                     </button>
+                    
                     </form>
             </div>
         </div>

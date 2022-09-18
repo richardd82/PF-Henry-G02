@@ -1,13 +1,9 @@
 const { Reviews, Users } = require("../db.js");
 
 const getReview = async(req, res, next) =>{
-    const {taId} = req.query
+    //const {taId} = req.query
     try {
-        const allReviews = await Reviews.findAll({
-            where: {
-                taId: taId
-            }
-        })
+        const allReviews = await Reviews.findAll({include: Users})
         res.json(allReviews)
     } catch (error) {
         next(error)
@@ -20,7 +16,7 @@ const getReviewByStudent = async (req, res, next)=>{
             where: {
                 id: userId
             }, 
-            include:{model: Reviews}
+            include:{model: Users}
         })
         res.json(student)
     } catch (error) {
@@ -61,13 +57,13 @@ const createReview = async(req, res, next) => {
                 id: taId
             }
          }) 
-         if (ta) {
+/*          if (ta) {
             const userRev = await Users.findAll({
                 where: {
                     id: user
                 }
-            })
-            if(userRev){
+            }) 
+            if(userRev){*/
             const newReview = await Reviews.create({
                 
                     taId: taId,
@@ -75,10 +71,10 @@ const createReview = async(req, res, next) => {
                     rating: rating,
                     comments: comments
                 })
-                await newReview.addUsers(userRev)
+                await newReview.setUser(user)
                 res.json(newReview)
-        }
-    } 
+        //}
+    //} 
     } catch (error) {
         next(error)
     }
