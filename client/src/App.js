@@ -37,7 +37,7 @@ function App() {
 
 	console.log(user, "============> Esto es user");
 	useEffect(() => {
-		// if (!user.id) {
+		if (!user.id) {
 		const getUser = () => {
 			if (token) {
 				const tokenDecode = jwt(token);
@@ -66,8 +66,8 @@ function App() {
 			}
 		};
 		getUser();
-		// }
-	}, [token, user]);
+		}
+	}, []);
 	//console.log(user);
 
 	return (
