@@ -1,22 +1,27 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { postNewClass, getAllClasses } from "../../../../redux/actions/userAdmin";
+import {
+  postNewClass,
+  getAllClasses,
+  getAllModules,
+} from "../../../../redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import { Validations } from "./validations";
-import Nav from "../../NavBar/Nav.js";
 
 const FormNewClass = () => {
   const [errors, setErrors] = useState({});
-  const adminUser = useSelector((state) => state.usuarios);
+  const modules = useSelector((state) => state.modules.allModules);
   const dispatch = useDispatch();
   const [input, setInput] = useState({
     name: "",
-    lectureLink: "",
-    lectureLink2: "",
-    codeReviewLink: "",
-    codeReviewLink2: "",
+    moduleId: "",
     description: "",
   });
+  useEffect(() => {
+    dispatch(getAllModules());
+  }, []);
+
+  console.log(modules);
   const handleChange = (e) => {
     setInput({
       ...input,
@@ -29,6 +34,13 @@ const FormNewClass = () => {
       })
     );
   };
+  const handleSelectModule = (e) => {
+    e.preventDefault(e);
+    setInput({
+      ...input,
+      moduleId: e.target.value,
+    });
+  };
   const handleSubmite = (e) => {
     e.preventDefault(e);
 
@@ -36,13 +48,9 @@ const FormNewClass = () => {
     alert("User Created");
     setInput({
       name: "",
-      lectureLink: "",
-      lectureLink2: "",
-      codeReviewLink: "",
-      codeReviewLink2: "",
+      moduleId: "",
       description: "",
     });
-    
   };
 
   return (
@@ -55,7 +63,7 @@ const FormNewClass = () => {
         }}
       >
         <label>
-          <b>*</b>Class Title:
+          <b>*</b>Título de la clase
         </label>
         <input
           placeholder="Title"
@@ -67,54 +75,22 @@ const FormNewClass = () => {
             handleChange(e);
           }}
         ></input>
-        {/* {errors.name && <h1>{errors.name}</h1>} */}
 
-        <label>
-          <b>*</b>Lecture:
-        </label>
+        <label>Descripción</label>
         <input
-          placeholder="paste url"
-          type="url"
-          value={input.lectureLink}
-          name="lectureLink"
+          placeholder="Descripción"
+          type={"text"}
+          value={input.description}
+          name="description"
           required
-          onChange={(e) => {
-            handleChange(e);
-          }}
+          onChange={handleChange}
         ></input>
-        {/* {errors.lastname && <h1>{errors.lastname}</h1>} */}
-        <label>Additional Lecture: </label>
-        <input
-          placeholder="paste url"
-          type="url"
-          value={input.lectureLink2}
-          name="lectureLink2"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-        ></input>
-        <label>Code Review:</label>
-        <input
-          placeholder="paste url"
-          type="url"
-          value={input.codeReviewLink}
-          name="codeReviewLink"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-        ></input>
-        <label>Additional Code Review :</label>
-        <input
-          placeholder="paste url"
-          type="url"
-          value={input.codeReviewLink2}
-          name="codeReviewLink2"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-        ></input>
-
-        {/* {errors.category && <h1>{errors.category}</h1>} */}
+        <select onChange={handleSelectModule}>
+          <option>MODULOS</option>
+          {modules?.map((e) => {
+            return <option value={e.id}>{e.name}</option>;
+          })}
+        </select>
         <button type="submit"> Create Class</button>
       </form>
     </div>

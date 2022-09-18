@@ -10,7 +10,7 @@ import "./AddReview.css";
 import { FaCheck } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
 import { useState } from "react";
-import Rating from '@mui/material/Rating';
+import {Rating} from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 import { Link } from "react-router-dom";

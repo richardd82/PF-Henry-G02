@@ -1,3 +1,4 @@
+import { ActionTypes } from "@mui/base";
 import {
   GET_ALL_LESSONS,
   GET_ALL_MODULES,
@@ -77,6 +78,7 @@ export function modules(state = initialState, action) {
       return {
         ...state,
         modules: action.payload,
+        allModules: action.payload,
       };
     case CLEAR_STATE_MODULES:
       return {
@@ -110,6 +112,8 @@ export function classes(state = initialState, action) {
       return {
         ...state,
         lessons: action.payload,
+        classes: action.payload,
+        allClasses: action.payload
       };
     case GET_LESSONS_BY_ID:
       return {
