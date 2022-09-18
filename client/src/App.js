@@ -32,6 +32,7 @@ import UserReview from "./components/Reviews/UserReview.jsx";
 import FormNewClass from "./components/Admin/Forms/FormNewClass/FormNewClass";
 import FormNewVideo from "./components/Admin/Forms/FormNewVideo/FormNewVideo.jsx";
 
+import UsersStats from "./components/Admin/Forms/Users Stats/activeUsers.jsx";
 
 
 function App() {
@@ -94,6 +95,7 @@ function App() {
 
         <Route path="/update/:id" element={<UpdateOptions user={user} />} />
         <Route path="/reviews" element={<Reviews user={user} />} />
+        <Route path="/userstats" element={<UsersStats />} />
 
         {/* Rutas de Students y TA */}
         <Route path="/students" element={<Students />} />
