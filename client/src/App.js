@@ -31,9 +31,7 @@ import AddReviews from "./components/Reviews/AddReviews.jsx";
 import UserReview from "./components/Reviews/UserReview.jsx";
 import FormNewClass from "./components/Admin/Forms/FormNewClass/FormNewClass";
 import FormNewVideo from "./components/Admin/Forms/FormNewVideo/FormNewVideo.jsx";
-
 import UsersStats from "./components/Admin/Forms/UserStats/UserStats.jsx";
-
 
 function App() {
   const [user, setUser] = useState({});
@@ -92,7 +90,6 @@ function App() {
         <Route path="/update" element={<FormUpdateUser user={user} />} />
         <Route path="/createClass" element={<FormNewClass />} />
 
-
         <Route path="/update/:id" element={<UpdateOptions user={user} />} />
         <Route path="/reviews" element={<Reviews user={user} />} />
         <Route path="/userstats" element={<UsersStats />} />
@@ -100,15 +97,18 @@ function App() {
         {/* Rutas de Students y TA */}
         <Route path="/students" element={<Students />} />
         <Route path="/tas" element={<Ta />} />
-        <Route path="/attendance" element={<Attendance user={user}/>} />
+        <Route path="/attendance" element={<Attendance user={user} />} />
         <Route path="/module/:id" element={<Module user={user} />} />
         <Route path="/lecture/:id" element={<Details user={user} />} />
         <Route path="/codeReview/:id" element={<Details user={user} />} />
         <Route path="/favourite" element={<AllFavourite user={user} />} />
         <Route path="/reviews/create" element={<AddReviews user={user} />} />
-        <Route path="/reviews/create/:id" element={<UserReview user={user} />} />
+        <Route
+          path="/reviews/create/:id"
+          element={<UserReview user={user} />}
+        />
         {/* Ruta de pasarela de pagos */}
-        <Route path="/pagos" element={<Payment user={user}/>} />  
+        <Route path="/pagos" element={<Payment user={user} />} />
         <Route path="/catalog" element={<Catalog user={user} />} />
         <Route path="/contacto" element={<Contact user={user} />} />
         <Route path="/assistance" element={<Attendant user={user} />} />
