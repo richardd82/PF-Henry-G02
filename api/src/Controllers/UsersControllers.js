@@ -1,11 +1,14 @@
-const { Users, Classes } = require("../db.js");
+const { Users, Classes, Reviews } = require("../db.js");
 const { Op } = require("sequelize");
 
 const getAllUsers = async (req, res, next) => {
   try {
     if (req.query.filter) {
       const usersFilter = await Users.findAll({
-        where: { category: req.query.filter },
+        where: { 
+          category: req.query.filter 
+        },
+        include:{model: Reviews}
       });
       return res.json(usersFilter);
     }
@@ -16,6 +19,16 @@ const getAllUsers = async (req, res, next) => {
     console.log(error);
   }
 };
+
+const getById = async (req, res, next) => {
+  const {id} = req.params
+  try {
+    const userById = await Users.findByPk(id, {inlcude: Reviews})
+    res.json(userById)
+  } catch (error) {
+    next(error)
+  }
+}
 
 const createUser = async (req, res, next) => {
   try {
@@ -170,6 +183,7 @@ const userByEmail = async (req, res, next) => {
 
 module.exports = {
   getAllUsers,
+  getById,
   createUser,
   updateUser,
   userByTeacher,

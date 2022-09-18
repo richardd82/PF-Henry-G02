@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
-import Nav from '../Nav/Nav'
+/* import Nav from '../Nav/Nav' */
 import DashboardStudent from './DashboardStudents/DasboardStudent'
 
-const Students = ({user}) => {
+const Students = () => {
  
 
   return (
     <div>
 
-    <Nav user={user} />
+   {/*  <Nav user={user} /> */}
     <DashboardStudent />
    
     

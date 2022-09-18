@@ -8,6 +8,7 @@ import {
   videos,
   extras,
   favorites,
+  reviews
 } from './reducer';
 import attendance from './attendanceReducer.js';
 
@@ -20,5 +21,6 @@ export default combineReducers({
   videos,
   extras,
   favorites,
-  attendance
+  attendance,
+  reviews
 });

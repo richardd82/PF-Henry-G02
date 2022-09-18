@@ -99,6 +99,8 @@ const FormNewUser = ({ user }) => {
     }
   };
 
+  const supFiltered= supExistente.filter(el => el.cohortId === input.cohortId)
+
   return (
     <>
       <Nav user={user} />
@@ -198,7 +200,7 @@ const FormNewUser = ({ user }) => {
           className="select"
            onChange={handleSelectSup}>
             <option> Select Standup</option>
-            {supExistente?.map((e) => {
+            {supFiltered?.map((e) => {
               return (
                 <option key={e.id} value={e.id}>
                   {e.name}

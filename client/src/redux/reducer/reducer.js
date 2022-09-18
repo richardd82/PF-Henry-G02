@@ -1,3 +1,4 @@
+import { ActionTypes } from "@mui/base";
 import {
   GET_ALL_LESSONS,
   GET_ALL_MODULES,
@@ -25,6 +26,10 @@ import {
   GET_BY_EMAIL,
   ADD_FAVORITE,
 	GET_FAVORITE_BY_ID,
+  ADD_REVIEW,
+  GET_REVIEWS,
+  REVIEWS_BY_STUDENT,
+  CLEAR_STATE_REVIEWS
 } from "../actions/index";
 
 const initialState = {
@@ -57,9 +62,14 @@ const initialState = {
   allVideos: [],
   detailVideos: {},
 
+  //Reviews
+  reviews: [],
+
   //Extras
   loading: false,
   errorMsg: "",
+
+
   ///////////////////////////////
 };
 export function modules(state = initialState, action) {
@@ -68,6 +78,7 @@ export function modules(state = initialState, action) {
       return {
         ...state,
         modules: action.payload,
+        allModules: action.payload,
       };
     case CLEAR_STATE_MODULES:
       return {
@@ -101,6 +112,8 @@ export function classes(state = initialState, action) {
       return {
         ...state,
         lessons: action.payload,
+        classes: action.payload,
+        allClasses: action.payload
       };
     case GET_LESSONS_BY_ID:
       return {
@@ -246,6 +259,31 @@ export function favorites(state = initialState, action) {
 				...state,
 			};
 
+		default:
+			return { ...state };
+	}
+}
+export function reviews(state = initialState, action) {
+	switch (action.type) {
+		case ADD_REVIEW:
+			return {
+				...state,
+			};
+    case GET_REVIEWS: 
+    return {
+      ...state,
+      reviews: action.payload
+    }
+    case REVIEWS_BY_STUDENT: 
+    return {
+      ...state,
+      reviews: action.payload
+    }
+    case CLEAR_STATE_REVIEWS: 
+    return {
+      ...state,
+      reviews: []
+    }
 		default:
 			return { ...state };
 	}

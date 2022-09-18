@@ -23,7 +23,7 @@ const AllFavourite = ({ user }) => {
     if (!users.length) {
       dispatch(getTodosUsuarios());
     }
-    console.log('HOLA');
+
   }, [dispatch, loginUserId, users.length]);
 
   const videos = useSelector(state => state.favorites.favorite);
@@ -51,7 +51,6 @@ const AllFavourite = ({ user }) => {
       ) : ( */}
       <div>
         <Nav user={user} />
-        <h1>Pagina de FAV</h1>
         <div>
           {currentVideos &&
             currentVideos.map(video => {

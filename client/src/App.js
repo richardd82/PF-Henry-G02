@@ -24,9 +24,15 @@ import FormNewStandUp from "./components/Admin/Forms/FormNewSup/FormNewSup.jsx";
 import FormNewUser from "./components/Admin/Forms/FormNewUser/FormNewUser.jsx";
 import Attendance from "./components/AttendantComponents/Attendance.jsx";
 import Payment from "./components/Payment/Payment.jsx";
-import UsersStats from "./components/Admin/Forms/Users Stats/activeUsers.jsx";
 import AllFavourite from "./pages/Favourite/allFavourite.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
+import Reviews from "./components/Reviews/Reviews.jsx";
+import AddReviews from "./components/Reviews/AddReviews.jsx";
+import UserReview from "./components/Reviews/UserReview.jsx";
+import FormNewClass from "./components/Admin/Forms/FormNewClass/FormNewClass";
+import FormNewVideo from "./components/Admin/Forms/FormNewVideo/FormNewVideo.jsx";
+
+import UsersStats from "./components/Admin/Forms/UserStats/UserStats.jsx";
 
 
 function App() {
@@ -84,7 +90,11 @@ function App() {
         <Route path="/createSUP" element={<FormNewStandUp user={user} />} />
         <Route path="/createUSER" element={<FormNewUser user={user} />} />
         <Route path="/update" element={<FormUpdateUser user={user} />} />
+        <Route path="/createClass" element={<FormNewClass />} />
+
+
         <Route path="/update/:id" element={<UpdateOptions user={user} />} />
+        <Route path="/reviews" element={<Reviews user={user} />} />
         <Route path="/userstats" element={<UsersStats />} />
 
         {/* Rutas de Students y TA */}
@@ -95,6 +105,8 @@ function App() {
         <Route path="/lecture/:id" element={<Details user={user} />} />
         <Route path="/codeReview/:id" element={<Details user={user} />} />
         <Route path="/favourite" element={<AllFavourite user={user} />} />
+        <Route path="/reviews/create" element={<AddReviews user={user} />} />
+        <Route path="/reviews/create/:id" element={<UserReview user={user} />} />
         {/* Ruta de pasarela de pagos */}
         <Route path="/pagos" element={<Payment user={user}/>} />  
         <Route path="/catalog" element={<Catalog user={user} />} />
@@ -104,6 +116,8 @@ function App() {
         <Route path="/teachers" element={<Teachers />} />
         <Route path="/createVideo" element={<CreateVideo user={user} />} />
         <Route path="/updateclass" element={<UpdateClass user={user} />} />
+        <Route path="/createVideo" element={<FormNewVideo />} />
+
         {/* Not found */}
         <Route path="*" element={<NotFound user={user} />} />
       </Routes>

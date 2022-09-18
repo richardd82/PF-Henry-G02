@@ -2,26 +2,34 @@ import React from "react";
 import ReactPlayer from "react-player";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { Link, useParams } from "react-router-dom";
 import avatar from "../../media/avatar.png";
 import github from "../../media/github.png";
 import sheet from "../../media/sheet.png";
 import "./Clases.css";
 import Nav from "../../components/Nav/Nav";
-import { clearStateVideos, getAllVideos } from "../../redux/actions/index";
+import {
+  clearStateVideos,
+  getAllVideos,
+  getTodosUsuarios,
+} from "../../redux/actions/index";
 import { getVideosById } from "../../redux/actions/index";
 //import CodeReviewOn from "./ConditionalRender/CodeReviewOn";
 
 const Details = ({ user }) => {
   const dispatch = useDispatch();
   const myLesson = useSelector((state) => state.videos.allVideos);
-  console.log(myLesson);
-
+  const myUsers = useSelector((state) => state.users.allUsers);
+  const myLessonMapped = myLesson.map((e) => e.userId);
+  const usersMapped = myUsers.map((e) => e.id);
+  // console.log(myLesson.map((e) => e.userId));
+  const usersFiltered = myUsers.filter((e) => e.id === myLessonMapped);
+  // console.log(usersFiltered);
   const { id } = useParams();
   useEffect(() => {
     dispatch(getAllVideos());
     dispatch(getVideosById(id));
+    dispatch(getTodosUsuarios());
     return () => dispatch(clearStateVideos());
   }, []);
 
@@ -33,6 +41,7 @@ const Details = ({ user }) => {
       <Nav user={user} />
       {myLesson.map((e) => {
         if (e && window.location.pathname === `/lecture/${e.id}`) {
+          
           return (
             <>
               <section className="sectiom__title-modulo">
@@ -57,7 +66,11 @@ const Details = ({ user }) => {
                   <div className="clase__profesor">
                     <img className="avatar__profesor" src={avatar} alt="" />
                     <p className="avatar__name-profesor">
-                      Prof.: Belen Manterola
+                      {myUsers.map((x) => {
+                        if (x.id === e.userId) {
+                          return <p>{x.name} {x.lastname}</p>
+                        }
+                      })}
                     </p>
                   </div>
                   <div className="code_review">

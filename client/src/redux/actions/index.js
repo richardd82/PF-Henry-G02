@@ -26,8 +26,10 @@ export const CLEAR_STATE_MODULES = "CLEAR_STATE_MODULES";
 export const GET_BY_EMAIL = "GET_BY_EMAIL";
 export const GET_FAVORITE_BY_ID = "GET_FAVORITE_BY_ID";
 export const ADD_FAVORITE = "ADD_FAVORITE";
-
-
+export const ADD_REVIEW = "ADD_REVIEW";
+export const GET_REVIEWS = "GET_REVIEWS";
+export const REVIEWS_BY_STUDENT = "REVIEWS_BY_STUDENT";
+export const CLEAR_STATE_REVIEWS = "CLEAR_STATE_REVIEWS";
 
 
 //*************Modulos************
@@ -295,13 +297,17 @@ export function getAllStandUps() {
     };
   }
   export function postNewStandUp(payload) {
-    return async function () {
-      var json = await axios.post(
-        `https://localhost:3001/standups/create`,
-        payload
-      );
-      return json;
-    };
+    try {
+      return async function () {
+        var json = await axios.post(
+          `https://localhost:3001/standups/create`,
+          payload
+        );
+        return json;
+      };
+    } catch (error) {
+      console.log(error);
+    }
   }
   //*********************Attendance**************************
   export const postAttendance = attendance => {
@@ -314,17 +320,22 @@ export function getAllStandUps() {
   };
 //*********************Favoritos**************************
 export function getFavoritesById(id) {
-  return async function (dispatch) {
-    var json = await axios.get(`http://localhost:3002/favorites/${id}`);
-    console.log(json)
-    return dispatch({
-      type: GET_FAVORITE_BY_ID,
-      payload: json.data.videos,
-    });
-  };
+  try {
+    return async function (dispatch) {
+      var json = await axios.get(`http://localhost:3002/favorites/${id}`);
+      console.log(json)
+      return dispatch({
+        type: GET_FAVORITE_BY_ID,
+        payload: json.data.videos,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function addFavoritesById(userId, videoId) {
+try {
   return async function (dispatch) {
     var json = await axios.post( `http://localhost:3002/favorites/create/${userId}/${videoId}`);
     console.log(json.data)
@@ -333,5 +344,55 @@ export function addFavoritesById(userId, videoId) {
       payload: json.data,
     });
   };
+} catch (error) {
+  console.log(error);
 }
-  
+}
+//*********************Reviews**************************
+export function addReview (user, payload){
+try {
+  return async (dispatch) => {
+    var response = await axios.post(`https://localhost:3001/reviews/create/${user}`, payload)
+    return dispatch({
+      type: ADD_REVIEW, 
+      payload: response.data
+    })
+  }
+} catch (error) {
+  console.log(error);
+}
+}
+
+export function getReviews (taId){
+  try {
+    return async (dispatch) => {
+      var response = await axios.get(`https://localhost:3001/reviews/?taId=${taId}`)
+      return dispatch({
+        type: GET_REVIEWS, 
+        payload: response.data
+      })
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  }
+
+  export function getReviewsByStudent (userId){
+    try {
+      return async (dispatch) => {
+        var response = await axios.get(`https://localhost:3001/reviews/reviewByStudent?userId=${userId}`)
+        return dispatch({
+          type: REVIEWS_BY_STUDENT, 
+          payload: response.data
+        })
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    }
+
+    export function clearStateReviews() {
+      return {
+        type: CLEAR_STATE_REVIEWS,
+      };
+    }

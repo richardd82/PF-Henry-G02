@@ -19,18 +19,17 @@ const createAttendance = async (req, res, next) => {
 };
 
 const getAttendances = async (req, res, next) => {
-  const { standupId, cohortId, classId, students } = req.body;
-  console.log(students);
+  const { standupId, cohortId, classId} = req.query;
+
+  console.log(req.body);
   try {
-    let attendances = await students.forEach(
-      async student =>
-        await Attendance.findAll({
+    let attendances = await Attendance.findAll({
           where: {
-            usersId: student.id,
+            standupId,
+            cohortId,
+            classId
           },
         })
-    );
-
     res.json(attendances);
   } catch (error) {
     next(error);

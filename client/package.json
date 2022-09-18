@@ -4,7 +4,10 @@
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^3.7.0",
-    "@formspree/react": "^2.4.0",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.5",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.1",
@@ -13,6 +16,7 @@
     "passport": "^0.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0",
     "react-player": "^2.10.1",
     "react-redux": "^7.2.3",
     "react-router-dom": "^6.3.0",
@@ -20,6 +24,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
+    "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
