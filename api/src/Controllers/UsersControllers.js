@@ -181,6 +181,35 @@ const userByEmail = async (req, res, next) => {
   }
 };
 
+const usersValidate = async (req, res) => {
+	try {
+		const {email, password} = req.body;
+
+		const user = await Users.findOne({
+			where: { email: email},
+			[Op.and]: [{password: password}]
+		});
+		console.log(user)
+		return res.send(
+			await jwt.sign(
+				{
+					id: user.id,
+					name: user.name,
+					image: user.image,
+					email: user.email,
+					active: user.active,
+					category: user.category,
+				},
+				SECRET_KEY,
+				{ expiresIn: "8h" }
+			)
+		);
+		
+	} catch (error) {
+		console.log(error)
+	}
+};
+
 module.exports = {
   getAllUsers,
   getById,
@@ -189,5 +218,6 @@ module.exports = {
   userByTeacher,
   userByStudent,
   getAllTeachers,
-  userByEmail
+  userByEmail,
+  usersValidate
 };

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwtDecode from "jwt-decode";
 export const GET_ALL_LESSONS = 'GET_ALL_LESSONS';
 export const GET_ALL_MODULES = 'GET_ALL_MODULES';
 export const GET_LESSONS_BY_ID = "GET_LESSONS_BY_ID";
@@ -30,6 +31,8 @@ export const ADD_REVIEW = "ADD_REVIEW";
 export const GET_REVIEWS = "GET_REVIEWS";
 export const REVIEWS_BY_STUDENT = "REVIEWS_BY_STUDENT";
 export const CLEAR_STATE_REVIEWS = "CLEAR_STATE_REVIEWS";
+export const USER_VALIDATE = "USER_VALIDATE";
+export const LOGOUT = "LOGOUT";
 
 
 //*************Modulos************
@@ -281,6 +284,20 @@ export function getTeachers() {
         payload: json.data,
       });
     }
+  }
+
+  export function usersValidate(payload) {
+    return async function (dispatch) {
+      console.log(payload.email + " <-------------->Entre a la Action");
+      var json = await axios.post(`http://localhost:3001/users/`, payload);
+      localStorage.setItem("token", JSON.stringify(json.data));
+      const data = await jwtDecode(json.data);
+      // console.log(data)
+      return dispatch({
+        type: USER_VALIDATE,
+        payload: data,
+      });
+    };
   }
 //*********************Stand Ups**************************
 export function getAllStandUps() {

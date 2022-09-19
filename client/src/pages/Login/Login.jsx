@@ -1,6 +1,9 @@
 import React from 'react'
 import Google from '../../assets/LogoGoogle.png'
 import GitHub from '../../assets/github.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { getTodosUsuarios, usersValidate } from '../../redux/actions/index.js';
 import './login.css'
 
 const Login = () => {
@@ -11,6 +14,51 @@ const google = () => {
 const github = () => {
     window.open("http://localhost:3001/auth/github", "_self");
 }
+const users = useSelector((state) => state.users.users);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		if(!users.length){
+		dispatch(getTodosUsuarios());
+		}
+	  }, [dispatch]);
+
+	const [input, setInput] = useState({
+		email: "",
+		password: "",
+	});
+	
+	const user = users.find(e => e.email === input.email);
+	const validated = useSelector((state) => state.userValidate);
+	// console.log(validated + ' - - - SOY validated')
+    
+    const payload = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(input)
+    };
+    const handleChange = (e) => {
+        setInput({
+            ...input,
+            [e.target.name]: e.target.value
+        })
+        // console.log(input.email + '========> ONSubmit')
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(user.email)
+		if(user.email === input.email && user.password === input.password){
+			// console.log(user, '======> SOY USER ANTES DEL ACTION');
+			// navigate('/', { user: user.category });
+			dispatch(usersValidate(user))
+			// navigate('/')
+			
+				window.location.reload('http://localhost:3000/');
+			
+;		}
+		else{
+			console.log('Usuario no registrado')
+		}
+    }
 
 
     return (
@@ -22,13 +70,15 @@ const github = () => {
                 <h1 className = 'l__side__right-title'>
                     Bienvenido a <span>Henry Students</span>
                 </h1>
-                <form className ='l__form'>
+                <form className ='l__form' onSubmit={(e)=> handleSubmit(e)}>
                     <div className ='l__form__input-field'>
-                        <input type="text" required></input>
+                        {/* <input type="text" required></input> */}
+                        <input type="text" onChange={handleChange} value={input.email} name = "email" required/>
                         <label>Email or User Name</label>
                     </div>
                     <div className ='l__form__input-field'>
-                        <input className ='l__form__input-pass' type="password" required></input>
+                        {/* <input className ='l__form__input-pass' type="password" required></input> */}
+                        <input className ='l__form__input-pass' type="password" onChange={handleChange} value={input.password} name = "password" required/>
                         <label>Password</label>
                     </div>
                     <div className ='l__form__button'>

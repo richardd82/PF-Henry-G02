@@ -10,27 +10,42 @@ import { getTodosUsuarios } from '../../redux/actions';
 
 export default function Nav({ user }) {
   const GOOGLE_CLIENT_ID = 'AIzaSyBnFVqnIJy_hAtph6l7W5_n9c0lLzCMkKM';
-  let obj = [];
-  obj.push(user);
-  // console.log(obj[0].photos[0].value);
-  // console.log(obj + "********************************************");
-  const logout = () => {
-    window.open('http://localhost:3001/auth/logout', '_self');
-  };
-
   const users = useSelector(state => state.users.allUsers);
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (!users.length) {
       dispatch(getTodosUsuarios());
     }
   }, [dispatch]);
+
+	const handleLogout =  () => {
+		if (user.category) {
+			localStorage.clear();
+			 dispatch(logout());
+			window.location.reload("http://localhost:3000/login");
+		} else if (user.emails) {
+			window.open("http://localhost:3001/auth/logout", "_self");
+		}
+	};
+	const redirect = () => {
+		window.location.reload("http://localhost:3000/login");
+	};
+  // let obj = [];
+  // obj.push(user);
+  // // console.log(obj[0].photos[0].value);
+  // // console.log(obj + "********************************************");
+  const logout = () => {
+    window.open('http://localhost:3001/auth/logout', '_self');
+  };
+
+  
+
+ 
   ///FALTA INVESTIGAR COMO OBTENER EL EMAIL DEL USER DE GOOGLE
   // dispatch(getTodosUsuarios());
   const userValidate = users.find(e => e.name === user.displayName);
   const category = userValidate && userValidate.category;
-  const active = userValidate && userValidate.active;
+  // const active = userValidate && userValidate.active;
 
   return (
     <div className="nav">
@@ -48,8 +63,9 @@ export default function Nav({ user }) {
             {/* <Link to="/"> */}
             <img src={logo_Henry} alt="" />
             {/* </Link> */}
+            {/* && active === true ? */}
             <div className="avatar">
-              {category === 'student' && active === true ? (
+              {category === 'student' ? (
                 <div>
                   <Link to="/catalog">
                     <p className="avatar__name">Catalogo</p>
@@ -61,29 +77,29 @@ export default function Nav({ user }) {
                     <p className="avatar__name">Contacto</p>
                   </Link>
                 </div>
-              ) : category === 'ta' && active === true ? (
+              ) : category === 'ta'? (
                 <div>
                   <Link to="/catalog">
                     <p className="avatar__name">Catalogo</p>
                   </Link>
                   <Link to="/assistance">
-                    <p className="avatar__name">Asistencia</p>
+                    <p className="avatar__name">Assistance</p>
                   </Link>
                   <Link to="/favourite">
-                    <p className="avatar__name">Favoritos</p>
+                    <p className="avatar__name">Favourite</p>
                   </Link>
                   <Link to="/contacto">
                     <p className="avatar__name">Contacto</p>
                   </Link>
                 </div>
               ) : null}
-              <p className="avatar__name">{user.displayName}</p>
+              <p className="avatar__name">{user.displayName || user.name}</p>
               {/* {user.displayName} */}
               <img
                 className="avatar__image"
                 src={alumno}
                 alt=""
-                onClick={logout}
+                onClick={handleLogout}
               />
               {/* {
 								user.photos[0].value + `?fields=image&key=${GOOGLE_CLIENT_ID}`
