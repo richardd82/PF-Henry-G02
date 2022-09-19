@@ -81,20 +81,19 @@ function App() {
       <Routes>
         {/* Rutas del Login y Home */}
         <Route
-          path="/login"
-          element={user.displayName ? <Navigate to="/" /> : <Login />}
-        />
-        <Route
-          exact
-          path="/"
-          element={
-            user.displayName ? (
-              <Profile user={user} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
+						path="/login"
+						element={user.name || user.emails ? <Navigate to="/" /> : <Login />}
+					/>
+					<Route
+						path="/"
+						element={
+							user.name || user.emails ? (
+								<Profile user={user} />
+							) : (
+								<Navigate to="/login" />
+							)
+						}
+					/>
         {/* Rutas del Admin */}
         <Route path="/admin" element={user.name || user.emails ? <Admin />:<Navigate to="/login" />}/>
         <Route path="/createCOHORT" element={user.name || user.emails ? <FormNewCohort user={user} />:<Navigate to="/login" />}/>

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTodosUsuarios } from '../../redux/actions';
 
 export default function Nav({ user }) {
-  const GOOGLE_CLIENT_ID = 'AIzaSyBnFVqnIJy_hAtph6l7W5_n9c0lLzCMkKM';
+  const GOOGLE_CLIENT_ID = 'AIzaSyBQVj2X9xWCr-pgiJDzR0K5TXNVaaUoeec';
   const users = useSelector(state => state.users.allUsers);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -40,7 +40,8 @@ export default function Nav({ user }) {
 
   
 
- 
+ console.log(user._json.picture)
+ const photo = user.photos[0].value;
   ///FALTA INVESTIGAR COMO OBTENER EL EMAIL DEL USER DE GOOGLE
   // dispatch(getTodosUsuarios());
   const userValidate = users.find(e => e.name === user.displayName);
@@ -97,7 +98,7 @@ export default function Nav({ user }) {
               {/* {user.displayName} */}
               <img
                 className="avatar__image"
-                src={alumno}
+                src={photo+GOOGLE_CLIENT_ID}
                 alt=""
                 onClick={handleLogout}
               />

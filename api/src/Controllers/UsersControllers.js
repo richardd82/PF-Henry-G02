@@ -1,5 +1,7 @@
 const { Users, Classes, Reviews } = require("../db.js");
 const { Op } = require("sequelize");
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = "qwertyuiopñlkjhgfdsa";
 
 const getAllUsers = async (req, res, next) => {
   try {
@@ -191,7 +193,7 @@ const usersValidate = async (req, res) => {
 		});
 		console.log(user)
 		return res.send(
-			await jwt.sign(
+			jwt.sign(
 				{
 					id: user.id,
 					name: user.name,
@@ -206,7 +208,7 @@ const usersValidate = async (req, res) => {
 		);
 		
 	} catch (error) {
-		console.log(error)
+		res.send(error)
 	}
 };
 

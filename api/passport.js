@@ -33,6 +33,7 @@ passport.use(
 		{
 			clientID: GITHUB_CLIENT_ID,
 			clientSecret: GITHUB_CLIENT_SECRET,
+			scope: ['user:email'],
 			callbackURL: "/auth/github/callback",
 		},
 		function (accessToken, refreshToken, profile, done) {
@@ -45,6 +46,7 @@ passport.use(
 		{
 			clientID: FACEBOOK_CLIENT_ID,
 			clientSecret: FACEBOOK_CLIENT_SECRET,
+			scope: [ 'user:email' ],
 			callbackURL: "/auth/facebook/callback",
 		},
 		function (accessToken, refreshToken, profile, done) {

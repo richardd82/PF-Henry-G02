@@ -41,7 +41,7 @@ const users = useSelector((state) => state.users.users);
             ...input,
             [e.target.name]: e.target.value
         })
-        // console.log(input.email + '========> ONSubmit')
+        console.log(input.email + '========> ONSubmit' + input.password)
     }
     const handleSubmit = (e) => {
         e.preventDefault()
