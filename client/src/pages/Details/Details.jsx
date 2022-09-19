@@ -11,25 +11,31 @@ import Nav from "../../components/Nav/Nav";
 import {
   clearStateVideos,
   getAllVideos,
+  getCohorts,
   getTodosUsuarios,
 } from "../../redux/actions/index";
 import { getVideosById } from "../../redux/actions/index";
-//import CodeReviewOn from "./ConditionalRender/CodeReviewOn";
 
 const Details = ({ user }) => {
   const dispatch = useDispatch();
   const myLesson = useSelector((state) => state.videos.allVideos);
   const myUsers = useSelector((state) => state.users.allUsers);
-  const myLessonMapped = myLesson.map((e) => e.userId);
-  const usersMapped = myUsers.map((e) => e.id);
-  // console.log(myLesson.map((e) => e.userId));
-  const usersFiltered = myUsers.filter((e) => e.id === myLessonMapped);
-  // console.log(usersFiltered);
+  const myCohorts = useSelector((state) => state.cohorts.allCohorts)
+
+
+  const myLessonMapped = myLesson.filter((e) => e.type === "lecture");
+  const codeReviews = myLesson.filter((e) => e.type === "code-review");
+
+  const myLessonClass = myLessonMapped.map((e) => e.classId);
+  const codeReviewsMapped = codeReviews.map((e) => e.classId);
+  // console.log(codeReviews);
+
   const { id } = useParams();
   useEffect(() => {
     dispatch(getAllVideos());
     dispatch(getVideosById(id));
     dispatch(getTodosUsuarios());
+    dispatch(getCohorts());
     return () => dispatch(clearStateVideos());
   }, []);
 
@@ -41,7 +47,6 @@ const Details = ({ user }) => {
       <Nav user={user} />
       {myLesson.map((e) => {
         if (e && window.location.pathname === `/lecture/${e.id}`) {
-          
           return (
             <>
               <section className="sectiom__title-modulo">
@@ -68,37 +73,45 @@ const Details = ({ user }) => {
                     <p className="avatar__name-profesor">
                       {myUsers.map((x) => {
                         if (x.id === e.userId) {
-                          return <p>{x.name} {x.lastname}</p>
+                          return (
+                            <p>
+                              {x.name} {x.lastname}
+                            </p>
+                          );
                         }
                       })}
                     </p>
                   </div>
-                  <div className="code_review">
-                    {myLesson.map((e) => {
-                      if (e.type === "code-review") {
-                        return (
+
+                  {/* ///////////CODE-REVIEW///////////////// */}
+
+                  {codeReviewsMapped.map((x) => {
+                    if (x === e.classId) {
+                      const codereviewlinked = codeReviews.filter(
+                        (c) => c.classId === e.classId
+                      );
+                      const link = codereviewlinked.map((codeId) => codeId.id);
+
+                      const video = codereviewlinked
+                        .map((linkId) => linkId.link)
+                        .toString();
+                      // console.log("asddddddddddd", video);
+
+                      return (
+                        <div className="code_review">
                           <div>
-                            {" "}
-                            <Link to={`/codeReview/${e.id}`}>
+                            <Link to={`/codeReview/${link}`}>
                               <ReactPlayer
-                                url={e.link}
                                 className="videoReactThumb"
-                              ></ReactPlayer>
+                                url={video}
+                              />{" "}
                               <button>Code Review</button>
                             </Link>
                           </div>
-                        );
-                      }
-                    })}
-                  </div>
-                  <div className="code_review">
-                    {/* <CodeReviewOn></CodeReviewOn> */}
-                    <ReactPlayer
-                      url={e.link}
-                      className="videoReactThumb"
-                    ></ReactPlayer>
-                    <p>Material complementario</p>
-                  </div>
+                        </div>
+                      );
+                    }
+                  })}
                 </article>
               </section>
             </>
@@ -128,18 +141,38 @@ const Details = ({ user }) => {
                   <div className="clase__profesor">
                     <img className="avatar__profesor" src={avatar} alt="" />
                     <p className="avatar__name-profesor">
-                      Prof.: Belen Manterola
+                      {myUsers.map((x) => {
+                        if (x.id === e.userId) {
+                          return (
+                            <p>
+                              {x.name} {x.lastname}
+                            </p>
+                          );
+                        }
+                      })}
                     </p>
                   </div>
                   <div className="code_review">
-                    {myLesson.map((e) => {
-                      if (e.id === "3cf3d422-b0fc-4d38-8ff9-cbb06eba0f54") {
+                    {myLessonClass.map((l) => {
+                      console.log(myLessonClass);
+                      if (l === e.classId) {
+                        const lectureLinked = myLessonMapped.filter(
+                          (le) => le.classId === e.classId
+                        );
+
+                        const link = lectureLinked.map(
+                          (lectureId) => lectureId.id
+                        );
+
+                        const video = lectureLinked
+                          .map((linkId) => linkId.link)
+                          .toString();
+
                         return (
                           <div>
-                            {" "}
-                            <Link to={`/lecture/${e.id}`}>
+                            <Link to={`/lecture/${link}`}>
                               <ReactPlayer
-                                url={e.link}
+                                url={video}
                                 className="videoReactThumb"
                               ></ReactPlayer>
                               <button>Lecture</button>
@@ -148,14 +181,6 @@ const Details = ({ user }) => {
                         );
                       }
                     })}
-                  </div>
-                  <div className="code_review">
-                    {/* <CodeReviewOn></CodeReviewOn> */}
-                    <ReactPlayer
-                      url={e.link}
-                      className="videoReactThumb"
-                    ></ReactPlayer>
-                    <p>Material complementario</p>
                   </div>
                 </article>
               </section>

@@ -309,7 +309,7 @@ export function getAllStandUps() {
           payload: json.data,
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
   }
@@ -323,7 +323,7 @@ export function getAllStandUps() {
         return json;
       };
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
   //*********************Attendance**************************
@@ -340,14 +340,14 @@ export function getFavoritesById(id) {
   try {
     return async function (dispatch) {
       var json = await axios.get(`http://localhost:3002/favorites/${id}`);
-      console.log(json)
+      // console.log(json)
       return dispatch({
         type: GET_FAVORITE_BY_ID,
         payload: json.data.videos,
       });
     };
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 
@@ -355,14 +355,14 @@ export function addFavoritesById(userId, videoId) {
 try {
   return async function (dispatch) {
     var json = await axios.post( `http://localhost:3002/favorites/create/${userId}/${videoId}`);
-    console.log(json.data)
+    // console.log(json.data)
     return dispatch({
       type: ADD_FAVORITE,
       payload: json.data,
     });
   };
 } catch (error) {
-  console.log(error);
+  // console.log(error);
 }
 }
 //*********************Reviews**************************
@@ -376,7 +376,7 @@ try {
     })
   }
 } catch (error) {
-  console.log(error);
+  // console.log(error);
 }
 }
 
@@ -390,7 +390,7 @@ export function getReviews (taId){
       })
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
   }
 
@@ -404,7 +404,7 @@ export function getReviews (taId){
         })
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
     }
 
