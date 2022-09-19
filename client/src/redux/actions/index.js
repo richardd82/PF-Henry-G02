@@ -42,7 +42,7 @@ export function getAllModules() {
           payload: json.data,
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
   }
@@ -61,7 +61,7 @@ export function getCohorts() {
           payload: response.data,
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
   }
@@ -84,7 +84,7 @@ export function getAllLessons() {
           payload: json.data,
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
   }
@@ -170,7 +170,7 @@ export function createVideo(payload) {
           payload: response.data,
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
   }
@@ -178,13 +178,13 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.get('https://localhost:3001/videos');
-        console.log(response.data);
+        // console.log(response.data);
         return dispatch({
           type: GET_VIDEOS,
           payload: response.data,
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
   }
@@ -199,7 +199,7 @@ export function createVideo(payload) {
           payload: response.data,
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
   }
@@ -212,14 +212,14 @@ export function createVideo(payload) {
           payload: response.data,
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
   }
   export function getVideosById(id) {
     return async function (dispatch) {
       var json = await axios.get(`https://localhost:3001/videos/byId/${id}`);
-      console.log(json)
+      // console.log(json)
       return dispatch({
         type: GET_VIDEOS_BY_ID,
         payload: json.data,
@@ -236,13 +236,13 @@ export function getTeachers() {
     return async function (dispatch) {
       try {
         const response = await axios.get('https://localhost:3001/users/teachers');
-        console.log(response.data);
+        // console.log(response.data);
         return dispatch({
           type: GET_TEACHERS,
           payload: response.data,
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
   }
@@ -255,7 +255,7 @@ export function getTeachers() {
           payload: json.data,
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
   }
@@ -292,7 +292,7 @@ export function getAllStandUps() {
           payload: json.data,
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
   }
@@ -306,7 +306,7 @@ export function getAllStandUps() {
         return json;
       };
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
   //*********************Attendance**************************
@@ -314,8 +314,8 @@ export function getAllStandUps() {
     return () => {
       axios
         .post('https://localhost:3001/attendance/create', attendance)
-        .then(response => console.log(response.data))
-        .catch(error => console.log(error));
+        // .then(response => console.log(response.data))
+        // .catch(error => console.log(error));
     };
   };
 //*********************Favoritos**************************
@@ -323,14 +323,14 @@ export function getFavoritesById(id) {
   try {
     return async function (dispatch) {
       var json = await axios.get(`http://localhost:3002/favorites/${id}`);
-      console.log(json)
+      // console.log(json)
       return dispatch({
         type: GET_FAVORITE_BY_ID,
         payload: json.data.videos,
       });
     };
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 
@@ -338,14 +338,14 @@ export function addFavoritesById(userId, videoId) {
 try {
   return async function (dispatch) {
     var json = await axios.post( `http://localhost:3002/favorites/create/${userId}/${videoId}`);
-    console.log(json.data)
+    // console.log(json.data)
     return dispatch({
       type: ADD_FAVORITE,
       payload: json.data,
     });
   };
 } catch (error) {
-  console.log(error);
+  // console.log(error);
 }
 }
 //*********************Reviews**************************
@@ -359,7 +359,7 @@ try {
     })
   }
 } catch (error) {
-  console.log(error);
+  // console.log(error);
 }
 }
 
@@ -373,7 +373,7 @@ export function getReviews (taId){
       })
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
   }
 
@@ -387,7 +387,7 @@ export function getReviews (taId){
         })
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
     }
 

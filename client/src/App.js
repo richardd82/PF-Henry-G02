@@ -31,8 +31,7 @@ import AddReviews from "./components/Reviews/AddReviews.jsx";
 import UserReview from "./components/Reviews/UserReview.jsx";
 import FormNewClass from "./components/Admin/Forms/FormNewClass/FormNewClass";
 import FormNewVideo from "./components/Admin/Forms/FormNewVideo/FormNewVideo.jsx";
-
-import UsersStats from "./components/Admin/Forms/Users Stats/activeUsers.jsx";
+import UsersStats from "./components/Admin/Forms/UserStats/UserStats.jsx";
 
 
 function App() {
