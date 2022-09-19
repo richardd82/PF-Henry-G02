@@ -15,7 +15,7 @@ export default function Nav({ user }) {
   // console.log(obj[0].photos[0].value);
   // console.log(obj + "********************************************");
   const logout = () => {
-    window.open('https://localhost:3001/auth/logout', '_self');
+    window.open('http://localhost:3001/auth/logout', '_self');
   };
 
   const users = useSelector(state => state.users.allUsers);

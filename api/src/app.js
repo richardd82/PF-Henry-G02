@@ -11,26 +11,26 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 require('./db.js');
 var fs = require('fs');
-var https = require('https');
+var http = require('http');
 const server = express();
-server.name = 'API';
-const PUERTO = 3001;
+// server.name = 'API';
+// const PUERTO = 3001;
 
-https.createServer({
-  cert: fs.readFileSync('./Certificate.crt'),
-  key: fs.readFileSync('./Private.key')
-},server).listen(PUERTO, function(){
-	console.log('Servidor https corriendo en el puerto 3001');
-});
+// http.createServer({
+//   cert: fs.readFileSync('./Certificate.crt'),
+//   key: fs.readFileSync('./Private.key')
+// },server).listen(PUERTO, function(){
+// 	console.log('Servidor http corriendo en el puerto 3001');
+// });
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan('dev'));
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://localhost:3000'); // update to match the domain you will make the request from
-  res.header('Access-Control-Allow-Origin', 'https://localhost:3000/auth/google'); // update to match the domain you will make the request from
-  res.header('Access-Control-Allow-Origin', 'https://localhost:3000/auth/google/callback'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000/auth/google'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000/auth/google/callback'); // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -41,7 +41,7 @@ server.use((req, res, next) => {
 
 server.use(cors(
   {
-    origin: 'https://localhost:3000',
+    origin: 'http://localhost:3000',
     methods:'GET, POST, PUT, DELETE',
     credentials: true,
   }
