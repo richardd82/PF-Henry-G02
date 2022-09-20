@@ -33,7 +33,13 @@ export const REVIEWS_BY_STUDENT = "REVIEWS_BY_STUDENT";
 export const CLEAR_STATE_REVIEWS = "CLEAR_STATE_REVIEWS";
 export const USER_VALIDATE = "USER_VALIDATE";
 export const LOGOUT = "LOGOUT";
-
+// payments
+export const REQUESTING = 'REQUESTING';
+export const SEND_PAYMENT = 'SEND_PAYMENT';
+export const GET_PAYMENT_BY_ID = 'GET_PAYMENT_BY_ID';
+export const GET_PAYMENTS_BY_USER = 'GET_PAYMENTS_BY_USER';
+export const CLEAR_PAYMENT_MSG = 'CLEAR_PAYMENT_MSG';
+export const REQUEST_ERROR = 'REQUEST_ERROR';
 
 //*************Modulos************
 export function getAllModules() {
@@ -413,3 +419,89 @@ export function getReviews (taId){
         type: CLEAR_STATE_REVIEWS,
       };
     }
+
+//**************Payments***************
+export const sendPayment = (stripeId, amount, userId) => {
+  return async dispatch => {
+    dispatch(requesting());
+    try {
+      const { data } = await axios.post('http://localhost:3001/checkout', {
+        stripeId,
+        amount,
+        userId,
+      });
+      return dispatch(sendPaymentSuccess(data));
+    } catch (error) {
+      console.log(error);
+      dispatch(sendPaymentFailure(error))
+    }
+  };
+};
+
+export const requesting = () => {
+  return {
+    type: REQUESTING,
+  };
+};
+
+export const sendPaymentSuccess = data => {
+  return {
+    type: SEND_PAYMENT,
+    payload: data,
+  };
+};
+
+export const sendPaymentFailure = message => {
+  return {
+    type: REQUEST_ERROR,
+    payload: message,
+  };
+};
+
+export const getPayments = userId => {
+  return async dispatch => {
+    dispatch(requesting());
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3001/checkout/payments/${userId}`
+      );
+      return dispatch(getPaymentsSuccess(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getPaymentsSuccess = data => {
+  return {
+    type: GET_PAYMENTS_BY_USER,
+    payload: data,
+  };
+};
+
+export const getPaymentById = paymentId => {
+  return async dispatch => {
+    dispatch(requesting());
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3001/checkout/${paymentId}`
+      );
+      return dispatch(getPaymentByIdSuccess(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getPaymentByIdSuccess = data => {
+  return {
+    type: GET_PAYMENT_BY_ID,
+    payload: data,
+  };
+};
+
+export const clearPaymentMsg = () => {
+  return {
+    type: CLEAR_PAYMENT_MSG,
+  };
+};

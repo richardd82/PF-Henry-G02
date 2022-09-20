@@ -56,7 +56,7 @@ module.exports = sequelize => {
       defaultValue: 1,
     },
     debt: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       defaultValue: 0,
     },
     salary: {
