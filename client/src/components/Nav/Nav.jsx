@@ -37,16 +37,32 @@ export default function Nav({ user }) {
   const logout = () => {
     window.open('http://localhost:3001/auth/logout', '_self');
   };
-
+  let category = '';
+  let active = false;
   
 
- console.log(user._json.picture)
- const photo = user.photos[0].value;
+// console.log(user._json.picture)
+ //const photo = user.photos[0].value;
   ///FALTA INVESTIGAR COMO OBTENER EL EMAIL DEL USER DE GOOGLE
   // dispatch(getTodosUsuarios());
-  const userValidate = users.find(e => e.name === user.displayName);
-  const category = userValidate && userValidate.category;
+/*   const userValidate = users.find(e => e.name === user.displayName);
+  const category = userValidate && userValidate.category; */
   // const active = userValidate && userValidate.active;
+
+  if (!user.category) {
+    // dispatch(getTodosUsuarios());
+		
+		const userValidate = users.find((e) => e.email === user.emails[0].value );
+    active = userValidate && userValidate.active;
+    //console.log(active);
+    category = userValidate && userValidate.category;
+  }else{
+    category = user.category;
+
+      active = user.active;
+			// console.log(category);
+	}
+
 
   return (
     <div className="nav">
@@ -98,7 +114,7 @@ export default function Nav({ user }) {
               {/* {user.displayName} */}
               <img
                 className="avatar__image"
-                src={photo+GOOGLE_CLIENT_ID}
+                src= {alumno}/* {photo+GOOGLE_CLIENT_ID} */
                 alt=""
                 onClick={handleLogout}
               />

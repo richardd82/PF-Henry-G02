@@ -18,8 +18,9 @@ import Nav from '../../components/Nav/Nav';
 const Module = ({ user }) => {
   const dispatch = useDispatch();
   const lessons = useSelector(state => state.classes.lessons);
+  const videos = useSelector(state=> state.videos.allVideos)
   const modules = useSelector(state => state.modules.modules);
-
+ // const videoClass = 
   useEffect(() => {
     dispatch(getAllModules());
     dispatch(getAllLessons());

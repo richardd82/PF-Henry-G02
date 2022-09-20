@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 // Actions
 import {
   getAllLessons,
@@ -13,6 +14,7 @@ import "./Formularios.css";
 import Nav from "../Nav/Nav";
 
 const CreateVideo = ({ user }) => {
+
   const dispatch = useDispatch();
   const teachers = useSelector((state) => state.users.teachers);
   const cohorts = useSelector((state) => state.cohorts.allCohorts);
@@ -31,7 +33,7 @@ const CreateVideo = ({ user }) => {
     link: "",
     classId: "",
     cohortId: "",
-    userId: "",
+    userId: user.displayName,
   });
 
   // Control de errores
@@ -84,7 +86,6 @@ const CreateVideo = ({ user }) => {
         type: "",
         link: "",
         cohortId: "",
-        userId: "",
         classId: "",
       });
     }
@@ -157,7 +158,7 @@ const CreateVideo = ({ user }) => {
               </select>
               {warnings.type ? <p>{warnings.type}</p> : null}
             </div>
-            <div>
+            {/* <div>
               <label>Profesor</label>
               <select
                 className="select"
@@ -175,7 +176,7 @@ const CreateVideo = ({ user }) => {
                   })}
               </select>
               {warnings.userId ? <p>{warnings.userId}</p> : null}
-            </div>
+            </div> */}
             <div>
               <label>Cohorte</label>
               <select

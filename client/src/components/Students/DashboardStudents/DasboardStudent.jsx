@@ -58,6 +58,7 @@ const DasboardStudent = () => {
           setTimeout(() => {
             var a = document.createElement("a");
             a.href = slides;
+            a.target = '_blank'
             a.click();
             window.URL.revokeObjectURL(slides);
           }, 1500);

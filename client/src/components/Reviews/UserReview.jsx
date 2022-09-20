@@ -17,9 +17,9 @@ import {
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function UserReview() {
+export default function UserReview({user}) {
 	//MODIFICAR CUANDO SE PUEDA INGRESAR CON LOGIN
-	const user = {
+/* 	const user = {
 		name: "Romi Jimenez",
 		id: "105104a9-9e18-4934-b950-18de117aa014",
 		standupId: "6c5dc9cc-460c-408c-8cb8-cfa94af873ec",
@@ -27,9 +27,17 @@ export default function UserReview() {
 		email: "romijimenez06@gmail.comimage",
 		category: "ta",
 		active: true,
-	};
+	}; */
 	//MODIFICAR CUANDO SE PUEDA INGRESAR CON LOGIN
 
+	let userValidate = ''
+
+    if (!user.category) {
+        userValidate = users.filter((e) => e.name === user._json.name );
+      }else{
+        userValidate = users.filter((e) => e.name === user.name );
+        }
+console.log(user);
 	const users = useSelector((state) => state.users.users);
 
 	const { id } = useParams();

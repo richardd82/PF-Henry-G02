@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllStandUps, getCohorts, getReviews, getTodosUsuarios } from '../../redux/actions';
+import Nav from '../Nav/Nav';
 
 
-//traigo reviews, usuarios 
-//verifico si user coincide con el id de user que me llega con la review
-//si lo anterior es true 
-export default function Reviews (){
+export default function Reviews ({user}){
     const dispatch = useDispatch()
     const cohorts = useSelector(state=> state.cohorts.allCohorts)
     const sup = useSelector(state=> state.standUps.allStandUp)
@@ -52,6 +50,7 @@ const userReviews = reviews.filter(e => e.user.standupId === input.standup)
 
     return (
         <div>
+            <Nav user={user}/>
             <select onChange={handleSelectCohort}>
                 <option>Cohorts</option>
                 {

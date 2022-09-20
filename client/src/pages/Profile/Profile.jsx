@@ -28,7 +28,7 @@ const Profile = ({ user }) => {
 		
 		const userValidate = users.find((e) => e.email === user.emails[0].value );
     active = userValidate && userValidate.active;
-    console.log(active);
+    //console.log(active);
     category = userValidate && userValidate.category;
   }else{
     category = user.category;

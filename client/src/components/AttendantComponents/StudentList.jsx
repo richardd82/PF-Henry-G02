@@ -52,17 +52,17 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
       }
     });
   };
-
+console.log(attendance.students);
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(postAttendance(attendance));
     alert('Asistencia enviada');
-    // setAttendance({
-    //   standupId: standup,
-    //   cohortId: cohort,
-    //   classId: lecture,
-    //   students: [],
-    // });
+     setAttendance({
+       standupId: standup,
+       cohortId: cohort,
+       classId: lecture,
+       students: [],
+     });
   };
 
   return (
@@ -71,15 +71,27 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
       <form className="form" onSubmit={e => handleSubmit(e)}>
           {currentStudents &&
           currentStudents.map(student => { 
-            if(attendances.map(el => el.cohortId === student.cohortId)){
+            return (
+              <div key={student.id}>
+             <label>{student.name}</label>
+             <input
+               className="inputCreate"
+               id={student.id}
+               value={true}
+               name={student.name}
+               type="checkbox"
+               onChange={e => handleSelect(e)}
+             />
+           </div> )
+           /*  if(attendances.map(el => el.cohortId === student.cohortId)){
              return (
     
               attendances.map(dbAttendance => {
                 if (
                   dbAttendance 
-                 /*  student.id === dbAttendance.usersId &&
+                   student.id === dbAttendance.usersId &&
                   dbAttendance.cohortId === attendance.cohortId &&
-                  dbAttendance.classId === attendance.classId */
+                  dbAttendance.classId === attendance.classId 
                 ) {
                   return (
                        <div key={student.id}>
@@ -113,7 +125,7 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
             } 
            return (
             <div>no renderizo nada</div>
-           )
+           ) */
           })}   
 {/*             {currentStudents &&
           currentStudents.map(student => {

@@ -20,7 +20,9 @@ const FormNewUser = ({ user }) => {
   const supExistente = useSelector((state) => state.standUps.allStandUp);
   const moduleExistente = useSelector((state) => state.modules.modules);
   const userEmail = adminUser.users.map((e) => e.email);
-
+  //const categoryUsers = adminUser.users.map(e => e.category);
+  //const category = [...new Set(categoryUsers)]
+ 
   const [input, setInput] = useState({
     name: "",
     lastname: "",
@@ -28,11 +30,12 @@ const FormNewUser = ({ user }) => {
     image: "image",
     password: "123",
     active: true,
-    category: "",
+    category:"",
     cohortId: "",
     moduleId: "",
     standupId: "",
   });
+  //const [checkedCategory, setCheckedCategory] = useState([]);
 
   const handleChange = (e) => {
     setInput({
@@ -46,6 +49,15 @@ const FormNewUser = ({ user }) => {
       })
     );
   };
+//const [checked, setChecked ] = useState(true)
+const handleCategory = (e) => {
+    setInput({
+      ...input,
+      category: e.target.value
+    })
+
+  }
+
   const handleSelectCohorte = (e) => {
     e.preventDefault(e);
     setInput({
@@ -75,7 +87,7 @@ const FormNewUser = ({ user }) => {
     dispatch(getAllModules());
   }, [dispatch]);
   const emailExistente = userEmail.find((e) => e === input.email);
-  console.log(emailExistente);
+  //console.log(emailExistente);
 
   const handleSubmit = (e) => {
     e.preventDefault(e);
@@ -158,9 +170,15 @@ const FormNewUser = ({ user }) => {
             required
           ></input>
           {/* {errors.email && <h1>{errors.email}</h1>} */}
+          {/* NO FUNCIONA EL CHECKBOXXXXX */}
+         <div>
+            <label>Estudiante<input type={'radio'} name={'category'} value={'student'} onChange={(e)=>handleCategory(e)}/></label>
+            <label>Instructor/a<input type={'radio'} name={'category'} value={'teacher'} onChange={(e)=>handleCategory(e)}/></label>
+            <label>Admin<input type={'radio'} name={'category'} value={'admin'} onChange={(e)=>handleCategory(e)}/></label>
+          </div> 
+      
 
-          <label>Category:</label>
-          <input
+{/*           <input
           className="inputCreate"
 
             placeholder="Insert a user role"
@@ -171,7 +189,7 @@ const FormNewUser = ({ user }) => {
               handleChange(e);
             }}
             required
-          ></input>
+          ></input> */}
           <select 
           className="select"
           onChange={handleSelectCohorte}>

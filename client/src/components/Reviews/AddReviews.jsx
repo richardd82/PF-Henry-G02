@@ -15,8 +15,8 @@ import "./AddReview.css";
 // import StarIcon from '@mui/icons-material/Star';
 import { Link } from "react-router-dom";
 
-export default function AddReview(){
-    const user = {
+export default function AddReview({user}){
+/*     const user = {
         name: "Romi Jimenez",
         id: "105104a9-9e18-4934-b950-18de117aa014",
         standupId: "6c5dc9cc-460c-408c-8cb8-cfa94af873ec",
@@ -24,7 +24,7 @@ export default function AddReview(){
         email: "romijimenez06@gmail.comimage",
         category: "ta",
         active: true,
-      };
+      }; */
 
       //MODIFICAR CUANDO SE PUEDA INGRESAR CON LOGIN
     const dispatch = useDispatch()
@@ -34,13 +34,26 @@ export default function AddReview(){
         dispatch(getTodosUsuarios())
     },[dispatch])
 
+    let userValidate = ''
+
+    if (!user.category) {
+        userValidate = users.filter((e) => e.name === user._json.name );
+      }else{
+        userValidate = users.filter((e) => e.name === user.name );
+        }
+const stydents = users.filter(e=> e.category === 'student')
+const ta = userValidate.map(e=> e.standupId).toString()
+const usersSUP = stydents.map(e=> e.standupId)
+const filtered = stydents.filter(e => e.standupId === ta)
+
 
 
     return (
         <div>
             {
-                users && users.map(e => {
-                    if(e.standupId === user.standupId && e.category === "student")
+                filtered && filtered.map(e => {
+                    //if(e === ta && e.category === "student")
+                   
                     return (
                     <Link to={`/reviews/create/${e.id}`}>
                     <p>
