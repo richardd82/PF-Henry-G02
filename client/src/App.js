@@ -35,6 +35,13 @@ import UsersStats from "./components/Admin/Forms/UserStats/UserStats.jsx";
 import jwt from "jwt-decode";
 import UserProfile from "./pages/UserProfile/UserProfile.jsx";
 import ImageUpload from "./components/ImageUpload/ImageUpload.jsx";
+import StudentPayments from "./components/StudentPayments/StudentPayments.jsx";
+import Checkout from "./components/Checkout/Checkout.jsx";
+import Payments from "./components/Payments/Payments.jsx";
+import PaymentDetails from "./components/PaymentDetails/PaymentDetails.jsx";
+import { loadStripe } from '@stripe/stripe-js';
+const { REACT_APP_STRIPE_KEY } = process.env;
+const stripePromise = loadStripe(REACT_APP_STRIPE_KEY);
 
 function App() {
   const [user, setUser] = useState({});
@@ -84,7 +91,7 @@ function App() {
 		}
 	}, []);
 	//console.log(user);
-
+  console.log('API KEY', REACT_APP_STRIPE_KEY)
 
   return (
     <div className="App">
@@ -121,7 +128,11 @@ function App() {
         <Route path="/userstats" element={user.name || user.emails ? <UsersStats user={user} />:<Navigate to="/login" />}/>
 
         {/* Rutas de Students y TA */}
-        <Route path="/students" element={user.name || user.emails ? <Students />:<Navigate to="/login" />}/>
+        <Route path="/students" element={user.name || user.emails ? <Students user={user} />:<Navigate to="/login" />}/>
+        <Route exact path="/students/gateway" element={user.name || user.emails ? <StudentPayments user={user} /> :<Navigate to="/login" />} />
+        <Route exact path="/students/gateway/checkout" element={user.name || user.emails ? <Checkout user={user} stripePromise={stripePromise} /> : <Navigate to="/login" />}/>
+        <Route exact path="/students/gateway/payments" element={user.name || user.emails ? <Payments user={user}/> : <Navigate to="/login" />} />
+        <Route exact path="/students/gateway/payments/:paymentId" element={user.name || user.emails ? <PaymentDetails user={user} /> : <Navigate to="/login" />} />
         <Route path="/tas" element= {user.name || user.emails ? <Ta />:<Navigate to="/login" />}/>
         <Route path="/attendance" element={user.name || user.emails ? <Attendance user={user} />:<Navigate to="/login" />}/>
         <Route path="/module/:id" element={user.name || user.emails ? <Module user={user} />:<Navigate to="/login" />}/>

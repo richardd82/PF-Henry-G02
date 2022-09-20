@@ -33,6 +33,12 @@ import {
   USER_VALIDATE,
   LOGOUT,
   UPLOAD_IMAGE,
+  REQUESTING,
+  GET_PAYMENTS_BY_USER,
+  GET_PAYMENT_BY_ID,
+  SEND_PAYMENT,
+  CLEAR_PAYMENT_MSG,
+  REQUEST_ERROR,
 } from "../actions/index";
 
 const initialState = {
@@ -74,6 +80,11 @@ const initialState = {
   loading: false,
   errorMsg: "",
 
+  //Payments
+  userPayments: [],
+  paymentDetails: {},
+  paymentMsg: '',
+  requesting: false,
 
   ///////////////////////////////
 };
@@ -318,6 +329,48 @@ export function cloudinaryImage(state = initialState, action) {
       return state;
   }
 }
+export function payments(state = initialState, action) {
+  switch (action.type) {
+    case REQUESTING:
+      return {
+        ...state,
+        requesting: true,
+      };
+    case GET_PAYMENTS_BY_USER:
+      return {
+        ...state,
+        userPayments: action.payload,
+        requesting: false,
+      };
+    case GET_PAYMENT_BY_ID:
+      return {
+        ...state,
+        paymentDetails: action.payload,
+        requesting: false,
+      };
+    case SEND_PAYMENT:
+      return {
+        ...state,
+        paymentMsg: action.payload,
+        requesting: false,
+      };
+    case REQUEST_ERROR:
+      return {
+        ...state,
+        errorMsg: action.payload,
+      };
+    case CLEAR_PAYMENT_MSG:
+      return {
+        ...state,
+        paymentMsg: '',
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+}
+
 // export default {
 // 	modules,
 // 	cohorts,

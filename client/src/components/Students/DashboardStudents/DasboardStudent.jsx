@@ -13,7 +13,7 @@ import imgSlides from "./slide.png";
 import swal from "sweetalert";
 import slides from "../DashboardStudents/Slides_Henry.pdf";
 
-const DasboardStudent = () => {
+const DasboardStudent = ({user}) => {
   const modules = useSelector((state) => state.modules.modules);
 
   const dispatch = useDispatch();
@@ -123,6 +123,11 @@ const DasboardStudent = () => {
           SLIDES
           <img src={imgSlides} />
         </button>
+      </div>
+      <div>
+        <Link to='/students/gateway'>
+          Pasarela de pagos
+        </Link>
       </div>
       <button onClick={sweetAttendance}>ASISTENCIAS AL SUP</button>
     </div>
