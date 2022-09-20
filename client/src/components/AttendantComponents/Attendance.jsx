@@ -95,7 +95,7 @@ const Attendance = ({ user }) => {
                   return aDate - bDate;
                 })
                 .filter(
-                  (lecture) => lecture.moduleId.toString() === options.module
+                  (lecture) => lecture.moduleId === options.module
                 )
                 .map((lecture) => {
                   return (
