@@ -9,7 +9,8 @@ import {
   extras,
   favorites,
   reviews,
-  cloudinaryImage
+  cloudinaryImage,
+  payments
 } from './reducer';
 import attendance from './attendanceReducer.js';
 
@@ -24,5 +25,6 @@ export default combineReducers({
   favorites,
   attendance,
   reviews,
-  cloudinaryImage
+  cloudinaryImage,
+  payments
 });

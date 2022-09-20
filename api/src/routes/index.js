@@ -10,11 +10,8 @@ const VideosRoute = require('./VideosRoute.js')
 const AttendanceRoute = require('./AttendanceRoute.js')
 const MercadopagoRoutes = require('./MercadopagoRoutes.js')
 const ReviewsRoute = require('./ReviewsRoute.js')
-<<<<<<< HEAD
 const Cloudinary = require("./Cloudinary.js")
-=======
 const PaymentRouter = require('./PaymentsRouter.js');
->>>>>>> 38e223a (feat: payments controllers and routes)
 
  
 // Importar todos los routers;
@@ -35,12 +32,8 @@ router.use('/videos', VideosRoute)
 router.use('/attendance', AttendanceRoute)
 router.use("/", MercadopagoRoutes);
 router.use('/reviews', ReviewsRoute)
-<<<<<<< HEAD
 router.use("/cloudinary", Cloudinary);
-
-=======
 router.use('/checkout', PaymentRouter);
->>>>>>> 38e223a (feat: payments controllers and routes)
 
 
 module.exports = router;
