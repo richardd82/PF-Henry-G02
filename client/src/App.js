@@ -33,6 +33,8 @@ import FormNewClass from "./components/Admin/Forms/FormNewClass/FormNewClass";
 import FormNewVideo from "./components/Admin/Forms/FormNewVideo/FormNewVideo.jsx";
 import UsersStats from "./components/Admin/Forms/UserStats/UserStats.jsx";
 import jwt from "jwt-decode";
+import UserProfile from "./pages/UserProfile/UserProfile.jsx";
+import ImageUpload from "./components/ImageUpload/ImageUpload.jsx";
 
 function App() {
   const [user, setUser] = useState({});
@@ -40,12 +42,20 @@ function App() {
 	const token = localStorage.getItem("token");
 	console.log(token + "Soy el token decodificado");
 
+	
+
+
 	console.log(user, "============> Esto es user");
 	useEffect(() => {
+		const savedImage = localStorage.getItem("profileImage");
+	console.log(savedImage , "Soy el saveImagen");
 		if (!user.id) {
 		const getUser = () => {
 			if (token) {
 				const tokenDecode = jwt(token);
+				if(savedImage){
+					tokenDecode.image = savedImage
+				}
 				setUser(tokenDecode);
 			} else {
 				fetch("http://localhost:3001/auth/login/success", {
@@ -94,6 +104,10 @@ function App() {
 							)
 						}
 					/>
+        <Route path="/userProfile" element={user.name || user.emails ? <UserProfile user={user}/>:<Navigate to="/login" />}/>
+        <Route path="/userProfile/uploadImage" element={user.category ? <ImageUpload user={user}/>:<Navigate to="/login" />}/>
+
+
         {/* Rutas del Admin */}
         <Route path="/admin" element={user.name || user.emails ? <Admin />:<Navigate to="/login" />}/>
         <Route path="/createCOHORT" element={user.name || user.emails ? <FormNewCohort user={user} />:<Navigate to="/login" />}/>

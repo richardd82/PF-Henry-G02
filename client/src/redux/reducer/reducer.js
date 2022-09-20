@@ -32,6 +32,7 @@ import {
   CLEAR_STATE_REVIEWS,
   USER_VALIDATE,
   LOGOUT,
+  UPLOAD_IMAGE,
 } from "../actions/index";
 
 const initialState = {
@@ -59,6 +60,7 @@ const initialState = {
   teachers: [],
   allUsers: [],
   userValidate: {},
+  image:[],
 
   //Videos
   videos: [],
@@ -302,6 +304,19 @@ export function reviews(state = initialState, action) {
 		default:
 			return { ...state };
 	}
+}
+
+export function cloudinaryImage(state = initialState, action) {
+  switch (action.type) {
+    case UPLOAD_IMAGE:
+      console.log(action.payload)
+      return {
+        ...initialState,
+        image: action.payload
+      };
+    default:
+      return state;
+  }
 }
 // export default {
 // 	modules,
