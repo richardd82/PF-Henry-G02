@@ -33,6 +33,8 @@ export const REVIEWS_BY_STUDENT = "REVIEWS_BY_STUDENT";
 export const CLEAR_STATE_REVIEWS = "CLEAR_STATE_REVIEWS";
 export const USER_VALIDATE = "USER_VALIDATE";
 export const LOGOUT = "LOGOUT";
+export const UPLOAD_IMAGE = "UPLOAD_IMAGE"
+
 
 
 //*************Modulos************
@@ -286,13 +288,14 @@ export function getTeachers() {
     }
   }
 
-  export function usersValidate(payload) {
+  export async function usersValidate(payload) {
     return async function (dispatch) {
       console.log(payload.email + " <-------------->Entre a la Action");
       var json = await axios.post(`http://localhost:3001/users/`, payload);
       localStorage.setItem("token", JSON.stringify(json.data));
       const data = await jwtDecode(json.data);
-      // console.log(data)
+		  window.location.reload('http://localhost:3000/');
+      console.log(data, "Esto es DATA")
       return dispatch({
         type: USER_VALIDATE,
         payload: data,
@@ -413,3 +416,27 @@ export function getReviews (taId){
         type: CLEAR_STATE_REVIEWS,
       };
     }
+
+//*********************Cloudinary**************************
+
+export async function uploadImage(base64EncodedImage, userId){
+      console.log(base64EncodedImage)
+      try {
+        return async (dispatch) => {
+
+          const res = await axios.post('http://localhost:3001/cloudinary/upload', { data: base64EncodedImage, id: userId })
+
+          console.log(res, "Esto es res23 156+4156+46+46+e5n el")
+
+          localStorage.setItem("profileImage", res.data.url)
+          window.location.reload('http://localhost:3000/');
+
+          return dispatch({
+            type: UPLOAD_IMAGE,
+            payload: base64EncodedImage,
+          })
+}
+      } catch (err) {
+          console.error(err);
+      }
+  };

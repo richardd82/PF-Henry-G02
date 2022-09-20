@@ -38,14 +38,16 @@ export default function Nav({ user }) {
     window.open('http://localhost:3001/auth/logout', '_self');
   };
 
-  
+  let photo = ""
 
- console.log(user._json.picture)
- const photo = user.photos[0].value;
-  ///FALTA INVESTIGAR COMO OBTENER EL EMAIL DEL USER DE GOOGLE
-  // dispatch(getTodosUsuarios());
-  const userValidate = users.find(e => e.name === user.displayName);
-  const category = userValidate && userValidate.category;
+//  console.log(user._json.picture)
+ console.log(photo)
+ ///FALTA INVESTIGAR COMO OBTENER EL EMAIL DEL USER DE GOOGLE
+ // dispatch(getTodosUsuarios());
+ const userValidate = users.find(e => e.name === user.displayName);
+ const category = userValidate ? userValidate.category : user.category;
+ if (userValidate ) {photo = user.photos[0].value;}
+ else {photo = user.image}
   // const active = userValidate && userValidate.active;
 
   return (
@@ -68,6 +70,9 @@ export default function Nav({ user }) {
             <div className="avatar">
               {category === 'student' ? (
                 <div>
+                  <Link to="/userProfile">
+                    <p className="avatar__name">Profile</p>
+                  </Link>
                   <Link to="/catalog">
                     <p className="avatar__name">Catalogo</p>
                   </Link>
@@ -80,6 +85,9 @@ export default function Nav({ user }) {
                 </div>
               ) : category === 'ta'? (
                 <div>
+                  <Link to="/userProfile">
+                    <p className="avatar__name">Profile</p>
+                  </Link>
                   <Link to="/catalog">
                     <p className="avatar__name">Catalogo</p>
                   </Link>
@@ -98,7 +106,8 @@ export default function Nav({ user }) {
               {/* {user.displayName} */}
               <img
                 className="avatar__image"
-                src={photo+GOOGLE_CLIENT_ID}
+                // photo+GOOGLE_CLIENT_ID
+                src={photo || user.image}
                 alt=""
                 onClick={handleLogout}
               />

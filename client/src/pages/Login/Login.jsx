@@ -43,16 +43,15 @@ const users = useSelector((state) => state.users.users);
         })
         console.log(input.email + '========> ONSubmit' + input.password)
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(user.email)
 		if(user.email === input.email && user.password === input.password){
 			// console.log(user, '======> SOY USER ANTES DEL ACTION');
 			// navigate('/', { user: user.category });
-			dispatch(usersValidate(user))
+			 dispatch(await usersValidate(user))
 			// navigate('/')
 			
-				window.location.reload('http://localhost:3000/');
 			
 ;		}
 		else{
