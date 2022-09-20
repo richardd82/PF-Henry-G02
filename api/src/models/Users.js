@@ -41,11 +41,27 @@ module.exports = sequelize => {
     category: {
       type: DataTypes.ENUM('admin', 'student', 'teacher', 'ta'),
       allowNull: false,
-    }
+    },
     // cohortId: {
     //   type:DataTypes.STRING,
     //   foreignKey: true,
     //   unique: false,
-    // }
+    // },
+    graduated: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    fees: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+    },
+    debt: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0,
+    },
+    salary: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0,
+    },
   });
 };
