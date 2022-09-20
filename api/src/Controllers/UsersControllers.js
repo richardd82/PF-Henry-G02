@@ -1,7 +1,8 @@
 const { Users, Classes, Reviews } = require("../db.js");
 const { Op } = require("sequelize");
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = "qwertyuiopñlkjhgfdsa";
+require('dotenv').config();
+const {	SECRET_KEY } = process.env;
 
 const getAllUsers = async (req, res, next) => {
   try {

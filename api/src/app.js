@@ -13,25 +13,21 @@ require('./db.js');
 var fs = require('fs');
 var http = require('http');
 const server = express();
-// server.name = 'API';
-// const PUERTO = 3001;
+require('dotenv').config();
+const {
+	CLIENT_URL
+  } = process.env;
 
-// http.createServer({
-//   cert: fs.readFileSync('./Certificate.crt'),
-//   key: fs.readFileSync('./Private.key')
-// },server).listen(PUERTO, function(){
-// 	console.log('Servidor http corriendo en el puerto 3001');
-// });
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan('dev'));
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // update to match the domain you will make the request from
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000/auth/google'); // update to match the domain you will make the request from
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000/auth/google/callback'); // update to match the domain you will make the request from
-  res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', CLIENT_URL); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', `${CLIENT_URL}/auth/google`); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', `${CLIENT_URL}/auth/google/callback`); // update to match the domain you will make the request from
+  // res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
@@ -41,7 +37,7 @@ server.use((req, res, next) => {
 
 server.use(cors(
   {
-    origin: 'http://localhost:3000',
+    origin:CLIENT_URL,
     methods:'GET, POST, PUT, DELETE',
     credentials: true,
   }
