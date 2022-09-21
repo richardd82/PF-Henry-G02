@@ -18,7 +18,12 @@ const {
 	CLIENT_URL
   } = process.env;
 
-
+// {
+      // origin:CLIENT_URL,
+      // methods:'GET, POST, PUT, DELETE',
+      // credentials: true,
+    // }
+  server.use(cors())
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
@@ -35,13 +40,6 @@ server.use((req, res, next) => {
 });
 
 
-server.use(cors(
-  {
-    origin:CLIENT_URL,
-    methods:'GET, POST, PUT, DELETE',
-    credentials: true,
-  }
-  ));
 server.use(cookieSession(//se cambió de cookieSession a Session
   {
     name: 'session',
