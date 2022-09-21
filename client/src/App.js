@@ -90,8 +90,8 @@ function App() {
 		getUser();
 		}
 	}, []);
-	//console.log(user);
-  console.log('API KEY', REACT_APP_STRIPE_KEY)
+	// console.log(user, "USER");
+//   console.log('API KEY', REACT_APP_STRIPE_KEY)
 
   return (
     <div className="App">

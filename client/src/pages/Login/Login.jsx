@@ -53,7 +53,7 @@ const users = useSelector((state) => state.users.users);
 			// navigate('/')
 			
 			
-;		}
+		}
 		else{
 			console.log('Usuario no registrado')
 		}

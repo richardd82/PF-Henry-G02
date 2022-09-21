@@ -9,6 +9,7 @@ import { getTodosUsuarios } from "../../redux/actions/index";
 import Login from "../Login/Login";
 
 const Profile = ({ user }) => {
+  // console.log(user, "USER")
   const users = useSelector((state) => state.users.allUsers);
   const dispatch = useDispatch();
   
@@ -25,10 +26,10 @@ const Profile = ({ user }) => {
   
   if (!user.category) {
     // dispatch(getTodosUsuarios());
-		
-		const userValidate = users.find((e) => e.email === user.emails[0].value );
+		// 
+		const userValidate = users.find((e) => e.email === user.emails[0].value  );
     active = userValidate && userValidate.active;
-    console.log(active);
+    console.log(userValidate);
     category = userValidate && userValidate.category;
   }else{
     category = user.category;
