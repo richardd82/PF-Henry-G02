@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
     },
     userId:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     }
   });
 };

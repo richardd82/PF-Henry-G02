@@ -8,7 +8,13 @@ import { addFavoritesById, getTodosUsuarios } from '../../redux/actions';
 function FavouriteButton({userId, videoId}) {
 
 const dispatch = useDispatch();
-const users = useSelector(state => state.users.allUsers);
+
+
+
+
+
+
+  const users = useSelector(state => state.users.allUsers);
   const userValidate = users.find(e => e.name === userId.displayName);
   const loginUserId = userValidate && userValidate.id;
   console.log(loginUserId); 
@@ -23,8 +29,8 @@ const addFavourite = (e) =>{
 }
 
   return (
-      <button onClick={(e)=>addFavourite(e)}>
-        <FiHeart/>
+      <button style={{cursor:"pointer"}}onClick={(e)=>addFavourite(e)}>
+        <FiHeart style={{color:"white"}}/>
         </button>
   )
 }

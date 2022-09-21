@@ -6,6 +6,7 @@ import {
   getAllLessons,
   getCohorts,
   getTeachers,
+  getTodosUsuarios,
 } from "../../redux/actions/index";
 import { createVideo } from "../../redux/actions/index";
 // Helpers
@@ -14,40 +15,51 @@ import "./Formularios.css";
 import Nav from "../Nav/Nav";
 
 const CreateVideo = ({ user }) => {
-
   const dispatch = useDispatch();
   const teachers = useSelector((state) => state.users.teachers);
+
   const cohorts = useSelector((state) => state.cohorts.allCohorts);
   const classes = useSelector((state) => state.classes.allClasses);
-  console.log(classes.map((e) => e.id));
+  // console.log(classes.map((e) => e.id));
   useEffect(() => {
     dispatch(getCohorts());
     dispatch(getTeachers());
     dispatch(getAllLessons());
+    dispatch(getTodosUsuarios());
   }, [dispatch]);
 
   // Control de inputs
+
+  let videos = "";
+  if (!user.category) {
+    videos = teachers.filter((e) => e.name === user._json.name);
+  } else {
+    videos = teachers.filter((e) => e.name === user.name);
+  }
+
+  const usersName = videos.map((e) => e.name).toString();
+  const cohortId = videos.map((e) => e.cohortId).toString();
+
   const [input, setInput] = useState({
     name: "",
     type: "",
     link: "",
     classId: "",
-    cohortId: "",
-    userId: user.displayName,
+    cohortId: cohortId,
+    userId: usersName,
   });
 
   // Control de errores
   //const [warnings, setWarnings] = useState({});
 
   function handleChange(e) {
-    const { name, value } = e.target;
-    setInput((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
+    e.preventDefault(e);
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+      userId: usersName,
+      cohortId: cohortId,
     });
-    //setWarnings(setVideoErrors(input));
   }
 
   function handleChangeClasses(e) {
@@ -71,7 +83,7 @@ const CreateVideo = ({ user }) => {
   function handleSubmit(e) {
     e.preventDefault();
 
- /*    if (warnings.error) {
+    /*    if (warnings.error) {
       setWarnings((prev) => {
         return {
           ...prev,
@@ -79,16 +91,18 @@ const CreateVideo = ({ user }) => {
         };
       });
     } else { */
-      dispatch(createVideo(input));
-      alert("Clase creada correctamente");
-      setInput({
-        name: "",
-        type: "",
-        link: "",
-        cohortId: "",
-        classId: "",
-      });
-    }
+    dispatch(createVideo(input));
+    alert("Clase creada correctamente");
+    setInput({
+      name: "",
+      type: "",
+      link: "",
+      cohortId: cohortId,
+      classId: "",
+      userId: usersName,
+    });
+    console.log(input);
+  }
   //}
   // console.log(input);
   return (
@@ -98,7 +112,7 @@ const CreateVideo = ({ user }) => {
         <div className="container">
           <h1 className="title">Creación de Videos</h1>
           <br></br>
-{/*           {warnings.errorMsg ? <p>{warnings.errorMsg}</p> : null} */}
+          {/*           {warnings.errorMsg ? <p>{warnings.errorMsg}</p> : null} */}
           <form className="form" onSubmit={(e) => handleSubmit(e)}>
             <div>
               <select
@@ -147,16 +161,16 @@ const CreateVideo = ({ user }) => {
               {/* {warnings.link ? <p>{warnings.link}</p> : null} */}
             </div>
             <div>
-              <label>Tipo</label>
               <select
                 className="select"
                 name="type"
                 onChange={(e) => handleSelect(e)}
               >
+                <option>Tipo</option>
                 <option value="lecture">Lecture</option>
                 <option value="code-review">Code Review</option>
               </select>
-{/*               {warnings.type ? <p>{warnings.type}</p> : null} */}
+              {/*               {warnings.type ? <p>{warnings.type}</p> : null} */}
             </div>
             {/* <div>
               <label>Profesor</label>
@@ -177,24 +191,7 @@ const CreateVideo = ({ user }) => {
               </select>
               {warnings.userId ? <p>{warnings.userId}</p> : null}
             </div> */}
-            <div>
-              <label>Cohorte</label>
-              <select
-                className="select"
-                name="cohortId"
-                onChange={(e) => handleSelect(e)}
-              >
-                {cohorts &&
-                  cohorts.map((e) => {
-                    return (
-                      <option key={e.id} value={e.id}>
-                        {e.name}
-                      </option>
-                    );
-                  })}
-              </select>
-{/*               {warnings.cohortId ? <p>{warnings.cohortId}</p> : null} */}
-            </div>
+
             <div>
               <button className="submitButton" type="submit" value="">
                 SUBIR VIDEO

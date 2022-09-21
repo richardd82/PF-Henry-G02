@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,59 +16,41 @@ import "./AddReview.css";
 import { Link } from "react-router-dom";
 import Nav from "../Nav/Nav";
 
-export default function AddReview(){
-    const user = {
-        name: "Romi Jimenez",
-        id: "105104a9-9e18-4934-b950-18de117aa014",
-        standupId: "6c5dc9cc-460c-408c-8cb8-cfa94af873ec",
-        lastname: "Jimenez",
-        email: "romijimenez06@gmail.comimage",
-        category: "ta",
-        active: true,
-      };
+export default function AddReview({user}) {
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.users.users);
 
-
-
-    const dispatch = useDispatch()
-    const users = useSelector(state=> state.users.users)
-
-    let ta = ''
-if(user){
+  let ta = "";
+  if (user) {
     if (!user.category) {
-        ta = users.filter((e) => e.name === user._json.name );
-     }else{
-       ta = users.filter((e) => e.name === user.name );
-       }
+      ta = users.filter((e) => e.name === user._json.name);
+    } else {
+      ta = users.filter((e) => e.name === user.name);
+    }
+  } else {
+    ta = "student";
+  }
 
-} else {
-    ta = 'student'
-}
+  const taSup = ta.map((e) => e.standupId).toString();
 
-       const taSup = ta.map(e=>e.standupId).toString()
-  
+  useEffect(() => {
+    dispatch(getTodosUsuarios());
+  }, [dispatch]);
 
-
-    useEffect(()=>{
-        dispatch(getTodosUsuarios())
-    },[dispatch])
-
-
-
-    return (
-        <div>
-            <Nav user={user}/>
-             {
-                users && users.map(e => {
-                    if(e.standupId === taSup && e.category === "student")
-                    return (
-                    <Link to={`/reviews/create/${e.id}`}>
-                    <p>
-                        {e.name} {e.lastname}
-                    </p>
-                    </Link>
-                    )
-                } )
-            } 
-        </div>
-    )
+  return (
+    <div>
+      <Nav user={user} />
+      {users &&
+        users.map((e) => {
+          if (e.standupId === taSup && e.category === "student")
+            return (
+              <Link to={`/reviews/create/${e.id}`}>
+                <p>
+                  {e.name} {e.lastname}
+                </p>
+              </Link>
+            );
+        })}
+    </div>
+  );
 }

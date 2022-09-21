@@ -12,6 +12,7 @@ import { getAllVideos } from "../../redux/actions/index";
 import { getTodosUsuarios } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
 import FavouriteButton from "../../components/FavouriteComponents/favouriteButton.jsx";
+import SearchBar from "../../components/SearchBar/SearchBar.jsx";
 
 const Catalog = ({ user }) => {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ const Catalog = ({ user }) => {
   return (
       <div>
         <Nav user={user} />
+        <SearchBar/>
         <Pager
           currentPage={currentPage}
           pageHandler={handlePage}

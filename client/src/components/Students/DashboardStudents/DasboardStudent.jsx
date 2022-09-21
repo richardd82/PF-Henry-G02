@@ -98,9 +98,7 @@ const DasboardStudent = () => {
         </ul>
 
         {/* </ul> */}
-        <div>
-          <SearchBar />
-        </div>
+       
         {/* las asistencias seran mostradas x/total */}
 
         {/* <div className="search">
