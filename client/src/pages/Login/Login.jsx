@@ -9,10 +9,10 @@ import './login.css'
 const Login = () => {
 
 const google = () => {
-    window.open("https://pf-henry-g02-production.up.railway.app/auth/google", "_self");
+    window.open("http://localhost:3001/auth/google", "_self");
 }
 const github = () => {
-    window.open("https://pf-henry-g02-production.up.railway.app/auth/github", "_self");
+    window.open("http://localhost:3001/auth/github", "_self");
 }
 const users = useSelector((state) => state.users.users);
 	const dispatch = useDispatch();

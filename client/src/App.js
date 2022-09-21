@@ -65,7 +65,7 @@ function App() {
 				}
 				setUser(tokenDecode);
 			} else {
-				fetch("https://pf-henry-g02-production.up.railway.app/auth/login/success", {
+				fetch("http://localhost:3001/auth/login/success", {
 					method: "GET",
 					credentials: "include",
 					headers: {
@@ -90,7 +90,7 @@ function App() {
 		getUser();
 		}
 	}, []);
-	// console.log(user, "USER");
+	console.log(user, "USER");
 //   console.log('API KEY', REACT_APP_STRIPE_KEY)
 
   return (

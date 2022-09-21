@@ -14,21 +14,32 @@ const AllFavourite = ({ user }) => {
   const dispatch = useDispatch();
   
   const users = useSelector(state => state.users.allUsers);
-  const userValidate = users.find(e => e.name === user.displayName);
-  const loginUserId = userValidate && userValidate.id;
-  console.log(loginUserId);
+  //const userValidate = users.find(e => e.name === user.displayName);
+  //const loginUserId = userValidate && userValidate.id;
+ 
   
+  let userValidate = ''
+  if (!user.category) {
+    userValidate = users.filter((e) => e.name === user._json.name );
+    }else{
+      userValidate = users.filter((e) => e.name === user.name );
+      }
+      const loginUserId = userValidate?.map(e=> e.id)
+      
+      const videos = useSelector(state => state.favorites.favorite);
+
   useEffect(() => {
-    dispatch(getFavoritesById(loginUserId));
+    if(!videos){
+      dispatch(getFavoritesById(loginUserId));
+    }
     if (!users.length) {
       dispatch(getTodosUsuarios());
     }
 
-  }, [dispatch, loginUserId, users.length]);
-
-  const videos = useSelector(state => state.favorites.favorite);
+  }, [dispatch, loginUserId, users.length, videos]);
   
-  console.log(videos)
+  
+
 
   // Pagination handler
   const [currentPage, setCurrentPage] = useState(1);

@@ -9,15 +9,16 @@ import { getTodosUsuarios } from "../../redux/actions/index";
 import Login from "../Login/Login";
 
 const Profile = ({ user }) => {
-  // console.log(user, "USER")
+  console.log(user, "USER")
   const users = useSelector((state) => state.users.allUsers);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
-    if (!users.length) {
+    //if (!users.length) {
       dispatch(getTodosUsuarios());
-    }
+    //}
   }, [dispatch, users.length]);
+ 
   let category = '';
   let active = false;
   ///FALTA INVESTIGAR COMO OBTENER EL EMAIL DEL USER DE GOOGLE
@@ -27,8 +28,8 @@ const Profile = ({ user }) => {
   if (!user.category) {
     // dispatch(getTodosUsuarios());
 		// e.email === user.emails[0].value 
-		const userValidate = users.find((e) => console.log(e) );
-    console.log(userValidate);
+		const userValidate = users.find((e) => e.email === user.emails[0].value  );
+    console.log(users.find(e=> e.email));
     active = userValidate && userValidate.active;
     category = userValidate && userValidate.category;
   }else{

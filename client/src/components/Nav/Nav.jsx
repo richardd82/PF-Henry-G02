@@ -66,16 +66,16 @@ export default function Nav({ user }) {
 		if (user.category) {
 			localStorage.clear();
 			dispatch(logout());
-			window.location.reload("https://pf-henry-g02.vercel.app/login");
+			window.location.reload("http://localhost:3000/login");
 		} else if (user.emails) {
-			window.open("https://pf-henry-g02-production.up.railway.app/auth/logout", "_self");
+			window.open("http://localhost:3001/auth/logout", "_self");
 		}
 	};
 	const redirect = () => {
-		window.location.reload("https://pf-henry-g02.vercel.app/login");
+		window.location.reload("http://localhost:3000/login");
 	};
 	const logout = () => {
-		window.open("https://pf-henry-g02-production.up.railway.app/auth/logout", "_self");
+		window.open("http://localhost:3001/auth/logout", "_self");
 	};
 
 	let category = "";
