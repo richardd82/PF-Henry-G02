@@ -4,9 +4,6 @@ require('dotenv').config();
 const {
 	CLIENT_URL, CLIENT_URL_LOGOUT
   } = process.env;
-//http://localhost:3001/auth/google/callback
-// const CLIENT_URL = "http://localhost:3000/";
-// const CLIENT_URL_LOGOUT = "http://localhost:3000/login";
 
 router.get("/login/success", (req, res) => {
 	if (req.user) {
