@@ -12,7 +12,7 @@ passport.use(
 		{
 			clientID: GOOGLE_CLIENT_ID,
 			clientSecret: GOOGLE_CLIENT_SECRET,
-			callbackURL: "/auth/google/callback",
+			callbackURL: "https://pf-henry-g02-production.up.railway.app/auth/google/callback",
 		},
 		function (accessToken, refreshToken, profile, done) {
 			done(null, profile)
@@ -25,7 +25,7 @@ passport.use(
 			clientID: GITHUB_CLIENT_ID,
 			clientSecret: GITHUB_CLIENT_SECRET,
 			scope: ['user:email'],
-			callbackURL: "/auth/github/callback",
+			callbackURL: "https://pf-henry-g02-production.up.railway.app/auth/github/callback",
 		},
 		function (accessToken, refreshToken, profile, done) {
 			done(null, profile)
