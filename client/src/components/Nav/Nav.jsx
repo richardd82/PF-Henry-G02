@@ -1,12 +1,21 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css';
+import swal from "sweetalert";
+import slides_pdf from "../Students/DashboardStudents/Slides_Henry.pdf";
+
 // Assets
+import home from '../../assets/media/home.png';
+import about from '../../assets/media/about.png'
+import correo from '../../assets/media/correo.png';
+import discord from '../../assets/media/discord.png';
+import slack from '../../assets/media/slack.png';
+import slides from '../../assets/media/slides.png';
 import logo_thumb from '../../assets/media/images.png';
-import logo_Henry from '../../assets/media/logoHenryWhite.png';
 import alumno from '../../assets/media/avatar.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTodosUsuarios } from '../../redux/actions';
+
 
 export default function Nav({ user }) {
   const GOOGLE_CLIENT_ID = 'AIzaSyBQVj2X9xWCr-pgiJDzR0K5TXNVaaUoeec';
@@ -17,6 +26,41 @@ export default function Nav({ user }) {
       dispatch(getTodosUsuarios());
     }
   }, [dispatch]);
+
+  function sweetSlides() {
+    swal("SLIDES", {
+      buttons: { descarga: "DESCARGAR", navegador: "VISTA PREVIA" },
+    }).then((value) => {
+      switch (value) {
+        case "descarga":
+          {
+            var a = document.createElement("a");
+            a.href = slides_pdf;
+            a.download = "slides-Henry.pdf";
+            a.click();
+            window.URL.revokeObjectURL(slides_pdf);
+          }
+          break;
+        case "navegador":
+          swal("Serás redireccionado a las slides", { buttons: false });
+          setTimeout(() => {
+            var a = document.createElement("a");
+            a.href = slides_pdf;
+            a.click();
+            window.URL.revokeObjectURL(slides_pdf);
+          }, 1500);
+        default:
+          console.log("hola");
+      }
+    });
+  }
+
+  function sweetAttendance() {
+    swal({
+      title: "ASISTENCIAS",
+      text: "Tu asistencia se calcula en función de todas las veces que hubo SUP y que tendrías que haber participado en el mismo. Esto incluye cohortes de las que hubieras migrado.(Estamos en plena transición a esta herramienta, por lo que los valores pueden ser inferiores a los reales, no te preocupes)",
+    });
+  }
 
 	const handleLogout =  () => {
 		if (user.category) {
@@ -37,11 +81,11 @@ export default function Nav({ user }) {
   const logout = () => {
     window.open('http://localhost:3001/auth/logout', '_self');
   };
-
+  
   
 
- console.log(user._json.picture)
- const photo = user.photos[0].value;
+//  console.log(user._json.picture)
+//  const photo = user.photos[0].value;
   ///FALTA INVESTIGAR COMO OBTENER EL EMAIL DEL USER DE GOOGLE
   // dispatch(getTodosUsuarios());
   const userValidate = users.find(e => e.name === user.displayName);
@@ -62,7 +106,7 @@ export default function Nav({ user }) {
               </Link>
             </div>
             {/* <Link to="/"> */}
-            <img src={logo_Henry} alt="" />
+            {/* <img src={logo_Henry} alt="" /> */}
             {/* </Link> */}
             {/* && active === true ? */}
             <div className="avatar">
@@ -74,8 +118,9 @@ export default function Nav({ user }) {
                   <Link to="/favourite">
                     <p className="avatar__name">Favoritos</p>
                   </Link>
-                  <Link to="/contacto">
-                    <p className="avatar__name">Contacto</p>
+                  <Link to="">
+                    <button onClick={sweetAttendance}>
+                    <p className="avatar__name">Asistencias</p></button>
                   </Link>
                 </div>
               ) : category === 'ta'? (
@@ -98,7 +143,7 @@ export default function Nav({ user }) {
               {/* {user.displayName} */}
               <img
                 className="avatar__image"
-                src={photo+GOOGLE_CLIENT_ID}
+                src={alumno}
                 alt=""
                 onClick={handleLogout}
               />
@@ -113,6 +158,35 @@ export default function Nav({ user }) {
           </Link>
         )}
       </header>
+      <div className="sticky-container">
+    <ul className="sticky">
+        <li>
+            <img src={home} width="32" height="32" alt="home"/>
+            <p><a href="" >Home</a></p>
+        </li>
+        <li>
+            <img src={slack} width="32" height="32" alt="slack"/>
+            <p><a href="https://soyhenry.slack.com" target="_blank">Slack</a></p>
+        </li>
+        <li>
+        <button onClick={sweetSlides}>
+          <img src={slides} width="32" height="32"  alt="slides"/>
+            <p><Link to="">Slides</Link></p></button>
+        </li>
+        <li>
+            <img src={about} width="32" height="32" alt="abouts"/>
+            <p><Link to="">Abouts</Link></p>
+        </li>
+        <li>
+            <img src={correo} width="32" height="32" alt="contacto"/>
+            <p><Link to="/contacto">Contact</Link></p>
+        </li>
+        <li>
+            <img src={discord} width="32" height="32" alt="discord"/>
+            <p><a href="https://discord.com" target="_blank">Discord</a></p>
+        </li>
+    </ul>
+</div>
     </div>
   );
 }

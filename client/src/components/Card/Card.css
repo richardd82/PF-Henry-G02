@@ -1,0 +1,55 @@
+.card {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 200px;
+  cursor: pointer;
+  transition: transform .4s;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 5px;
+  /* min-height: 105px; */
+  height: 205px;
+}
+
+.cardHeader img {
+  width: 100%;
+  /* height: fit-content; */
+  /* object-fit:fill; */
+  /* margin: 6px; */
+  border-radius: 5px;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.tag {
+  /* background: black; */
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 800;
+  margin: 0;
+  /* color: black; */
+  padding: 5px 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #47bcd4 !important;
+}
+
+.tagTeal {
+  color: #47bcd4 !important;
+}
+
+.userInfo h6{
+  margin: 0;
+  color :grey;
+
+}
+
+

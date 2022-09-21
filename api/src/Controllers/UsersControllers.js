@@ -197,7 +197,7 @@ const usersValidate = async (req, res) => {
 				{
 					id: user.id,
 					name: user.name,
-					image: user.image,
+					picture: user.image,
 					email: user.email,
 					active: user.active,
 					category: user.category,

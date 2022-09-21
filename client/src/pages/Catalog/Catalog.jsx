@@ -7,11 +7,14 @@ import Pager from "../../components/Pager/Pager.jsx";
 import Videos from "../../components/Videos/Videos.jsx";
 import Card from "../../components/Card/Card.jsx";
 import Nav from "../../components/Nav/Nav";
+import SearchBar from "../../components/SearchBar/SearchBar.jsx";
 // Actions
 import { getAllVideos } from "../../redux/actions/index";
 import { getTodosUsuarios } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
 import FavouriteButton from "../../components/FavouriteComponents/favouriteButton.jsx";
+
+import "./Catalog.css";
 
 const Catalog = ({ user }) => {
   const dispatch = useDispatch();
@@ -37,7 +40,7 @@ const Catalog = ({ user }) => {
     setCurrentPage(number);
   };
 
-  const videosPerPage = 10,
+  const videosPerPage = 8,
     indexOfLastVideo = currentPage * videosPerPage,
     indexOfFirstVideo = indexOfLastVideo - videosPerPage,
     currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
@@ -45,50 +48,56 @@ const Catalog = ({ user }) => {
   console.log(instructor);
 
   return (
-    <div>
-      {/* {videos.loading === true ? (
-        <h1>Loading</h1>
-      ) : ( */}
-      <div>
-        <Nav user={user} />
-        <Pager
-          currentPage={currentPage}
-          pageHandler={handlePage}
-          itemsPerPage={videosPerPage}
-          totalItems={videos.length}
-        />
+    <div className="c__cards-container">
         <div>
-          {currentVideos &&
-            currentVideos
-              .sort((a, b) => {
-                const aDate = new Date(a.createdAt);
-                const bDate = new Date(b.createdAt);
-                return aDate - bDate;
-              })
-              .map((video) => {
-                return (
-                  <div>
-                    <Link key={video.id} to={`/lecture/${video.id}`}>
-                      <Card
-                        id={video.id}
-                        title={video.name}
-                        instructor={instructor}
-                        description={video.description}
-                      />
-                    </Link>
-                    <FavouriteButton userId={user} videoId={video.id} />
-                  </div>
-                );
-              })}
+          {/* {videos.loading === true ? (
+            <h1>Loading</h1>
+          ) : ( */}
+          <div>
+            <Nav user={user} />
+            <Pager
+              currentPage={currentPage}
+              pageHandler={handlePage}
+              itemsPerPage={videosPerPage}
+              totalItems={videos.length}
+            />
+            <div className = "c__cards">
+              {currentVideos &&
+                currentVideos
+                  .sort((a, b) => {
+                    const aDate = new Date(a.createdAt);
+                    const bDate = new Date(b.createdAt);
+                    return aDate - bDate;
+                  })
+                  .map((video) => {
+                    return (
+                      <>
+                        <Link className= "c__fav-container" key={video.id} to={`/lecture/${video.id}`}>
+                          <Card
+                            id={video.id}
+                            title={video.name}
+                            instructor={instructor}
+                            description={video.description}
+                          />
+                          <div className= "c__favorito">
+                          <FavouriteButton userId={user} videoId={video.id}/>
+                          </div>
+                        </Link>
+                        {/* <FavouriteButton userId={user} videoId={video.id} /> */}
+                      </>
+                    );
+                  })}
+            </div>
+            <Pager
+              currentPage={currentPage}
+              pageHandler={handlePage}
+              itemsPerPage={videosPerPage}
+              totalItems={videos.length}
+            />
+          </div>
+          {/* )} */}
         </div>
-        <Pager
-          currentPage={currentPage}
-          pageHandler={handlePage}
-          itemsPerPage={videosPerPage}
-          totalItems={videos.length}
-        />
-      </div>
-      {/* )} */}
+        <div className="c__cards-search"><SearchBar/></div>
     </div>
   );
 };
