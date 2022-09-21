@@ -278,14 +278,14 @@ export function getTeachers() {
 
   export function putUser(id,payload) {
       return async function () {
-        var json = await axios.put(`http://localhost:3002/users/update/${id}`, payload);
+        var json = await axios.put(`https://pf-henry-g02-production.up.railway.app/users/update/${id}`, payload);
         return json;
       };
     }
 
   export function searchByEmail(email){
     return async function(dispatch){
-      var json = await axios.get(`http://localhost:3002/users/byEmail?email=${email}`);
+      var json = await axios.get(`https://pf-henry-g02-production.up.railway.app/users/byEmail?email=${email}`);
       return dispatch({
         type: GET_BY_EMAIL,
         payload: json.data,
@@ -347,7 +347,7 @@ export function getAllStandUps() {
 export function getFavoritesById(id) {
   return async function (dispatch) {
   try {
-      var json = await axios.get(`http://localhost:3002/favorites/${id}`);
+      var json = await axios.get(`https://pf-henry-g02-production.up.railway.app/favorites/${id}`);
       // console.log(json)
       return dispatch({
         type: GET_FAVORITE_BY_ID,
@@ -363,7 +363,7 @@ export function getFavoritesById(id) {
 export function addFavoritesById(userId, videoId) {
   return async function (dispatch) {
     try {
-    var json = await axios.post( `http://localhost:3002/favorites/create/${userId}/${videoId}`);
+    var json = await axios.post( `https://pf-henry-g02-production.up.railway.app/favorites/create/${userId}/${videoId}`);
     // console.log(json.data)
     return dispatch({
       type: ADD_FAVORITE,
