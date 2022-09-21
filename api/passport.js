@@ -15,6 +15,7 @@ passport.use(
 			callbackURL: "https://pf-henry-g02-production.up.railway.app/auth/google/callback",
 		},
 		function (accessToken, refreshToken, profile, done) {
+			console.log("entre a google", accessToken)
 			done(null, profile)
 		}
 	)
