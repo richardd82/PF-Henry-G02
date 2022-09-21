@@ -8,7 +8,6 @@ const FavoritesRoute = require("./FavoritesRoute.js");
 const passport = require('passport');
 const VideosRoute = require('./VideosRoute.js')
 const AttendanceRoute = require('./AttendanceRoute.js')
-const MercadopagoRoutes = require('./MercadopagoRoutes.js')
 const ReviewsRoute = require('./ReviewsRoute.js')
 const Cloudinary = require("./Cloudinary.js")
 const PaymentRouter = require('./PaymentsRouter.js');
@@ -30,7 +29,6 @@ router.use("/users", UsersRoute);
 router.use("/favorites", FavoritesRoute);
 router.use('/videos', VideosRoute)
 router.use('/attendance', AttendanceRoute)
-router.use("/", MercadopagoRoutes);
 router.use('/reviews', ReviewsRoute)
 router.use("/cloudinary", Cloudinary);
 router.use('/checkout', PaymentRouter);
