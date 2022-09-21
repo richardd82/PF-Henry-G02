@@ -5,9 +5,11 @@ import Nav from '../Nav/Nav';
 
 const Ta = ({ user }) => {
   return (
-    <div>
+    <div className="ta__container">
       <Nav user={user} />
+      <div className="ta__attendance">
       <Attendance user={user} />
+      </div>
     </div>
   );
 };

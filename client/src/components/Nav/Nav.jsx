@@ -82,14 +82,30 @@ export default function Nav({ user }) {
     window.open('http://localhost:3001/auth/logout', '_self');
   };
   
+ let active = false;
+ let category = "";
+
+  if (!user.category) {
+    // dispatch(getTodosUsuarios());
+		
+		const userValidate = users.find((e) => e.email === user.emails[0].value );
+    active = userValidate && userValidate.active;
+    console.log(active);
+    category = userValidate && userValidate.category;
+  }else{
+    category = user.category;
+    console.log(category);
+      active = user.active;
+			// console.log(category);
+	}
   
 
 //  console.log(user._json.picture)
 //  const photo = user.photos[0].value;
   ///FALTA INVESTIGAR COMO OBTENER EL EMAIL DEL USER DE GOOGLE
   // dispatch(getTodosUsuarios());
-  const userValidate = users.find(e => e.name === user.displayName);
-  const category = userValidate && userValidate.category;
+  // const userValidate = users.find(e => e.name === user.displayName);
+  // const category = userValidate && userValidate.category;
   // const active = userValidate && userValidate.active;
 
   return (
