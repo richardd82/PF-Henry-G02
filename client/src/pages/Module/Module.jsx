@@ -11,7 +11,7 @@ import Contact from '../../components/Contact/Contact';
 // Assets
 import github from '../../media/github.png';
 import sheet from '../../media/sheet.png';
-import './ClaseDetails.css';
+import './Module.css';
 import Nav from '../../components/Nav/Nav';
 
 
@@ -44,7 +44,7 @@ const Module = ({ user }) => {
                 .map((obj, index) => {
                   if (obj.moduleId === module.id) {
                     return (
-                      <div key={index} className="sectionModuloClases">
+                      <div key={index} className="section__modulo-clases">
                         <article>
                           <Link key={obj.id} to={`/lecture/${obj.id}`}>
                             <p>{`${obj.name}`}</p>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // Actions
-import "./SearchBar.css";
+// import "./SearchBar.css";
 import lupa from "../../../../media/lupa.png";
 import { getTodosUsuarios, searchByEmail } from "../../../../redux/actions";
 

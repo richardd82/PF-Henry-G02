@@ -1,0 +1,35 @@
+.c__cards-container{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.c__cards{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    width: 80vw;
+    overflow: hidden;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 5px 50px 5px 50px;
+    overflow-x: hidden;
+}
+
+.c__fav-container{
+position: relative;
+}
+
+.c__favoritos button svg{
+    position: absolute;
+    color: gray;
+    /* margin-top: -50px; */
+}
+
+.c__cards-search{
+margin-left: 81%;
+width: 200px;
+position: absolute;
+margin-top: 100px;
+}
