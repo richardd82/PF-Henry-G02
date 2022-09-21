@@ -1,22 +1,26 @@
-require('dotenv').config();
+require("dotenv").config();
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const GithubStrategy = require("passport-github2").Strategy;
 // const FacebookStrategy = require("passport-facebook").Strategy;
 const {
-	GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET
-  } = process.env;
+	GOOGLE_CLIENT_ID,
+	GOOGLE_CLIENT_SECRET,
+	GITHUB_CLIENT_ID,
+	GITHUB_CLIENT_SECRET,
+} = process.env;
 
 passport.use(
 	new GoogleStrategy(
 		{
 			clientID: GOOGLE_CLIENT_ID,
 			clientSecret: GOOGLE_CLIENT_SECRET,
-			callbackURL: "https://pf-henry-g02-production.up.railway.app/auth/google/callback",
+			callbackURL:
+				"https://pf-henry-g02-production.up.railway.app/auth/google/callback",
 		},
 		function (accessToken, refreshToken, profile, done) {
-			console.log("entre a google", accessToken)
-			done(null, profile)
+			console.log("entre a google", accessToken);
+			done(null, profile);
 		}
 	)
 );
@@ -25,17 +29,24 @@ passport.use(
 		{
 			clientID: GITHUB_CLIENT_ID,
 			clientSecret: GITHUB_CLIENT_SECRET,
-			scope: ['user:email'],
-			callbackURL: "https://pf-henry-g02-production.up.railway.app/auth/github/callback",
+			scope: ["user:email"],
+			callbackURL:
+				"https://pf-henry-g02-production.up.railway.app/auth/github/callback",
 		},
 		function (accessToken, refreshToken, profile, done) {
-			return done(null, profile)
+			console.log("accessToken==" + accessToken);
+			// User.findOrCreate({ githubId: profile.id }, function (err, user) {
+				// cb(err, user);
+			// }
+			// );
+			console.log(profile + 'PROFILE')
+			return done(null, profile);
 		}
 	)
 );
 passport.serializeUser((user, done) => {
-    done(null, user);
-})
+	done(null, user);
+});
 passport.deserializeUser((user, done) => {
-    done(null, user);
-})
+	done(null, user);
+});
