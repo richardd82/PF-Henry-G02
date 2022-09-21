@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon -L",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Henry",
   "license": "ISC",
   "engines": {
-    "node": ">=18.5.0",
+    "node": ">=14.20.0",
     "npm": ">=6.14.17"
   },
   "dependencies": {
@@ -32,7 +32,7 @@
     "passport-github2": "^0.1.12",
     "passport-google-oauth20": "^2.0.0",
     "pg": "^8.5.1",
-    "sequelize": "^6.3.5",
+    "sequelize": "^6.23.0",
     "stripe": "^10.10.0"
   },
   "devDependencies": {
