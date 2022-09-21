@@ -29,7 +29,7 @@ passport.use(
 			callbackURL: "https://pf-henry-g02-production.up.railway.app/auth/github/callback",
 		},
 		function (accessToken, refreshToken, profile, done) {
-			done(null, profile)
+			return done(null, profile)
 		}
 	)
 );
