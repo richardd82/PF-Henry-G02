@@ -46,7 +46,7 @@ export const REQUEST_ERROR = 'REQUEST_ERROR';
 export function getAllModules() {
     return async function (dispatch) {
       try {
-        var json = await axios.get('http://localhost:3001/modules');
+        var json = await axios.get('https://pf-henry-g02-production.up.railway.app/modules');
         return dispatch({
           type: GET_ALL_MODULES,
           payload: json.data,
@@ -65,7 +65,7 @@ export function getAllModules() {
 export function getCohorts() {
     return async function (dispatch) {
       try {
-        const response = await axios.get('http://localhost:3001/cohorts');
+        const response = await axios.get('https://pf-henry-g02-production.up.railway.app/cohorts');
         return dispatch({
           type: GET_ALL_COHORTS,
           payload: response.data,
@@ -78,7 +78,7 @@ export function getCohorts() {
   export function postNewCohort(payload) {
     return async function () {
       var json = await axios.post(
-        `http://localhost:3001/cohorts/create`,
+        `https://pf-henry-g02-production.up.railway.app/cohorts/create`,
         payload
       );
       return json;
@@ -88,7 +88,7 @@ export function getCohorts() {
 export function getAllLessons() {
     return async function (dispatch) {
       try {
-        var json = await axios.get('http://localhost:3001/classes');
+        var json = await axios.get('https://pf-henry-g02-production.up.railway.app/classes');
         return dispatch({
           type: GET_ALL_LESSONS,
           payload: json.data,
@@ -100,7 +100,7 @@ export function getAllLessons() {
   }
   export function getLessonsById(id) {
     return async function (dispatch) {
-      var json = await axios.get(`http://localhost:3001/classes/byId/${id}`);
+      var json = await axios.get(`https://pf-henry-g02-production.up.railway.app/classes/byId/${id}`);
       return dispatch({
         type: GET_LESSONS_BY_ID,
         payload: json.data,
@@ -124,7 +124,7 @@ export const getClassesByName = name => {
       // Si no, llenamos el estado `errorMsg` con el error
       // Más adelante se definen las otras acciones llamadas acá
       axios
-        .get(`http://localhost:3001/classes/byName?name=${name}`)
+        .get(`https://pf-henry-g02-production.up.railway.app/classes/byName?name=${name}`)
         .then(response => dispatch(getByNameSuccess(response.data)))
         .catch(error => dispatch(requestFailure(error.response.data)));
     };
@@ -156,7 +156,7 @@ export const getClassesByName = name => {
   export function postNewClass(payload) {
     return async function () {
       var json = await axios.post(
-        `http://localhost:3001/classes/create`,
+        `https://pf-henry-g02-production.up.railway.app/classes/create`,
         payload
       );
       return json;
@@ -172,7 +172,7 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.post(
-          'http://localhost:3001/videos/create',
+          'https://pf-henry-g02-production.up.railway.app/videos/create',
           payload
         );
         return dispatch({
@@ -187,7 +187,7 @@ export function createVideo(payload) {
   export function getAllVideos() {
     return async function (dispatch) {
       try {
-        const response = await axios.get('http://localhost:3001/videos');
+        const response = await axios.get('https://pf-henry-g02-production.up.railway.app/videos');
         console.log(response.data);
         return dispatch({
           type: GET_VIDEOS,
@@ -202,7 +202,7 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `http://localhost:3001/videos/byName?name=${name}`
+          `https://pf-henry-g02-production.up.railway.app/videos/byName?name=${name}`
         );
         return dispatch({
           type: GET_VIDEOS_BY_NAME,
@@ -216,7 +216,7 @@ export function createVideo(payload) {
   export function getVideosByTeacher(id) {
     return async function (dispatch) {
       try {
-        const response = await axios.get(`http://localhost:3001/byTeacher/${id}`);
+        const response = await axios.get(`https://pf-henry-g02-production.up.railway.app/byTeacher/${id}`);
         return dispatch({
           type: GET_VIDEOS_BY_TEACHER,
           payload: response.data,
@@ -228,7 +228,7 @@ export function createVideo(payload) {
   }
   export function getVideosById(id) {
     return async function (dispatch) {
-      var json = await axios.get(`http://localhost:3001/videos/byId/${id}`);
+      var json = await axios.get(`https://pf-henry-g02-production.up.railway.app/videos/byId/${id}`);
       console.log(json)
       return dispatch({
         type: GET_VIDEOS_BY_ID,
@@ -245,7 +245,7 @@ export function createVideo(payload) {
 export function getTeachers() {
     return async function (dispatch) {
       try {
-        const response = await axios.get('http://localhost:3001/users/teachers');
+        const response = await axios.get('https://pf-henry-g02-production.up.railway.app/users/teachers');
         console.log(response.data);
         return dispatch({
           type: GET_TEACHERS,
@@ -259,7 +259,7 @@ export function getTeachers() {
   export function getTodosUsuarios() {
     return async function (dispatch) {
       try {
-        var json = await axios.get("http://localhost:3001/users");
+        var json = await axios.get("https://pf-henry-g02-production.up.railway.app/users");
         return dispatch({
           type: GET_ALL_USERS,
           payload: json.data,
@@ -271,7 +271,7 @@ export function getTeachers() {
   }
   export function postNewUser(payload) {
     return async function () {
-      var json = await axios.post(`http://localhost:3001/users/create`, payload);
+      var json = await axios.post(`https://pf-henry-g02-production.up.railway.app/users/create`, payload);
       return json;
     };
   }
@@ -296,10 +296,10 @@ export function getTeachers() {
   export async function usersValidate(payload) {
     return async function (dispatch) {
       console.log(payload.email + " <-------------->Entre a la Action");
-      var json = await axios.post(`http://localhost:3001/users/`, payload);
+      var json = await axios.post(`https://pf-henry-g02-production.up.railway.app/users/`, payload);
       localStorage.setItem("token", JSON.stringify(json.data));
       const data = await jwtDecode(json.data);
-		  window.location.reload('http://localhost:3000/');
+		  window.location.reload('https://pf-henry-g02.vercel.app/');
       console.log(data, "Esto es DATA")
       return dispatch({
         type: USER_VALIDATE,
@@ -311,7 +311,7 @@ export function getTeachers() {
 export function getAllStandUps() {
     return async function (dispatch) {
       try {
-        var json = await axios.get("http://localhost:3001/standups");
+        var json = await axios.get("https://pf-henry-g02-production.up.railway.app/standups");
         return dispatch({
           type: GET_ALL_STANDUPS,
           payload: json.data,
@@ -325,7 +325,7 @@ export function getAllStandUps() {
     return async function () {
         try {
         var json = await axios.post(
-          `http://localhost:3001/standups/create`,
+          `https://pf-henry-g02-production.up.railway.app/standups/create`,
           payload
         );
         return json;
@@ -338,7 +338,7 @@ export function getAllStandUps() {
   export const postAttendance = attendance => {
     return () => {
       axios
-        .post('http://localhost:3001/attendance/create', attendance)
+        .post('https://pf-henry-g02-production.up.railway.app/attendance/create', attendance)
         .then(response => console.log(response.data))
         .catch(error => console.log(error));
     };
@@ -378,7 +378,7 @@ export function addFavoritesById(userId, videoId) {
 export function addReview (user, payload){
   return async (dispatch) => {
     try {
-    var response = await axios.post(`http://localhost:3001/reviews/create/${user}`, payload)
+    var response = await axios.post(`https://pf-henry-g02-production.up.railway.app/reviews/create/${user}`, payload)
     return dispatch({
       type: ADD_REVIEW, 
       payload: response.data
@@ -392,7 +392,7 @@ export function addReview (user, payload){
 export function getReviews (taId){
   return async (dispatch) => {
     try {
-      var response = await axios.get(`http://localhost:3001/reviews/?taId=${taId}`)
+      var response = await axios.get(`https://pf-henry-g02-production.up.railway.app/reviews/?taId=${taId}`)
       return dispatch({
         type: GET_REVIEWS, 
         payload: response.data
@@ -407,7 +407,7 @@ export function getReviews (taId){
   export function getReviewsByStudent (userId){
     return async (dispatch) => {
       try {
-        var response = await axios.get(`http://localhost:3001/reviews/reviewByStudent?userId=${userId}`)
+        var response = await axios.get(`https://pf-henry-g02-production.up.railway.app/reviews/reviewByStudent?userId=${userId}`)
         return dispatch({
           type: REVIEWS_BY_STUDENT, 
           payload: response.data
@@ -432,12 +432,12 @@ export async function uploadImage(base64EncodedImage, userId){
       try {
         return async (dispatch) => {
 
-          const res = await axios.post('http://localhost:3001/cloudinary/upload', { data: base64EncodedImage, id: userId })
+          const res = await axios.post('https://pf-henry-g02-production.up.railway.app/cloudinary/upload', { data: base64EncodedImage, id: userId })
 
           console.log(res, "Esto es res23 156+4156+46+46+e5n el")
 
           localStorage.setItem("profileImage", res.data.url)
-          window.location.reload('http://localhost:3000/');
+          window.location.reload('https://pf-henry-g02.vercel.app/');
 
           return dispatch({
             type: UPLOAD_IMAGE,
@@ -453,7 +453,7 @@ export const sendPayment = (stripeId, amount, userId) => {
   return async dispatch => {
     dispatch(requesting());
     try {
-      const { data } = await axios.post('http://localhost:3001/checkout', {
+      const { data } = await axios.post('https://pf-henry-g02-production.up.railway.app/checkout', {
         stripeId,
         amount,
         userId,
@@ -491,7 +491,7 @@ export const getPayments = userId => {
     dispatch(requesting());
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/checkout/payments/${userId}`
+        `https://pf-henry-g02-production.up.railway.app/checkout/payments/${userId}`
       );
       return dispatch(getPaymentsSuccess(data));
     } catch (error) {
@@ -512,7 +512,7 @@ export const getPaymentById = paymentId => {
     dispatch(requesting());
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/checkout/${paymentId}`
+        `https://pf-henry-g02-production.up.railway.app/checkout/${paymentId}`
       );
       return dispatch(getPaymentByIdSuccess(data));
     } catch (error) {

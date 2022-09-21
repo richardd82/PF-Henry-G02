@@ -11,13 +11,13 @@ export default function UserProfile({ user }) {
         if (user.category) {
             localStorage.clear();
             dispatch(logout());
-            window.location.reload("http://localhost:3000/login");
+            window.location.reload("https://pf-henry-g02.vercel.app/login");
         } else if (user.emails) {
-            window.open("http://localhost:3001/auth/logout", "_self");
+            window.open("https://pf-henry-g02-production.up.railway.app/auth/logout", "_self");
         }
     };
     const logout = () => {
-        window.open("http://localhost:3001/auth/logout", "_self");
+        window.open("https://pf-henry-g02-production.up.railway.app/auth/logout", "_self");
     };
 let userValidate = ""
 let userImage = ""

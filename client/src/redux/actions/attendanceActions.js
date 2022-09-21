@@ -13,7 +13,7 @@ export const getUsers = () => {
   return dispatch => {
     dispatch(fetching());
     axios
-      .get('http://localhost:3001/users')
+      .get('https://pf-henry-g02-production.up.railway.app/users')
       .then(response => {
         dispatch(getUsersSuccess(response.data));
       })
@@ -38,7 +38,7 @@ export const getCohorts = () => {
   return dispatch => {
     dispatch(fetching());
     axios
-      .get('http://localhost:3001/cohorts')
+      .get('https://pf-henry-g02-production.up.railway.app/cohorts')
       .then(response => {
         dispatch(getCohortsSuccess(response.data));
       })
@@ -57,7 +57,7 @@ export const getModules = () => {
   return dispatch => {
     dispatch(fetching());
     axios
-      .get('http://localhost:3001/modules')
+      .get('https://pf-henry-g02-production.up.railway.app/modules')
       .then(response => {
         dispatch(getModulesSuccess(response.data));
       })
@@ -76,7 +76,7 @@ export const getStandups = () => {
   return dispatch => {
     dispatch(fetching());
     axios
-      .get('http://localhost:3001/standups')
+      .get('https://pf-henry-g02-production.up.railway.app/standups')
       .then(response => {
         dispatch(getStandupsSuccess(response.data));
       })
@@ -94,7 +94,7 @@ export const getStandupsSuccess = standups => {
 export const getAllClasses = () => {
   return dispatch => {
     dispatch(fetching());
-    axios.get('http://localhost:3001/classes').then(response => {
+    axios.get('https://pf-henry-g02-production.up.railway.app/classes').then(response => {
       dispatch(getLecturesSuccess(response.data));
     });
   };
@@ -110,7 +110,7 @@ export const getLecturesSuccess = lectures => {
 export const postAttendance = attendance => {
   return () => {
     axios
-      .post('http://localhost:3001/attendance/create', attendance)
+      .post('https://pf-henry-g02-production.up.railway.app/attendance/create', attendance)
       .then(response => console.log(response.data))
       .catch(error => console.log(error));
   };
@@ -118,7 +118,7 @@ export const postAttendance = attendance => {
 
 export const getAttendances = (standupId, cohortId, classId) => {
   return dispatch => {
-    axios.get(`http://localhost:3001/attendance?standupId=${standupId}&cohortId=${cohortId}&classId=${classId}`)
+    axios.get(`https://pf-henry-g02-production.up.railway.app/attendance?standupId=${standupId}&cohortId=${cohortId}&classId=${classId}`)
        .then(response => { 
         dispatch(() => {
           return {
