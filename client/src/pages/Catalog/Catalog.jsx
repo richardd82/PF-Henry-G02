@@ -12,8 +12,8 @@ import SearchBar from "../../components/SearchBar/SearchBar.jsx";
 import { getAllVideos } from "../../redux/actions/index";
 import { getTodosUsuarios } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
-import FavouriteButton from "../../components/FavouriteComponents/favouriteButton.jsx";
-import SearchBar from "../../components/SearchBar/SearchBar.jsx";
+// import FavouriteButton from "../../components/FavouriteComponents/favouriteButton.jsx";
+// import SearchBar from "../../components/SearchBar/SearchBar.jsx";
 
 import "./Catalog.css";
 
@@ -51,9 +51,9 @@ const Catalog = ({ user }) => {
     indexOfLastVideo = currentPage * videosPerPage,
     indexOfFirstVideo = indexOfLastVideo - videosPerPage,
     currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
-/*      
+    
   const instructor = userCohort.map(e=> e).filter(r=> r === videos.cohortId);
- console.log(instructor); */
+ console.log(instructor); 
 
   return (
     <div className="c__cards-container">
@@ -84,12 +84,22 @@ const Catalog = ({ user }) => {
                           <Card
                             id={video.id}
                             title={video.name}
-                            instructor={instructor}
+                            user = {user}
+                            video = {video}
+                            instructor= {users.map((x) => {
+                              if (x.id === video.userId) {
+                                return (
+                                <>    
+                                  <p>
+                                    {x.name} {x.lastname}
+                                  </p>
+                                  </>  
+                                );
+                              }
+                            })}
+                            // instructor={instructor}
                             description={video.description}
                           />
-                          <div className= "c__favorito">
-                          <FavouriteButton userId={user} videoId={video.id}/>
-                          </div>
                         </Link>
                         {/* <FavouriteButton userId={user} videoId={video.id} /> */}
                       </>

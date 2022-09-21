@@ -10,9 +10,9 @@ const Ta = ({ user }) => {
     <div className="ta__container">
       <Nav user={user} />
       <div className="ta__attendance">
-      <Link to={'/reviews/create'}>
-      <button>Agregar reviews</button>
-      </Link>
+      {/* <Link to={'/reviews/create'}> */}
+      {/* <button>Agregar reviews</button> */}
+      {/* </Link> */}
       <DasboardStudent user={user}/>
       </div>
     </div>

@@ -74,11 +74,9 @@ const Details = ({ user }) => {
                       {myUsers.map((x) => {
                         if (x.id === e.userId) {
                           return (
-                           <>    
-                            <p>
-                              {x.name} {x.lastname}
-                            </p>
-                            <p>{e.name}</p>
+                          <>    
+                            {x.name} {x.lastname}
+                            {/* <p>{e.name}</p> */}
                             </>  
                           );
                         }

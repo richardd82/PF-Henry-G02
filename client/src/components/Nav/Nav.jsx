@@ -128,30 +128,30 @@ export default function Nav({ user }) {
             <div className="avatar">
               {category === 'student' ? (
                 <div>
+                  <Link to="">
+                    <button onClick={sweetAttendance}>
+                    <p className="avatar__name">Asistencias</p></button>
+                  </Link>
                   <Link to="/catalog">
                     <p className="avatar__name">Catalogo</p>
                   </Link>
                   <Link to="/favourite">
                     <p className="avatar__name">Favoritos</p>
                   </Link>
-                  <Link to="">
-                    <button onClick={sweetAttendance}>
-                    <p className="avatar__name">Asistencias</p></button>
-                  </Link>
                 </div>
               ) : category === 'ta'? (
                 <div>
-                  <Link to="/catalog">
-                    <p className="avatar__name">Catalogo</p>
-                  </Link>
                   <Link to="/attendance">
                     <p className="avatar__name">Asistencia</p>
+                  </Link>
+                  <Link to="/catalog">
+                    <p className="avatar__name">Catalogo</p>
                   </Link>
                   <Link to="/favourite">
                     <p className="avatar__name">Favourite</p>
                   </Link>
-                  <Link to="/contacto">
-                    <p className="avatar__name">Contacto</p>
+                  <Link to="/reviews/create">
+                    <p className="avatar__name">Reviews</p>
                   </Link>
                 </div>
               ) : null}
