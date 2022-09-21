@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import AddReview from "./AddReviews";
 
@@ -12,14 +13,16 @@ import Box from "@mui/material/Box";
 import {
 	addReview,
 	clearStateReviews,
+	getReviews,
 	getTodosUsuarios,
 } from "../../redux/actions";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Nav from "../Nav/Nav";
 
-export default function UserReview() {
-	//MODIFICAR CUANDO SE PUEDA INGRESAR CON LOGIN
-	const user = {
+export default function UserReview({user}) {
+
+/* 	const user = {
 		name: "Romi Jimenez",
 		id: "105104a9-9e18-4934-b950-18de117aa014",
 		standupId: "6c5dc9cc-460c-408c-8cb8-cfa94af873ec",
@@ -28,12 +31,26 @@ export default function UserReview() {
 		category: "ta",
 		active: true,
 	};
-	//MODIFICAR CUANDO SE PUEDA INGRESAR CON LOGIN
-
-	const users = useSelector((state) => state.users.users);
+ */
 
 	const { id } = useParams();
+
+	const users = useSelector((state) => state.users.users);
+	const reviews = useSelector(state=> state.reviews.reviews)
+
 	const dispatch = useDispatch();
+
+
+	let ta = ''
+	if (user.category) {
+		ta = users.filter((e) => e.name === user.name );
+   }else{
+	 ta = users.filter((e) => e.name === user._json.name );
+	 }
+const idTa = ta.map(e=> e.id).toString()
+const nameTa = ta.map(e=> e.name).toString()
+
+
 
 	const labels = {
 		1: "Useless+",
@@ -45,6 +62,7 @@ export default function UserReview() {
 
 	useEffect(() => {
 		dispatch(getTodosUsuarios());
+		dispatch(getReviews())
 		return () => {
 			dispatch(clearStateReviews());
 		};
@@ -56,15 +74,20 @@ export default function UserReview() {
 	const [value, setValue] = useState({
 		rating: 0,
 		comments: "",
-		taId: "",
+		taId: idTa,
+		userId: id
 	});
+
+	
 	const [hover, setHover] = useState(-1);
+	
 
 	function handleChange(e) {
 		setValue({
 			...value,
 			[e.target.name]: e.target.value,
 		});
+		
 	}
 
 	function handleSelect(e) {
@@ -72,22 +95,36 @@ export default function UserReview() {
 			taId: e.target.value,
 		});
 	}
+
+
+	const reviewsExistente = reviews.find(e => e.userId === value.userId)
 	function handleSubmit(e) {
-		e.preventDefault();
-		dispatch(addReview(id, value));
-		setValue({
-			rating: 0,
-			comments: "",
-			taId: "",
-		});
+		if(reviewsExistente){
+			setValue({
+				rating: 0,
+				comments: "",
+				taId: "",
+				userId: id
+			});
+			return alert('El usuario ya tiene su review')
+		}
+		
+			dispatch(addReview(id, value));
+			setValue({
+				rating: 0,
+				comments: "",
+				taId: "",
+				userId: id
+			});
+			alert('La review se ha creado correctamente')
 	}
 
 	return (
 		<div>
-			<AddReview />
+			<AddReview user={user} />
 			<div>
-				<form onSubmit={(e) => handleSubmit(e)}>
-					<select onChange={(e) => handleSelect(e)}>
+				<form onSubmit={handleSubmit}>
+					{/* <select onChange={(e) => handleSelect(e)}>
 						<option value={""}>TA</option>
 						{users &&
 							users.map((e) => {
@@ -98,7 +135,8 @@ export default function UserReview() {
 										</option>
 									);
 							})}
-					</select>
+					</select> */}
+				
 					<Box
 						sx={{
 							width: 200,

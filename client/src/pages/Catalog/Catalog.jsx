@@ -24,7 +24,13 @@ const Catalog = ({ user }) => {
   const loginUserId = userValidate && userValidate.id;
   const videosMapped = videos.map((e) => e.userId)
   const usersMapped = users.map((e) => e.id)
-
+  const teacher = users.filter(e=> e.category === 'teacher')
+  const userName = teacher.map((e)=> e.name)
+  const userLastname = teacher.map((e)=> e.lastname)
+  const userCohort = teacher.map(e => e.cohortId)
+ /*  const filtered = userCohort.find(r=> r === video.cohortId)
+  const instructor = teacher.filter(e => e.cohortId === filtered) */
+  
   useEffect(() => {
     // if (!videos.classes.length && videos.loading === false) {
     dispatch(getAllVideos());

@@ -1,16 +1,20 @@
-import React from 'react';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 // Actions
-import { getClassesByName } from '../../redux/actions/index';
-import './SearchBar.css';
-import lupa from '../../media/lupa.png';
+import { getVideosByName } from "../../redux/actions/index";
+import "./SearchBar.css";
+import lupa from "../../media/lupa.png";
 
 const SearchBar = () => {
+  const videos = useSelector((state) => state.videos.allVideos);
+
+  const videosMapped = videos.map((e) => e.name).toString();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [nameSearch, setNameSearch] = useState('');
+  const [nameSearch, setNameSearch] = useState("");
 
   function handleChange(e) {
     setNameSearch(e.target.value);
@@ -18,10 +22,10 @@ const SearchBar = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(getClassesByName(nameSearch));
-    setNameSearch('');
-    e.target.placeholder = 'Search...';
-    navigate('/catalog', { replace: true });
+    dispatch(getVideosByName(nameSearch));
+    setNameSearch("");
+    e.target.placeholder = "Search...";
+    navigate("/catalog", { replace: true });
   }
 
   return (

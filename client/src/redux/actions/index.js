@@ -1,13 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 import jwtDecode from "jwt-decode";
-export const GET_ALL_LESSONS = 'GET_ALL_LESSONS';
-export const GET_ALL_MODULES = 'GET_ALL_MODULES';
+import swal from "sweetalert";
+export const GET_ALL_LESSONS = "GET_ALL_LESSONS";
+export const GET_ALL_MODULES = "GET_ALL_MODULES";
 export const GET_LESSONS_BY_ID = "GET_LESSONS_BY_ID";
-export const SET_PAGE_NUMBER = 'SET_PAGE_NUMBER';
-export const REQUEST = 'GET_REQUEST'
-export const REQUEST_FAILURE = 'REQUEST_FAILURE';
-export const GET_BY_NAME_SUCCESS = 'GET_BY_NAME_SUCCESS';
-export const GET_ALL_CLASSES_SUCCESS = 'GET_ALL_CLASSES_SUCCESS';
+export const SET_PAGE_NUMBER = "SET_PAGE_NUMBER";
+export const REQUEST = "GET_REQUEST";
+export const REQUEST_FAILURE = "REQUEST_FAILURE";
+export const GET_BY_NAME_SUCCESS = "GET_BY_NAME_SUCCESS";
+export const GET_ALL_CLASSES_SUCCESS = "GET_ALL_CLASSES_SUCCESS";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_ALL_STANDUPS = "GET_ALL_STANDUPS";
 export const GET_ALL_COHORTS = "GET_ALL_COHORTS";

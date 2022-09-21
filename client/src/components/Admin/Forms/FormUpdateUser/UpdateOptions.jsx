@@ -34,6 +34,20 @@ const UpdateOptions = ({ user }) => {
     standupId: cohortsExistentes.id,
   });
 
+  const handleCategory = (e) => {
+    setInput({
+      ...input,
+      category: e.target.value
+    })
+  }
+console.log(input.category);
+  const handleActive = (e) => {
+    setInput({
+      ...input,
+      active: e.target.value
+    })
+  }
+  console.log(input.active);
   const handleSelectCohorte = (e) => {
     e.preventDefault(e);
     setInput({
@@ -134,29 +148,19 @@ const UpdateOptions = ({ user }) => {
                           }}
                         />
                         <label>Category</label>
-                        <input
-                          className="inputCreate"
-                          placeholder={`${e.category}`}
-                          name="category"
-                          defaultValue={e.category}
-                          required
-                          value={input.category}
-                          onChange={(e) => {
-                            handleChange(e);
-                          }}
-                        />
-                        <label>is active?</label>
-                        <input
-                          className="inputCreate"
-                          placeholder={e.active}
-                          name="active"
-                          value={input.active}
-                          defaultValue={e.active}
-                          required
-                          onChange={(e) => {
-                            handleChange(e);
-                          }}
-                        />
+                        <div>
+                          <label>Estudiante<input type={'radio'} name={'category'} value={'student'} onChange={(e)=>handleCategory(e)}/></label>
+                          <label>Instructor/a<input type={'radio'} name={'category'} value={'teacher'} onChange={(e)=>handleCategory(e)}/></label>
+                          <label>Administrador/a<input type={'radio'} name={'category'} value={'admin'} onChange={(e)=>handleCategory(e)}/></label>
+                          <label>TA<input type={'radio'} name={'category'} value={'ta'} onChange={(e)=>handleCategory(e)}/></label>
+                         </div> 
+                         <div>
+                        <label>Estado</label>
+                        <label>Activo<input type={'radio'} name={'active'} value={true} onChange={(e)=>handleActive(e)}/></label>
+                        <label>Inactivo<input type={'radio'} name={'active'} value={false} onChange={(e)=>handleActive(e)}/></label>
+                         </div>
+
+                        
                         <select
                           className="select"
                           onChange={handleSelectCohorte}

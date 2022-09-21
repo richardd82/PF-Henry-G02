@@ -74,9 +74,12 @@ const Details = ({ user }) => {
                       {myUsers.map((x) => {
                         if (x.id === e.userId) {
                           return (
+                           <>    
                             <p>
                               {x.name} {x.lastname}
                             </p>
+                            <p>{e.name}</p>
+                            </>  
                           );
                         }
                       })}
@@ -100,7 +103,7 @@ const Details = ({ user }) => {
                       return (
                         <div className="code_review">
                           <div>
-                            <Link to={`/codeReview/${link}`}>
+                            <Link to={`/code-review/${link}`}>
                               <ReactPlayer
                                 className="videoReactThumb"
                                 url={video}
@@ -116,7 +119,7 @@ const Details = ({ user }) => {
               </section>
             </>
           );
-        } else if (e && window.location.pathname === `/codeReview/${e.id}`) {
+        } else if (e && window.location.pathname === `/code-review/${e.id}`) {
           return (
             <>
               <section className="sectiom__title-modulo">
@@ -144,9 +147,12 @@ const Details = ({ user }) => {
                       {myUsers.map((x) => {
                         if (x.id === e.userId) {
                           return (
+                            <>
                             <p>
                               {x.name} {x.lastname}
                             </p>
+                            <p>{e.name}</p>
+                            </> 
                           );
                         }
                       })}
