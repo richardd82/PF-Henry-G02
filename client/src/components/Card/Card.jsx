@@ -3,6 +3,7 @@ import resultados from '../../assets/resultados.jpeg';
 import './Card.css';
 
 const Card = ({ id, title, instructor, description }) => {
+
   return (
     <div key={id} className="card">
       <div className="cardHeader">

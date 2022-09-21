@@ -13,6 +13,7 @@ import { getAllVideos } from "../../redux/actions/index";
 import { getTodosUsuarios } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
 import FavouriteButton from "../../components/FavouriteComponents/favouriteButton.jsx";
+import SearchBar from "../../components/SearchBar/SearchBar.jsx";
 
 import "./Catalog.css";
 
@@ -24,7 +25,13 @@ const Catalog = ({ user }) => {
   const loginUserId = userValidate && userValidate.id;
   const videosMapped = videos.map((e) => e.userId)
   const usersMapped = users.map((e) => e.id)
-
+  const teacher = users.filter(e=> e.category === 'teacher')
+  const userName = teacher.map((e)=> e.name)
+  const userLastname = teacher.map((e)=> e.lastname)
+  const userCohort = teacher.map(e => e.cohortId)
+ /*  const filtered = userCohort.find(r=> r === video.cohortId)
+  const instructor = teacher.filter(e => e.cohortId === filtered) */
+  
   useEffect(() => {
     // if (!videos.classes.length && videos.loading === false) {
     dispatch(getAllVideos());
@@ -44,8 +51,9 @@ const Catalog = ({ user }) => {
     indexOfLastVideo = currentPage * videosPerPage,
     indexOfFirstVideo = indexOfLastVideo - videosPerPage,
     currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
-  const instructor = videos.filter((e) => e.userId === usersMapped);
-  console.log(instructor);
+/*      
+  const instructor = userCohort.map(e=> e).filter(r=> r === videos.cohortId);
+ console.log(instructor); */
 
   return (
     <div className="c__cards-container">

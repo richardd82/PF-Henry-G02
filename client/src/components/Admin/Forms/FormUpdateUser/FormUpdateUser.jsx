@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SearchBarEmail from "./SearchBarEmail";
 import s from './FormUpdate.module.css';
-import {FiChevronsUp} from 'react-icons/fi'
+import {FiChevronsUp} from 'react-icons/fi';
+import Nav from '../../../Nav/Nav';
 
-const FormUpdateUser = () => {
+const FormUpdateUser = ({user}) => {
   const dispatch = useDispatch();
   const updateUser = useSelector((state) => state.users.users);
   const userMapped = updateUser.map((e) => e);
@@ -42,6 +43,8 @@ function topFunction() {
 }
 
   return (
+    <>
+    <Nav user={user} /> 
     <div style={{marginLeft: '200px'}}>
       <SearchBarEmail />
           <div>
@@ -76,7 +79,7 @@ function topFunction() {
           <br/>
           <div>
             <table className={s.demo}>
-	<caption style={{fontWeight: 'bold'}}>PROFESORES/AS<br/><br/></caption>
+	<caption style={{fontWeight: 'bold'}}>INSTRUCTORES/AS<br/><br/></caption>
 	<thead>
 	<tr>
 		<th>Nombre</th>
@@ -136,7 +139,7 @@ function topFunction() {
     </div>
     <button onClick={topFunction} className={s.myBtn} id={'myBtn'}><FiChevronsUp/></button>
     </div>
-
+    </>
   )
 };
 

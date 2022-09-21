@@ -1,13 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 import jwtDecode from "jwt-decode";
-export const GET_ALL_LESSONS = 'GET_ALL_LESSONS';
-export const GET_ALL_MODULES = 'GET_ALL_MODULES';
+import swal from "sweetalert";
+export const GET_ALL_LESSONS = "GET_ALL_LESSONS";
+export const GET_ALL_MODULES = "GET_ALL_MODULES";
 export const GET_LESSONS_BY_ID = "GET_LESSONS_BY_ID";
-export const SET_PAGE_NUMBER = 'SET_PAGE_NUMBER';
-export const REQUEST = 'GET_REQUEST'
-export const REQUEST_FAILURE = 'REQUEST_FAILURE';
-export const GET_BY_NAME_SUCCESS = 'GET_BY_NAME_SUCCESS';
-export const GET_ALL_CLASSES_SUCCESS = 'GET_ALL_CLASSES_SUCCESS';
+export const SET_PAGE_NUMBER = "SET_PAGE_NUMBER";
+export const REQUEST = "GET_REQUEST";
+export const REQUEST_FAILURE = "REQUEST_FAILURE";
+export const GET_BY_NAME_SUCCESS = "GET_BY_NAME_SUCCESS";
+export const GET_ALL_CLASSES_SUCCESS = "GET_ALL_CLASSES_SUCCESS";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_ALL_STANDUPS = "GET_ALL_STANDUPS";
 export const GET_ALL_COHORTS = "GET_ALL_COHORTS";
@@ -34,312 +35,323 @@ export const CLEAR_STATE_REVIEWS = "CLEAR_STATE_REVIEWS";
 export const USER_VALIDATE = "USER_VALIDATE";
 export const LOGOUT = "LOGOUT";
 
-
 //*************Modulos************
 export function getAllModules() {
-    return async function (dispatch) {
-      try {
-        var json = await axios.get('http://localhost:3001/modules');
-        return dispatch({
-          type: GET_ALL_MODULES,
-          payload: json.data,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  }
-  export function clearStateModules() {
-    return {
-      type: CLEAR_STATE_MODULES,
-    };
-  }
-//*****************Cohorts*************
-export function getCohorts() {
-    return async function (dispatch) {
-      try {
-        const response = await axios.get('http://localhost:3001/cohorts');
-        return dispatch({
-          type: GET_ALL_COHORTS,
-          payload: response.data,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  }
-  export function postNewCohort(payload) {
-    return async function () {
-      var json = await axios.post(
-        `http://localhost:3001/cohorts/create`,
-        payload
-      );
-      return json;
-    };
-  }
-//****************Classes*****************
-export function getAllLessons() {
-    return async function (dispatch) {
-      try {
-        var json = await axios.get('http://localhost:3001/classes');
-        return dispatch({
-          type: GET_ALL_LESSONS,
-          payload: json.data,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  }
-  export function getLessonsById(id) {
-    return async function (dispatch) {
-      var json = await axios.get(`http://localhost:3001/classes/byId/${id}`);
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/modules");
       return dispatch({
-        type: GET_LESSONS_BY_ID,
+        type: GET_ALL_MODULES,
         payload: json.data,
       });
-    };
-  }
-  export const setPageNumber = number => {
-      return {
-          type: SET_PAGE_NUMBER,
-          payload: number,
-      };
+    } catch (error) {
+      console.log(error);
+    }
   };
-  // Petición por nombre desde un query en SearchBar
-export const getClassesByName = name => {
-    return dispatch => {
-      // Dispatch para cambiar el estado `loading` a `true`
-      // más adelante útil para renderizar loaders
-      dispatch(request());
-      // Ahora sí, la petición por nombre
-      // De tener éxito llenamos el estado con las clases
-      // Si no, llenamos el estado `errorMsg` con el error
-      // Más adelante se definen las otras acciones llamadas acá
-      axios
-        .get(`http://localhost:3001/classes/byName?name=${name}`)
-        .then(response => dispatch(getByNameSuccess(response.data)))
-        .catch(error => dispatch(requestFailure(error.response.data)));
-    };
+}
+export function clearStateModules() {
+  return {
+    type: CLEAR_STATE_MODULES,
   };
-  export const request = () => {
-    return {
-      type: REQUEST,
-    };
+}
+//*****************Cohorts*************
+export function getCohorts() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("http://localhost:3001/cohorts");
+      return dispatch({
+        type: GET_ALL_COHORTS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
-  export const getByNameSuccess = classes => {
-    return {
-      type: GET_BY_NAME_SUCCESS,
-      payload: classes,
-    };
+}
+export function postNewCohort(payload) {
+  return async function () {
+    var json = await axios.post(
+      `http://localhost:3001/cohorts/create`,
+      payload
+    );
+    return json;
   };
-  
-  export const requestFailure = errorMsg => {
-    return {
-      type: REQUEST_FAILURE,
-      payload: errorMsg,
-    };
+}
+//****************Classes*****************
+export function getAllLessons() {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/classes");
+      return dispatch({
+        type: GET_ALL_LESSONS,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
-  export const getAllClassesSuccess = classes => {
-    return {
-      type: GET_ALL_CLASSES_SUCCESS,
-      payload: classes,
-    };
+}
+export function getLessonsById(id) {
+  return async function (dispatch) {
+    var json = await axios.get(`http://localhost:3001/classes/byId/${id}`);
+    return dispatch({
+      type: GET_LESSONS_BY_ID,
+      payload: json.data,
+    });
   };
-  export function postNewClass(payload) {
-    return async function () {
-      var json = await axios.post(
-        `http://localhost:3001/classes/create`,
-        payload
-      );
-      return json;
-    };
-  }
-  export function clearStateLessons() {
-    return {
-      type: CLEAR_STATE_LESSONS,
-    };
-  }
+}
+export const setPageNumber = (number) => {
+  return {
+    type: SET_PAGE_NUMBER,
+    payload: number,
+  };
+};
+// Petición por nombre desde un query en SearchBar
+export const getClassesByName = (name) => {
+  return (dispatch) => {
+    // Dispatch para cambiar el estado `loading` a `true`
+    // más adelante útil para renderizar loaders
+    dispatch(request());
+    // Ahora sí, la petición por nombre
+    // De tener éxito llenamos el estado con las clases
+    // Si no, llenamos el estado `errorMsg` con el error
+    // Más adelante se definen las otras acciones llamadas acá
+    axios
+      .get(`http://localhost:3001/classes/byName?name=${name}`)
+      .then((response) => dispatch(getByNameSuccess(response.data)))
+      .catch((error) => dispatch(requestFailure(error.response.data)));
+  };
+};
+export const request = () => {
+  return {
+    type: REQUEST,
+  };
+};
+export const getByNameSuccess = (classes) => {
+  return {
+    type: GET_BY_NAME_SUCCESS,
+    payload: classes,
+  };
+};
+
+export const requestFailure = (errorMsg) => {
+  return {
+    type: REQUEST_FAILURE,
+    payload: errorMsg,
+  };
+};
+export const getAllClassesSuccess = (classes) => {
+  return {
+    type: GET_ALL_CLASSES_SUCCESS,
+    payload: classes,
+  };
+};
+export function postNewClass(payload) {
+  return async function () {
+    var json = await axios.post(
+      `http://localhost:3001/classes/create`,
+      payload
+    );
+    return json;
+  };
+}
+export function clearStateLessons() {
+  return {
+    type: CLEAR_STATE_LESSONS,
+  };
+}
 //******************Videos************************
 export function createVideo(payload) {
-    return async function (dispatch) {
-      try {
-        const response = await axios.post(
-          'http://localhost:3001/videos/create',
-          payload
-        );
-        return dispatch({
-          type: CREATE_VIDEO,
-          payload: response.data,
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/videos/create",
+        payload
+      );
+      return dispatch({
+        type: CREATE_VIDEO,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function getAllVideos() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("http://localhost:3001/videos");
+      console.log(response.data);
+      return dispatch({
+        type: GET_VIDEOS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function getVideosByName(name) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/videos/byName?name=${name}`
+      );
+      if (!response.data.length) {
+        swal("Error: no se encontró el video.", {
+          icon: "error",
+          buttons: "Cerrar",
         });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  }
-  export function getAllVideos() {
-    return async function (dispatch) {
-      try {
-        const response = await axios.get('http://localhost:3001/videos');
-        console.log(response.data);
-        return dispatch({
-          type: GET_VIDEOS,
-          payload: response.data,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  }
-  export function getVideosByName(name) {
-    return async function (dispatch) {
-      try {
-        const response = await axios.get(
-          `http://localhost:3001/videos/byName?name=${name}`
-        );
+      } else {
         return dispatch({
           type: GET_VIDEOS_BY_NAME,
           payload: response.data,
         });
-      } catch (error) {
-        console.log(error);
       }
-    };
-  }
-  export function getVideosByTeacher(id) {
-    return async function (dispatch) {
-      try {
-        const response = await axios.get(`http://localhost:3001/byTeacher/${id}`);
-        return dispatch({
-          type: GET_VIDEOS_BY_TEACHER,
-          payload: response.data,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  }
-  export function getVideosById(id) {
-    return async function (dispatch) {
-      var json = await axios.get(`http://localhost:3001/videos/byId/${id}`);
-      console.log(json)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function getVideosByTeacher(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`http://localhost:3001/byTeacher/${id}`);
       return dispatch({
-        type: GET_VIDEOS_BY_ID,
-        payload: json.data,
+        type: GET_VIDEOS_BY_TEACHER,
+        payload: response.data,
       });
-    };
-  }
-  export function clearStateVideos() {
-    return {
-      type: CLEAR_STATE_VIDEOS,
-    };
-  }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function getVideosById(id) {
+  return async function (dispatch) {
+    var json = await axios.get(`http://localhost:3001/videos/byId/${id}`);
+    console.log(json);
+    return dispatch({
+      type: GET_VIDEOS_BY_ID,
+      payload: json.data,
+    });
+  };
+}
+export function clearStateVideos() {
+  return {
+    type: CLEAR_STATE_VIDEOS,
+  };
+}
 //************************User************************
 export function getTeachers() {
-    return async function (dispatch) {
-      try {
-        const response = await axios.get('http://localhost:3001/users/teachers');
-        console.log(response.data);
-        return dispatch({
-          type: GET_TEACHERS,
-          payload: response.data,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  }
-  export function getTodosUsuarios() {
-    return async function (dispatch) {
-      try {
-        var json = await axios.get("http://localhost:3001/users");
-        return dispatch({
-          type: GET_ALL_USERS,
-          payload: json.data,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  }
-  export function postNewUser(payload) {
-    return async function () {
-      var json = await axios.post(`http://localhost:3001/users/create`, payload);
-      return json;
-    };
-  }
-
-  export function putUser(id,payload) {
-      return async function () {
-        var json = await axios.put(`http://localhost:3002/users/update/${id}`, payload);
-        return json;
-      };
-    }
-
-  export function searchByEmail(email){
-    return async function(dispatch){
-      var json = await axios.get(`http://localhost:3002/users/byEmail?email=${email}`);
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("http://localhost:3001/users/teachers");
+      console.log(response.data);
       return dispatch({
-        type: GET_BY_EMAIL,
+        type: GET_TEACHERS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function getTodosUsuarios() {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/users");
+      return dispatch({
+        type: GET_ALL_USERS,
         payload: json.data,
       });
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
+}
+export function postNewUser(payload) {
+  return async function () {
+    var json = await axios.post(`http://localhost:3001/users/create`, payload);
+    return json;
+  };
+}
 
-  export function usersValidate(payload) {
-    return async function (dispatch) {
-      console.log(payload.email + " <-------------->Entre a la Action");
-      var json = await axios.post(`http://localhost:3001/users/`, payload);
-      localStorage.setItem("token", JSON.stringify(json.data));
-      const data = await jwtDecode(json.data);
-      // console.log(data)
-      return dispatch({
-        type: USER_VALIDATE,
-        payload: data,
-      });
-    };
-  }
+export function putUser(id, payload) {
+  return async function () {
+    var json = await axios.put(
+      `http://localhost:3002/users/update/${id}`,
+      payload
+    );
+    return json;
+  };
+}
+
+export function searchByEmail(email) {
+  return async function (dispatch) {
+    var json = await axios.get(
+      `http://localhost:3002/users/byEmail?email=${email}`
+    );
+    return dispatch({
+      type: GET_BY_EMAIL,
+      payload: json.data,
+    });
+  };
+}
+
+export function usersValidate(payload) {
+  return async function (dispatch) {
+    console.log(payload.email + " <-------------->Entre a la Action");
+    var json = await axios.post(`http://localhost:3001/users/`, payload);
+    localStorage.setItem("token", JSON.stringify(json.data));
+    const data = await jwtDecode(json.data);
+    // console.log(data)
+    return dispatch({
+      type: USER_VALIDATE,
+      payload: data,
+    });
+  };
+}
 //*********************Stand Ups**************************
 export function getAllStandUps() {
-    return async function (dispatch) {
-      try {
-        var json = await axios.get("http://localhost:3001/standups");
-        return dispatch({
-          type: GET_ALL_STANDUPS,
-          payload: json.data,
-        });
-      } catch (error) {
-        // console.log(error);
-      }
-    };
-  }
-  export function postNewStandUp(payload) {
+  return async function (dispatch) {
     try {
-      return async function () {
-        var json = await axios.post(
-          `http://localhost:3001/standups/create`,
-          payload
-        );
-        return json;
-      };
+      var json = await axios.get("http://localhost:3001/standups");
+      return dispatch({
+        type: GET_ALL_STANDUPS,
+        payload: json.data,
+      });
     } catch (error) {
       // console.log(error);
     }
-  }
-  //*********************Attendance**************************
-  export const postAttendance = attendance => {
-    return () => {
-      axios
-        .post('http://localhost:3001/attendance/create', attendance)
-        .then(response => console.log(response.data))
-        .catch(error => console.log(error));
-    };
   };
+}
+export function postNewStandUp(payload) {
+  try {
+    return async function () {
+      var json = await axios.post(
+        `http://localhost:3001/standups/create`,
+        payload
+      );
+      return json;
+    };
+  } catch (error) {
+    // console.log(error);
+  }
+}
+//*********************Attendance**************************
+export const postAttendance = (attendance) => {
+  return () => {
+    axios
+      .post("http://localhost:3001/attendance/create", attendance)
+      .then((response) => console.log(response.data))
+      .catch((error) => console.log(error));
+  };
+};
 //*********************Favoritos**************************
 export function getFavoritesById(id) {
   try {
     return async function (dispatch) {
-      var json = await axios.get(`http://localhost:3002/favorites/${id}`);
+      var json = await axios.get(`http://localhost:3001/favorites/${id}`);
       // console.log(json)
       return dispatch({
         type: GET_FAVORITE_BY_ID,
@@ -351,65 +363,87 @@ export function getFavoritesById(id) {
   }
 }
 
-export function addFavoritesById(userId, videoId) {
-try {
+export function deleteFavorites(id) {
   return async function (dispatch) {
-    var json = await axios.post( `http://localhost:3002/favorites/create/${userId}/${videoId}`);
-    // console.log(json.data)
-    return dispatch({
-      type: ADD_FAVORITE,
-      payload: json.data,
-    });
+    try {
+      var json = await axios.delete(
+        `http://localhost:3001/favorites/delete/${id}`
+      );
+      return dispatch({
+        type: "REMOVE_FAVORITE",
+        payload: json.data,
+      });
+    } catch (error) {
+      return error;
+    }
   };
-} catch (error) {
-  // console.log(error);
-}
-}
-//*********************Reviews**************************
-export function addReview (user, payload){
-try {
-  return async (dispatch) => {
-    var response = await axios.post(`http://localhost:3001/reviews/create/${user}`, payload)
-    return dispatch({
-      type: ADD_REVIEW, 
-      payload: response.data
-    })
-  }
-} catch (error) {
-  // console.log(error);
-}
 }
 
-export function getReviews (taId){
+export function addFavoritesById(userId, videoId) {
   try {
-    return async (dispatch) => {
-      var response = await axios.get(`http://localhost:3001/reviews/?taId=${taId}`)
+    return async function (dispatch) {
+      var json = await axios.post(
+        `http://localhost:3001/favorites/create/${userId}/${videoId}`
+      );
+      // console.log(json.data)
       return dispatch({
-        type: GET_REVIEWS, 
-        payload: response.data
-      })
-    }
+        type: ADD_FAVORITE,
+        payload: json.data,
+      });
+    };
   } catch (error) {
     // console.log(error);
   }
-  }
-
-  export function getReviewsByStudent (userId){
+}
+//*********************Reviews**************************
+export function addReview(user, payload) {
+  return async (dispatch) => {
     try {
-      return async (dispatch) => {
-        var response = await axios.get(`http://localhost:3001/reviews/reviewByStudent?userId=${userId}`)
-        return dispatch({
-          type: REVIEWS_BY_STUDENT, 
-          payload: response.data
-        })
-      }
+      var response = await axios.post(
+        `http://localhost:3001/reviews/create/${user}`,
+        payload
+      );
+      return dispatch({
+        type: ADD_REVIEW,
+        payload: response.data,
+      });
     } catch (error) {
       // console.log(error);
     }
-    }
+  };
+}
 
-    export function clearStateReviews() {
-      return {
-        type: CLEAR_STATE_REVIEWS,
-      };
+export function getReviews() {
+  return async (dispatch) => {
+    try {
+      var response = await axios.get("http://localhost:3001/reviews");
+      return dispatch({
+        type: GET_REVIEWS,
+        payload: response.data,
+      });
+    } catch (error) {
+      // console.log(error);
     }
+  };
+}
+export function getReviewsByStudent(userId) {
+  return async (dispatch) => {
+    try {
+      var response = await axios.get(
+        `http://localhost:3001/reviews/reviewByStudent?userId=${userId}`
+      );
+      return dispatch({
+        type: REVIEWS_BY_STUDENT,
+        payload: response.data,
+      });
+    } catch (error) {
+      // console.log(error);
+    }
+  };
+}
+
+export function clearStateReviews() {
+  return {
+    type: CLEAR_STATE_REVIEWS,
+  };
+}

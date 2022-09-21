@@ -1,9 +1,12 @@
 import React from "react";
 import {Link} from 'react-router-dom'
 
-export default function TeacherDashboard (){
+
+export default function TeacherDashboard ({user}){
+
     return (
         <div>
+           
             <Link to={'/createVideo'}>
                 <button>Subir Video</button>
             </Link>

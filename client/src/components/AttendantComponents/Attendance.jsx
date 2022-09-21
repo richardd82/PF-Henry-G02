@@ -11,27 +11,28 @@ import {
 } from "../../redux/actions/attendanceActions.js";
 // import Nav from "../Nav/Nav.jsx";
 import "./Formularios.css";
+import Nav from "../Nav/Nav.jsx";
 
 const Attendance = ({ user }) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.attendance);
   //const ta = state.users.filter(e => e.name === user.displayName)[0];
 
-  const ta = {
-    name: "Romi",
-    lastname: "Jimenez",
-    email: "romi@gmail.com",
-    imege: "image",
-    password: 1234,
-    category: "ta",
-    active: true,
-    moduleId: "1d7be497-d63a-4422-9f86-89eaf640cd53",
-    cohortId: "e03aecf1-2f6a-4c58-93f7-f7e21519ed20",
-    standupId: "6c5dc9cc-460c-408c-8cb8-cfa94af873ec",
-  };
-  const students = state.users.filter(
-    (e) => e.category === "student" && e.standupId === ta.standupId
-  );
+  const students = state.users.filter(e=> e.category === 'student')
+
+  let ta = ''
+  if (!user.category) {
+    ta = state.users.filter((e) => e.name === user._json.name );
+ }else{
+   ta = state.users.filter((e) => e.name === user.name );
+   }
+
+   const taSup = ta.map(e=>e.standupId).toString()
+   const taCohort = ta.map(e=>e.cohortId)
+   const usersMaped = students.map((e) => e.standupId)
+   const filtered = students.filter((e) => e.standupId === taSup ); 
+
+
 
   useEffect(() => {
     dispatch(getAllClasses());
@@ -56,6 +57,8 @@ const Attendance = ({ user }) => {
   };
 
   return (
+    <>
+    <Nav user={user}/>
     <div className="parent">
       <div className="container">
         <h1 className="title">CONTROL ASISTENCIAS STANDUP</h1>
@@ -95,7 +98,7 @@ const Attendance = ({ user }) => {
                   return aDate - bDate;
                 })
                 .filter(
-                  (lecture) => lecture.moduleId.toString() === options.module
+                  (lecture) => lecture.moduleId === options.module
                 )
                 .map((lecture) => {
                   return (
@@ -109,13 +112,14 @@ const Attendance = ({ user }) => {
         {options.module && options.lecture && (
           <StudentList
             lecture={options.lecture}
-            currentStudents={students}
-            standup={ta.standupId}
-            cohort={ta.cohortId}
+            currentStudents={filtered}
+            standup={taSup}
+           // cohort={taCohort} 
           />
         )}
       </div>
     </div>
+    </>
   );
 };
 

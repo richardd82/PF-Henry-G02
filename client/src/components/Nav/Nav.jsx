@@ -144,8 +144,8 @@ export default function Nav({ user }) {
                   <Link to="/catalog">
                     <p className="avatar__name">Catalogo</p>
                   </Link>
-                  <Link to="/assistance">
-                    <p className="avatar__name">Assistance</p>
+                  <Link to="/attendance">
+                    <p className="avatar__name">Asistencia</p>
                   </Link>
                   <Link to="/favourite">
                     <p className="avatar__name">Favourite</p>
