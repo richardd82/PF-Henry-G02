@@ -367,47 +367,46 @@ try {
 }
 //*********************Reviews**************************
 export function addReview (user, payload){
-try {
   return async (dispatch) => {
+try {
     var response = await axios.post(`http://localhost:3001/reviews/create/${user}`, payload)
     return dispatch({
       type: ADD_REVIEW, 
       payload: response.data
     })
-  }
 } catch (error) {
   // console.log(error);
 }
 }
+}
 
-export function getReviews (taId){
+export function getReviews (){
+  return async (dispatch) => {
   try {
-    return async (dispatch) => {
-      var response = await axios.get(`http://localhost:3001/reviews/?taId=${taId}`)
+      var response = await axios.get('http://localhost:3001/reviews')
       return dispatch({
         type: GET_REVIEWS, 
         payload: response.data
       })
-    }
   } catch (error) {
     // console.log(error);
   }
   }
-
+}
   export function getReviewsByStudent (userId){
+    return async (dispatch) => {
     try {
-      return async (dispatch) => {
         var response = await axios.get(`http://localhost:3001/reviews/reviewByStudent?userId=${userId}`)
         return dispatch({
           type: REVIEWS_BY_STUDENT, 
           payload: response.data
         })
-      }
     } catch (error) {
       // console.log(error);
     }
     }
-
+  }
+  
     export function clearStateReviews() {
       return {
         type: CLEAR_STATE_REVIEWS,

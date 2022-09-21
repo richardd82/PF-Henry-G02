@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,6 +15,7 @@ import "./AddReview.css";
 // import Box from '@mui/material/Box';
 // import StarIcon from '@mui/icons-material/Star';
 import { Link } from "react-router-dom";
+import Nav from "../Nav/Nav";
 
 export default function AddReview({user}){
 /*     const user = {
@@ -26,34 +28,39 @@ export default function AddReview({user}){
         active: true,
       }; */
 
-      //MODIFICAR CUANDO SE PUEDA INGRESAR CON LOGIN
+
+
     const dispatch = useDispatch()
     const users = useSelector(state=> state.users.users)
+
+    let ta = ''
+if(user){
+    if (!user.category) {
+        ta = users.filter((e) => e.name === user._json.name );
+     }else{
+       ta = users.filter((e) => e.name === user.name );
+       }
+
+} else {
+    ta = 'student'
+}
+
+       const taSup = ta.map(e=>e.standupId).toString()
+  
+
 
     useEffect(()=>{
         dispatch(getTodosUsuarios())
     },[dispatch])
 
-    let userValidate = ''
-
-    if (!user.category) {
-        userValidate = users.filter((e) => e.name === user._json.name );
-      }else{
-        userValidate = users.filter((e) => e.name === user.name );
-        }
-const stydents = users.filter(e=> e.category === 'student')
-const ta = userValidate.map(e=> e.standupId).toString()
-const usersSUP = stydents.map(e=> e.standupId)
-const filtered = stydents.filter(e => e.standupId === ta)
-
 
 
     return (
         <div>
-            {
-                filtered && filtered.map(e => {
-                    //if(e === ta && e.category === "student")
-                   
+            <Nav user={user}/>
+             {
+                users && users.map(e => {
+                    if(e.standupId === taSup && e.category === "student")
                     return (
                     <Link to={`/reviews/create/${e.id}`}>
                     <p>
@@ -62,7 +69,7 @@ const filtered = stydents.filter(e => e.standupId === ta)
                     </Link>
                     )
                 } )
-            }
+            } 
         </div>
     )
 }

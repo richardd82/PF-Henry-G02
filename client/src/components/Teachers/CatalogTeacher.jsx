@@ -52,7 +52,7 @@ let videos = ''
                 .map((video) => {
                   return (
                     <div>
-                      <Link key={video.id} to={`/lecture/${video.id}`}>
+                      <Link key={video.id} to={`/${video.type}/${video.id}`}>
                         <Card
                           id={video.id}
                           title={video.name}

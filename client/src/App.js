@@ -112,7 +112,7 @@ function App() {
         <Route path="/attendance" element={user.name || user.emails ? <Attendance user={user} />:<Navigate to="/login" />}/>
         <Route path="/module/:id" element={user.name || user.emails ? <Module user={user} />:<Navigate to="/login" />}/>
         <Route path="/lecture/:id" element={user.name || user.emails ? <Details user={user} />:<Navigate to="/login" />}/>
-        <Route path="/codeReview/:id" element={user.name || user.emails ? <Details user={user} />:<Navigate to="/login" />}/>
+        <Route path="/code-review/:id" element={user.name || user.emails ? <Details user={user} />:<Navigate to="/login" />}/>
         <Route path="/favourite" element={user.name || user.emails ? <AllFavourite user={user} />:<Navigate to="/login" />}/>
         <Route path="/reviews/create" element={user.name || user.emails ? <AddReviews   user={user} />:<Navigate to="/login" />}/>
         <Route path="/reviews/create/:id" element={user.name || user.emails ? <UserReview  user={user} />:<Navigate to="/login" />}/>
