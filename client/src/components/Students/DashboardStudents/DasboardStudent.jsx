@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import rocket from "../../../assets/media/rocket.png";
+import rocket from "../../../assets/media/cohete.png";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearStateModules,
@@ -28,44 +28,44 @@ const DasboardStudent = ({user}) => {
     dispatch(getAllModules());
   };
 
-  function sweetAttendance() {
-    swal({
-      title: "ASISTENCIAS",
-      text: "Tu asistencia se calcula en función de todas las veces que hubo SUP y que tendrías que haber participado en el mismo. Esto incluye cohortes de las que hubieras migrado.(Estamos en plena transición a esta herramienta, por lo que los valores pueden ser inferiores a los reales, no te preocupes)",
-    });
-  }
+  // function sweetAttendance() {
+  //   swal({
+  //     title: "ASISTENCIAS",
+  //     text: "Tu asistencia se calcula en función de todas las veces que hubo SUP y que tendrías que haber participado en el mismo. Esto incluye cohortes de las que hubieras migrado.(Estamos en plena transición a esta herramienta, por lo que los valores pueden ser inferiores a los reales, no te preocupes)",
+  //   });
+  // }
   function sweetCheckpoints() {
     swal({
       text: "Ha ocurrido un error, contacta a tu instructor.",
     });
   }
-  function sweetSlides() {
-    swal("SLIDES", {
-      buttons: { descarga: "DESCARGAR", navegador: "VISTA PREVIA" },
-    }).then((value) => {
-      switch (value) {
-        case "descarga":
-          {
-            var a = document.createElement("a");
-            a.href = slides;
-            a.download = "slides-Henry.pdf";
-            a.click();
-            window.URL.revokeObjectURL(slides);
-          }
-          break;
-        case "navegador":
-          swal("Serás redireccionado a las slides", { buttons: false });
-          setTimeout(() => {
-            var a = document.createElement("a");
-            a.href = slides;
-            a.click();
-            window.URL.revokeObjectURL(slides);
-          }, 1500);
-        default:
-          console.log("hola");
-      }
-    });
-  }
+  // function sweetSlides() {
+  //   swal("SLIDES", {
+  //     buttons: { descarga: "DESCARGAR", navegador: "VISTA PREVIA" },
+  //   }).then((value) => {
+  //     switch (value) {
+  //       case "descarga":
+  //         {
+  //           var a = document.createElement("a");
+  //           a.href = slides;
+  //           a.download = "slides-Henry.pdf";
+  //           a.click();
+  //           window.URL.revokeObjectURL(slides);
+  //         }
+  //         break;
+  //       case "navegador":
+  //         swal("Serás redireccionado a las slides", { buttons: false });
+  //         setTimeout(() => {
+  //           var a = document.createElement("a");
+  //           a.href = slides;
+  //           a.click();
+  //           window.URL.revokeObjectURL(slides);
+  //         }, 1500);
+  //       default:
+  //         console.log("hola");
+  //     }
+  //   });
+  // }
 
   return (
     <div>
@@ -107,29 +107,13 @@ const DasboardStudent = ({user}) => {
 <Link to="/" className="link-Search"><img className="icon-Search" src={lupa} alt=""/></Link>
 </div> */}
       </nav>
-	  
-      <div>
-		<div>
-			UNETE A NUESTRO SLACK DE TRABAJO
-		</div>
-        <a href="https://soyhenry.slack.com" target="_blank" >
-          <button>
-            <img src={img} />
-          </button>
-        </a>
-      </div>
-      <div>
+      {/* <div>
         <button onClick={sweetSlides}>
           SLIDES
           <img src={imgSlides} />
         </button>
-      </div>
-      <div>
-        <Link to='/students/gateway'>
-          Pasarela de pagos
-        </Link>
-      </div>
-      <button onClick={sweetAttendance}>ASISTENCIAS AL SUP</button>
+      </div> */}
+      {/* <button onClick={sweetAttendance}>ASISTENCIAS AL SUP</button> */}
     </div>
   );
 };

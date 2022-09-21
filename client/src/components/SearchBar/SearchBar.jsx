@@ -27,16 +27,16 @@ const SearchBar = () => {
   return (
     <div className="search">
       <form id="Form" onSubmit={e => handleSubmit(e)}>
-        <div className="search">
+        <div className="s__input">
           <input
             type="text"
             onChange={handleChange}
             value={nameSearch}
             className="search-Input"
-            placeholder="Search..."
           />
+          <label className='lbl-search'>Search...</label>
           <button type="submit" className="icon-Search" src={lupa}>
-            <i>&#128640;</i>
+            
           </button>
         </div>
       </form>

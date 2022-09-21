@@ -1,18 +1,18 @@
 import React from 'react';
 import resultados from '../../assets/resultados.jpeg';
-import s from './Card.module.css';
+import './Card.css';
 
 const Card = ({ id, title, instructor, description }) => {
   return (
-    <div key={id} className={s.card}>
-      <div className={s.cardHeader}>
+    <div key={id} className="card">
+      <div className="cardHeader">
         <img src={resultados} alt="video-thumbnail" />
       </div>
-      <div className={s.cardBody}>
-        <span className={`s.tag s.tagTeal`}>{title}</span>
-        <p>{description}</p>
-        <div className={s.userInfo}>
-          <h5>{instructor}</h5>
+      <div className="cardBody">
+        <span className={"tag tagTeal"}>{title}</span>
+        {/* <p>{description} hola que tal como estas</p> */}
+        <div className="userInfo">
+          <h6>{instructor} Martina Scomazzon</h6>
         </div>
       </div>
     </div>
