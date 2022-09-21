@@ -12,7 +12,7 @@ passport.use(
 		{
 			clientID: GOOGLE_CLIENT_ID,
 			clientSecret: GOOGLE_CLIENT_SECRET,
-			callbackURL: "https://pf-henry-g02-5zcv32yn5-richardd82.vercel.app/auth/google/callback",
+			callbackURL: "/auth/google/callback",
 		},
 		function (accessToken, refreshToken, profile, done) {
 			done(null, profile)
@@ -25,7 +25,7 @@ passport.use(
 			clientID: GITHUB_CLIENT_ID,
 			clientSecret: GITHUB_CLIENT_SECRET,
 			scope: ['user:email'],
-			callbackURL: "https://pf-henry-g02-5zcv32yn5-richardd82.vercel.app/auth/github/callback",
+			callbackURL: "/auth/github/callback",
 		},
 		function (accessToken, refreshToken, profile, done) {
 			done(null, profile)
