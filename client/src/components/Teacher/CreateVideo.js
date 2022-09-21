@@ -37,7 +37,7 @@ const CreateVideo = ({ user }) => {
   });
 
   // Control de errores
-  const [warnings, setWarnings] = useState({});
+  //const [warnings, setWarnings] = useState({});
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -47,7 +47,7 @@ const CreateVideo = ({ user }) => {
         [name]: value,
       };
     });
-    setWarnings(setVideoErrors(input));
+    //setWarnings(setVideoErrors(input));
   }
 
   function handleChangeClasses(e) {
@@ -71,14 +71,14 @@ const CreateVideo = ({ user }) => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (warnings.error) {
+ /*    if (warnings.error) {
       setWarnings((prev) => {
         return {
           ...prev,
           errorMsg: "Llena todos los campos obligatorios",
         };
       });
-    } else {
+    } else { */
       dispatch(createVideo(input));
       alert("Clase creada correctamente");
       setInput({
@@ -89,7 +89,7 @@ const CreateVideo = ({ user }) => {
         classId: "",
       });
     }
-  }
+  //}
   // console.log(input);
   return (
     <>
@@ -98,7 +98,7 @@ const CreateVideo = ({ user }) => {
         <div className="container">
           <h1 className="title">Creación de Videos</h1>
           <br></br>
-          {warnings.errorMsg ? <p>{warnings.errorMsg}</p> : null}
+{/*           {warnings.errorMsg ? <p>{warnings.errorMsg}</p> : null} */}
           <form className="form" onSubmit={(e) => handleSubmit(e)}>
             <div>
               <select
@@ -156,7 +156,7 @@ const CreateVideo = ({ user }) => {
                 <option value="lecture">Lecture</option>
                 <option value="code-review">Code Review</option>
               </select>
-              {warnings.type ? <p>{warnings.type}</p> : null}
+{/*               {warnings.type ? <p>{warnings.type}</p> : null} */}
             </div>
             {/* <div>
               <label>Profesor</label>
@@ -193,7 +193,7 @@ const CreateVideo = ({ user }) => {
                     );
                   })}
               </select>
-              {warnings.cohortId ? <p>{warnings.cohortId}</p> : null}
+{/*               {warnings.cohortId ? <p>{warnings.cohortId}</p> : null} */}
             </div>
             <div>
               <button className="submitButton" type="submit" value="">

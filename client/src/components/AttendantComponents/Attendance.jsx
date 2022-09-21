@@ -11,6 +11,7 @@ import {
 } from "../../redux/actions/attendanceActions.js";
 // import Nav from "../Nav/Nav.jsx";
 import "./Formularios.css";
+import Nav from "../Nav/Nav.jsx";
 
 const Attendance = ({ user }) => {
   const dispatch = useDispatch();
@@ -56,6 +57,8 @@ const Attendance = ({ user }) => {
   };
 
   return (
+    <>
+    <Nav user={user}/>
     <div className="parent">
       <div className="container">
         <h1 className="title">CONTROL ASISTENCIAS STANDUP</h1>
@@ -116,6 +119,7 @@ const Attendance = ({ user }) => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

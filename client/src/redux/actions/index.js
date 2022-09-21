@@ -356,73 +356,63 @@ export function getFavoritesById(id) {
 }
 
 export function addFavoritesById(userId, videoId) {
+try {
+  return async function (dispatch) {
+    var json = await axios.post( `http://localhost:3002/favorites/create/${userId}/${videoId}`);
+    // console.log(json.data)
+    return dispatch({
+      type: ADD_FAVORITE,
+      payload: json.data,
+    });
+  };
+} catch (error) {
+  // console.log(error);
+}
+}
+//*********************Reviews**************************
+export function addReview (user, payload){
+  return async (dispatch) => {
+try {
+    var response = await axios.post(`http://localhost:3001/reviews/create/${user}`, payload)
+    return dispatch({
+      type: ADD_REVIEW, 
+      payload: response.data
+    })
+} catch (error) {
+  // console.log(error);
+}
+}
+}
+
+export function getReviews (){
+  return async (dispatch) => {
   try {
-    return async function (dispatch) {
-      var json = await axios.post(
-        `http://localhost:3002/favorites/create/${userId}/${videoId}`
-      );
-      // console.log(json.data)
+      var response = await axios.get('http://localhost:3001/reviews')
       return dispatch({
-        type: ADD_FAVORITE,
-        payload: json.data,
-      });
-    };
+        type: GET_REVIEWS, 
+        payload: response.data
+      })
   } catch (error) {
     // console.log(error);
   }
+  }
 }
-//*********************Reviews**************************
-export function addReview(user, payload) {
-  return async (dispatch) => {
+  export function getReviewsByStudent (userId){
+    return async (dispatch) => {
     try {
-      var response = await axios.post(
-        `http://localhost:3001/reviews/create/${user}`,
-        payload
-      );
-      return dispatch({
-        type: ADD_REVIEW,
-        payload: response.data,
-      });
+        var response = await axios.get(`http://localhost:3001/reviews/reviewByStudent?userId=${userId}`)
+        return dispatch({
+          type: REVIEWS_BY_STUDENT, 
+          payload: response.data
+        })
     } catch (error) {
       // console.log(error);
     }
-  };
-}
-
-export function getReviews(taId) {
-  return async (dispatch) => {
-    try {
-      var response = await axios.get(
-        `http://localhost:3001/reviews/?taId=${taId}`
-      );
-      return dispatch({
-        type: GET_REVIEWS,
-        payload: response.data,
-      });
-    } catch (error) {
-      // console.log(error);
     }
-  };
-}
-
-export function getReviewsByStudent(userId) {
-  return async (dispatch) => {
-    try {
-      var response = await axios.get(
-        `http://localhost:3001/reviews/reviewByStudent?userId=${userId}`
-      );
-      return dispatch({
-        type: REVIEWS_BY_STUDENT,
-        payload: response.data,
-      });
-    } catch (error) {
-      // console.log(error);
+  }
+  
+    export function clearStateReviews() {
+      return {
+        type: CLEAR_STATE_REVIEWS,
+      };
     }
-  };
-}
-
-export function clearStateReviews() {
-  return {
-    type: CLEAR_STATE_REVIEWS,
-  };
-}

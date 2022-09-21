@@ -23,30 +23,6 @@ const getReviewByStudent = async (req, res, next)=>{
         next(error)
     }
 }
-   /*  const {taId }= req.query
-    try {
-        const ta = await Users.findOne({               //me traigo toda la info del TA
-            where: {
-                id: taId
-            }
-        })
-        const reviewForTA = await Reviews.findAll({    // me traigo todas las puntuaciones que coinciden con ese TA
-            where: {
-                taId: ta
-    }})
-        const studentReviewed = await Users.findOne({  //me traigo al estudiante puntuado
-            where: {
-                id: reviewForTA.map(el => el.userId)
-            }
-        })
-         const result = reviewForTA.map(review => {
-            review.rating = studentReviewed.find(student => student.id === review.userId)
-        }) 
-        res.json(result) 
-
-    } catch (error) {
-        next(error)
-    } */
 const createReview = async(req, res, next) => {
     const {user }= req.params
     const {rating, comments, taId} = req.body
