@@ -44,3 +44,9 @@
   border-radius: 20px;
   border: 2px solid rgba(255, 255, 0, 0.4);
 }
+
+.vuvu__cardelement {
+  width: 200px;
+  border: 2px solid gray;
+  border-radius: 4px;
+}

@@ -48,7 +48,7 @@ function App() {
 	// const navigate = useNavigate();
 	const token = localStorage.getItem("token");
 	console.log(token + "Soy el token decodificado");
-
+console.log(REACT_APP_STRIPE_KEY)
 	
 
 

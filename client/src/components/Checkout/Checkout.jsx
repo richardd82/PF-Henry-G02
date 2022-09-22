@@ -24,7 +24,6 @@ const Checkout = ({ user, stripePromise }) => {
       <div className="vuvu__container">
         {currentUser && (
           <div className="vuvu__paymentscont">
-            <h1>Realiza tu pago acá</h1>
             <Elements stripe={stripePromise}>
               <CardPayment user={user} />
             </Elements>

@@ -1,8 +1,8 @@
 require('dotenv').config();
 const Stripe = require('stripe');
-const { SECRET_KEY } = process.env;
+const { STRIPE_SECRET_KEY } = process.env;
 const { Users, Payments } = require('../db');
-const stripe = new Stripe(SECRET_KEY);
+const stripe = new Stripe(STRIPE_SECRET_KEY);
 
 const createPayment = async (req, res, next) => {
   try {
