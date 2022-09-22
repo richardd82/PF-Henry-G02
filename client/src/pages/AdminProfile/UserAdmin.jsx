@@ -6,6 +6,9 @@ import React from "react";
 import Nav from "../../components/Nav/Nav";
 import UsersStats from "../../components/Admin/Forms/UserStats/UserStats";
 import "./UserAdmin.css";
+//import '../../components/Students/DashboardStudents/dashboard.css'
+//import logoGrande from '../../assets/media/logohenry2.png'
+
 
 const UserAdmin = ({ user }) => {
 	const dispatch = useDispatch();
@@ -38,6 +41,9 @@ const UserAdmin = ({ user }) => {
 					<UsersStats />
 					<hr className="hrStats" />
 				</div>
+{/* 				<div className="logo">
+					<img src={logoGrande} />
+				</div> */}
 			</div>
 		</>
 	);

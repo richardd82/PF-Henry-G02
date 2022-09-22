@@ -49,7 +49,7 @@ function topFunction() {
       <SearchBarEmail />
           <div>
             <table className={s.demo}>
-	<caption style={{fontWeight: 'bold'}}>ESTUDIANTES<br/><br/></caption>
+	<caption style={{fontWeight: 'bold', color: 'white'}}>ESTUDIANTES<br/><br/></caption>
 	<thead>
 	<tr>
 		<th>Nombre</th>
@@ -64,10 +64,10 @@ function topFunction() {
         return (
 	<tbody>
 	<tr>
-		<td style={{width: '300px'}}>{e.name}  {e.lastname}</td>
-		<td style={{width: '350px'}}>{e.email}</td>
-		<td style={{width: '130px'}}>{e.category}</td>
-		<td style={{width: '70px', textAlign: 'center'}}>{e.active.toString().replace('true', '✔️').replace('false', '❌')}</td>
+		<td style={{width: '300px', color: 'white'}}>{e.name}  {e.lastname}</td>
+		<td style={{width: '350px', color: 'white'}}>{e.email}</td>
+		<td style={{width: '130px', color: 'white'}}>{e.category}</td>
+		<td style={{width: '70px', color: 'white', textAlign: 'center'}}>{e.active.toString().replace('true', '✔️').replace('false', '❌')}</td>
     <Link to={e.id}><td style={{width: '110px'}}>Update</td></Link>
 	</tr>
 	</tbody>
@@ -79,7 +79,7 @@ function topFunction() {
           <br/>
           <div>
             <table className={s.demo}>
-	<caption style={{fontWeight: 'bold'}}>INSTRUCTORES/AS<br/><br/></caption>
+	<caption style={{fontWeight: 'bold', color: 'white'}}>INSTRUCTORES/AS<br/><br/></caption>
 	<thead>
 	<tr>
 		<th>Nombre</th>
@@ -94,10 +94,10 @@ function topFunction() {
         return (
 	<tbody>
 	<tr>
-		<td style={{width: '300px'}}>{e.name}  {e.lastname}</td>
-		<td style={{width: '350px'}}>{e.email}</td>
-		<td style={{width: '130px'}}>{e.category.replace('teacher', 'profesor/a')}</td>
-		<td style={{width: '70px', textAlign: 'center'}}>{e.active.toString().replace('true', '✔️').replace('false', '❌')}</td>
+		<td style={{width: '300px', color: 'white'}}>{e.name}  {e.lastname}</td>
+		<td style={{width: '350px', color: 'white'}}>{e.email}</td>
+		<td style={{width: '130px', color: 'white'}}>{e.category.replace('teacher', 'profesor/a')}</td>
+		<td style={{width: '70px', color: 'white', textAlign: 'center'}}>{e.active.toString().replace('true', '✔️').replace('false', '❌')}</td>
     <Link to={e.id}><td style={{width: '110px'}}>Update</td></Link>
 	</tr>
 	</tbody>
@@ -110,7 +110,7 @@ function topFunction() {
           <div>
             <table className={s.demo}>
 
-	<caption style={{fontWeight: 'bold'}}>ADMINISTRADORES/AS<br/><br/></caption>
+	<caption style={{fontWeight: 'bold', color: 'white'}}>ADMINISTRADORES/AS<br/><br/></caption>
 	<thead>
 	<tr>
 		<th>Nombre</th>
@@ -125,10 +125,10 @@ function topFunction() {
         return (
 	<tbody>
 	<tr>
-		<td style={{width: '300px'}}>{e.name}  {e.lastname}</td>
-		<td style={{width: '350px'}}>{e.email}</td>
-		<td style={{width: '130px'}}>{e.category.replace('admin', 'administrador/a')}</td>
-		<td style={{width: '70px', textAlign: 'center'}}>{e.active.toString().replace('true', '✔️').replace('false', '❌')}</td>
+		<td style={{width: '300px', color: 'white'}}>{e.name}  {e.lastname}</td>
+		<td style={{width: '350px', color: 'white'}}>{e.email}</td>
+		<td style={{width: '130px', color: 'white'}}>{e.category.replace('admin', 'administrador/a')}</td>
+		<td style={{width: '70px', color: 'white', textAlign: 'center'}}>{e.active.toString().replace('true', '✔️').replace('false', '❌')}</td>
     <Link to={e.id}><td style={{width: '110px'}}>Update</td></Link>
 	</tr>
 	</tbody>

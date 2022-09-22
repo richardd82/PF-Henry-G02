@@ -7,6 +7,7 @@ import {
   getTodosUsuarios,
 } from "../../redux/actions";
 import Nav from "../Nav/Nav";
+import '../Admin/Forms/Formularios.css'
 
 //traigo reviews, usuarios
 //verifico si user coincide con el id de user que me llega con la review
@@ -43,24 +44,24 @@ export default function Reviews({ user }) {
       standup: e.target.value,
     });
   }
-
+  const student = users.filter(e=> e.category === 'student')
   const supFiltered = sup.filter((el) => el.cohortId === input.cohort);
-  const usersFiltered = users.filter((el) => el.standupId === input.standup);
+  const usersFiltered = student.filter((el) => el.standupId === input.standup);
   const userReviews = reviews.filter((e) => e.user.standupId === input.standup);
   //const newSet = [...new Set(userReviews.map(e=> e.userId))]
 
   return (
     <>
     <Nav user={user}></Nav>
-      <div>
-        <select onChange={handleSelectCohort}>
+      <div className="container-forms">
+        <select className="select-forms" onChange={handleSelectCohort}>
           <option>Cohorts</option>
           {cohorts &&
             cohorts.map((e) => {
               return <option value={e.id}>{e.name}</option>;
             })}
         </select>
-        <select onChange={handleSelectSup}>
+        <select className="select-forms" onChange={handleSelectSup}>
           <option> Select Standup</option>
           {supFiltered?.map((e) => {
             return <option value={e.id}>{e.name}</option>;
@@ -68,8 +69,10 @@ export default function Reviews({ user }) {
         </select>
         {usersFiltered?.map((e) => {
           return (
-            <div>
+            <div className="names-forms">
+              <div className="name-forms">
               <h2 key={e.id}>{e.name}</h2>
+              </div>
               {userReviews?.map((r) => {
                 if (e.id === r.userId) {
                   return (

@@ -73,12 +73,12 @@ const users = useSelector((state) => state.users.users);
                     <div className ='l__form__input-field'>
                         {/* <input type="text" required></input> */}
                         <input type="text" onChange={handleChange} value={input.email} name = "email" required/>
-                        <label>Email or User Name</label>
+                        <label className='label-form'>Email</label>
                     </div>
                     <div className ='l__form__input-field'>
                         {/* <input className ='l__form__input-pass' type="password" required></input> */}
                         <input className ='l__form__input-pass' type="password" onChange={handleChange} value={input.password} name = "password" required/>
-                        <label>Password</label>
+                        <label className='label-form'>Password</label>
                     </div>
                     <div className ='l__form__button'>
                         <div className='inner'></div>

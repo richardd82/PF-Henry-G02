@@ -5,6 +5,7 @@ import './Card.css';
 
 
 const Card = ({ id, title, instructor, description, user, video }) => {
+console.log(user);
 
   return (
     <div key={id} className="card">
@@ -17,7 +18,7 @@ const Card = ({ id, title, instructor, description, user, video }) => {
         <div className="userInfo">
           <h6>{instructor}</h6>
         </div>
-        <div className= "c__favorito" z-index="10000">
+        <div className= "c__favorito">
         <FavouriteButton user={user} userId={user.id} videoId={video.id}/>
         </div>
       </div>
@@ -25,13 +26,5 @@ const Card = ({ id, title, instructor, description, user, video }) => {
   );
 };
 export default Card;
-
-
-
-
-
-
-
-
 
 

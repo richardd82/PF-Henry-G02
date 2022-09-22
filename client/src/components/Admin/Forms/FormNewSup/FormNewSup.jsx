@@ -61,14 +61,14 @@ const FormNewStandUp = ({ user }) => {
   return (
     <>
       <Nav user={user} />
-      <div className="parent">
-        <div className="container">
-          <h1 className="title">Create new Stand Up </h1>
+      <div className="parent-forms">
+        <div className="container-forms">
+          <h1 className="title-forms">Create new Stand Up </h1>
           <br></br>
-          <form  className="form" autoComplete="off" onSubmit={handleSubmit}>
+          <form  className="form-forms" autoComplete="off" onSubmit={handleSubmit}>
             <label>Name:</label>
             <input
-            className="inputCreate"
+            className="inputCreate-forms"
               placeholder="Insert a name"
               type="text"
               value={input.name}
@@ -76,7 +76,7 @@ const FormNewStandUp = ({ user }) => {
               onChange={handleChange}
               required
             ></input>
-            <select className="select" onChange={handleSelect}>
+            <select className="select-forms" onChange={handleSelect}>
               <option> Select cohort</option>
               {cohortsExistentes?.map((e) => {
                 return (
@@ -88,7 +88,7 @@ const FormNewStandUp = ({ user }) => {
             </select>
             {/* {errors.name && <h1>{errors.name}</h1>} */}
 
-            <button className="submitButton" type="submit"> Create Stand Up </button>
+            <button className="submitButton-forms" type="submit"> Create Stand Up </button>
           </form>
         </div>
       </div>

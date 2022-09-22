@@ -1,0 +1,22 @@
+.selectedstars{
+    color: rgb(18, 172, 80);
+}
+
+.lastname-reviews{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.comments-reviews{
+    float: right;
+}
+.buttons-reviews{
+    float: right;
+}
+.estrellas-reviews{
+    text-align: center;
+    
+}
+/* input {
+     all: unset !important;
+} */

@@ -18,6 +18,7 @@ import { getTodosUsuarios } from '../../redux/actions';
 
 
 export default function Nav({ user }) {
+
 	const GOOGLE_CLIENT_ID = "AIzaSyBQVj2X9xWCr-pgiJDzR0K5TXNVaaUoeec";
 	const users = useSelector((state) => state.users.allUsers);
 	const dispatch = useDispatch();
@@ -55,12 +56,12 @@ export default function Nav({ user }) {
     });
   }
 
-  function sweetAttendance() {
+/*   function sweetAttendance() {
     swal({
       title: "ASISTENCIAS",
       text: "Tu asistencia se calcula en función de todas las veces que hubo SUP y que tendrías que haber participado en el mismo. Esto incluye cohortes de las que hubieras migrado.(Estamos en plena transición a esta herramienta, por lo que los valores pueden ser inferiores a los reales, no te preocupes)",
     });
-  }
+  } */
 
 	const handleLogout =  () => {
 		if (user.category) {
@@ -116,10 +117,10 @@ export default function Nav({ user }) {
             <div className="avatar">
               {category === 'student' ? (
                 <div>
-                  <Link to="">
+{/*                   <Link to="">
                     <button onClick={sweetAttendance}>
                     <p className="avatar__name">Asistencias</p></button>
-                  </Link>
+                  </Link> */}
                   <Link to="/catalog">
                     <p className="avatar__name">Catalogo</p>
                   </Link>
@@ -143,11 +144,13 @@ export default function Nav({ user }) {
                   </Link>
                 </div>
               ) : null}
+             <Link to='/usuario'>
               <p className="avatar__name separador">{user.displayName || user.name}</p>
+             </Link> 
               {/* {user.displayName} */}
               <img
                 className="avatar__image"
-                src={alumno}
+                src={user.image || alumno}
                 alt=""
                 onClick={handleLogout}
               />
