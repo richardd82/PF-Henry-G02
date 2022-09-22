@@ -10,6 +10,7 @@ const VideosRoute = require('./VideosRoute.js')
 const AttendanceRoute = require('./AttendanceRoute.js')
 const ReviewsRoute = require('./ReviewsRoute.js')
 const Cloudinary = require("./Cloudinary.js")
+const PaymentsRouter = require('./PaymentsRouter.js')
 // const PaymentRouter = require('./PaymentsRouter.js');
 
  
@@ -21,6 +22,7 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+router.use("/checkout", PaymentsRouter);
 router.use("/classes", ClassesRoute);
 router.use("/cohorts", CohortsRoute);
 router.use("/modules", ModulesRoute);

@@ -128,7 +128,7 @@ function App() {
         <Route path="/userstats" element={user.name || user.emails ? <UsersStats user={user} />:<Navigate to="/login" />}/>
 
         {/* Rutas de Students y TA */}
-        <Route path="/students" element={user.name || user.emails ? <Students user={user} />:<Navigate to="/login" />}/>
+        <Route exact path="/students" element={user.name || user.emails ? <Students user={user} />:<Navigate to="/login" />}/>
         <Route exact path="/students/gateway" element={user.name || user.emails ? <StudentPayments user={user} /> :<Navigate to="/login" />} />
         <Route exact path="/students/gateway/checkout" element={user.name || user.emails ? <Checkout user={user} stripePromise={stripePromise} /> : <Navigate to="/login" />}/>
         <Route exact path="/students/gateway/payments" element={user.name || user.emails ? <Payments user={user}/> : <Navigate to="/login" />} />

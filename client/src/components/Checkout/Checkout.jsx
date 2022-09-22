@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Elements } from '@stripe/react-stripe-js';
 import CardPayment from '../CardPayment/CardPayment.jsx';
 import Nav from '../Nav/Nav.jsx';
+import '../StudentPayments/StudentPayments.css';
 // actions
 import { getTodosUsuarios } from '../../redux/actions/index.js';
 
@@ -20,14 +21,16 @@ const Checkout = ({ user, stripePromise }) => {
   return (
     <>
       <Nav user={user} />
-      {currentUser && (
-        <div>
-          <h1>Realiza tu pago acá</h1>
-          <Elements stripe={stripePromise}>
-            <CardPayment user={user} />
-          </Elements>
-        </div>
-      )}
+      <div className="vuvu__container">
+        {currentUser && (
+          <div className="vuvu__paymentscont">
+            <h1>Realiza tu pago acá</h1>
+            <Elements stripe={stripePromise}>
+              <CardPayment user={user} />
+            </Elements>
+          </div>
+        )}
+      </div>
     </>
   );
 };

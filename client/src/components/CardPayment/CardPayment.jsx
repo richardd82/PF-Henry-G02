@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import '../StudentPayments/StudentPayments.css';
 // actions
 import {
   sendPayment,
@@ -64,8 +65,12 @@ const CardPayment = ({ user }) => {
             <button type="subtmit">Pagar</button>
           </form>
           <div>
-            <Link to="/students/gateway">Pasarela</Link>
-            <Link to="/students/gateway/payments/">Hitorial de pagos</Link>
+            <div className="vuvu__button">
+              <Link to="/students/gateway">Pasarela</Link>
+            </div>
+            <div className="vuvu__button">
+              <Link to="/students/gateway/payments/">Hitorial de pagos</Link>
+            </div>
           </div>
         </div>
       ) : (
@@ -73,7 +78,10 @@ const CardPayment = ({ user }) => {
           <div>
             <h1>{state.paymentMsg}</h1>
             <div>
-              <Link onClick={() => dispatch(getTodosUsuarios())} to="/students/gateway">
+              <Link
+                onClick={() => dispatch(getTodosUsuarios())}
+                to="/students/gateway"
+              >
                 Pasarela
               </Link>
               <button onClick={handleClick}>Regresar</button>

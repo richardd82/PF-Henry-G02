@@ -120,6 +120,9 @@ export default function Nav({ user }) {
                     <button onClick={sweetAttendance}>
                     <p className="avatar__name">Asistencias</p></button>
                   </Link>
+                  <Link to="/students/gateway">
+                    <p className="avatar__name">Pagos</p>
+                  </Link>
                   <Link to="/catalog">
                     <p className="avatar__name">Catalogo</p>
                   </Link>
