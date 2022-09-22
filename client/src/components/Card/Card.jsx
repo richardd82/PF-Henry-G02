@@ -2,8 +2,10 @@ import React from 'react';
 import resultados from '../../assets/resultados.jpeg';
 import FavouriteButton from '../FavouriteComponents/favouriteButton';
 import './Card.css';
+
+
 const Card = ({ id, title, instructor, description, user, video }) => {
-  console.log(video);
+
   return (
     <div key={id} className="card">
       <div className="cardHeader">

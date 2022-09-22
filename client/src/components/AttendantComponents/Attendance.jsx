@@ -12,28 +12,21 @@ import {
 // import Nav from "../Nav/Nav.jsx";
 import "./Formularios.css";
 import Nav from "../Nav/Nav.jsx";
-
 const Attendance = ({ user }) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.attendance);
   //const ta = state.users.filter(e => e.name === user.displayName)[0];
-
   const students = state.users.filter(e=> e.category === 'student')
-
   let ta = ''
   if (!user.category) {
     ta = state.users.filter((e) => e.name === user._json.name );
  }else{
    ta = state.users.filter((e) => e.name === user.name );
    }
-
    const taSup = ta.map(e=>e.standupId).toString()
    const taCohort = ta.map(e=>e.cohortId)
    const usersMaped = students.map((e) => e.standupId)
-   const filtered = students.filter((e) => e.standupId === taSup ); 
-
-
-
+   const filtered = students.filter((e) => e.standupId === taSup );
   useEffect(() => {
     dispatch(getAllClasses());
     dispatch(getUsers());
@@ -41,12 +34,10 @@ const Attendance = ({ user }) => {
     dispatch(getModules());
     dispatch(getStandups());
   }, [dispatch]);
-
   const [options, setOptions] = useState({
     module: "",
     lecture: "",
   });
-
   const handleChange = (e) => {
     setOptions((prev) => {
       return {
@@ -55,7 +46,6 @@ const Attendance = ({ user }) => {
       };
     });
   };
-
   return (
     <>
     <Nav user={user}/>
@@ -114,7 +104,7 @@ const Attendance = ({ user }) => {
             lecture={options.lecture}
             currentStudents={filtered}
             standup={taSup}
-           // cohort={taCohort} 
+           // cohort={taCohort}
           />
         )}
       </div>
@@ -122,5 +112,4 @@ const Attendance = ({ user }) => {
     </>
   );
 };
-
 export default Attendance;

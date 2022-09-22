@@ -53,23 +53,36 @@ padding: 5px;
 .section__modulo-clases article{
   display: flex;
   flex-direction: column;
+  border: 5px solid white;
+  background-color: rgb(175, 175, 175);
+  padding: 10px;
+  margin: 10px 3px;
+  border-radius: 20px;
+  min-width: 285px;
+  cursor: pointer;
+  width: 285px;
+  align-items: center;
+  /* min-height: 584px; */
+  /* display: flex;
+  flex-direction: column;
   background-color:#b6d7db;
   padding-top: 10px;
   margin: 10px;
   border-radius: 10px;
   min-width: fit-content;
-  cursor: pointer;
+  cursor: pointer; */
 }
 .section__modulo-clases article p{
   font-size: 1.4rem;
- 
+  display:flex;
+  flex-direction:column;
   margin: 10px;
   color:white;
 }
 
 .section__modulo-clases article div{
   display: flex;
-  flex-direction: row;
+  flex-direction: center;
   justify-content: center;
   align-items: center;
 }
@@ -87,3 +100,4 @@ padding: 5px;
   background-color: transparent;
   padding: 5px;
   }
+

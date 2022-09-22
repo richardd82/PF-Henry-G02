@@ -17,18 +17,18 @@ import { Link } from "react-router-dom";
 import "./Catalog.css";
 
 const Catalog = ({ user }) => {
-  const dispatch = useDispatch();
-  const videos = useSelector((state) => state.videos.videos);
-  const users = useSelector((state) => state.users.allUsers);
-  const userValidate = users.find((e) => e.name === user.displayName);
-  const loginUserId = userValidate && userValidate.id;
-  const videosMapped = videos.map((e) => e.userId)
-  const usersMapped = users.map((e) => e.id)
-  const teacher = users.filter(e=> e.category === 'teacher')
-  const userName = teacher.map((e)=> e.name)
-  const userLastname = teacher.map((e)=> e.lastname)
-  const userCohort = teacher.map(e => e.cohortId)
- /*  const filtered = userCohort.find(r=> r === video.cohortId)
+	const dispatch = useDispatch();
+	const videos = useSelector((state) => state.videos.videos);
+	const users = useSelector((state) => state.users.allUsers);
+	const userValidate = users.find((e) => e.name === user.displayName);
+	const loginUserId = userValidate && userValidate.id;
+	const videosMapped = videos.map((e) => e.userId);
+	const usersMapped = users.map((e) => e.id);
+	const teacher = users.filter((e) => e.category === "teacher");
+	const userName = teacher.map((e) => e.name);
+	const userLastname = teacher.map((e) => e.lastname);
+	const userCohort = teacher.map((e) => e.cohortId);
+	/*  const filtered = userCohort.find(r=> r === video.cohortId)
   const instructor = teacher.filter(e => e.cohortId === filtered) */
   useEffect(() => {
     // if (!videos.classes.length && videos.loading === false) {

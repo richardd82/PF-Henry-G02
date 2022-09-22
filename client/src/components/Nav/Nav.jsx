@@ -114,39 +114,36 @@ export default function Nav({ user }) {
             {/* </Link> */}
             {/* && active === true ? */}
             <div className="avatar">
-            <Link to="/userProfile">
-										<p className="avatar__name">Profile</p>
-						</Link>
-            {category === 'student' ? (
-                  <div>
-                    <Link to="">
-                      <button onClick={sweetAttendance}>
-                      <p className="avatar__name">Asistencias</p></button>
-                    </Link>
-                    <Link to="/catalog">
-                      <p className="avatar__name">Catalogo</p>
-                    </Link>
-                    <Link to="/favourite">
-                      <p className="avatar__name">Favoritos</p>
-                    </Link>
-                  </div>
-                ) : category === 'ta'? (
-                  <div>
-                    <Link to="/attendance">
-                      <p className="avatar__name">Asistencia</p>
-                    </Link>
-                    <Link to="/catalog">
-                      <p className="avatar__name">Catalogo</p>
-                    </Link>
-                    <Link to="/favourite">
-                      <p className="avatar__name">Favourite</p>
-                    </Link>
-                    <Link to="/reviews/create">
-                      <p className="avatar__name">Reviews</p>
-                    </Link>
-                  </div>
-                ) : null}
-              <p className="avatar__name">{user.displayName || user.name}</p>
+              {category === 'student' ? (
+                <div>
+                  <Link to="">
+                    <button onClick={sweetAttendance}>
+                    <p className="avatar__name">Asistencias</p></button>
+                  </Link>
+                  <Link to="/catalog">
+                    <p className="avatar__name">Catalogo</p>
+                  </Link>
+                  <Link to="/favourite">
+                    <p className="avatar__name">Favoritos</p>
+                  </Link>
+                </div>
+              ) : category === 'ta'? (
+                <div>
+                  <Link to="/attendance">
+                    <p className="avatar__name">Asistencia</p>
+                  </Link>
+                  <Link to="/catalog">
+                    <p className="avatar__name">Catalogo</p>
+                  </Link>
+                  <Link to="/favourite">
+                    <p className="avatar__name">Favourite</p>
+                  </Link>
+                  <Link to="/reviews/create">
+                    <p className="avatar__name">Reviews</p>
+                  </Link>
+                </div>
+              ) : null}
+              <p className="avatar__name separador">{user.displayName || user.name}</p>
               {/* {user.displayName} */}
               <img
                 className="avatar__image"
