@@ -3,6 +3,7 @@ import resultados from '../../assets/resultados.jpeg';
 import FavouriteButton from '../FavouriteComponents/favouriteButton';
 import './Card.css';
 const Card = ({ id, title, instructor, description, user, video }) => {
+  console.log(video);
   return (
     <div key={id} className="card">
       <div className="cardHeader">
@@ -15,7 +16,7 @@ const Card = ({ id, title, instructor, description, user, video }) => {
           <h6>{instructor}</h6>
         </div>
         <div className= "c__favorito" z-index="10000">
-        <FavouriteButton userId={user.id} videoId={video.id}/>
+        <FavouriteButton user={user} userId={user.id} videoId={video.id}/>
         </div>
       </div>
     </div>

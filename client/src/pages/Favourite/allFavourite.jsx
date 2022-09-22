@@ -10,37 +10,25 @@ import Nav from '../../components/Nav/Nav';
 import { getFavoritesById, getTodosUsuarios } from '../../redux/actions/index';
 import { Link } from 'react-router-dom';
 
-
 const AllFavourite = ({ user }) => {
   const dispatch = useDispatch();
   
   const users = useSelector(state => state.users.allUsers);
-  //const userValidate = users.find(e => e.name === user.displayName);
-  //const loginUserId = userValidate && userValidate.id;
- 
+  const userValidate = users.find(e => e.name === user.displayName);
+  const loginUserId = userValidate && userValidate.id;
+  console.log(loginUserId);
   
-  let userValidate = ''
-  if (!user.category) {
-    userValidate = users.filter((e) => e.name === user._json.name );
-    }else{
-      userValidate = users.filter((e) => e.name === user.name );
-      }
-      const loginUserId = userValidate?.map(e=> e.id)
-      
-      const videos = useSelector(state => state.favorites.favorite);
-
   useEffect(() => {
-    if(!videos){
-      dispatch(getFavoritesById(loginUserId));
-    }
+    dispatch(getFavoritesById(loginUserId));
     if (!users.length) {
       dispatch(getTodosUsuarios());
     }
 
-  }, [dispatch, loginUserId, users.length, videos]);
-  
-  
+  }, [dispatch, loginUserId, users.length]);
 
+  const videos = useSelector(state => state.favorites.favorite);
+  
+  console.log(videos)
 
   // Pagination handler
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,18 +60,7 @@ const AllFavourite = ({ user }) => {
                     <Card
                       id={video.id}
                       title={video.name}
-                      instructor= {users.map((x) => {
-                        if (x.name === video.userId) {
-                          return (
-                          <>
-                            <p>
-                              {x.name} {x.lastname}
-                            </p>
-                            </>
-                          );
-                        }
-                      })}
-                      /* instructor="Martina" */
+                      instructor="Martina"
                       description={video.description}
                     />
                   </Link>

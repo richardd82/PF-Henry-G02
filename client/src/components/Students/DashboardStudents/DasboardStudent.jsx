@@ -6,7 +6,6 @@ import {
   getAllLessons,
   getAllModules,
 } from "../../../redux/actions/index";
-import SearchBar from "../../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import img from "./slack_logo_icon.png";
 import imgSlides from "./slide.png";
@@ -97,9 +96,6 @@ const DasboardStudent = ({user}) => {
         </ul>
 
         {/* </ul> */}
-        <div>
-          <SearchBar />
-        </div>
         {/* las asistencias seran mostradas x/total */}
 
         {/* <div className="search">
