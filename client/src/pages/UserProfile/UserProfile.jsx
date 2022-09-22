@@ -3,7 +3,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
-import { getTodosUsuarios } from "../../redux/actions";
+import ControlAsistencia from "../../components/Students/ControlAsistencia";
+//import ControlAsistencia from "../../components/Students/ControlAsistencia";
+import { /* getAllAttendances, */ getTodosUsuarios } from "../../redux/actions";
 
 export default function UserProfile({ user }) {
     const dispatch = useDispatch()
@@ -24,10 +26,12 @@ let userImage = ""
 
   const users = useSelector((state) => state.users.allUsers);
   const saveImage = useSelector((state) => state.cloudinaryImage.image);
+  //const attendance = useSelector(state=> state.allAttendance.allAttendance)
   console.log(saveImage, "cloudinaryImage")
   console.log(user.image, "USER.IMAGE")
 
   useEffect(() => {
+     // dispatch(getAllAttendances())
     if (!users.length) {
       dispatch(getTodosUsuarios());
     }
@@ -43,11 +47,12 @@ let userImage = ""
   const loginUserName = userValidate && userValidate.name;
   const loginUserEmail = userValidate && userValidate.email;
   const loginUserCategory = userValidate && userValidate.category;
-
+//console.log(attendance);
   console.log(user, "ESTO ES USER EN USERPROFILE");
   return (
     <div>
       <Nav user={user} />
+       <ControlAsistencia user={user}/> 
       <h1>Username: {loginUserName || user.name}</h1>
       <h1>Email: {loginUserEmail || user.email}</h1>
       <h1>Category: {loginUserCategory || user.category}</h1>

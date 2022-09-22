@@ -10,6 +10,7 @@ import Nav from '../../components/Nav/Nav';
 import { getFavoritesById, getTodosUsuarios } from '../../redux/actions/index';
 import { Link } from 'react-router-dom';
 
+
 const AllFavourite = ({ user }) => {
   const dispatch = useDispatch();
   
@@ -71,7 +72,18 @@ const AllFavourite = ({ user }) => {
                     <Card
                       id={video.id}
                       title={video.name}
-                      instructor="Martina"
+                      instructor= {users.map((x) => {
+                        if (x.name === video.userId) {
+                          return (
+                          <>
+                            <p>
+                              {x.name} {x.lastname}
+                            </p>
+                            </>
+                          );
+                        }
+                      })}
+                      /* instructor="Martina" */
                       description={video.description}
                     />
                   </Link>

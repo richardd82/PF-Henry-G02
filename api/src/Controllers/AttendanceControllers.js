@@ -1,4 +1,4 @@
-const { Attendance } = require('../db.js');
+const { Attendance, Users } = require('../db.js');
 
 const createAttendance = async (req, res, next) => {
   try {
@@ -36,7 +36,17 @@ const getAttendances = async (req, res, next) => {
   }
 };
 
+const getAllAttendance = async (req, res, next) => {
+  try {
+    let asistencia = await Attendance.findAll()
+    res.json(asistencia)
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   createAttendance,
   getAttendances,
+  getAllAttendance
 };

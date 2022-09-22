@@ -9,6 +9,8 @@ export const GET_ALL_STANDUPS = 'GET_ALL_STANDUPS';
 export const GET_ALL_LECTURES = 'GET_ALL_LECTURES';
 export const GET_ATTENDANCES = 'GET_ATTENDANCES';
 
+
+
 export const getUsers = () => {
   return dispatch => {
     dispatch(fetching());
@@ -129,6 +131,7 @@ export const getAttendances = (standupId, cohortId, classId) => {
       })
   .catch(error=>console.log(error))}
   };
+
 
 /* {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.

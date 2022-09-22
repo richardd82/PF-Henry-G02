@@ -5,7 +5,8 @@ import {
   GET_ALL_COHORTS,
   GET_ALL_STANDUPS,
   GET_ALL_LECTURES,
-  GET_ATTENDANCES
+  GET_ATTENDANCES,
+
 } from '../actions/attendanceActions.js';
 
 const initialState = {
@@ -15,7 +16,7 @@ const initialState = {
   modules: [],
   standups: [],
   lectures: [],
-  attendances: [],
+  attendances: []
 };
 
 export default function attendance(state = initialState, action) {
@@ -61,6 +62,7 @@ export default function attendance(state = initialState, action) {
         fetching: false,
         attendances: action.payload
       }
+      
     default:
       return {
         ...state,

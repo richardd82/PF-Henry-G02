@@ -34,7 +34,8 @@ export const REVIEWS_BY_STUDENT = "REVIEWS_BY_STUDENT";
 export const CLEAR_STATE_REVIEWS = "CLEAR_STATE_REVIEWS";
 export const USER_VALIDATE = "USER_VALIDATE";
 export const LOGOUT = "LOGOUT";
-export const UPLOAD_IMAGE = "UPLOAD_IMAGE"
+export const UPLOAD_IMAGE = "UPLOAD_IMAGE";
+export const GET_ALL_ATTENDANCES = 'GET_ALL_ATTENDANCES';
 // payments
 export const REQUESTING = 'REQUESTING';
 export const SEND_PAYMENT = 'SEND_PAYMENT';
@@ -541,3 +542,19 @@ export const clearPaymentMsg = () => {
     type: CLEAR_PAYMENT_MSG,
   };
 };
+
+
+//**************Attendance***************
+/* export const getAllAttendances = () => {
+  return dispatch => {
+    axios.get(`http://localhost:3001/attendance/get`)
+    .then(response => { 
+        dispatch(() => {
+          return {
+            type: GET_ALL_ATTENDANCES,
+            payload: response.data,
+          };
+        });
+      })
+  .catch(error=>console.log(error))}
+  }; */

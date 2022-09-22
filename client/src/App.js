@@ -141,6 +141,7 @@ function App() {
         <Route path="/favourite" element={user.name || user.emails ? <AllFavourite user={user} />:<Navigate to="/login" />}/>
         <Route path="/reviews/create" element={user.name || user.emails ? <AddReviews   user={user} />:<Navigate to="/login" />}/>
         <Route path="/reviews/create/:id" element={user.name || user.emails ? <UserReview  user={user} />:<Navigate to="/login" />}/>
+
     
         {/* Ruta de pasarela de pagos */}
         <Route path="/pagos" element= {user.name || user.emails ? <Payment user={user} />:<Navigate to="/login" />}/>
