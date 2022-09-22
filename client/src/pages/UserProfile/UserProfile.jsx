@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
 import { getTodosUsuarios } from "../../redux/actions";
+const {REACT_APP_SERVER_URL, REACT_APP_FRONT_URL } = process.env;
 
 export default function UserProfile({ user }) {
     const dispatch = useDispatch()
@@ -11,13 +12,13 @@ export default function UserProfile({ user }) {
         if (user.category) {
             localStorage.clear();
             dispatch(logout());
-            window.location.reload("https://pf-henry-g02.vercel.app/login");
+            window.location.reload(REACT_APP_FRONT_URL+"/login");
         } else if (user.emails) {
-            window.open("https://pf-henry-g02-production.up.railway.app/auth/logout", "_self");
+            window.open(REACT_APP_SERVER_URL+"/auth/logout", "_self");
         }
     };
     const logout = () => {
-        window.open("https://pf-henry-g02-production.up.railway.app/auth/logout", "_self");
+        window.open(REACT_APP_SERVER_URL+"/auth/logout", "_self");
     };
 let userValidate = ""
 let userImage = ""

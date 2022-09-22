@@ -1,6 +1,4 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-// import { useHistory } from 'react-router-dom';
-
 import Catalog from "./pages/Catalog/Catalog.jsx";
 import Details from "./pages/Details/Details.jsx";
 import Module from "./pages/Module/Module.jsx";
@@ -40,8 +38,9 @@ import Checkout from "./components/Checkout/Checkout.jsx";
 import Payments from "./components/Payments/Payments.jsx";
 import PaymentDetails from "./components/PaymentDetails/PaymentDetails.jsx";
 import { loadStripe } from '@stripe/stripe-js';
-const { REACT_APP_STRIPE_KEY } = process.env;
+const { REACT_APP_STRIPE_KEY, REACT_APP_SERVER_URL } = process.env;
 const stripePromise = loadStripe(REACT_APP_STRIPE_KEY);
+
 
 function App() {
   const [user, setUser] = useState({});
@@ -65,7 +64,7 @@ function App() {
 				}
 				setUser(tokenDecode);
 			} else {
-				fetch("https://pf-henry-g02-production.up.railway.app/auth/login/success", {
+				fetch(REACT_APP_SERVER_URL+"/auth/login/success", {
 					method: "GET",
 					credentials: "include",
 					headers: {

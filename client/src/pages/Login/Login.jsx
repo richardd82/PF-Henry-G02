@@ -5,14 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getTodosUsuarios, usersValidate } from '../../redux/actions/index.js';
 import './login.css'
+const {REACT_APP_SERVER_URL } = process.env;
 
 const Login = () => {
 
 const google = () => {
-    window.open("https://pf-henry-g02-production.up.railway.app/auth/google", "_self");
+    window.open(REACT_APP_SERVER_URL+"/auth/google", "_self");
 }
 const github = () => {
-    window.open("https://pf-henry-g02-production.up.railway.app/auth/github", "_self");
+    window.open(REACT_APP_SERVER_URL+"/auth/github", "_self");
 }
 const users = useSelector((state) => state.users.users);
 	const dispatch = useDispatch();

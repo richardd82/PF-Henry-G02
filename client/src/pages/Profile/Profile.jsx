@@ -27,7 +27,7 @@ const Profile = ({ user }) => {
   if (!user.category) {
     // dispatch(getTodosUsuarios());
 		// e.email === user.emails[0].value 
-		const userValidate = users.find((e) => console.log(e) );
+		const userValidate = users.find((e) => e.email === user.emails[0].value  );
     console.log(userValidate);
     active = userValidate && userValidate.active;
     category = userValidate && userValidate.category;

@@ -1,6 +1,7 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import swal from "sweetalert";
+const {REACT_APP_SERVER_URL, REACT_APP_FRONT_URL} = process.env;
 export const GET_ALL_LESSONS = "GET_ALL_LESSONS";
 export const GET_ALL_MODULES = "GET_ALL_MODULES";
 export const GET_LESSONS_BY_ID = "GET_LESSONS_BY_ID";
@@ -42,12 +43,11 @@ export const GET_PAYMENT_BY_ID = 'GET_PAYMENT_BY_ID';
 export const GET_PAYMENTS_BY_USER = 'GET_PAYMENTS_BY_USER';
 export const CLEAR_PAYMENT_MSG = 'CLEAR_PAYMENT_MSG';
 export const REQUEST_ERROR = 'REQUEST_ERROR';
-
 //*************Modulos************
 export function getAllModules() {
     return async function (dispatch) {
       try {
-        var json = await axios.get('https://pf-henry-g02-production.up.railway.app/modules');
+        var json = await axios.get(REACT_APP_SERVER_URL+'/modules');
         return dispatch({
           type: GET_ALL_MODULES,
           payload: json.data,
@@ -66,7 +66,7 @@ export function getAllModules() {
 export function getCohorts() {
     return async function (dispatch) {
       try {
-        const response = await axios.get('https://pf-henry-g02-production.up.railway.app/cohorts');
+        const response = await axios.get(REACT_APP_SERVER_URL+'/cohorts');
         return dispatch({
           type: GET_ALL_COHORTS,
           payload: response.data,
@@ -79,7 +79,7 @@ export function getCohorts() {
   export function postNewCohort(payload) {
     return async function () {
       var json = await axios.post(
-        `https://pf-henry-g02-production.up.railway.app/cohorts/create`,
+        REACT_APP_SERVER_URL+`/cohorts/create`,
         payload
       );
       return json;
@@ -89,7 +89,7 @@ export function getCohorts() {
 export function getAllLessons() {
     return async function (dispatch) {
       try {
-        var json = await axios.get('https://pf-henry-g02-production.up.railway.app/classes');
+        var json = await axios.get(REACT_APP_SERVER_URL+'/classes');
         return dispatch({
           type: GET_ALL_LESSONS,
           payload: json.data,
@@ -101,7 +101,7 @@ export function getAllLessons() {
   }
   export function getLessonsById(id) {
     return async function (dispatch) {
-      var json = await axios.get(`https://pf-henry-g02-production.up.railway.app/classes/byId/${id}`);
+      var json = await axios.get(REACT_APP_SERVER_URL+`/classes/byId/${id}`);
       return dispatch({
         type: GET_LESSONS_BY_ID,
         payload: json.data,
@@ -125,7 +125,7 @@ export const getClassesByName = name => {
       // Si no, llenamos el estado `errorMsg` con el error
       // Más adelante se definen las otras acciones llamadas acá
       axios
-        .get(`https://pf-henry-g02-production.up.railway.app/classes/byName?name=${name}`)
+        .get(REACT_APP_SERVER_URL+`/classes/byName?name=${name}`)
         .then(response => dispatch(getByNameSuccess(response.data)))
         .catch(error => dispatch(requestFailure(error.response.data)));
     };
@@ -157,7 +157,7 @@ export const getClassesByName = name => {
   export function postNewClass(payload) {
     return async function () {
       var json = await axios.post(
-        `https://pf-henry-g02-production.up.railway.app/classes/create`,
+        REACT_APP_SERVER_URL+`/classes/create`,
         payload
       );
       return json;
@@ -173,7 +173,7 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.post(
-          'https://pf-henry-g02-production.up.railway.app/videos/create',
+          REACT_APP_SERVER_URL+'/videos/create',
           payload
         );
         return dispatch({
@@ -188,7 +188,7 @@ export function createVideo(payload) {
   export function getAllVideos() {
     return async function (dispatch) {
       try {
-        const response = await axios.get('https://pf-henry-g02-production.up.railway.app/videos');
+        const response = await axios.get(REACT_APP_SERVER_URL+'/videos');
         console.log(response.data);
         return dispatch({
           type: GET_VIDEOS,
@@ -203,7 +203,7 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
-          `https://pf-henry-g02-production.up.railway.app/videos/byName?name=${name}`
+          REACT_APP_SERVER_URL+`/videos/byName?name=${name}`
         );
         return dispatch({
           type: GET_VIDEOS_BY_NAME,
@@ -217,7 +217,7 @@ export function createVideo(payload) {
   export function getVideosByTeacher(id) {
     return async function (dispatch) {
       try {
-        const response = await axios.get(`https://pf-henry-g02-production.up.railway.app/byTeacher/${id}`);
+        const response = await axios.get(REACT_APP_SERVER_URL+`/byTeacher/${id}`);
         return dispatch({
           type: GET_VIDEOS_BY_TEACHER,
           payload: response.data,
@@ -229,7 +229,7 @@ export function createVideo(payload) {
   }
   export function getVideosById(id) {
     return async function (dispatch) {
-      var json = await axios.get(`https://pf-henry-g02-production.up.railway.app/videos/byId/${id}`);
+      var json = await axios.get(REACT_APP_SERVER_URL+`/videos/byId/${id}`);
       console.log(json)
       return dispatch({
         type: GET_VIDEOS_BY_ID,
@@ -246,7 +246,7 @@ export function createVideo(payload) {
 export function getTeachers() {
     return async function (dispatch) {
       try {
-        const response = await axios.get('https://pf-henry-g02-production.up.railway.app/users/teachers');
+        const response = await axios.get(REACT_APP_SERVER_URL+'/users/teachers');
         console.log(response.data);
         return dispatch({
           type: GET_TEACHERS,
@@ -260,7 +260,7 @@ export function getTeachers() {
   export function getTodosUsuarios() {
     return async function (dispatch) {
       try {
-        var json = await axios.get("https://pf-henry-g02-production.up.railway.app/users");
+        var json = await axios.get(REACT_APP_SERVER_URL+"/users");
         return dispatch({
           type: GET_ALL_USERS,
           payload: json.data,
@@ -272,21 +272,21 @@ export function getTeachers() {
   }
   export function postNewUser(payload) {
     return async function () {
-      var json = await axios.post(`https://pf-henry-g02-production.up.railway.app/users/create`, payload);
+      var json = await axios.post(REACT_APP_SERVER_URL+`/users/create`, payload);
       return json;
     };
   }
 
   export function putUser(id,payload) {
       return async function () {
-        var json = await axios.put(`https://pf-henry-g02-production.up.railway.app/users/update/${id}`, payload);
+        var json = await axios.put(REACT_APP_SERVER_URL+`/users/update/${id}`, payload);
         return json;
       };
     }
 
   export function searchByEmail(email){
     return async function(dispatch){
-      var json = await axios.get(`https://pf-henry-g02-production.up.railway.app/users/byEmail?email=${email}`);
+      var json = await axios.get(REACT_APP_SERVER_URL+`/users/byEmail?email=${email}`);
       return dispatch({
         type: GET_BY_EMAIL,
         payload: json.data,
@@ -297,10 +297,10 @@ export function getTeachers() {
   export async function usersValidate(payload) {
     return async function (dispatch) {
       console.log(payload.email + " <-------------->Entre a la Action");
-      var json = await axios.post(`https://pf-henry-g02-production.up.railway.app/users/`, payload);
+      var json = await axios.post(REACT_APP_SERVER_URL+`/users/`, payload);
       localStorage.setItem("token", JSON.stringify(json.data));
       const data = await jwtDecode(json.data);
-		  window.location.reload('https://pf-henry-g02.vercel.app/');
+		  window.location.reload(REACT_APP_FRONT_URL+'/');
       console.log(data, "Esto es DATA")
       return dispatch({
         type: USER_VALIDATE,
@@ -312,7 +312,7 @@ export function getTeachers() {
 export function getAllStandUps() {
     return async function (dispatch) {
       try {
-        var json = await axios.get("https://pf-henry-g02-production.up.railway.app/standups");
+        var json = await axios.get(REACT_APP_SERVER_URL+"/standups");
         return dispatch({
           type: GET_ALL_STANDUPS,
           payload: json.data,
@@ -326,7 +326,7 @@ export function getAllStandUps() {
     return async function () {
         try {
         var json = await axios.post(
-          `https://pf-henry-g02-production.up.railway.app/standups/create`,
+          REACT_APP_SERVER_URL+`/standups/create`,
           payload
         );
         return json;
@@ -339,7 +339,7 @@ export function getAllStandUps() {
   export const postAttendance = attendance => {
     return () => {
       axios
-        .post('https://pf-henry-g02-production.up.railway.app/attendance/create', attendance)
+        .post(REACT_APP_SERVER_URL+'/attendance/create', attendance)
         .then(response => console.log(response.data))
         .catch(error => console.log(error));
     };
@@ -348,7 +348,7 @@ export function getAllStandUps() {
 export function getFavoritesById(id) {
   return async function (dispatch) {
   try {
-      var json = await axios.get(`https://pf-henry-g02-production.up.railway.app/favorites/${id}`);
+      var json = await axios.get(REACT_APP_SERVER_URL+`/favorites/${id}`);
       // console.log(json)
       return dispatch({
         type: GET_FAVORITE_BY_ID,
@@ -364,7 +364,7 @@ export function getFavoritesById(id) {
 export function addFavoritesById(userId, videoId) {
   return async function (dispatch) {
     try {
-    var json = await axios.post( `https://pf-henry-g02-production.up.railway.app/favorites/create/${userId}/${videoId}`);
+    var json = await axios.post( REACT_APP_SERVER_URL+`/favorites/create/${userId}/${videoId}`);
     // console.log(json.data)
     return dispatch({
       type: ADD_FAVORITE,
@@ -379,7 +379,7 @@ export function addFavoritesById(userId, videoId) {
 export function addReview (user, payload){
   return async (dispatch) => {
     try {
-    var response = await axios.post(`https://pf-henry-g02-production.up.railway.app/reviews/create/${user}`, payload)
+    var response = await axios.post(REACT_APP_SERVER_URL+`/reviews/create/${user}`, payload)
     return dispatch({
       type: ADD_REVIEW, 
       payload: response.data
@@ -393,7 +393,7 @@ export function addReview (user, payload){
 export function getReviews (taId){
   return async (dispatch) => {
     try {
-      var response = await axios.get(`https://pf-henry-g02-production.up.railway.app/reviews/?taId=${taId}`)
+      var response = await axios.get(REACT_APP_SERVER_URL+`/reviews/?taId=${taId}`)
       return dispatch({
         type: GET_REVIEWS, 
         payload: response.data
@@ -408,7 +408,7 @@ export function getReviews (taId){
   export function getReviewsByStudent (userId){
     return async (dispatch) => {
       try {
-        var response = await axios.get(`https://pf-henry-g02-production.up.railway.app/reviews/reviewByStudent?userId=${userId}`)
+        var response = await axios.get(REACT_APP_SERVER_URL+`/reviews/reviewByStudent?userId=${userId}`)
         return dispatch({
           type: REVIEWS_BY_STUDENT, 
           payload: response.data
@@ -433,12 +433,12 @@ export async function uploadImage(base64EncodedImage, userId){
       try {
         return async (dispatch) => {
 
-          const res = await axios.post('https://pf-henry-g02-production.up.railway.app/cloudinary/upload', { data: base64EncodedImage, id: userId })
+          const res = await axios.post(REACT_APP_SERVER_URL+'/cloudinary/upload', { data: base64EncodedImage, id: userId })
 
           console.log(res, "Esto es res23 156+4156+46+46+e5n el")
 
           localStorage.setItem("profileImage", res.data.url)
-          window.location.reload('https://pf-henry-g02.vercel.app/');
+          window.location.reload(REACT_APP_FRONT_URL+'/');
 
           return dispatch({
             type: UPLOAD_IMAGE,
@@ -454,7 +454,7 @@ export const sendPayment = (stripeId, amount, userId) => {
   return async dispatch => {
     dispatch(requesting());
     try {
-      const { data } = await axios.post('https://pf-henry-g02-production.up.railway.app/checkout', {
+      const { data } = await axios.post(REACT_APP_SERVER_URL+'/checkout', {
         stripeId,
         amount,
         userId,
@@ -492,7 +492,7 @@ export const getPayments = userId => {
     dispatch(requesting());
     try {
       const { data } = await axios.get(
-        `https://pf-henry-g02-production.up.railway.app/checkout/payments/${userId}`
+        REACT_APP_SERVER_URL+`/checkout/payments/${userId}`
       );
       return dispatch(getPaymentsSuccess(data));
     } catch (error) {
@@ -513,7 +513,7 @@ export const getPaymentById = paymentId => {
     dispatch(requesting());
     try {
       const { data } = await axios.get(
-        `https://pf-henry-g02-production.up.railway.app/checkout/${paymentId}`
+        REACT_APP_SERVER_URL+`/checkout/${paymentId}`
       );
       return dispatch(getPaymentByIdSuccess(data));
     } catch (error) {
