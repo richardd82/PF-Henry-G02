@@ -155,7 +155,7 @@ export default function Nav({ user }) {
                   </Link>
                 </div>
               ) : null}
-              <p className="avatar__name">{user.displayName || user.name}</p>
+              <p className="avatar__name separador">{user.displayName || user.name}</p>
               {/* {user.displayName} */}
               <img
                 className="avatar__image"

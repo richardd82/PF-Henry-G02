@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import avatar from "../../media/avatar.png";
 import github from "../../media/github.png";
 import sheet from "../../media/sheet.png";
-import "./Clases.css";
+import "./Details.css";
 import Nav from "../../components/Nav/Nav";
 import {
   clearStateVideos,
@@ -50,7 +50,7 @@ const Details = ({ user }) => {
           return (
             <>
               <section className="sectiom__title-modulo">
-                <h1>FOUNDATION</h1>
+                <h1>LECTURE</h1>
               </section>
               <section className="section__modulo-clases">
                 {myLesson && (
@@ -121,7 +121,7 @@ const Details = ({ user }) => {
           return (
             <>
               <section className="sectiom__title-modulo">
-                <h1>FOUNDATION</h1>
+                <h1>CODE-REVIEW</h1>
               </section>
               <section className="section__modulo-clases">
                 {myLesson && (
