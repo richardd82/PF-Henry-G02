@@ -49,23 +49,25 @@ students.map((e) => {
     }
   });
   return (
-    <>
-    <div className ="user_stats">
+    <div className ="u__Stats">
+    <div className ="studentStats user_stats ">
       <div><span>✔️</span> Estudiantes activos: {usersActive}</div>
       <div><span>❌</span> Estudiantes inactivos: {usersInactive}</div>
       <br/>
     </div>
-    <div className ="user_stats">
+    <div className ="user_stats teacherStats">
       <div><span>✔️</span> Profesores/as activos: {teachersActive}</div>
       <div><span>❌</span> Profesores/as inactivos: {teachersInactive}</div>
       <br/>
     </div>
-    <div className ="user_stats">
+    <div className ="user_stats adminStats">
       <div><span>✔️</span> Administradores/as activos: {adminActive}</div>
       <div><span>❌</span> Administradores/as inactivos: {adminInactive}</div>
       <br/>
     </div>
-    </>
+  
+    </div>
+    
   );
 };
 
