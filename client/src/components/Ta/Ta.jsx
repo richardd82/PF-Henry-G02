@@ -7,12 +7,14 @@ import DasboardStudent from '../Students/DashboardStudents/DasboardStudent.jsx';
 
 const Ta = ({ user }) => {
   return (
-    <div>
+    <div className="ta__container">
       <Nav user={user} />
-      <Link to={'/reviews/create'}>
-      <button>Agregar reviews</button>
-      </Link>
+      <div className="ta__attendance">
+      {/* <Link to={'/reviews/create'}> */}
+      {/* <button>Agregar reviews</button> */}
+      {/* </Link> */}
       <DasboardStudent user={user}/>
+      </div>
     </div>
   );
 };

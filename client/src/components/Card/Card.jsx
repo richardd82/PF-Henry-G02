@@ -1,8 +1,10 @@
 import React from 'react';
 import resultados from '../../assets/resultados.jpeg';
+import FavouriteButton from '../FavouriteComponents/favouriteButton';
 import './Card.css';
 
-const Card = ({ id, title, instructor, description }) => {
+
+const Card = ({ id, title, instructor, description, user, video }) => {
 
   return (
     <div key={id} className="card">
@@ -13,7 +15,10 @@ const Card = ({ id, title, instructor, description }) => {
         <span className={"tag tagTeal"}>{title}</span>
         {/* <p>{description} hola que tal como estas</p> */}
         <div className="userInfo">
-          <h6>{instructor} Martina Scomazzon</h6>
+          <h6>{instructor}</h6>
+        </div>
+        <div className= "c__favorito" z-index="10000">
+        <FavouriteButton userId={user.id} videoId={video.id}/>
         </div>
       </div>
     </div>
