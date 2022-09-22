@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  getAllLessons, getAllModules, getTodosUsuarios} from "../../redux/actions";
-
+import '../../pages/UserProfile/UserProfile.css'
 
 
 export default function ControlAsistencia ({user}){
@@ -72,13 +72,13 @@ export default function ControlAsistencia ({user}){
     const asistenciaModulo = classesMaped.map(e => attendanceMaped.filter(a=>a.classId === e.id))
     const contador = asistenciaModulo.filter(e => e.length > 0)
     
-console.log(typeof asistenciaStudent.asistencias);
+
     return(
         <>
-        <button onClick={()=>displayAttendance()}>Ver Asistencias</button>
+        <button className="user-button" onClick={()=>displayAttendance()}>Ver Asistencias</button>
         {
             asistenciaStudent.asistencias && showAttendance === true ? (
-                <div >
+                <div className="user-asistencia">
                     <p>{`${asistenciaStudent.asistencias} / ${asistenciaStudent.total}`}</p>
                 </div>
 

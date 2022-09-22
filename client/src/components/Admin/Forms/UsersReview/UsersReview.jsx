@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-
+import './Formularios.css'
 
 
 
@@ -22,7 +22,7 @@ const VerReviews =() =>{
 
     return(
         <>
-        <select className="select" onChange={handleSelect}>
+        <select className="select-forms" onChange={handleSelect}>
               <option> Select cohort</option>
               {cohortsExistentes?.map((e) => {
                 return (

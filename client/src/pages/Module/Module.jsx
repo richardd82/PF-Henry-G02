@@ -52,7 +52,7 @@ const lecture = videos.filter(v=> v.type === 'lecture')
   return (
     <>
       <Nav user={user} />
-      <div className="moduleContainer">
+      <div className="moduleContainer c__cards">
         {modules &&
           modules.map((module, index) => {
             if (window.location.pathname === `/module/${module.id}`) {

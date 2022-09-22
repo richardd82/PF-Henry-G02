@@ -6,7 +6,7 @@ import {
   getTodosUsuarios,
 } from "../../redux/actions";
 // import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import "./AddReview.css";
+import style from "./AddReview.module.css";
 // import { FaCheck } from "react-icons/fa";
 // import { TiDelete } from "react-icons/ti";
 // import { useState } from "react";
@@ -16,7 +16,8 @@ import "./AddReview.css";
 import { Link } from "react-router-dom";
 import Nav from "../Nav/Nav";
 
-export default function AddReview({user}) {
+
+export default function AddReview({ user }) {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.users);
 
@@ -44,13 +45,24 @@ export default function AddReview({user}) {
         users.map((e) => {
           if (e.standupId === taSup && e.category === "student")
             return (
-              <Link to={`/reviews/create/${e.id}`}>
-                <p>
-                  {e.name} {e.lastname}
-                </p>
-              </Link>
+              <>
+                <table className="tg">
+                  <thead>
+                    <tr>
+                    <Link to={`/reviews/create/${e.id}`}>
+                      <p>
+                        <td className={style.lastnameReviews}>{e.name} {e.lastname} </td>
+                      </p>
+                    </Link>
+                    </tr>
+                  </thead>
+                </table >
+              </>
             );
         })}
     </div>
   );
 }
+
+
+

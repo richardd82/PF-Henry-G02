@@ -39,6 +39,7 @@ import StudentPayments from "./components/StudentPayments/StudentPayments.jsx";
 import Checkout from "./components/Checkout/Checkout.jsx";
 import Payments from "./components/Payments/Payments.jsx";
 import PaymentDetails from "./components/PaymentDetails/PaymentDetails.jsx";
+
 import { loadStripe } from '@stripe/stripe-js';
 const { REACT_APP_STRIPE_KEY } = process.env;
 const stripePromise = loadStripe(REACT_APP_STRIPE_KEY);
@@ -141,6 +142,8 @@ console.log(REACT_APP_STRIPE_KEY)
         <Route path="/favourite" element={user.name || user.emails ? <AllFavourite user={user} />:<Navigate to="/login" />}/>
         <Route path="/reviews/create" element={user.name || user.emails ? <AddReviews   user={user} />:<Navigate to="/login" />}/>
         <Route path="/reviews/create/:id" element={user.name || user.emails ? <UserReview  user={user} />:<Navigate to="/login" />}/>
+        <Route path="/usuario" element={user.name || user.emails ? <UserProfile  user={user} />:<Navigate to="/login" />}/>
+
 
     
         {/* Ruta de pasarela de pagos */}

@@ -10,6 +10,7 @@ const Admin = ({user}) => {
     <div >
      <Nav user={user} /> 
       <UserAdmin /> 
+      
       {/* <Link to="/reviews">
           <p>Ver reviews</p>
       </Link> */}

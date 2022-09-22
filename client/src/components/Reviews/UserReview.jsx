@@ -3,13 +3,13 @@ import React, { useEffect } from "react";
 import AddReview from "./AddReviews";
 
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import "./AddReview.css";
+import style from "./AddReview.module.css";
 import { FaCheck } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
 import { useState } from "react";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
-// import StarIcon from "@mui/icons-material/Star";
+import StarIcon from "@mui/icons-material/Star";
 import {
 	addReview,
 	clearStateReviews,
@@ -20,35 +20,35 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Nav from "../Nav/Nav";
 
-export default function UserReview({user}) {
+export default function UserReview({ user }) {
 
-/* 	const user = {
-		name: "Romi Jimenez",
-		id: "105104a9-9e18-4934-b950-18de117aa014",
-		standupId: "6c5dc9cc-460c-408c-8cb8-cfa94af873ec",
-		lastname: "Jimenez",
-		email: "romijimenez06@gmail.comimage",
-		category: "ta",
-		active: true,
-	};
- */
+	/* 	const user = {
+			name: "Romi Jimenez",
+			id: "105104a9-9e18-4934-b950-18de117aa014",
+			standupId: "6c5dc9cc-460c-408c-8cb8-cfa94af873ec",
+			lastname: "Jimenez",
+			email: "romijimenez06@gmail.comimage",
+			category: "ta",
+			active: true,
+		};
+	 */
 
 	const { id } = useParams();
 
 	const users = useSelector((state) => state.users.users);
-	const reviews = useSelector(state=> state.reviews.reviews)
+	const reviews = useSelector(state => state.reviews.reviews)
 
 	const dispatch = useDispatch();
 
 
 	let ta = ''
 	if (user.category) {
-		ta = users.filter((e) => e.name === user.name );
-   }else{
-	 ta = users.filter((e) => e.name === user._json.name );
-	 }
-const idTa = ta.map(e=> e.id).toString()
-const nameTa = ta.map(e=> e.name).toString()
+		ta = users.filter((e) => e.name === user.name);
+	} else {
+		ta = users.filter((e) => e.name === user._json.name);
+	}
+	const idTa = ta.map(e => e.id).toString()
+	const nameTa = ta.map(e => e.name).toString()
 
 
 
@@ -78,16 +78,16 @@ const nameTa = ta.map(e=> e.name).toString()
 		userId: id
 	});
 
-	
+
 	const [hover, setHover] = useState(-1);
-	
+
 
 	function handleChange(e) {
 		setValue({
 			...value,
 			[e.target.name]: e.target.value,
 		});
-		
+
 	}
 
 	function handleSelect(e) {
@@ -99,7 +99,7 @@ const nameTa = ta.map(e=> e.name).toString()
 
 	const reviewsExistente = reviews.find(e => e.userId === value.userId)
 	function handleSubmit(e) {
-		if(reviewsExistente){
+		if (reviewsExistente) {
 			setValue({
 				rating: 0,
 				comments: "",
@@ -108,15 +108,15 @@ const nameTa = ta.map(e=> e.name).toString()
 			});
 			return alert('El usuario ya tiene su review')
 		}
-		
-			dispatch(addReview(id, value));
-			setValue({
-				rating: 0,
-				comments: "",
-				taId: "",
-				userId: id
-			});
-			alert('La review se ha creado correctamente')
+
+		dispatch(addReview(id, value));
+		setValue({
+			rating: 0,
+			comments: "",
+			taId: "",
+			userId: id
+		});
+		alert('La review se ha creado correctamente')
 	}
 
 	return (
@@ -136,8 +136,33 @@ const nameTa = ta.map(e=> e.name).toString()
 									);
 							})}
 					</select> */}
-				
-					<Box
+					<div className={style.estrellas-reviews}>
+						<Box
+/* 							sx={{
+								width: 200,
+								display: 'flex',
+								alignItems: 'center',
+							}} */
+						>
+							<Rating
+								name="hover-feedback"
+								value={value}
+								precision={1}
+								getLabelText={getLabelText}
+								onChange={(event, newValue) => {
+									setValue(newValue);
+								}}
+								onChangeActive={(event, newHover) => {
+									setHover(newHover);
+								}}
+								size= 'large'
+								emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+							/>
+{/* 							{value !== null && (
+								<Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+							)} */}
+						</Box>
+						{/* 					<Box
 						sx={{
 							width: 200,
 							display: "flex",
@@ -153,43 +178,51 @@ const nameTa = ta.map(e=> e.name).toString()
 							onChangeActive={(event, newHover) => {
 								setHover(newHover);
 							}}
-							// emptyIcon={
-							// 	<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-							// }
+							 emptyIcon={
+							 	<StarIcon style={{ opacity: 0.55 }} fontSize='15px' />
+							 }
 						/>
 						{value !== null && (
-							<Box sx={{ ml: 2 }}>
+							<Box sx={{ ml: 5 }}>
 								{labels[hover !== -1 ? hover : value.rating]}
 							</Box>
 						)}
-					</Box>
+					</Box> */}
+					</div>
 
-					<textarea
-						name={"comments"}
-						value={value.comments}
-						onChange={handleChange}
-						wrap="hard"
-						required
-						placeholder={"Deje un comentario sobre el estudiante"}
-						style={{
-							border: "1px solid black",
-							width: "400px",
-							height: "200px",
-							resize: "none",
-						}}
-					></textarea>
-					<button
-						style={{ display: "flex", color: "green" }}
-						type="submit"
-						disabled={value == "0" ? true : false}
-					>
-						<FaCheck />
-					</button>
-					<button style={{ display: "flex", color: "red" }} type="submit">
-						<TiDelete />
-					</button>
+
+					<div className={style.comments-reviews}>
+						<textarea
+							name={"comments"}
+							value={value.comments}
+							onChange={handleChange}
+							wrap="hard"
+							required
+							placeholder={"Deje un comentario sobre el estudiante"}
+							style={{
+								border: "1px solid black",
+								width: "400px",
+								height: "200px",
+								resize: "none",
+							}}
+						></textarea>
+					</div>
+					<div className={style.buttons-reviews}>
+						<button
+							style={{ display: "flex", color: "green" }}
+							type="submit"
+							disabled={value == "0" ? true : false}
+						>
+							<FaCheck />
+						</button>
+
+						<button style={{ display: "flex", color: "red" }} type="submit">
+							<TiDelete />
+						</button>
+					</div>
 				</form>
 			</div>
 		</div>
 	);
 }
+

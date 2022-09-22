@@ -49,12 +49,12 @@ const FormNewCohort = ({ user }) => {
   return (
     <>
       <Nav user={user} />
-      <div className="parent">
-        <div className="container">
-          <h1 className="title">Create new cohort </h1>
+      <div className="parent-forms">
+        <div className="container-forms">
+          <h1 className="title-forms">Create new cohort </h1>
           <br></br>
           <form
-          className="form"
+          className="form-forms"
             autoComplete="off"
             onSubmit={(e) => {
               handleSubmit(e);
@@ -64,7 +64,7 @@ const FormNewCohort = ({ user }) => {
               <b>*</b>Cohort name:
             </label>
             <input
-            className="inputCreate"
+            className="inputCreate-forms"
               placeholder="Title"
               type="text"
               value={input.name}
@@ -76,7 +76,7 @@ const FormNewCohort = ({ user }) => {
             ></input>
 
             {/* {errors.name && <h1>{errors.name}</h1>} */}
-            <button className="submitButton" type="submit"> Create</button>
+            <button className="submitButton-forms" type="submit"> Create</button>
           </form>
         </div>
       </div>

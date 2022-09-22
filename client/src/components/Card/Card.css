@@ -58,6 +58,7 @@
   position: absolute;
   top: 115px;
   left: 175px;
+  z-index: 100;
 }
 
 .c__favorito svg{
