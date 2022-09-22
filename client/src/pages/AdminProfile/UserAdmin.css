@@ -8,6 +8,9 @@
 
 .u__Stats{
 width: 100%;
+align-self: flex-start;
+display: flex;
+flex-direction: row-reverse;
 }
 
 .u__admim__container{
