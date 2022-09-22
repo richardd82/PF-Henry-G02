@@ -5,7 +5,6 @@ import {
   postAttendance,
   getAttendances,
 } from '../../redux/actions/attendanceActions.js';
-
 const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
   const dispatch = useDispatch();
   const [attendance, setAttendance] = useState({
@@ -14,7 +13,6 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
     classId: lecture,
     students: [],
   });
-
    useEffect(() => {
     if(attendance.standupId &&  attendance.cohortId && attendance.classId){
     dispatch(
@@ -29,10 +27,8 @@ const StudentList = ({ currentStudents, lecture, cohort, standup }) => {
         students: [],
       });
     };  */
-  }, [dispatch, standup, cohort, lecture]); 
-
+  }, [dispatch, standup, cohort, lecture]);
   const attendances = useSelector(state => state.attendance.attendances);
-
   const handleSelect = e => {
     const { name, id, checked } = e.target;
     setAttendance(prev => {
@@ -64,13 +60,12 @@ console.log(attendance.students);
        students: [],
      });
   };
-
   return (
     <div>
       <h1>Estudiantes</h1>
       <form className="form" onSubmit={e => handleSubmit(e)}>
           {currentStudents &&
-          currentStudents.map(student => { 
+          currentStudents.map(student => {
             return (
               <div key={student.id}>
              <label>{student.name}</label>
@@ -85,13 +80,12 @@ console.log(attendance.students);
            </div> )
            /*  if(attendances.map(el => el.cohortId === student.cohortId)){
              return (
-    
               attendances.map(dbAttendance => {
                 if (
-                  dbAttendance 
+                  dbAttendance
                    student.id === dbAttendance.usersId &&
                   dbAttendance.cohortId === attendance.cohortId &&
-                  dbAttendance.classId === attendance.classId 
+                  dbAttendance.classId === attendance.classId
                 ) {
                   return (
                        <div key={student.id}>
@@ -104,9 +98,9 @@ console.log(attendance.students);
                         type="checkbox"
                         onChange={e => handleSelect(e)}
                       />
-                    </div> 
+                    </div>
                   );
-                } else { 
+                } else {
                   return (
                     <div key={student.id}>
                       <label>{student.name}</label>
@@ -122,11 +116,11 @@ console.log(attendance.students);
                 }
                })
               );
-            } 
+            }
            return (
             <div>no renderizo nada</div>
            ) */
-          })}   
+          })}
 {/*             {currentStudents &&
           currentStudents.map(student => {
             return (
@@ -149,5 +143,4 @@ console.log(attendance.students);
     </div>
   );
 };
-
 export default StudentList;

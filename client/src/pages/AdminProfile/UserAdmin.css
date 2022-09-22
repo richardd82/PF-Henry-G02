@@ -1,0 +1,48 @@
+
+.u__container{
+    display: flex;
+    width: 100vw;
+    min-height: 100vh;
+    flex-direction: row;
+}
+
+.u__Stats{
+width: 100%;
+}
+
+.u__admim__container{
+    width: 270px;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    padding: 20px;
+}
+
+.u__admim__container h3{
+    color: #FFFF00;
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #FFFF00;
+}
+
+.u__admim__container a{
+    margin-top: 5px;
+    text-decoration: none;
+    display: block;
+    transition: all .5s;
+    height: 3.5rem;
+}
+
+.u__admim__container a:hover{
+    color:#FFFF00 ;
+}
+
+.u__admim__container button{
+    cursor: pointer;
+}
+
+.u__Stats{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

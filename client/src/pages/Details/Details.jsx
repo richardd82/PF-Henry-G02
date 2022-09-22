@@ -133,8 +133,8 @@ const Details = ({ user }) => {
                     ></ReactPlayer>
                   </div>
                 )}
-                <article>
-                  <div>
+                <article className="d_class_detail">
+                  <div className= "d_icons">
                     <img src={github} alt="" />
                     <img src={sheet} alt="" />
                   </div>

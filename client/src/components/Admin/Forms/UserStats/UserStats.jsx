@@ -4,7 +4,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTodosUsuarios } from "../../../../redux/actions";
 import { FcCheckmark} from 'react-icons/fc';
-import style from './UserStats.module.css'
+// import style from './UserStats.module.css'
+import './UserStats.css';
+
 
 const UsersStats = () => {
   const allUsers = useSelector((state) => state.users.allUsers);
@@ -48,21 +50,21 @@ students.map((e) => {
   });
   return (
     <>
-    <div>
+    <div className ="user_stats">
       <div><span>✔️</span> Estudiantes activos: {usersActive}</div>
       <div><span>❌</span> Estudiantes inactivos: {usersInactive}</div>
       <br/>
-      </div>
-      <div>
+    </div>
+    <div className ="user_stats">
       <div><span>✔️</span> Profesores/as activos: {teachersActive}</div>
       <div><span>❌</span> Profesores/as inactivos: {teachersInactive}</div>
       <br/>
-      </div>
-      <div>
+    </div>
+    <div className ="user_stats">
       <div><span>✔️</span> Administradores/as activos: {adminActive}</div>
       <div><span>❌</span> Administradores/as inactivos: {adminInactive}</div>
       <br/>
-      </div>
+    </div>
     </>
   );
 };
