@@ -16,8 +16,8 @@ passport.use(
 		{
 			clientID: GOOGLE_CLIENT_ID,
 			clientSecret: GOOGLE_CLIENT_SECRET,
-			scope: ["profile, email"],
 			callbackURL: API_URL+"/auth/google/callback",
+			scope: ["profile, email"],
 		},
 		function (accessToken, refreshToken, profile, done) {
 			// console.log("entre a google", accessToken);
@@ -31,8 +31,8 @@ passport.use(
 		{
 			clientID: GITHUB_CLIENT_ID,
 			clientSecret: GITHUB_CLIENT_SECRET,
-			scope: ["user, email"],
 			callbackURL: API_URL+"/auth/github/callback",
+			scope: ["user, email"],
 
 		},
 		function (accessToken, refreshToken, profile, done) {
