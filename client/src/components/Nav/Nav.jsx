@@ -15,7 +15,7 @@ import logo_thumb from '../../assets/media/images.png';
 import alumno from '../../assets/media/avatar.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTodosUsuarios } from '../../redux/actions';
-
+const {REACT_APP_SERVER_URL, REACT_APP_FRONT_URL } = process.env;
 
 export default function Nav({ user }) {
 
@@ -67,16 +67,16 @@ export default function Nav({ user }) {
 		if (user.category) {
 			localStorage.clear();
 			dispatch(logout());
-			window.location.reload("http://localhost:3000/login");
+			window.location.reload("/login");
 		} else if (user.emails) {
-			window.open("http://localhost:3001/auth/logout", "_self");
+			window.open(REACT_APP_SERVER_URL+"/auth/logout", "_self");
 		}
 	};
 	const redirect = () => {
-		window.location.reload("http://localhost:3000/login");
+		window.location.reload(REACT_APP_FRONT_URL+"/login");
 	};
 	const logout = () => {
-		window.open("http://localhost:3001/auth/logout", "_self");
+		window.open(REACT_APP_SERVER_URL+"/auth/logout", "_self");
 	};
 
 	let category = "";

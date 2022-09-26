@@ -3,27 +3,26 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
-// import ControlAsistencia from "../../components/Students/ControlAsistencia";
-//import ControlAsistencia from "../../components/Students/ControlAsistencia";
-import { /* getAllAttendances, */ getTodosUsuarios } from "../../redux/actions";
-import './UserProfile.css'
+
+import { getTodosUsuarios } from "../../redux/actions";
+const {REACT_APP_SERVER_URL, REACT_APP_FRONT_URL } = process.env;
 
 export default function UserProfile({ user }) {
-  const dispatch = useDispatch()
-  const handleLogout = () => {
-    if (user.category) {
-      localStorage.clear();
-      dispatch(logout());
-      window.location.reload("http://localhost:3000/login");
-    } else if (user.emails) {
-      window.open("http://localhost:3001/auth/logout", "_self");
-    }
-  };
-  const logout = () => {
-    window.open("http://localhost:3001/auth/logout", "_self");
-  };
-  let userValidate = ""
-  let userImage = ""
+    const dispatch = useDispatch()
+    const handleLogout = () => {
+        if (user.category) {
+            localStorage.clear();
+            dispatch(logout());
+            window.location.reload(REACT_APP_FRONT_URL+"/login");
+        } else if (user.emails) {
+            window.open(REACT_APP_SERVER_URL+"/auth/logout", "_self");
+        }
+    };
+    const logout = () => {
+        window.open(REACT_APP_SERVER_URL+"/auth/logout", "_self");
+    };
+let userValidate = ""
+let userImage = ""
 
   const users = useSelector((state) => state.users.allUsers);
   const saveImage = useSelector((state) => state.cloudinaryImage.image);
