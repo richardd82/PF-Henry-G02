@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 // Components
 import Pager from "../../components/Pager/Pager.jsx";
 import Videos from "../../components/Videos/Videos.jsx";
@@ -12,16 +11,21 @@ import SearchBar from "../../components/SearchBar/SearchBar.jsx";
 import { getAllVideos } from "../../redux/actions/index";
 import { getTodosUsuarios } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
-import FavouriteButton from "../../components/FavouriteComponents/favouriteButton.jsx";
-
+// import FavouriteButton from "../../components/FavouriteComponents/favouriteButton.jsx";
+// import SearchBar from "../../components/SearchBar/SearchBar.jsx";
 import "./Catalog.css";
-
 const Catalog = ({ user }) => {
   const dispatch = useDispatch();
   const videos = useSelector((state) => state.videos.videos);
   const users = useSelector((state) => state.users.allUsers);
-  const userValidate = users.find((e) => e.name === user.displayName);
-  const loginUserId = userValidate && userValidate.id;
+  //const userValidate = users.find((e) => e.name === user.displayName);
+  let userValidate = ''
+if (!user.category) {
+    userValidate= users.filter((e) => e.name === user._json.name );
+  }else{
+    userValidate = users.filter((e) => e.name === user.name );
+    }
+  const loginUserId = userValidate[0]
   const videosMapped = videos.map((e) => e.userId)
   const usersMapped = users.map((e) => e.id)
   const teacher = users.filter(e=> e.category === 'teacher')
@@ -30,7 +34,6 @@ const Catalog = ({ user }) => {
   const userCohort = teacher.map(e => e.cohortId)
  /*  const filtered = userCohort.find(r=> r === video.cohortId)
   const instructor = teacher.filter(e => e.cohortId === filtered) */
-  
   useEffect(() => {
     // if (!videos.classes.length && videos.loading === false) {
     dispatch(getAllVideos());
@@ -39,20 +42,16 @@ const Catalog = ({ user }) => {
       dispatch(getTodosUsuarios());
     }
   }, [dispatch]);
-
   // Pagination handler
   const [currentPage, setCurrentPage] = useState(1);
   const handlePage = (number) => {
     setCurrentPage(number);
   };
-
   const videosPerPage = 8,
     indexOfLastVideo = currentPage * videosPerPage,
     indexOfFirstVideo = indexOfLastVideo - videosPerPage,
     currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
-  const instructor = videos.filter((e) => e.userId === usersMapped);
-  console.log(instructor);
-
+  const instructor = userCohort.map(e=> e).filter(r=> r === videos.cohortId);
   return (
     <div className="c__cards-container">
         <div>
@@ -82,14 +81,25 @@ const Catalog = ({ user }) => {
                           <Card
                             id={video.id}
                             title={video.name}
-                            instructor={instructor}
+                            user = {loginUserId}
+                            video = {video}
+                            instructor= {users.map((x) => {
+                              if (x.id === video.userId) {
+                                return (
+                                <>
+                                  <p>
+                                    {x.name} {x.lastname}
+                                  </p>
+                                  </>
+                                );
+                              }
+                            })}
+                            // instructor={instructor}
                             description={video.description}
                           />
-                          <div className= "c__favorito">
-                          <FavouriteButton userId={user} videoId={video.id}/>
-                          </div>
                         </Link>
-                        {/* <FavouriteButton userId={user} videoId={video.id} /> */}
+                        <div className="c__button">
+                        </div>
                       </>
                     );
                   })}
@@ -101,11 +111,34 @@ const Catalog = ({ user }) => {
               totalItems={videos.length}
             />
           </div>
-          {/* )} */}
         </div>
         <div className="c__cards-search"><SearchBar/></div>
     </div>
   );
 };
-
 export default Catalog;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

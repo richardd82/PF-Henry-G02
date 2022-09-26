@@ -7,13 +7,13 @@ import { FormsCreate } from './Forms/FormsCreate/FormsCreate'
 const Admin = ({user}) => {
   
   return (
-    <div>
-    
+    <div >
      <Nav user={user} /> 
       <UserAdmin /> 
-      <Link to="/reviews">
+      
+      {/* <Link to="/reviews">
           <p>Ver reviews</p>
-      </Link>
+      </Link> */}
     </div>
   )
 }

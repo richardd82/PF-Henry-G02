@@ -35,7 +35,8 @@ export const REVIEWS_BY_STUDENT = "REVIEWS_BY_STUDENT";
 export const CLEAR_STATE_REVIEWS = "CLEAR_STATE_REVIEWS";
 export const USER_VALIDATE = "USER_VALIDATE";
 export const LOGOUT = "LOGOUT";
-export const UPLOAD_IMAGE = "UPLOAD_IMAGE"
+export const UPLOAD_IMAGE = "UPLOAD_IMAGE";
+export const GET_ALL_ATTENDANCES = 'GET_ALL_ATTENDANCES';
 // payments
 export const REQUESTING = 'REQUESTING';
 export const SEND_PAYMENT = 'SEND_PAYMENT';
@@ -203,12 +204,20 @@ export function createVideo(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.get(
+
           REACT_APP_SERVER_URL+`/videos/byName?name=${name}`
         );
+        if (!response.data.length) {
+          swal("Error: no se encontró el video.", {
+            icon: "error",
+            buttons: "Cerrar",
+          }); 
+          } else {
         return dispatch({
           type: GET_VIDEOS_BY_NAME,
           payload: response.data,
         });
+      }
       } catch (error) {
         console.log(error);
       }
@@ -534,3 +543,20 @@ export const clearPaymentMsg = () => {
     type: CLEAR_PAYMENT_MSG,
   };
 };
+
+
+//**************Attendance***************
+/* export const getAllAttendances = () => {
+  return dispatch => {
+    axios.get(`http://localhost:3001/attendance/get`)
+    .then(response => { 
+        dispatch(() => {
+          return {
+            type: GET_ALL_ATTENDANCES,
+            payload: response.data,
+          };
+        });
+      })
+  .catch(error=>console.log(error))}
+  }; */
+

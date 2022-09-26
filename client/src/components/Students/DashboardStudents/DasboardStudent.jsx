@@ -6,12 +6,13 @@ import {
   getAllLessons,
   getAllModules,
 } from "../../../redux/actions/index";
-import SearchBar from "../../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import img from "./slack_logo_icon.png";
 import imgSlides from "./slide.png";
 import swal from "sweetalert";
 import slides from "../DashboardStudents/Slides_Henry.pdf";
+import logoGrande from '../../../assets/media/logohenry2.png';
+import './dashboard.css'
 
 const DasboardStudent = ({user}) => {
   const modules = useSelector((state) => state.modules.modules);
@@ -73,11 +74,11 @@ const DasboardStudent = ({user}) => {
       <nav className="nav__links">
         <ul>
           {modules
-            .sort((a, b) => {
+/*             .sort((a, b) => {
               const aDate = new Date(a.createdAt);
               const bDate = new Date(b.createdAt);
               return aDate - bDate;
-            })
+            }) */
             .map((obj, index) => {
               return (
                 <li key={index}>
@@ -95,11 +96,8 @@ const DasboardStudent = ({user}) => {
             })}
           <img className="nav__rocket" src={rocket} alt="" />
         </ul>
-
+            
         {/* </ul> */}
-        <div>
-          <SearchBar />
-        </div>
         {/* las asistencias seran mostradas x/total */}
 
         {/* <div className="search">
@@ -107,6 +105,9 @@ const DasboardStudent = ({user}) => {
 <Link to="/" className="link-Search"><img className="icon-Search" src={lupa} alt=""/></Link>
 </div> */}
       </nav>
+      <div className="logo">
+      <img src={logoGrande} />
+      </div>
       {/* <div>
         <button onClick={sweetSlides}>
           SLIDES

@@ -39,6 +39,7 @@ import {
   SEND_PAYMENT,
   CLEAR_PAYMENT_MSG,
   REQUEST_ERROR,
+  GET_ALL_ATTENDANCES
 } from "../actions/index";
 
 const initialState = {
@@ -86,6 +87,9 @@ const initialState = {
   paymentMsg: '',
   requesting: false,
 
+  //Attendance
+  allAttendance: []
+
   ///////////////////////////////
 };
 export function modules(state = initialState, action) {
@@ -96,10 +100,10 @@ export function modules(state = initialState, action) {
         modules: action.payload,
         allModules: action.payload,
       };
-    case CLEAR_STATE_MODULES:
+     case CLEAR_STATE_MODULES:
       return {
         ...initialState,
-      };
+      }; 
     default:
       return state;
   }
@@ -368,6 +372,17 @@ export function payments(state = initialState, action) {
       return {
         ...state,
       };
+  }
+}
+export function allAttendance(state = initialState, action) {
+  switch (action.type) {
+    case GET_ALL_ATTENDANCES: 
+    return {
+      ...state,
+      allAttendance: action.payload
+    };
+    default:
+      return state;
   }
 }
 

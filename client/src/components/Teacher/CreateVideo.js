@@ -108,15 +108,15 @@ const CreateVideo = ({ user }) => {
   return (
     <>
       <Nav user={user} />
-      <div className="parent">
-        <div className="container">
-          <h1 className="title">Creación de Videos</h1>
+      <div className="parent-forms">
+        <div className="container-forms">
+          <h1 className="title-forms">Creación de Videos</h1>
           <br></br>
           {/*           {warnings.errorMsg ? <p>{warnings.errorMsg}</p> : null} */}
-          <form className="form" onSubmit={(e) => handleSubmit(e)}>
+          <form className="form-forms" onSubmit={(e) => handleSubmit(e)}>
             <div>
               <select
-                className="select"
+                className="select-forms"
                 name="classId"
                 onChange={handleChangeClasses}
               >
@@ -137,7 +137,7 @@ const CreateVideo = ({ user }) => {
               <label>Nombre</label>
               <input
                 required
-                className="inputCreate"
+                className="inputCreate-forms"
                 type="text"
                 name="name"
                 value={input.name}
@@ -150,7 +150,7 @@ const CreateVideo = ({ user }) => {
             <div>
               <label>Link al vídeo</label>
               <input
-                className="inputCreate"
+                className="inputCreate-forms"
                 required
                 type="text"
                 name="link"
@@ -162,7 +162,7 @@ const CreateVideo = ({ user }) => {
             </div>
             <div>
               <select
-                className="select"
+                className="select-forms"
                 name="type"
                 onChange={(e) => handleSelect(e)}
               >
@@ -193,7 +193,7 @@ const CreateVideo = ({ user }) => {
             </div> */}
 
             <div>
-              <button className="submitButton" type="submit" value="">
+              <button className="submitButton-forms" type="submit" value="">
                 SUBIR VIDEO
               </button>
             </div>

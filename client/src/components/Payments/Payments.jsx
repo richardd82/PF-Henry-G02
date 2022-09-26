@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Nav from '../Nav/Nav';
+import '../StudentPayments/StudentPayments.css';
 // actions
 import {
   getPaymentById,
@@ -26,50 +27,58 @@ const Payments = ({ user }) => {
   const handleClick = paymentId => {
     dispatch(getPaymentById(paymentId));
   };
-
+  console.log(payments);
   return (
     <>
       <Nav user={user} />
-      <h1>Estado de cuenta</h1>
-      {currentUser && payments.length > 0 ? (
-        <div>
-          <h3>Bienvenido, {currentUser.name}</h3>
-          <table cellSpacing="0">
-            <thead>
-              <tr>
-                <th>TOTAL</th>
-                <th>FECHA</th>
-                <th>DETALLE</th>
-              </tr>
-            </thead>
-            <tbody>
-              {payments &&
-                payments.map((payment, idx) => (
-                  <tr key={idx}>
-                    <td>{payment.amount}</td>
-                    <td>{payment.date}</td>
-                    <td>
-                      <Link
-                        onClick={() => handleClick(payment.id)}
-                        to={`/students/gateway/payments/${payment.id}`}
-                      >
-                        Ir a detalle
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-          <Link to="/students/gateway">Pasarela</Link>
-        </div>
-      ) : payments.length < 1 ? (
-        <div>
-          <h2>Aun no tienes transacciones realizadas</h2>
-          <Link to="/students/gateway">Pasarela</Link>
-        </div>
-      ) : (
-        <h1>Loading</h1>
-      )}
+      <div className="vuvu__container">
+        {currentUser && payments.length > 0 ? (
+          <div className="vuvu__paymentscont">
+            <h1>Estado de cuenta</h1>
+            <h3>Bienvenido, {currentUser.name}</h3>
+            <table cellSpacing="0">
+              <thead>
+                <tr>
+                  <th>TOTAL</th>
+                  <th>FECHA</th>
+                  <th>DETALLE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {payments &&
+                  payments.map((payment, idx) => (
+                    <tr key={idx}>
+                      <td>{payment.amount}</td>
+                      <td>{payment.date}</td>
+                      <td>
+                        <div className="vuvu__button">
+                          <Link
+                            onClick={() => handleClick(payment.id)}
+                            to={`/students/gateway/payments/${payment.id}`}
+                          >
+                            Ir a detalle
+                          </Link>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+            <div className="vuvu__button">
+              <Link to="/students/gateway">Pasarela</Link>
+            </div>
+          </div>
+        ) : payments.length < 1 ? (
+          <div className="vuvu__paycont">
+            <h2>Aun no tienes transacciones realizadas</h2>
+            <div className="vuvu__button">
+              <Link to="/students/gateway">Pasarela</Link>
+            </div>
+          </div>
+        ) : (
+          <h1>Loading</h1>
+        )}
+      </div>
     </>
   );
 };

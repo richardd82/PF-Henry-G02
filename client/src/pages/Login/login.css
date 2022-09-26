@@ -158,18 +158,30 @@ a {
   transform: translateY(-50%);
   left: 15px;
   pointer-events: none;
-  color: grey;
+  color: gray;
   font-size: 1rem;
   transition: 0.4s;
 }
-
-input:focus ~ label,
-input:valid ~ label {
+.l__form__input-field:focus ~ label {
   transform: translateY(-45px);
   font-size: 0.9rem;
-  color: white;
+  color: grey;
 }
-
+ .l__form__input-field:focus {
+  transform: translateY(-45px);
+  font-size: 0.9rem;
+  color: grey;
+}  
+.l__form__input-field:valid{
+  transform: translateY(-45px);
+  font-size: 0.9rem;
+  color: grey;
+}  
+.label-forms{
+  transform: translateY(-45px);
+  font-size: 0.9rem;
+  color: grey;
+}
 .l__form__button {
   margin-top: 30px;
   overflow: hidden;

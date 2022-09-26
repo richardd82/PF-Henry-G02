@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Nav from '../Nav/Nav';
+import '../StudentPayments/StudentPayments.css';
 // actions
 import { getPaymentById, getTodosUsuarios } from '../../redux/actions';
 
@@ -21,37 +22,43 @@ const PaymentDetails = ({ user }) => {
   return (
     <>
       <Nav user={user} />
-      {payment && currentUser ? (
-        <div>
-          <table cellSpacing="0">
-            <thead>
-              <tr>
-                <th>Payment Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Monto</td>
-                <td>{payment.amount}</td>
-              </tr>
-              <tr>
-                <td>Fecha</td>
-                <td>{payment.date}</td>
-              </tr>
-              <tr>
-                <td>Cuota pagada</td>
-                <td>{payment.fee}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div>
-            <Link to="/students/gateway/payments">Historial</Link>
-            <Link to="/students/gateway">Pasarela</Link>
+      <div className="vuvu__container">
+        {payment && currentUser ? (
+          <div className="vuvu__paymentscont">
+            <table cellSpacing="0">
+              <thead>
+                <tr>
+                  <th>Payment Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Monto</td>
+                  <td>{payment.amount} USD</td>
+                </tr>
+                <tr>
+                  <td>Fecha</td>
+                  <td>{payment.date}</td>
+                </tr>
+                <tr>
+                  <td>Cuota pagada</td>
+                  <td>{payment.fee}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div>
+              <div className="vuvu__button">
+                <Link to="/students/gateway/payments">Historial</Link>
+              </div>
+              <div className="vuvu__button">
+                <Link to="/students/gateway">Pasarela</Link>
+              </div>
+            </div>
           </div>
-        </div>
-      ) : (
-        <h1>Loading</h1>
-      )}
+        ) : (
+          <h1>Loading</h1>
+        )}
+      </div>
     </>
   );
 };

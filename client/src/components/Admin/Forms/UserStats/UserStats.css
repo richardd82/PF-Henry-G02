@@ -1,0 +1,23 @@
+.user_stats{
+    display: flex;
+    flex-direction: column;
+}
+
+.user_stats > div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.studentStats{
+    border: 2px solid, yellow;
+}
+.hrStats {
+    position: relative;
+    border: 2px solid #ffff00;
+}
+.statsMaster{
+    width: 125%;
+    margin-left: 0%;
+    color: white;
+}

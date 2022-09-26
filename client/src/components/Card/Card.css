@@ -11,6 +11,7 @@
   padding: 5px;
   /* min-height: 105px; */
   height: 205px;
+  position: relative;
 }
 
 .cardHeader img {
@@ -24,9 +25,10 @@
 .cardBody {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  height: 100%;
+  justify-content: space-around;
   align-items: flex-start;
-  padding: 20px;
+  padding-top: 10px;
 }
 
 .tag {
@@ -36,7 +38,7 @@
   font-weight: 800;
   margin: 0;
   /* color: black; */
-  padding: 5px 10px;
+  padding: 5px 8px;
   text-transform: uppercase;
   cursor: pointer;
   color: #47bcd4 !important;
@@ -50,6 +52,22 @@
   margin: 0;
   color :grey;
 
+}
+
+.c__favorito{
+  position: absolute;
+  top: 115px;
+  left: 175px;
+  z-index: 100;
+}
+
+.c__favorito svg{
+  color: rgb(75, 72, 72);
+  filter: invert(66%) sepia(0%) saturate(587%) hue-rotate(243deg) brightness(94%) contrast(88%) 
+}
+
+.userInfo{
+  margin-left: 5px;
 }
 
 

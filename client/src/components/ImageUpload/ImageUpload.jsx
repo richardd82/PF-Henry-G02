@@ -63,7 +63,7 @@ export default function ImageUpload({user}) {
                     <img
                         src={previewSource}
                         alt="chosen"
-                        style={{ height: '300px' }}
+                        style={{ height: '300px', width:'300px' }}
                     />
                 )}
             </div> : <div>Uploading...</div> }

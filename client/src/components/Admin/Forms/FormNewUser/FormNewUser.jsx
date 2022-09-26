@@ -22,7 +22,7 @@ const FormNewUser = ({ user }) => {
   const userEmail = adminUser.users.map((e) => e.email);
   //const categoryUsers = adminUser.users.map(e => e.category);
   //const category = [...new Set(categoryUsers)]
- 
+
   const [input, setInput] = useState({
     name: "",
     lastname: "",
@@ -30,7 +30,7 @@ const FormNewUser = ({ user }) => {
     image: "image",
     password: "123",
     active: true,
-    category:"",
+    category: "",
     cohortId: "",
     moduleId: "",
     standupId: "",
@@ -49,8 +49,8 @@ const FormNewUser = ({ user }) => {
       })
     );
   };
-//const [checked, setChecked ] = useState(true)
-const handleCategory = (e) => {
+  //const [checked, setChecked ] = useState(true)
+  const handleCategory = (e) => {
     setInput({
       ...input,
       category: e.target.value
@@ -111,74 +111,73 @@ const handleCategory = (e) => {
     }
   };
 
-  const supFiltered= supExistente.filter(el => el.cohortId === input.cohortId)
+  const supFiltered = supExistente.filter(el => el.cohortId === input.cohortId)
 
   return (
     <>
       <Nav user={user} />
-      <div className="parent">
-        <div className="container">
-        <h1 className="title">Create new user </h1>
-        <br></br>
-        <form
-        className="form"
-          autoComplete="off"
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
-          <label>Name:</label>
-          <input
-          className="inputCreate"
-            placeholder="Insert a name"
-            type="text"
-            value={input.name}
-            name="name"
-            onChange={(e) => {
-              handleChange(e);
+      <div className="parent-forms">
+        <div className="container-forms">
+          <h1 className="title-forms">Create new user </h1>
+          <br></br>
+          <form
+            className="form-forms"
+            autoComplete="off"
+            onSubmit={(e) => {
+              handleSubmit(e);
             }}
-            required
-          ></input>
-          {/* {errors.name && <h1>{errors.name}</h1>} */}
+          >
+            <label>Name:</label>
+            <input
+              className="inputCreate-forms"
+              placeholder="Insert a name"
+              type="text"
+              value={input.name}
+              name="name"
+              onChange={(e) => {
+                handleChange(e);
+              }}
+              required
+            ></input>
+            {/* {errors.name && <h1>{errors.name}</h1>} */}
 
-          <label>Last Name:</label>
-          <input
-          className="inputCreate"
+            <label>Last Name:</label>
+            <input
+              className="inputCreate-forms"
 
-            placeholder="Insert a lastname"
-            type="text"
-            value={input.lastname}
-            name="lastname"
-            onChange={(e) => {
-              handleChange(e);
-            }}
-            required
-          ></input>
-          {/* {errors.lastname && <h1>{errors.lastname}</h1>} */}
+              placeholder="Insert a lastname"
+              type="text"
+              value={input.lastname}
+              name="lastname"
+              onChange={(e) => {
+                handleChange(e);
+              }}
+              required
+            ></input>
+            {/* {errors.lastname && <h1>{errors.lastname}</h1>} */}
 
-          <label>Email:</label>
-          <input
-          className="inputCreate"
+            <label>Email:</label>
+            <input
+              className="inputCreate-forms"
 
-            placeholder="Insert a email"
-            type="email"
-            value={input.email}
-            name="email"
-            onChange={(e) => {
-              handleChange(e);
-            }}
-            required
-          ></input>
-          {/* {errors.email && <h1>{errors.email}</h1>} */}
-          {/* NO FUNCIONA EL CHECKBOXXXXX */}
-         <div>
-            <label>Estudiante<input type={'radio'} name={'category'} value={'student'} onChange={(e)=>handleCategory(e)}/></label>
-            <label>Instructor/a<input type={'radio'} name={'category'} value={'teacher'} onChange={(e)=>handleCategory(e)}/></label>
-            <label>Admin<input type={'radio'} name={'category'} value={'admin'} onChange={(e)=>handleCategory(e)}/></label>
-          </div> 
-      
+              placeholder="Insert a email"
+              type="email"
+              value={input.email}
+              name="email"
+              onChange={(e) => {
+                handleChange(e);
+              }}
+              required
+            ></input>
+            {/* {errors.email && <h1>{errors.email}</h1>} */}
+            <div className="check-forms">
+              <label>Estudiante<input type={'radio'} name={'category'} value={'student'} onChange={(e) => handleCategory(e)} /></label>
+              <label>Instructor/a<input type={'radio'} name={'category'} value={'teacher'} onChange={(e) => handleCategory(e)} /></label>
+              <label>Admin<input type={'radio'} name={'category'} value={'admin'} onChange={(e) => handleCategory(e)} /></label>
+            </div>
 
-{/*           <input
+
+            {/*           <input
           className="inputCreate"
 
             placeholder="Insert a user role"
@@ -190,45 +189,45 @@ const handleCategory = (e) => {
             }}
             required
           ></input> */}
-          <select 
-          className="select"
-          onChange={handleSelectCohorte}>
-            <option> Select cohort</option>
-            {cohortsExistentes?.map((e) => {
-              return (
-                <option key={e.id} value={e.id}>
-                  {e.name}
-                </option>
-              );
-            })}
-          </select>
-          <select 
-          className="select"
-          onChange={handleSelectModule}>
-            <option> Select module</option>
-            {moduleExistente?.map((e) => {
-              return (
-                <option key={e.id} value={e.id}>
-                  {e.name}
-                </option>
-              );
-            })}
-          </select>
-          <select
-          className="select"
-           onChange={handleSelectSup}>
-            <option> Select Standup</option>
-            {supFiltered?.map((e) => {
-              return (
-                <option key={e.id} value={e.id}>
-                  {e.name}
-                </option>
-              );
-            })}
-          </select>
-          {/* {errors.category && <h1>{errors.category}</h1>} */}
-          <button className="submitButton" type="submit"> Create User</button>
-        </form>
+            <select
+              className="select-forms"
+              onChange={handleSelectCohorte}>
+              <option> Select cohort</option>
+              {cohortsExistentes?.map((e) => {
+                return (
+                  <option key={e.id} value={e.id}>
+                    {e.name}
+                  </option>
+                );
+              })}
+            </select>
+            <select
+              className="select-forms"
+              onChange={handleSelectModule}>
+              <option> Select module</option>
+              {moduleExistente?.map((e) => {
+                return (
+                  <option key={e.id} value={e.id}>
+                    {e.name}
+                  </option>
+                );
+              })}
+            </select>
+            <select
+              className="select-forms"
+              onChange={handleSelectSup}>
+              <option> Select Standup</option>
+              {supFiltered?.map((e) => {
+                return (
+                  <option key={e.id} value={e.id}>
+                    {e.name}
+                  </option>
+                );
+              })}
+            </select>
+            {/* {errors.category && <h1>{errors.category}</h1>} */}
+            <button className="submitButton-forms" type="submit"> Create User</button>
+          </form>
         </div>
       </div>
     </>

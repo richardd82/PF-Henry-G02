@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import '../StudentPayments/StudentPayments.css';
 // actions
 import {
   sendPayment,
@@ -60,12 +61,18 @@ const CardPayment = ({ user }) => {
             <h2>Cuota {currentFee} de 24</h2>
             <h3>Deuda: ${currentUser.debt}</h3>
             <h3>Pagarás: ${amount}</h3>
-            <CardElement />
+            <div className="vuvu__cardelement">
+              <CardElement />
+            </div>
             <button type="subtmit">Pagar</button>
           </form>
           <div>
-            <Link to="/students/gateway">Pasarela</Link>
-            <Link to="/students/gateway/payments/">Hitorial de pagos</Link>
+            <div className="vuvu__button">
+              <Link to="/students/gateway">Pasarela</Link>
+            </div>
+            <div className="vuvu__button">
+              <Link to="/students/gateway/payments/">Historial de pagos</Link>
+            </div>
           </div>
         </div>
       ) : (
@@ -73,10 +80,17 @@ const CardPayment = ({ user }) => {
           <div>
             <h1>{state.paymentMsg}</h1>
             <div>
-              <Link onClick={() => dispatch(getTodosUsuarios())} to="/students/gateway">
-                Pasarela
-              </Link>
-              <button onClick={handleClick}>Regresar</button>
+              <div className="vuvu__button">
+                <Link
+                  onClick={() => dispatch(getTodosUsuarios())}
+                  to="/students/gateway"
+                >
+                  Pasarela
+                </Link>
+              </div>
+              <button className="vuvu__button" onClick={handleClick}>
+                Regresar
+              </button>
             </div>
           </div>
         )

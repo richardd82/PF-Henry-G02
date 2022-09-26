@@ -37,6 +37,7 @@ import StudentPayments from "./components/StudentPayments/StudentPayments.jsx";
 import Checkout from "./components/Checkout/Checkout.jsx";
 import Payments from "./components/Payments/Payments.jsx";
 import PaymentDetails from "./components/PaymentDetails/PaymentDetails.jsx";
+
 import { loadStripe } from '@stripe/stripe-js';
 const { REACT_APP_STRIPE_KEY, REACT_APP_SERVER_URL } = process.env;
 const stripePromise = loadStripe(REACT_APP_STRIPE_KEY);
@@ -47,7 +48,7 @@ function App() {
 	// const navigate = useNavigate();
 	const token = localStorage.getItem("token");
 	console.log(token + "Soy el token decodificado");
-
+console.log(REACT_APP_STRIPE_KEY)
 	
 
 
@@ -89,7 +90,7 @@ function App() {
 		getUser();
 		}
 	}, []);
-	// console.log(user, "USER");
+	console.log(user, "USER");
 //   console.log('API KEY', REACT_APP_STRIPE_KEY)
 
   return (
@@ -127,7 +128,7 @@ function App() {
         <Route path="/userstats" element={user.name || user.emails ? <UsersStats user={user} />:<Navigate to="/login" />}/>
 
         {/* Rutas de Students y TA */}
-        <Route path="/students" element={user.name || user.emails ? <Students user={user} />:<Navigate to="/login" />}/>
+        <Route exact path="/students" element={user.name || user.emails ? <Students user={user} />:<Navigate to="/login" />}/>
         <Route exact path="/students/gateway" element={user.name || user.emails ? <StudentPayments user={user} /> :<Navigate to="/login" />} />
         <Route exact path="/students/gateway/checkout" element={user.name || user.emails ? <Checkout user={user} stripePromise={stripePromise} /> : <Navigate to="/login" />}/>
         <Route exact path="/students/gateway/payments" element={user.name || user.emails ? <Payments user={user}/> : <Navigate to="/login" />} />
@@ -140,6 +141,9 @@ function App() {
         <Route path="/favourite" element={user.name || user.emails ? <AllFavourite user={user} />:<Navigate to="/login" />}/>
         <Route path="/reviews/create" element={user.name || user.emails ? <AddReviews   user={user} />:<Navigate to="/login" />}/>
         <Route path="/reviews/create/:id" element={user.name || user.emails ? <UserReview  user={user} />:<Navigate to="/login" />}/>
+        <Route path="/usuario" element={user.name || user.emails ? <UserProfile  user={user} />:<Navigate to="/login" />}/>
+
+
     
         {/* Ruta de pasarela de pagos */}
         <Route path="/pagos" element= {user.name || user.emails ? <Payment user={user} />:<Navigate to="/login" />}/>

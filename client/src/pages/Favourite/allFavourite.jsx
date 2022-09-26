@@ -14,10 +14,22 @@ const AllFavourite = ({ user }) => {
   const dispatch = useDispatch();
   
   const users = useSelector(state => state.users.allUsers);
-  const userValidate = users.find(e => e.name === user.displayName);
+/*   const userValidate = users.find(e => e.name === user.displayName);
   const loginUserId = userValidate && userValidate.id;
-  console.log(loginUserId);
+  console.log(loginUserId); */
   
+let userValidate = ''
+if (!user.category) {
+    userValidate= users.filter((e) => e.name === user._json.name );
+  }else{
+    userValidate = users.filter((e) => e.name === user.name );
+    }
+
+
+  //const userValidate = users.find(e => e.name === userId.displayName);
+  const loginUserId = userValidate.map(e=>e.id).toString(); 
+   const usuario = userValidate[0]
+
   useEffect(() => {
     dispatch(getFavoritesById(loginUserId));
     if (!users.length) {
@@ -28,7 +40,6 @@ const AllFavourite = ({ user }) => {
 
   const videos = useSelector(state => state.favorites.favorite);
   
-  console.log(videos)
 
   // Pagination handler
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,19 +62,32 @@ const AllFavourite = ({ user }) => {
       ) : ( */}
       <div>
         <Nav user={user} />
-        <div>
+        <div className = "c__cards">
           {currentVideos &&
             currentVideos.map(video => {
+              console.log(video.id);
               return (
                 <div key={video.id}>
-                  <Link key={video.id} to={`/lecture/${video.id}`}>
+                   <Link key={video.id} to={`/lecture/${video.id}`}>
                     <Card
+                    video={video}
+                    user={usuario}
                       id={video.id}
                       title={video.name}
-                      instructor="Martina"
+                      instructor={users.map((x) => {
+                        if (x.id === video.userId) {
+                          return (
+                          <>    
+                            <p>
+                              {x.name} {x.lastname}
+                            </p>
+                            </>  
+                          );
+                        }
+                      })}
                       description={video.description}
                     />
-                  </Link>
+                  </Link> 
                 </div>
               );
             })}
