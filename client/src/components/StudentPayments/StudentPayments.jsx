@@ -9,8 +9,7 @@ import { getPayments, getTodosUsuarios } from '../../redux/actions';
 const StudentPayments = ({ user }) => {
   const dispatch = useDispatch();
   const users = useSelector(state => state.users.allUsers);
-  const currentUser =
-    users && users.find(e => e.email === user.emails[0].value);
+  const currentUser = users && users.find(e => e.email === user.emails[0].value);
   const amount = currentUser.salary * 0.15;
 
   useEffect(() => {

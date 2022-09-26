@@ -117,10 +117,10 @@ export default function Nav({ user }) {
             <div className="avatar">
               {category === 'student' ? (
                 <div>
-                  <Link to="">
+                  {/* <Link to="">
                     <button onClick={sweetAttendance}>
                     <p className="avatar__name">Asistencias</p></button>
-                  </Link>
+                  </Link> */}
                   <Link to="/students/gateway">
                     <p className="avatar__name">Pagos</p>
                   </Link>

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Nav from "../../components/Nav/Nav";
-import ControlAsistencia from "../../components/Students/ControlAsistencia";
+// import ControlAsistencia from "../../components/Students/ControlAsistencia";
 //import ControlAsistencia from "../../components/Students/ControlAsistencia";
 import { /* getAllAttendances, */ getTodosUsuarios } from "../../redux/actions";
 import './UserProfile.css'
@@ -56,7 +56,7 @@ export default function UserProfile({ user }) {
       <Nav user={user} />
       <div className="user-profile">
         <div className="user-profile-b">
-        <ControlAsistencia user={user} />
+        {/* <ControlAsistencia user={user} /> */}
         <h1>Username: {loginUserName || user.name}</h1>
         <h1>Email: {loginUserEmail || user.email}</h1>
         <h1>Category: {loginUserCategory || user.category}</h1>

@@ -71,7 +71,7 @@ const CardPayment = ({ user }) => {
               <Link to="/students/gateway">Pasarela</Link>
             </div>
             <div className="vuvu__button">
-              <Link to="/students/gateway/payments/">Hitorial de pagos</Link>
+              <Link to="/students/gateway/payments/">Historial de pagos</Link>
             </div>
           </div>
         </div>

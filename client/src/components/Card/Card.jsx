@@ -2,11 +2,8 @@ import React from 'react';
 import resultados from '../../assets/resultados.jpeg';
 import FavouriteButton from '../FavouriteComponents/favouriteButton';
 import './Card.css';
-
-
 const Card = ({ id, title, instructor, description, user, video }) => {
 console.log(user);
-
   return (
     <div key={id} className="card">
       <div className="cardHeader">
@@ -19,12 +16,10 @@ console.log(user);
           <h6>{instructor}</h6>
         </div>
         <div className= "c__favorito">
-        <FavouriteButton user={user} userId={user.id} videoId={video.id}/>
+        {/* <FavouriteButton user={user} userId={user.id} videoId={video.id}/> */}
         </div>
       </div>
     </div>
   );
 };
 export default Card;
-
-

@@ -1,9 +1,6 @@
-
-
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 // Components
 import Pager from "../../components/Pager/Pager.jsx";
 import Videos from "../../components/Videos/Videos.jsx";
@@ -16,9 +13,7 @@ import { getTodosUsuarios } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
 // import FavouriteButton from "../../components/FavouriteComponents/favouriteButton.jsx";
 // import SearchBar from "../../components/SearchBar/SearchBar.jsx";
-
 import "./Catalog.css";
-
 const Catalog = ({ user }) => {
   const dispatch = useDispatch();
   const videos = useSelector((state) => state.videos.videos);
@@ -31,7 +26,6 @@ if (!user.category) {
     userValidate = users.filter((e) => e.name === user.name );
     }
   const loginUserId = userValidate[0]
-
   const videosMapped = videos.map((e) => e.userId)
   const usersMapped = users.map((e) => e.id)
   const teacher = users.filter(e=> e.category === 'teacher')
@@ -40,7 +34,6 @@ if (!user.category) {
   const userCohort = teacher.map(e => e.cohortId)
  /*  const filtered = userCohort.find(r=> r === video.cohortId)
   const instructor = teacher.filter(e => e.cohortId === filtered) */
-  
   useEffect(() => {
     // if (!videos.classes.length && videos.loading === false) {
     dispatch(getAllVideos());
@@ -49,21 +42,16 @@ if (!user.category) {
       dispatch(getTodosUsuarios());
     }
   }, [dispatch]);
-
   // Pagination handler
   const [currentPage, setCurrentPage] = useState(1);
   const handlePage = (number) => {
     setCurrentPage(number);
   };
-
   const videosPerPage = 8,
     indexOfLastVideo = currentPage * videosPerPage,
     indexOfFirstVideo = indexOfLastVideo - videosPerPage,
     currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
-    
   const instructor = userCohort.map(e=> e).filter(r=> r === videos.cohortId);
-
-
   return (
     <div className="c__cards-container">
         <div>
@@ -98,11 +86,11 @@ if (!user.category) {
                             instructor= {users.map((x) => {
                               if (x.id === video.userId) {
                                 return (
-                                <>    
+                                <>
                                   <p>
                                     {x.name} {x.lastname}
                                   </p>
-                                  </>  
+                                  </>
                                 );
                               }
                             })}
@@ -111,7 +99,6 @@ if (!user.category) {
                           />
                         </Link>
                         <div className="c__button">
-
                         </div>
                       </>
                     );
@@ -129,8 +116,27 @@ if (!user.category) {
     </div>
   );
 };
-
 export default Catalog;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
