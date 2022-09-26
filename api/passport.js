@@ -24,6 +24,7 @@ passport.use(
 		}
 	)
 );
+
 passport.use(
 	new GithubStrategy(
 		{
