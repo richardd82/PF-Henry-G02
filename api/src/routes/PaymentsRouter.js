@@ -3,7 +3,7 @@ const {
   createPayment,
   getPaymentsByUser,
   getPaymentDetails,
-} = require('../controllers/PaymentController.js');
+} = require('../Controllers/PaymentController');
 const router = Router();
 
 router.post('/', createPayment);
