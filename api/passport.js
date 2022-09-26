@@ -16,7 +16,7 @@ passport.use(
 		{
 			clientID: GOOGLE_CLIENT_ID,
 			clientSecret: GOOGLE_CLIENT_SECRET,
-			callbackURL: "/auth/%s/callback",
+			callbackURL: "/auth/google/callback",
 			userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 
 		},
@@ -33,7 +33,7 @@ passport.use(
 			clientID: GITHUB_CLIENT_ID,
 			clientSecret: GITHUB_CLIENT_SECRET,
 			scope: ["user:email"],
-			callbackURL:"/auth/%s/callback",
+			callbackURL:"/auth/github/callback",
 
 		},
 		function (accessToken, refreshToken, profile, done) {
