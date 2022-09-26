@@ -11,7 +11,7 @@ const AttendanceRoute = require('./AttendanceRoute.js')
 const ReviewsRoute = require('./ReviewsRoute.js')
 const Cloudinary = require("./Cloudinary.js")
 const PaymentsRouter = require('./PaymentsRouter.js')
-// const PaymentRouter = require('./PaymentsRouter.js');
+const PaymentRouter = require('./PaymentsRouter.js');
 
  
 // Importar todos los routers;
@@ -33,7 +33,7 @@ router.use('/videos', VideosRoute)
 router.use('/attendance', AttendanceRoute)
 router.use('/reviews', ReviewsRoute)
 router.use("/cloudinary", Cloudinary);
-// router.use('/checkout', PaymentRouter);
+router.use('/checkout', PaymentRouter);
 
 
 module.exports = router;
