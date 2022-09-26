@@ -16,11 +16,11 @@ passport.use(
 		{
 			clientID: GOOGLE_CLIENT_ID,
 			clientSecret: GOOGLE_CLIENT_SECRET,
-			scope: ["user, email"],
+			scope: ["profile, email"],
 			callbackURL: API_URL+"/auth/google/callback",
 		},
 		function (accessToken, refreshToken, profile, done) {
-			console.log("entre a google", accessToken);
+			// console.log("entre a google", accessToken);
 			done(null, profile);
 		}
 	)
@@ -36,7 +36,7 @@ passport.use(
 
 		},
 		function (accessToken, refreshToken, profile, done) {
-			console.log(profile + 'PROFILE')
+			// console.log(profile + 'PROFILE')
 			return done(null, profile);
 		}
 	)
