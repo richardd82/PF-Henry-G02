@@ -36,11 +36,6 @@ passport.use(
 
 		},
 		function (accessToken, refreshToken, profile, done) {
-			console.log("accessToken==" + accessToken);
-			// User.findOrCreate({ githubId: profile.id }, function (err, user) {
-				// cb(err, user);
-			// }
-			// ); 
 			console.log(profile + 'PROFILE')
 			return done(null, profile);
 		}
